@@ -26,29 +26,14 @@
       "weight": 5
     },
     {
-      "name": "NHK",
-      "url": "https://www3.nhk.or.jp/nhkworld/rss/world.xml",
-      "weight": 3
-    },
-    {
       "name": "CNA",
-      "url": "https://www.channelnewsasia.com/rssfeed/8395986",
+      "url": "https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml",
       "weight": 3
     },
     {
       "name": "Mercopress",
       "url": "https://en.mercopress.com/rss/",
       "weight": 3
-    },
-    {
-      "name": "FocusTaiwan",
-      "url": "https://focustaiwan.tw/rss",
-      "weight": 5
-    },
-    {
-      "name": "Kyodo",
-      "url": "https://english.kyodonews.net/rss/news.xml",
-      "weight": 4
     },
     {
       "name": "SCMP",
@@ -61,23 +46,8 @@
       "weight": 4
     },
     {
-      "name": "Stars and Stripes",
-      "url": "https://www.stripes.com/feeds/pacific.rss",
-      "weight": 4
-    },
-    {
       "name": "Yonhap",
       "url": "https://en.yna.co.kr/RSS/news.xml",
-      "weight": 4
-    },
-    {
-      "name": "Nikkei Asia",
-      "url": "https://asia.nikkei.com/rss",
-      "weight": 3
-    },
-    {
-      "name": "Taipei Times",
-      "url": "https://www.taipeitimes.com/xml/pda.rss",
       "weight": 4
     },
     {
