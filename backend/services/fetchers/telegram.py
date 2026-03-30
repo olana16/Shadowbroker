@@ -202,23 +202,21 @@ def fetch_telegram():
         for channel in channels:
             last_id = cache.get(channel, 0)
             messages = await _fetch_channel_messages(client, channel, last_id)
-            if messages:
-                # Update cache with latest message ID
-                cache[channel] = max(msg['id'] for msg in messages)
-                all_messages.extend(messages)
-
-        if not all_messages:
-            logger.info("No new Telegram messages since cached IDs; fetching a recent snapshot instead")
-            for channel in channels:
+            if not messages:
+                logger.info(
+                    "No new Telegram messages for %s; fetching a recent snapshot instead",
+                    channel,
+                )
                 messages = await _fetch_channel_messages(
                     client,
                     channel,
                     last_id=None,
                     limit=SNAPSHOT_MESSAGE_LIMIT,
                 )
-                if messages:
-                    cache[channel] = max(msg['id'] for msg in messages)
-                    all_messages.extend(messages)
+            if messages:
+                # Keep each channel represented in the panel, even if it had no fresh posts.
+                cache[channel] = max(msg['id'] for msg in messages)
+                all_messages.extend(messages)
         
         await client.disconnect()
         return all_messages

@@ -473,6 +473,7 @@ async def api_update_key(request: Request, body: ApiKeyUpdate):
 # News Feed Configuration
 # ---------------------------------------------------------------------------
 from services.news_feed_config import get_feeds, save_feeds, reset_feeds
+from services.telegram_config import get_channels, save_channels, reset_channels
 
 @app.get("/api/settings/news-feeds")
 @limiter.limit("30/minute")
@@ -499,6 +500,38 @@ async def api_reset_news_feeds(request: Request):
     if ok:
         return {"status": "reset", "feeds": get_feeds()}
     return {"status": "error", "message": "Failed to reset feeds"}
+
+
+# ---------------------------------------------------------------------------
+# Telegram Channel Configuration
+# ---------------------------------------------------------------------------
+@app.get("/api/settings/telegram-channels")
+@limiter.limit("30/minute")
+async def api_get_telegram_channels(request: Request):
+    return get_channels()
+
+
+@app.put("/api/settings/telegram-channels", dependencies=[Depends(require_admin)])
+@limiter.limit("10/minute")
+async def api_save_telegram_channels(request: Request):
+    body = await request.json()
+    ok = save_channels(body)
+    if ok:
+        return {"status": "updated", "count": len(get_channels())}
+    return Response(
+        content=json_mod.dumps({"status": "error", "message": "Validation failed (max 20 channels, each needs a username)"}),
+        status_code=400,
+        media_type="application/json",
+    )
+
+
+@app.post("/api/settings/telegram-channels/reset", dependencies=[Depends(require_admin)])
+@limiter.limit("10/minute")
+async def api_reset_telegram_channels(request: Request):
+    ok = reset_channels()
+    if ok:
+        return {"status": "reset", "channels": get_channels()}
+    return {"status": "error", "message": "Failed to reset Telegram channels"}
 
 # ---------------------------------------------------------------------------
 # System — self-update

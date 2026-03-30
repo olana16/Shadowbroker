@@ -1,0 +1,24 @@
+{
+  "channels": [
+    {
+      "username": "@Sport_433et",
+      "name": "4-3-3 Sport",
+      "enabled": true
+    },
+    {
+      "username": "@tikvahethiopia",
+      "name": "Tikvah Ethiopia",
+      "enabled": true
+    },
+    {
+      "username": "@insagovet",
+      "name": "Insa ETH",
+      "enabled": true
+    },
+    {
+      "username": "@tikvahethmagazine",
+      "name": "TIKVAH MAGAZINE",
+      "enabled": true
+    }
+  ]
+}

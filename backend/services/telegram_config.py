@@ -85,6 +85,13 @@ def save_channels(channels: list):
         logger.info(f"Saved {len(normalized)} Telegram channels to {RUNTIME_CONFIG_PATH}")
     except Exception as e:
         logger.error(f"Failed to save Telegram channels: {e}")
+        return False
+    return True
+
+
+def reset_channels() -> bool:
+    """Reset Telegram channels to defaults."""
+    return save_channels(list(DEFAULT_CHANNELS))
 
 
 def get_enabled_channels():

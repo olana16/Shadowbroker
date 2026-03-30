@@ -3,7 +3,7 @@
 import { API_BASE } from "@/lib/api";
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Settings, ExternalLink, Key, Shield, X, Save, ChevronDown, ChevronUp, Rss, Plus, Trash2, RotateCcw } from "lucide-react";
+import { Settings, ExternalLink, Key, Shield, X, Save, ChevronDown, ChevronUp, Rss, Plus, Trash2, RotateCcw, Send } from "lucide-react";
 
 interface ApiEntry {
     id: string;
@@ -24,6 +24,12 @@ interface FeedEntry {
     weight: number;
 }
 
+interface TelegramChannelEntry {
+    username: string;
+    name: string;
+    enabled: boolean;
+}
+
 const WEIGHT_LABELS: Record<number, string> = { 1: "LOW", 2: "MED", 3: "STD", 4: "HIGH", 5: "CRIT" };
 const WEIGHT_COLORS: Record<number, string> = {
     1: "text-gray-400 border-gray-600",
@@ -33,6 +39,7 @@ const WEIGHT_COLORS: Record<number, string> = {
     5: "text-red-400 border-red-600",
 };
 const MAX_FEEDS = 50;
+const MAX_TELEGRAM_CHANNELS = 20;
 
 // Category colors for the tactical UI
 const CATEGORY_COLORS: Record<string, string> = {
@@ -47,7 +54,7 @@ const CATEGORY_COLORS: Record<string, string> = {
     SIGINT: "text-rose-400 border-rose-500/30 bg-rose-950/20",
 };
 
-type Tab = "api-keys" | "news-feeds";
+type Tab = "api-keys" | "news-feeds" | "telegram-channels";
 
 const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     const [activeTab, setActiveTab] = useState<Tab>("api-keys");
@@ -75,6 +82,10 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
     const [feedsDirty, setFeedsDirty] = useState(false);
     const [feedSaving, setFeedSaving] = useState(false);
     const [feedMsg, setFeedMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
+    const [telegramChannels, setTelegramChannels] = useState<TelegramChannelEntry[]>([]);
+    const [telegramDirty, setTelegramDirty] = useState(false);
+    const [telegramSaving, setTelegramSaving] = useState(false);
+    const [telegramMsg, setTelegramMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
 
     const fetchKeys = useCallback(async () => {
         try {
@@ -99,12 +110,25 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
         }
     }, []);
 
+    const fetchTelegramChannels = useCallback(async () => {
+        try {
+            const res = await fetch(`${API_BASE}/api/settings/telegram-channels`);
+            if (res.ok) {
+                setTelegramChannels(await res.json());
+                setTelegramDirty(false);
+            }
+        } catch (e) {
+            console.error("Failed to fetch Telegram channels", e);
+        }
+    }, []);
+
     useEffect(() => {
         if (isOpen) {
             fetchKeys();
             fetchFeeds();
+            fetchTelegramChannels();
         }
-    }, [isOpen, fetchKeys, fetchFeeds]);
+    }, [isOpen, fetchKeys, fetchFeeds, fetchTelegramChannels]);
 
     // API Keys handlers
     const startEditing = (api: ApiEntry) => { setEditingId(api.id); setEditValue(""); };
@@ -174,7 +198,7 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
                 const d = await res.json().catch(() => ({}));
                 setFeedMsg({ type: "err", text: d.message || "Save failed" });
             }
-        } catch (e) {
+        } catch {
             setFeedMsg({ type: "err", text: "Network error" });
         } finally { setFeedSaving(false); }
     };
@@ -191,8 +215,65 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
                 setFeedsDirty(false);
                 setFeedMsg({ type: "ok", text: "Reset to defaults" });
             }
-        } catch (e) {
+        } catch {
             setFeedMsg({ type: "err", text: "Reset failed" });
+        }
+    };
+
+    const updateTelegramChannel = (idx: number, field: keyof TelegramChannelEntry, value: string | boolean) => {
+        setTelegramChannels(prev => prev.map((channel, i) => i === idx ? { ...channel, [field]: value } : channel));
+        setTelegramDirty(true);
+        setTelegramMsg(null);
+    };
+
+    const removeTelegramChannel = (idx: number) => {
+        setTelegramChannels(prev => prev.filter((_, i) => i !== idx));
+        setTelegramDirty(true);
+        setTelegramMsg(null);
+    };
+
+    const addTelegramChannel = () => {
+        if (telegramChannels.length >= MAX_TELEGRAM_CHANNELS) return;
+        setTelegramChannels(prev => [...prev, { username: "", name: "", enabled: true }]);
+        setTelegramDirty(true);
+        setTelegramMsg(null);
+    };
+
+    const saveTelegramChannels = async () => {
+        setTelegramSaving(true);
+        setTelegramMsg(null);
+        try {
+            const res = await fetch(`${API_BASE}/api/settings/telegram-channels`, {
+                method: "PUT",
+                headers: adminHeaders({ "Content-Type": "application/json" }),
+                body: JSON.stringify(telegramChannels),
+            });
+            if (res.ok) {
+                setTelegramDirty(false);
+                setTelegramMsg({ type: "ok", text: "Telegram channels saved. Changes take effect on the next Telegram refresh (~5min) or backend restart." });
+            } else {
+                const d = await res.json().catch(() => ({}));
+                setTelegramMsg({ type: "err", text: d.message || "Save failed" });
+            }
+        } catch {
+            setTelegramMsg({ type: "err", text: "Network error" });
+        } finally { setTelegramSaving(false); }
+    };
+
+    const resetTelegramChannels = async () => {
+        try {
+            const res = await fetch(`${API_BASE}/api/settings/telegram-channels/reset`, {
+                method: "POST",
+                headers: adminHeaders(),
+            });
+            if (res.ok) {
+                const d = await res.json();
+                setTelegramChannels(d.channels || []);
+                setTelegramDirty(false);
+                setTelegramMsg({ type: "ok", text: "Reset to defaults" });
+            }
+        } catch {
+            setTelegramMsg({ type: "err", text: "Reset failed" });
         }
     };
 
@@ -268,6 +349,14 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
                                 <Rss size={10} />
                                 NEWS FEEDS
                                 {feedsDirty && <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />}
+                            </button>
+                            <button
+                                onClick={() => setActiveTab("telegram-channels")}
+                                className={`flex-1 px-4 py-2.5 text-[10px] font-mono tracking-widest font-bold transition-colors flex items-center justify-center gap-1.5 ${activeTab === "telegram-channels" ? "text-sky-400 border-b-2 border-sky-500 bg-sky-950/10" : "text-[var(--text-muted)] hover:text-[var(--text-secondary)]"}`}
+                            >
+                                <Send size={10} />
+                                TELEGRAM
+                                {telegramDirty && <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />}
                             </button>
                         </div>
 
@@ -479,6 +568,99 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
                                     <div className="flex items-center justify-between text-[9px] text-[var(--text-muted)] font-mono mt-2">
                                         <span>{feeds.length}/{MAX_FEEDS} SOURCES</span>
                                         <span>WEIGHT: 1=LOW  5=CRITICAL</span>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {/* ==================== TELEGRAM CHANNELS TAB ==================== */}
+                        {activeTab === "telegram-channels" && (
+                            <>
+                                <div className="mx-4 mt-4 p-3 rounded-lg border border-sky-900/30 bg-sky-950/10">
+                                    <div className="flex items-start gap-2">
+                                        <Send size={12} className="text-sky-500 mt-0.5 flex-shrink-0" />
+                                        <p className="text-[10px] text-[var(--text-secondary)] font-mono leading-relaxed">
+                                            Configure Telegram channels for the Threat Intel panel. Add public channel usernames like <span className="text-sky-400">@tikvahethiopia</span>, set a display name, and enable or disable channels individually. Up to <span className="text-sky-400">{MAX_TELEGRAM_CHANNELS}</span> sources.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex-1 overflow-y-auto styled-scrollbar p-4 space-y-2">
+                                    {telegramChannels.map((channel, idx) => (
+                                        <div key={idx} className="rounded-lg border border-[var(--border-primary)]/60 p-3 hover:border-sky-500/40 transition-colors group">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <input
+                                                    type="text"
+                                                    value={channel.name}
+                                                    onChange={(e) => updateTelegramChannel(idx, "name", e.target.value)}
+                                                    className="flex-1 bg-transparent border-b border-[var(--border-primary)] text-xs font-mono text-[var(--text-primary)] outline-none focus:border-sky-500/70 transition-colors px-1 py-0.5"
+                                                    placeholder="Display name..."
+                                                />
+                                                <label className="flex items-center gap-2 text-[9px] font-mono text-[var(--text-muted)]">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={channel.enabled}
+                                                        onChange={(e) => updateTelegramChannel(idx, "enabled", e.target.checked)}
+                                                        className="accent-sky-500"
+                                                    />
+                                                    ENABLED
+                                                </label>
+                                                <button
+                                                    onClick={() => removeTelegramChannel(idx)}
+                                                    className="w-6 h-6 rounded flex items-center justify-center text-[var(--text-muted)] hover:text-red-400 hover:bg-red-950/20 transition-all opacity-0 group-hover:opacity-100"
+                                                    title="Remove channel"
+                                                >
+                                                    <Trash2 size={11} />
+                                                </button>
+                                            </div>
+                                            <input
+                                                type="text"
+                                                value={channel.username}
+                                                onChange={(e) => updateTelegramChannel(idx, "username", e.target.value)}
+                                                className="w-full bg-black/30 border border-[var(--border-primary)]/40 rounded px-2 py-1 text-[10px] font-mono text-[var(--text-muted)] outline-none focus:border-sky-500/50 focus:text-sky-300 transition-colors"
+                                                placeholder="@channel_username"
+                                            />
+                                        </div>
+                                    ))}
+
+                                    <button
+                                        onClick={addTelegramChannel}
+                                        disabled={telegramChannels.length >= MAX_TELEGRAM_CHANNELS}
+                                        className="w-full py-2.5 rounded-lg border border-dashed border-[var(--border-primary)]/60 text-[var(--text-muted)] hover:border-sky-500/50 hover:text-sky-400 hover:bg-sky-950/10 transition-all text-[10px] font-mono flex items-center justify-center gap-1.5 disabled:opacity-30 disabled:cursor-not-allowed"
+                                    >
+                                        <Plus size={10} />
+                                        ADD CHANNEL ({telegramChannels.length}/{MAX_TELEGRAM_CHANNELS})
+                                    </button>
+                                </div>
+
+                                {telegramMsg && (
+                                    <div className={`mx-4 mb-2 px-3 py-2 rounded text-[10px] font-mono ${telegramMsg.type === "ok" ? "text-green-400 bg-green-950/20 border border-green-900/30" : "text-red-400 bg-red-950/20 border border-red-900/30"}`}>
+                                        {telegramMsg.text}
+                                    </div>
+                                )}
+
+                                <div className="p-4 border-t border-[var(--border-primary)]/80">
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            onClick={saveTelegramChannels}
+                                            disabled={!telegramDirty || telegramSaving}
+                                            className="flex-1 px-4 py-2 rounded bg-sky-500/20 border border-sky-500/40 text-sky-400 hover:bg-sky-500/30 transition-colors text-[10px] font-mono flex items-center justify-center gap-1.5 disabled:opacity-30 disabled:cursor-not-allowed"
+                                        >
+                                            <Save size={10} />
+                                            {telegramSaving ? "SAVING..." : "SAVE CHANNELS"}
+                                        </button>
+                                        <button
+                                            onClick={resetTelegramChannels}
+                                            className="px-3 py-2 rounded border border-[var(--border-primary)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-secondary)] transition-all text-[10px] font-mono flex items-center gap-1.5"
+                                            title="Reset to defaults"
+                                        >
+                                            <RotateCcw size={10} />
+                                            RESET
+                                        </button>
+                                    </div>
+                                    <div className="flex items-center justify-between text-[9px] text-[var(--text-muted)] font-mono mt-2">
+                                        <span>{telegramChannels.length}/{MAX_TELEGRAM_CHANNELS} CHANNELS</span>
+                                        <span>USERNAMES SHOULD LOOK LIKE @CHANNEL</span>
                                     </div>
                                 </div>
                             </>

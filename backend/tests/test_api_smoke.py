@@ -73,6 +73,12 @@ class TestSettingsEndpoints:
         data = r.json()
         assert isinstance(data, list)
 
+    def test_get_telegram_channels(self, client):
+        r = client.get("/api/settings/telegram-channels")
+        assert r.status_code == 200
+        data = r.json()
+        assert isinstance(data, list)
+
 
 class TestRadioEndpoints:
     def test_radio_top_returns_200(self, client):
