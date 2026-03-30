@@ -292,6 +292,7 @@ async def live_data_slow(request: Request,
     payload = {
         "last_updated": d.get("last_updated"),
         "news": d.get("news", []),  # News has coords but we always send it (small set, important)
+        "telegram": d.get("telegram", []),  # Telegram messages
         "stocks": d.get("stocks", {}),
         "oil": d.get("oil", {}),
         "weather": d.get("weather"),
@@ -318,6 +319,14 @@ async def debug_latest_data(request: Request):
     return list(get_latest_data().keys())
 
 
+@app.get("/api/telegram-feed")
+@limiter.limit("60/minute")
+async def telegram_feed(request: Request):
+    """Get latest Telegram messages in normalized news format."""
+    d = get_latest_data()
+    return d.get("telegram", [])
+
+
 @app.get("/api/health", response_model=HealthResponse)
 @limiter.limit("30/minute")
 async def health_check(request: Request):
@@ -335,6 +344,7 @@ async def health_check(request: Request):
             "earthquakes": len(d.get("earthquakes", [])),
             "cctv": len(d.get("cctv", [])),
             "news": len(d.get("news", [])),
+            "telegram": len(d.get("telegram", [])),
             "uavs": len(d.get("uavs", [])),
             "firms_fires": len(d.get("firms_fires", [])),
             "liveuamap": len(d.get("liveuamap", [])),

@@ -199,6 +199,7 @@ helm install shadowbroker ./helm/chart --create-namespace --namespace shadowbrok
 * **Global Incidents** — GDELT-powered conflict event aggregation (last 8 hours, ~1,000 events)
 * **Ukraine Frontline** — Live warfront GeoJSON from DeepState Map
 * **SIGINT/RISINT News Feed** — Real-time RSS aggregation from multiple intelligence-focused sources with user-customizable feeds (up to 20 sources, configurable priority weights 1-5)
+* **Telegram Channel Monitoring** — Real-time message aggregation from configured Telegram channels (news outlets, government accounts, etc.) with automatic geocoding and risk scoring
 * **Region Dossier** — Right-click anywhere on the map for:
   * Country profile (population, capital, languages, currencies, area)
   * Head of state & government type (Wikidata SPARQL)

@@ -517,9 +517,10 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
     }, [selectedEntity, data]);
 
     const spreadAlerts = useMemo(() => {
-        if (!data?.news) return [];
-        return spreadAlertItems(data.news, viewState.zoom, dismissedAlerts);
-    }, [data?.news, Math.round(viewState.zoom), dismissedAlerts]);
+        const allNews = [...(data?.news || []), ...(data?.telegram || [])];
+        if (!allNews.length) return [];
+        return spreadAlertItems(allNews, viewState.zoom, dismissedAlerts);
+    }, [data?.news, data?.telegram, Math.round(viewState.zoom), dismissedAlerts]);
 
     // Tracked flights GeoJSON with interpolation
     const trackedFlightsGeoJSON = useMemo(() => {
@@ -2147,8 +2148,9 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                 }
 
                 {(() => {
-                    if (selectedEntity?.type !== 'news' || !data?.news) return null;
-                    const item = data.news.find((n: any) => {
+                    if (selectedEntity?.type !== 'news' || (!data?.news && !data?.telegram)) return null;
+                    const allNews = [...(data?.news || []), ...(data?.telegram || [])];
+                    const item = allNews.find((n: any) => {
                         const key = n.alertKey || `${n.title}|${n.coords?.[0]},${n.coords?.[1]}`;
                         return key === selectedEntity.id;
                     });

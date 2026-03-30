@@ -49,6 +49,14 @@ from services.fetchers.geo import (  # noqa: F401
     fetch_frontlines, fetch_gdelt, fetch_geopolitics, update_liveuamap,
 )
 
+try:
+    from services.fetchers.telegram import fetch_telegram  # noqa: F401
+except ModuleNotFoundError:
+    fetch_telegram = None
+    logger = logging.getLogger("services.data_fetcher")
+    logger.warning("Telethon is not installed; Telegram fetcher will be skipped.")
+
+
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
@@ -75,6 +83,10 @@ def update_slow_data():
     logger.info("Slow-tier data update starting...")
     slow_funcs = [
         fetch_news,
+    ]
+    if fetch_telegram:
+        slow_funcs.append(fetch_telegram)
+    slow_funcs.extend([
         fetch_earthquakes,
         fetch_firms_fires,
         fetch_defense_stocks,
@@ -89,7 +101,7 @@ def update_slow_data():
         fetch_datacenters,
         fetch_military_bases,
         fetch_power_plants,
-    ]
+    ])
     with concurrent.futures.ThreadPoolExecutor(max_workers=len(slow_funcs)) as executor:
         futures = [executor.submit(func) for func in slow_funcs]
         concurrent.futures.wait(futures)

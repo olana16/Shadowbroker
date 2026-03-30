@@ -172,6 +172,12 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
     }
 
     const news = data?.news || [];
+    const telegram = data?.telegram || [];
+    
+    // Combine RSS news and Telegram messages, sorted by published date (newest first)
+    const combinedNews = [...news, ...telegram].sort((a, b) => 
+        new Date(b.published).getTime() - new Date(a.published).getTime()
+    );
 
     // Determine the selected flight's model for Wikipedia thumbnail lookup
     // (must call hook unconditionally — React rules of hooks)
@@ -981,7 +987,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                         exit={{ opacity: 0 }}
                         className="flex-1 overflow-y-auto p-3 flex flex-col gap-2 styled-scrollbar"
                     >
-                        {news.map((item: any, idx: number) => {
+                        {combinedNews.map((item: any, idx: number) => {
                             let bgClass, titleClass, badgeClass;
                             if (item.risk_score >= 9) {
                                 bgClass = "bg-red-950/20 border-red-500/30";
@@ -1078,7 +1084,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                                 </motion.div>
                             )
                         })}
-                        {news.length === 0 && (
+                        {combinedNews.length === 0 && (
                             <div className="text-cyan-500/50 text-[10px] tracking-widest font-bold text-center mt-6 animate-pulse">
                                 INITIALIZING SECURE HANDSHAKE...
                             </div>

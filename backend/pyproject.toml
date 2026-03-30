@@ -19,6 +19,7 @@ dependencies = [
     "reverse-geocoder==1.5.1",
     "sgp4==2.23",
     "slowapi==0.1.9",
+    "telethon==1.38.1",
     "uvicorn==0.34.0",
     "yfinance==0.2.54",
 ]
