@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, Clock, ChevronDown, ChevronUp } from 'lucide-react';
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 import WikiImage from '@/components/WikiImage';
-import type { DashboardData, SelectedEntity, RegionDossier } from "@/types/dashboard";
+import type { DashboardData, NewsArticle, SelectedEntity, RegionDossier } from "@/types/dashboard";
+
+type FeedView = 'all' | 'news' | 'telegram';
 
 // HLS video player — uses hls.js on Chrome/Firefox, native on Safari
 function HlsVideo({ url, className }: { url: string; className?: string }) {
@@ -158,6 +160,7 @@ const VESSEL_TYPE_WIKI: Record<string, string> = {
 function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoading }: { data: DashboardData, selectedEntity?: SelectedEntity | null, regionDossier?: RegionDossier | null, regionDossierLoading?: boolean }) {
     const [isMinimized, setIsMinimized] = useState(false);
     const [expandedIndexes, setExpandedIndexes] = useState<number[]>([]);
+    const [feedView, setFeedView] = useState<FeedView>('all');
     const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     // Intentionally omitting map click triggers for expanding
@@ -171,11 +174,18 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         }
     }
 
-    const news = data?.news || [];
-    const telegram = data?.telegram || [];
+    const news: NewsArticle[] = data?.news || [];
+    const telegram: NewsArticle[] = data?.telegram || [];
     
     // Combine RSS news and Telegram messages, sorted by published date (newest first)
     const combinedNews = [...news, ...telegram].sort((a, b) => 
+        new Date(b.published).getTime() - new Date(a.published).getTime()
+    );
+    const visibleFeed = (
+        feedView === 'news' ? news :
+        feedView === 'telegram' ? telegram :
+        combinedNews
+    ).sort((a, b) =>
         new Date(b.published).getTime() - new Date(a.published).getTime()
     );
 
@@ -987,7 +997,40 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                         exit={{ opacity: 0 }}
                         className="flex-1 overflow-y-auto p-3 flex flex-col gap-2 styled-scrollbar"
                     >
-                        {combinedNews.map((item: any, idx: number) => {
+                        <div className="sticky top-0 z-20 -mt-3 -mx-3 px-3 pt-3 pb-2 bg-[linear-gradient(to_bottom,rgba(6,10,14,0.96),rgba(6,10,14,0.88),rgba(6,10,14,0))] backdrop-blur-sm">
+                            <div className="flex items-center justify-between gap-2">
+                                <div className="flex items-center gap-1 rounded-md border border-cyan-900/50 bg-black/30 p-1">
+                                    {([
+                                        { key: 'all', label: 'ALL', count: combinedNews.length },
+                                        { key: 'news', label: 'NEWS', count: news.length },
+                                        { key: 'telegram', label: 'TELEGRAM', count: telegram.length },
+                                    ] as { key: FeedView; label: string; count: number }[]).map((tab) => {
+                                        const isActive = feedView === tab.key;
+                                        return (
+                                            <button
+                                                key={tab.key}
+                                                onClick={() => {
+                                                    setFeedView(tab.key);
+                                                    setExpandedIndexes([]);
+                                                }}
+                                                className={`px-2 py-1 text-[8px] font-bold tracking-[0.2em] border rounded-sm transition-colors ${
+                                                    isActive
+                                                        ? 'border-cyan-400 bg-cyan-400 text-black'
+                                                        : 'border-cyan-900/50 text-cyan-500 hover:border-cyan-700 hover:text-cyan-300'
+                                                }`}
+                                            >
+                                                {tab.label} [{tab.count}]
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                                <span className="text-[8px] font-bold tracking-[0.18em] text-cyan-500/70">
+                                    {feedView === 'all' ? 'MERGED FEED' : feedView === 'news' ? 'RSS MONITOR' : 'TELEGRAM MONITOR'}
+                                </span>
+                            </div>
+                        </div>
+
+                        {visibleFeed.map((item: NewsArticle, idx: number) => {
                             let bgClass, titleClass, badgeClass;
                             if (item.risk_score >= 9) {
                                 bgClass = "bg-red-950/20 border-red-500/30";
@@ -1010,7 +1053,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
 
                             return (
                                 <motion.div
-                                    key={idx}
+                                    key={`${item.source || 'feed'}-${item.link || idx}-${item.telegram_message_id || idx}`}
                                     ref={(el) => { itemRefs.current[idx] = el; }}
                                     initial={idx < 15 ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -1021,7 +1064,12 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                                         <span className="font-bold flex items-center gap-1 text-cyan-600">
                                             &gt;_ {item.source}
                                         </span>
-                                        <span>[{item.published ? formatTime(item.published) : ''}]</span>
+                                        <div className="flex items-center gap-1">
+                                            {String(item.source || '').startsWith('Telegram:') && (
+                                                <span className="px-1 border border-sky-500/40 bg-sky-500/10 text-sky-300 rounded-sm">TG</span>
+                                            )}
+                                            <span>[{item.published ? formatTime(item.published) : ''}]</span>
+                                        </div>
                                     </div>
 
                                     <a href={item.link} target="_blank" rel="noreferrer" className={`text-[11px] ${titleClass} hover:text-[var(--text-primary)] transition-colors leading-tight`}>
@@ -1062,7 +1110,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                                                 exit={{ height: 0, opacity: 0 }}
                                                 className="mt-2 pt-2 border-t border-cyan-500/20 flex flex-col gap-2 overflow-hidden"
                                             >
-                                                {item.articles.slice(1).map((subItem: any, subIdx: number) => (
+                                                {item.articles.slice(1).map((subItem: NewsArticle, subIdx: number) => (
                                                     <div key={subIdx} className="flex flex-col gap-0.5 pl-2 border-l border-cyan-500/20">
                                                         <div className="flex items-center justify-between text-[7.5px] text-[var(--text-muted)] uppercase font-bold">
                                                             <span>&gt;_ {subItem.source}</span>
@@ -1084,9 +1132,9 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                                 </motion.div>
                             )
                         })}
-                        {combinedNews.length === 0 && (
+                        {visibleFeed.length === 0 && (
                             <div className="text-cyan-500/50 text-[10px] tracking-widest font-bold text-center mt-6 animate-pulse">
-                                INITIALIZING SECURE HANDSHAKE...
+                                {feedView === 'telegram' ? 'NO TELEGRAM INTERCEPTS AVAILABLE' : feedView === 'news' ? 'NO RSS NEWS AVAILABLE' : 'INITIALIZING SECURE HANDSHAKE...'}
                             </div>
                         )}
                     </motion.div>

@@ -256,16 +256,20 @@ export interface MilitaryBase {
 export interface NewsArticle {
   id: number | string;
   title: string;
-  summary: string;
+  summary?: string;
   source: string;
   link: string;
-  pub_date: string;
+  pub_date?: string;
+  published?: string;
   risk_score: number;
-  lat: number;
-  lng: number;
+  lat?: number;
+  lng?: number;
   region?: string;
   coords?: [number, number];
   machine_assessment?: string;
+  cluster_count?: number;
+  articles?: NewsArticle[];
+  telegram_message_id?: number;
 }
 
 // ─── UKRAINE FRONTLINE ──────────────────────────────────────────────────────
@@ -419,6 +423,7 @@ export interface DashboardData {
 
   // Slow tier
   news?: NewsArticle[];
+  telegram?: NewsArticle[];
   stocks?: StocksData;
   oil?: OilData;
   weather?: Weather | null;
