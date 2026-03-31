@@ -16,6 +16,11 @@ RUNTIME_CONFIG_PATH = Path(__file__).parent.parent / "data" / "news_feeds.json"
 MAX_FEEDS = 50
 
 DEFAULT_FEEDS = [
+    {"name": "KrebsOnSecurity", "url": "https://krebsonsecurity.com/feed/", "weight": 5},
+    {"name": "The Hacker News", "url": "https://feeds.feedburner.com/TheHackersNews", "weight": 5},
+    {"name": "BleepingComputer", "url": "https://www.bleepingcomputer.com/feed/", "weight": 5},
+    {"name": "Microsoft Security Response Center", "url": "https://api.msrc.microsoft.com/update-guide/rss", "weight": 5},
+    {"name": "SecurityWeek", "url": "https://www.securityweek.com/feed/", "weight": 4},
     {"name": "NPR", "url": "https://feeds.npr.org/1004/rss.xml", "weight": 4},
     {"name": "BBC", "url": "http://feeds.bbci.co.uk/news/world/rss.xml", "weight": 3},
     {"name": "AlJazeera", "url": "https://www.aljazeera.com/xml/rss/all.xml", "weight": 2},

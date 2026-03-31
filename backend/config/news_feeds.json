@@ -1,6 +1,31 @@
 {
   "feeds": [
     {
+      "name": "KrebsOnSecurity",
+      "url": "https://krebsonsecurity.com/feed/",
+      "weight": 5
+    },
+    {
+      "name": "The Hacker News",
+      "url": "https://feeds.feedburner.com/TheHackersNews",
+      "weight": 5
+    },
+    {
+      "name": "BleepingComputer",
+      "url": "https://www.bleepingcomputer.com/feed/",
+      "weight": 5
+    },
+    {
+      "name": "Microsoft Security Response Center",
+      "url": "https://api.msrc.microsoft.com/update-guide/rss",
+      "weight": 5
+    },
+    {
+      "name": "SecurityWeek",
+      "url": "https://www.securityweek.com/feed/",
+      "weight": 4
+    },
+    {
       "name": "NPR",
       "url": "https://feeds.npr.org/1004/rss.xml",
       "weight": 4

@@ -8,7 +8,25 @@ import Hls from 'hls.js';
 import WikiImage from '@/components/WikiImage';
 import type { DashboardData, NewsArticle, SelectedEntity, RegionDossier } from "@/types/dashboard";
 
-type FeedView = 'all' | 'news' | 'telegram';
+type FeedView = 'all' | 'news' | 'cyber' | 'telegram';
+
+const CYBER_NEWS_SOURCES = new Set([
+    'krebsonsecurity',
+    'the hacker news',
+    'bleepingcomputer',
+    'microsoft security response center',
+    'securityweek',
+]);
+
+function normalizeSourceName(source: string | undefined): string {
+    return String(source || '').trim().toLowerCase();
+}
+
+function isCyberArticle(item: NewsArticle): boolean {
+    if (CYBER_NEWS_SOURCES.has(normalizeSourceName(item.source))) return true;
+    if (item.articles?.some((article) => CYBER_NEWS_SOURCES.has(normalizeSourceName(article.source)))) return true;
+    return false;
+}
 
 // HLS video player — uses hls.js on Chrome/Firefox, native on Safari
 function HlsVideo({ url, className }: { url: string; className?: string }) {
@@ -176,6 +194,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
 
     const news: NewsArticle[] = data?.news || [];
     const telegram: NewsArticle[] = data?.telegram || [];
+    const cyberNews = news.filter(isCyberArticle);
     
     // Combine RSS news and Telegram messages, sorted by published date (newest first)
     const combinedNews = [...news, ...telegram].sort((a, b) => 
@@ -183,6 +202,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
     );
     const visibleFeed = (
         feedView === 'news' ? news :
+        feedView === 'cyber' ? cyberNews :
         feedView === 'telegram' ? telegram :
         combinedNews
     ).sort((a, b) =>
@@ -1003,6 +1023,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                                     {([
                                         { key: 'all', label: 'ALL', count: combinedNews.length },
                                         { key: 'news', label: 'NEWS', count: news.length },
+                                        { key: 'cyber', label: 'CYBER NEWS', count: cyberNews.length },
                                         { key: 'telegram', label: 'TELEGRAM', count: telegram.length },
                                     ] as { key: FeedView; label: string; count: number }[]).map((tab) => {
                                         const isActive = feedView === tab.key;
@@ -1025,7 +1046,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                                     })}
                                 </div>
                                 <span className="text-[8px] font-bold tracking-[0.18em] text-cyan-500/70">
-                                    {feedView === 'all' ? 'MERGED FEED' : feedView === 'news' ? 'RSS MONITOR' : 'TELEGRAM MONITOR'}
+                                    {feedView === 'all' ? 'MERGED FEED' : feedView === 'news' ? 'RSS MONITOR' : feedView === 'cyber' ? 'CYBER MONITOR' : 'TELEGRAM MONITOR'}
                                 </span>
                             </div>
                         </div>
@@ -1134,7 +1155,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                         })}
                         {visibleFeed.length === 0 && (
                             <div className="text-cyan-500/50 text-[10px] tracking-widest font-bold text-center mt-6 animate-pulse">
-                                {feedView === 'telegram' ? 'NO TELEGRAM INTERCEPTS AVAILABLE' : feedView === 'news' ? 'NO RSS NEWS AVAILABLE' : 'INITIALIZING SECURE HANDSHAKE...'}
+                                {feedView === 'telegram' ? 'NO TELEGRAM INTERCEPTS AVAILABLE' : feedView === 'news' ? 'NO RSS NEWS AVAILABLE' : feedView === 'cyber' ? 'NO CYBER NEWS AVAILABLE' : 'INITIALIZING SECURE HANDSHAKE...'}
                             </div>
                         )}
                     </motion.div>
