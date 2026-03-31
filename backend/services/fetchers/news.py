@@ -1,5 +1,7 @@
-"""News fetching, geocoding, clustering, and risk assessment."""
+"""News fetching, geocoding, clustering, risk assessment, and optional LLM summaries."""
+import os
 import re
+import json
 import logging
 import concurrent.futures
 import requests
@@ -9,6 +11,133 @@ from services.fetchers._store import latest_data, _data_lock, _mark_fresh
 from services.fetchers.retry import with_retry
 
 logger = logging.getLogger("services.data_fetcher")
+
+_summary_cache: dict[str, str] = {}
+
+
+def _env_flag(name: str, default: bool = False) -> bool:
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _news_summary_enabled() -> bool:
+    return _env_flag("OLLAMA_NEWS_SUMMARY_ENABLED", default=False)
+
+
+def _news_summary_model() -> str:
+    return os.getenv("OLLAMA_NEWS_MODEL") or os.getenv("OLLAMA_MODEL") or "llama3.2:3b"
+
+
+def _news_summary_url() -> str:
+    return os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/") + "/api/generate"
+
+
+def _news_summary_limit() -> int:
+    try:
+        return max(0, int(os.getenv("OLLAMA_NEWS_SUMMARY_LIMIT", "8")))
+    except ValueError:
+        return 8
+
+
+def _news_summary_min_risk() -> int:
+    try:
+        return max(1, min(10, int(os.getenv("OLLAMA_NEWS_SUMMARY_MIN_RISK", "4"))))
+    except ValueError:
+        return 4
+
+
+def _news_summary_timeout() -> int:
+    try:
+        return max(3, int(os.getenv("OLLAMA_NEWS_TIMEOUT_SECONDS", "20")))
+    except ValueError:
+        return 20
+
+
+def _build_summary_prompt(item: dict) -> str:
+    cluster_lines = []
+    for article in item.get("articles", [])[:4]:
+        source = article.get("source", "Unknown")
+        title = article.get("title", "").strip()
+        if title:
+            cluster_lines.append(f"- {source}: {title}")
+
+    cluster_context = "\n".join(cluster_lines) if cluster_lines else "- No supporting articles available"
+    coords = item.get("coords")
+    location_hint = f"{coords[0]:.2f}, {coords[1]:.2f}" if coords else "unknown"
+
+    return (
+        "You are writing terse threat-intel summaries for an OSINT dashboard.\n"
+        "Summarize this news item in 1-2 sentences, maximum 45 words.\n"
+        "Focus on what happened, where it matters, and why operators should care.\n"
+        "If details are uncertain or conflicting, say so plainly.\n"
+        "Do not use bullet points. Do not mention being an AI.\n\n"
+        f"Primary headline: {item.get('title', '')}\n"
+        f"Primary source: {item.get('source', 'Unknown')}\n"
+        f"Risk score: {item.get('risk_score', 'unknown')}/10\n"
+        f"Cluster count: {item.get('cluster_count', 1)}\n"
+        f"Location hint: {location_hint}\n"
+        "Related coverage:\n"
+        f"{cluster_context}\n"
+    )
+
+
+def _generate_machine_assessment(item: dict) -> str | None:
+    if not _news_summary_enabled():
+        return None
+
+    cache_key = " | ".join(
+        str(item.get(key, "")).strip()
+        for key in ("source", "title", "link", "published")
+    )
+    if cache_key in _summary_cache:
+        return _summary_cache[cache_key]
+
+    payload = {
+        "model": _news_summary_model(),
+        "prompt": _build_summary_prompt(item),
+        "stream": False,
+        "options": {
+            "temperature": 0.2,
+            "num_predict": 90,
+        },
+    }
+
+    try:
+        response = requests.post(
+            _news_summary_url(),
+            json=payload,
+            timeout=_news_summary_timeout(),
+        )
+        response.raise_for_status()
+        body = response.json()
+        summary = re.sub(r"\s+", " ", str(body.get("response", "")).strip())
+        if not summary:
+            return None
+        _summary_cache[cache_key] = summary
+        return summary
+    except (requests.RequestException, json.JSONDecodeError, ValueError) as e:
+        logger.warning(f"Ollama news summary unavailable: {e}")
+        return None
+
+
+def _attach_machine_assessments(news_items: list[dict]) -> None:
+    if not _news_summary_enabled():
+        return
+
+    remaining = _news_summary_limit()
+    min_risk = _news_summary_min_risk()
+    if remaining <= 0:
+        return
+
+    for item in news_items:
+        if remaining <= 0:
+            break
+        if int(item.get("risk_score", 0)) < min_risk:
+            continue
+        item["machine_assessment"] = _generate_machine_assessment(item)
+        remaining -= 1
 
 
 # Keyword -> coordinate mapping for geocoding news articles
@@ -268,6 +397,7 @@ def fetch_news():
         })
 
     news_items.sort(key=lambda x: x['risk_score'], reverse=True)
+    _attach_machine_assessments(news_items)
     with _data_lock:
         latest_data['news'] = news_items
     _mark_fresh("news")

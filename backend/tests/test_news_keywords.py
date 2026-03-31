@@ -1,10 +1,11 @@
 """Regression tests for news geocoding keywords and feed configuration."""
 import json
 from pathlib import Path
+from unittest.mock import MagicMock
 
 import pytest
 
-from services.fetchers.news import _resolve_coords
+from services.fetchers.news import _resolve_coords, _attach_machine_assessments, _generate_machine_assessment
 from services import news_feed_config
 from services.news_feed_config import DEFAULT_FEEDS
 
@@ -175,3 +176,65 @@ class TestFeedConfig:
 
         assert names[:2] == ["NPR", "Custom Feed"]
         assert "Voice of America" in names
+
+
+class TestOllamaSummaries:
+    def test_generate_machine_assessment_disabled_returns_none(self, monkeypatch):
+        monkeypatch.delenv("OLLAMA_NEWS_SUMMARY_ENABLED", raising=False)
+
+        item = {
+            "title": "Critical infrastructure intrusion reported",
+            "source": "SecurityWeek",
+            "link": "https://example.com/story",
+            "published": "2026-03-31T00:00:00Z",
+            "risk_score": 8,
+            "cluster_count": 1,
+            "articles": [],
+            "coords": None,
+        }
+
+        assert _generate_machine_assessment(item) is None
+
+    def test_attach_machine_assessments_respects_limit_and_min_risk(self, monkeypatch):
+        monkeypatch.setenv("OLLAMA_NEWS_SUMMARY_ENABLED", "true")
+        monkeypatch.setenv("OLLAMA_NEWS_SUMMARY_LIMIT", "1")
+        monkeypatch.setenv("OLLAMA_NEWS_SUMMARY_MIN_RISK", "6")
+
+        mock_response = MagicMock()
+        mock_response.json.return_value = {"response": "Operators should watch this activity closely."}
+        mock_response.raise_for_status.return_value = None
+
+        def fake_post(*args, **kwargs):
+            return mock_response
+
+        monkeypatch.setattr("services.fetchers.news.requests.post", fake_post)
+
+        items = [
+            {
+                "title": "High risk intrusion alert",
+                "source": "SecurityWeek",
+                "link": "https://example.com/high",
+                "published": "2026-03-31T00:00:00Z",
+                "risk_score": 9,
+                "cluster_count": 1,
+                "articles": [],
+                "coords": None,
+                "machine_assessment": None,
+            },
+            {
+                "title": "Lower risk patch note",
+                "source": "BleepingComputer",
+                "link": "https://example.com/low",
+                "published": "2026-03-31T00:00:01Z",
+                "risk_score": 3,
+                "cluster_count": 1,
+                "articles": [],
+                "coords": None,
+                "machine_assessment": None,
+            },
+        ]
+
+        _attach_machine_assessments(items)
+
+        assert items[0]["machine_assessment"] == "Operators should watch this activity closely."
+        assert items[1]["machine_assessment"] is None
