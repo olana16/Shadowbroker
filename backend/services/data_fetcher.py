@@ -33,7 +33,7 @@ from services.fetchers.flights import fetch_flights  # noqa: F401
 from services.fetchers.flights import _BLIND_SPOT_REGIONS  # noqa: F401 — re-exported for tests
 from services.fetchers.military import fetch_military_flights  # noqa: F401
 from services.fetchers.satellites import fetch_satellites  # noqa: F401
-from services.fetchers.news import fetch_news  # noqa: F401
+from services.fetchers.news import fetch_news, load_cached_news_into_store  # noqa: F401
 
 # Newly extracted fetcher modules
 from services.fetchers.financial import fetch_defense_stocks, fetch_oil_prices  # noqa: F401
@@ -122,13 +122,31 @@ _scheduler = None
 def start_scheduler():
     global _scheduler
     init_db()
+    load_cached_news_into_store()
     _scheduler = BackgroundScheduler(daemon=True)
+    _now = datetime.now()
 
     # Fast tier — every 60 seconds
-    _scheduler.add_job(update_fast_data, 'interval', seconds=60, id='fast_tier', max_instances=1, misfire_grace_time=30)
+    _scheduler.add_job(
+        update_fast_data,
+        'interval',
+        seconds=60,
+        id='fast_tier',
+        max_instances=1,
+        misfire_grace_time=30,
+        next_run_time=_now,
+    )
 
     # Slow tier — every 5 minutes
-    _scheduler.add_job(update_slow_data, 'interval', minutes=5, id='slow_tier', max_instances=1, misfire_grace_time=120)
+    _scheduler.add_job(
+        update_slow_data,
+        'interval',
+        minutes=5,
+        id='slow_tier',
+        max_instances=1,
+        misfire_grace_time=120,
+        next_run_time=_now,
+    )
 
     # Very slow — every 15 minutes
     _scheduler.add_job(fetch_gdelt, 'interval', minutes=15, id='gdelt', max_instances=1, misfire_grace_time=120)
@@ -144,7 +162,6 @@ def start_scheduler():
     _cctv_lta = LTASingaporeIngestor()
     _cctv_atx = AustinTXIngestor()
     _cctv_nyc = NYCDOTIngestor()
-    _now = datetime.now()
     _scheduler.add_job(_cctv_tfl.ingest, 'interval', minutes=10, id='cctv_tfl', max_instances=1, misfire_grace_time=120, next_run_time=_now)
     _scheduler.add_job(_cctv_lta.ingest, 'interval', minutes=10, id='cctv_lta', max_instances=1, misfire_grace_time=120, next_run_time=_now)
     _scheduler.add_job(_cctv_atx.ingest, 'interval', minutes=10, id='cctv_atx', max_instances=1, misfire_grace_time=120, next_run_time=_now)

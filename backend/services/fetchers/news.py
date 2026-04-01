@@ -4,6 +4,7 @@ import re
 import json
 import logging
 import concurrent.futures
+from pathlib import Path
 import requests
 import feedparser
 from services.network_utils import fetch_with_curl
@@ -13,6 +14,41 @@ from services.fetchers.retry import with_retry
 logger = logging.getLogger("services.data_fetcher")
 
 _summary_cache: dict[str, str] = {}
+_NEWS_CACHE_PATH = Path(__file__).parent.parent.parent / "data" / "news_cache.json"
+
+
+def _load_news_cache() -> list[dict]:
+    try:
+        if _NEWS_CACHE_PATH.exists():
+            with open(_NEWS_CACHE_PATH, "r", encoding="utf-8") as f:
+                cached = json.load(f)
+            if isinstance(cached, list):
+                return cached
+    except (IOError, OSError, json.JSONDecodeError, ValueError) as e:
+        logger.warning(f"Failed to load news cache: {e}")
+    return []
+
+
+def _save_news_cache(news_items: list[dict]) -> None:
+    try:
+        _NEWS_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(_NEWS_CACHE_PATH, "w", encoding="utf-8") as f:
+            json.dump(news_items, f, indent=2, ensure_ascii=False)
+    except (IOError, OSError) as e:
+        logger.warning(f"Failed to save news cache: {e}")
+
+
+def load_cached_news_into_store() -> int:
+    cached = _load_news_cache()
+    if not cached:
+        return 0
+    with _data_lock:
+        if latest_data.get("news"):
+            return len(latest_data["news"])
+        latest_data["news"] = cached
+    _mark_fresh("news")
+    logger.info("Loaded %s cached news items into store", len(cached))
+    return len(cached)
 
 
 def _env_flag(name: str, default: bool = False) -> bool:
@@ -293,8 +329,21 @@ def fetch_news():
     def _fetch_feed(item):
         source_name, url = item
         try:
-            xml_data = fetch_with_curl(url, timeout=10).text
-            return source_name, feedparser.parse(xml_data)
+            response = fetch_with_curl(url, timeout=10)
+            if getattr(response, "status_code", 500) >= 400:
+                raise ValueError(f"HTTP {getattr(response, 'status_code', 'unknown')}")
+
+            xml_data = response.text
+            if not xml_data.strip():
+                raise ValueError("empty feed response")
+
+            parsed = feedparser.parse(xml_data)
+            if getattr(parsed, "bozo", 0) and not getattr(parsed, "entries", []):
+                raise ValueError(f"invalid feed payload: {parsed.bozo_exception}")
+
+            entry_count = len(getattr(parsed, "entries", []))
+            logger.info("Feed %s returned %s entries", source_name, entry_count)
+            return source_name, parsed
         except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, OSError) as e:
             logger.warning(f"Feed {source_name} failed: {e}")
             return source_name, None
@@ -398,6 +447,16 @@ def fetch_news():
 
     news_items.sort(key=lambda x: x['risk_score'], reverse=True)
     _attach_machine_assessments(news_items)
+    logger.info("News fetch produced %s clustered items", len(news_items))
+    if not news_items:
+        cached_news = _load_news_cache()
+        if cached_news:
+            with _data_lock:
+                latest_data['news'] = cached_news
+            _mark_fresh("news")
+            logger.info("News fetch returned 0 items; kept %s cached items", len(cached_news))
+            return
     with _data_lock:
         latest_data['news'] = news_items
+    _save_news_cache(news_items)
     _mark_fresh("news")
