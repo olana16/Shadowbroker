@@ -474,6 +474,12 @@ async def api_update_key(request: Request, body: ApiKeyUpdate):
 # ---------------------------------------------------------------------------
 from services.news_feed_config import get_feeds, save_feeds, reset_feeds
 from services.telegram_config import get_channels, save_channels, reset_channels
+from services.live_video_config import (
+    get_channels as get_live_video_channels,
+    save_channels as save_live_video_channels,
+    reset_channels as reset_live_video_channels,
+)
+from services.live_video_resolver import resolve_youtube_embed_url
 
 @app.get("/api/settings/news-feeds")
 @limiter.limit("30/minute")
@@ -532,6 +538,44 @@ async def api_reset_telegram_channels(request: Request):
     if ok:
         return {"status": "reset", "channels": get_channels()}
     return {"status": "error", "message": "Failed to reset Telegram channels"}
+
+
+# ---------------------------------------------------------------------------
+# Live Video Channel Configuration
+# ---------------------------------------------------------------------------
+@app.get("/api/settings/live-video-channels")
+@limiter.limit("30/minute")
+async def api_get_live_video_channels(request: Request):
+    return get_live_video_channels()
+
+
+@app.put("/api/settings/live-video-channels", dependencies=[Depends(require_admin)])
+@limiter.limit("10/minute")
+async def api_save_live_video_channels(request: Request):
+    body = await request.json()
+    ok = save_live_video_channels(body)
+    if ok:
+        return {"status": "updated", "count": len(get_live_video_channels())}
+    return Response(
+        content=json_mod.dumps({"status": "error", "message": "Validation failed (max 20 channels, each needs name and YouTube URL)"}),
+        status_code=400,
+        media_type="application/json",
+    )
+
+
+@app.post("/api/settings/live-video-channels/reset", dependencies=[Depends(require_admin)])
+@limiter.limit("10/minute")
+async def api_reset_live_video_channels(request: Request):
+    ok = reset_live_video_channels()
+    if ok:
+        return {"status": "reset", "channels": get_live_video_channels()}
+    return {"status": "error", "message": "Failed to reset live video channels"}
+
+
+@app.get("/api/youtube/embed-url")
+@limiter.limit("60/minute")
+async def api_resolve_youtube_embed_url(request: Request, url: str = Query(...)):
+    return {"embed_url": resolve_youtube_embed_url(url)}
 
 # ---------------------------------------------------------------------------
 # System — self-update

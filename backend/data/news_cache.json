@@ -1,57 +1,31 @@
 [
   {
-    "title": "With the Indo-Pacific concept’s demise, what of Japan, Australia?",
-    "link": "https://asiatimes.com/2026/04/with-the-indo-pacific-concepts-demise-what-of-japan-australia/",
-    "published": "Tue, 31 Mar 2026 19:07:59 +0000",
-    "source": "Asia Times",
-    "risk_score": 9,
-    "coords": [
-      -25.274,
-      133.775
-    ],
-    "cluster_count": 2,
-    "articles": [
-      {
-        "title": "With the Indo-Pacific concept’s demise, what of Japan, Australia?",
-        "link": "https://asiatimes.com/2026/04/with-the-indo-pacific-concepts-demise-what-of-japan-australia/",
-        "published": "Tue, 31 Mar 2026 19:07:59 +0000",
-        "source": "Asia Times",
-        "risk_score": 9,
-        "coords": [
-          -25.274,
-          133.775
-        ]
-      },
-      {
-        "title": "Australia and Japan face jet fuel supply crunch as China cuts exports",
-        "link": "https://www.scmp.com/economy/china-economy/article/3348642/australia-and-japan-face-jet-fuel-supply-crunch-china-cuts-exports?utm_source=rss_feed",
-        "published": "Wed, 01 Apr 2026 07:22:29 +0000",
-        "source": "SCMP",
-        "risk_score": 3,
-        "coords": [
-          -25.274,
-          133.775
-        ]
-      }
-    ],
-    "machine_assessment": "China has reportedly cut jet fuel exports to Australia and Japan, sparking concerns over energy security in the region. This development may impact military operations and regional stability, with implications for operators in the Indo-Pacific area."
-  },
-  {
-    "title": "Trump underestimated Iran’s resilience, gutting his exit options",
-    "link": "https://asiatimes.com/2026/04/trump-underestimated-irans-resilience-gutting-his-exit-options/",
-    "published": "Wed, 01 Apr 2026 03:43:23 +0000",
-    "source": "Asia Times",
+    "title": "What the Iran war reveals about Nato’s appetite for conflict over Taiwan",
+    "link": "https://www.scmp.com/opinion/world-opinion/article/3348047/what-iran-war-reveals-about-natos-appetite-conflict-over-taiwan?utm_source=rss_feed",
+    "published": "Wed, 01 Apr 2026 12:30:09 +0000",
+    "source": "SCMP",
     "risk_score": 7,
     "coords": [
       38.907,
       -77.036
     ],
-    "cluster_count": 12,
+    "cluster_count": 8,
     "articles": [
       {
-        "title": "Trump underestimated Iran’s resilience, gutting his exit options",
-        "link": "https://asiatimes.com/2026/04/trump-underestimated-irans-resilience-gutting-his-exit-options/",
-        "published": "Wed, 01 Apr 2026 03:43:23 +0000",
+        "title": "What the Iran war reveals about Nato’s appetite for conflict over Taiwan",
+        "link": "https://www.scmp.com/opinion/world-opinion/article/3348047/what-iran-war-reveals-about-natos-appetite-conflict-over-taiwan?utm_source=rss_feed",
+        "published": "Wed, 01 Apr 2026 12:30:09 +0000",
+        "source": "SCMP",
+        "risk_score": 7,
+        "coords": [
+          38.907,
+          -77.036
+        ]
+      },
+      {
+        "title": "Iran war teaching Taiwan hard lessons about US resolve",
+        "link": "https://asiatimes.com/2026/04/iran-war-teaching-taiwan-hard-lessons-about-us-resolve/",
+        "published": "Wed, 01 Apr 2026 10:30:41 +0000",
         "source": "Asia Times",
         "risk_score": 7,
         "coords": [
@@ -60,43 +34,10 @@
         ]
       },
       {
-        "title": "Iran war shows dollar’s grip starting to slip on Asia",
-        "link": "https://asiatimes.com/2026/04/iran-war-shows-dollars-grip-starting-to-slip-on-asia/",
-        "published": "Wed, 01 Apr 2026 03:03:50 +0000",
-        "source": "Asia Times",
-        "risk_score": 7,
-        "coords": [
-          38.907,
-          -77.036
-        ]
-      },
-      {
-        "title": "Only China can end the Iran war",
-        "link": "https://asiatimes.com/2026/04/only-china-can-end-the-iran-war/",
-        "published": "Wed, 01 Apr 2026 02:33:53 +0000",
-        "source": "Asia Times",
-        "risk_score": 5,
-        "coords": [
-          38.907,
-          -77.036
-        ]
-      },
-      {
-        "title": "Limited missions, big risks: What a US ground fight in Iran could become",
-        "link": "https://www.defensenews.com/news/your-military/2026/03/30/limited-missions-big-risks-what-a-us-ground-fight-in-iran-could-become/",
-        "published": "Mon, 30 Mar 2026 21:43:39 +0000",
-        "source": "Defense News",
-        "risk_score": 5,
-        "coords": [
-          38.907,
-          -77.036
-        ]
-      },
-      {
-        "title": "King Charles to Visit U.S. as Tensions Rise Between Trump and Britain",
-        "link": "https://www.nytimes.com/2026/03/31/world/europe/king-charles-state-visit-trump.html",
-        "published": "Tue, 31 Mar 2026 14:54:50 +0000",
-        "source": "NYT",
+        "title": "Trump running out of options in Iran, a US victory is possible?",
+        "link": "https://en.mercopress.com/2026/04/01/trump-running-out-of-options-in-iran-a-us-victory-is-possible?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
+        "published": "Wed, 01 Apr 2026 10:12:00 GMT",
+        "source": "Mercopress",
         "risk_score": 5,
         "coords": [
           38.9,
@@ -115,21 +56,10 @@
         ]
       },
       {
-        "title": "Machado meets Rubio in Washington, says her return to Venezuela is near",
-        "link": "https://en.mercopress.com/2026/04/01/machado-meets-rubio-in-washington-says-her-return-to-venezuela-is-near?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
-        "published": "Wed, 01 Apr 2026 02:07:00 GMT",
-        "source": "Mercopress",
-        "risk_score": 3,
-        "coords": [
-          38.907,
-          -77.036
-        ]
-      },
-      {
-        "title": "Trump says US will leave Iran in \"two or three weeks,\" claims regime change achieved",
-        "link": "https://en.mercopress.com/2026/04/01/trump-says-us-will-leave-iran-in-two-or-three-weeks-claims-regime-change-achieved?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
-        "published": "Wed, 01 Apr 2026 00:48:00 GMT",
-        "source": "Mercopress",
+        "title": "US Supreme Court to hear constitutional test of birthright citizenship",
+        "link": "https://www.aljazeera.com/news/2026/4/1/us-supreme-court-to-hear-constitutional-test-of-birthright-citizenship?traffic_source=rss",
+        "published": "Wed, 01 Apr 2026 11:41:47 +0000",
+        "source": "AlJazeera",
         "risk_score": 3,
         "coords": [
           38.907,
@@ -148,10 +78,10 @@
         ]
       },
       {
-        "title": "Rubio says US will 'have to re-examine' NATO relationship",
-        "link": "https://www.channelnewsasia.com/world/us-re-examine-nato-relationship-rubio-iran-war-6030491",
-        "published": "Wed, 01 Apr 2026 14:45:00 +0800",
-        "source": "CNA",
+        "title": "The Strait of Hormuz offers a lesson in air denial",
+        "link": "https://www.defensenews.com/opinion/2026/04/01/the-strait-of-hormuz-offers-a-lesson-in-air-denial/",
+        "published": "Wed, 01 Apr 2026 09:32:41 +0000",
+        "source": "Defense News",
         "risk_score": 1,
         "coords": [
           38.907,
@@ -168,39 +98,50 @@
           38.907,
           -77.036
         ]
-      },
-      {
-        "title": "First Canadian Astronaut Will Travel to the Moon Amid Fraying U.S.-Canada Relations",
-        "link": "https://www.nytimes.com/2026/03/31/world/canada/canada-astronaut-artemis-ii-mission-moon.html",
-        "published": "Tue, 31 Mar 2026 11:34:35 +0000",
-        "source": "NYT",
-        "risk_score": 1,
-        "coords": [
-          38.907,
-          -77.036
-        ]
       }
     ],
-    "machine_assessment": "US-Iran tensions escalate as Trump's underestimation of Iranian resilience limits his exit options. This development may indicate increased risk for US military operations and diplomatic efforts in the region."
+    "machine_assessment": "NATO's involvement in the Iran conflict has sparked concerns over its willingness to engage in conflict over Taiwan. This development may embolden or provoke China, increasing tensions in the region and posing a risk to regional stability."
   },
   {
-    "title": "Shared energy stakes call for greater China-India cooperation",
-    "link": "https://asiatimes.com/2026/04/shared-energy-stakes-call-for-greater-china-india-cooperation/",
-    "published": "Wed, 01 Apr 2026 04:02:12 +0000",
-    "source": "Asia Times",
+    "title": "Another front for Trump, “pain in the pump”, gasoline above US$ 4 a gallon",
+    "link": "https://en.mercopress.com/2026/04/01/another-front-for-trump-pain-in-the-pump-gasoline-above-us-4-a-gallon?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
+    "published": "Wed, 01 Apr 2026 09:01:00 GMT",
+    "source": "Mercopress",
     "risk_score": 7,
     "coords": [
       31.5,
       34.8
     ],
-    "cluster_count": 8,
+    "cluster_count": 14,
     "articles": [
+      {
+        "title": "Another front for Trump, “pain in the pump”, gasoline above US$ 4 a gallon",
+        "link": "https://en.mercopress.com/2026/04/01/another-front-for-trump-pain-in-the-pump-gasoline-above-us-4-a-gallon?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
+        "published": "Wed, 01 Apr 2026 09:01:00 GMT",
+        "source": "Mercopress",
+        "risk_score": 7,
+        "coords": [
+          31.5,
+          34.8
+        ]
+      },
       {
         "title": "Shared energy stakes call for greater China-India cooperation",
         "link": "https://asiatimes.com/2026/04/shared-energy-stakes-call-for-greater-china-india-cooperation/",
         "published": "Wed, 01 Apr 2026 04:02:12 +0000",
         "source": "Asia Times",
         "risk_score": 7,
+        "coords": [
+          31.5,
+          34.8
+        ]
+      },
+      {
+        "title": "Will Conflict in the Middle East Boost China’s Renewable Energy Sector?",
+        "link": "https://thediplomat.com/2026/04/will-conflict-in-the-middle-east-boost-chinas-renewable-energy-sector/",
+        "published": "Wed, 01 Apr 2026 03:24:00 +0900",
+        "source": "The Diplomat",
+        "risk_score": 5,
         "coords": [
           31.5,
           34.8
@@ -218,36 +159,36 @@
         ]
       },
       {
-        "title": "Iran war: What is happening on day 33 of US-Israel attacks?",
-        "link": "https://www.aljazeera.com/news/2026/4/1/iran-war-what-is-happening-on-day-33-of-us-israel-attacks?traffic_source=rss",
-        "published": "Wed, 01 Apr 2026 07:01:14 +0000",
-        "source": "AlJazeera",
-        "risk_score": 5,
-        "coords": [
-          31.046,
-          34.851
-        ]
-      },
-      {
-        "title": "Iranians debate whether the war is worth it",
-        "link": "https://www.npr.org/2026/03/31/nx-s1-5759351/iranians-debate-whether-the-war-is-worth-it",
-        "published": "Tue, 31 Mar 2026 17:33:12 -0400",
-        "source": "NPR",
+        "title": "Japan, France to draw road map for supply of critical minerals",
+        "link": "https://www.scmp.com/news/asia/east-asia/article/3348694/japan-france-draw-road-map-supply-critical-minerals?utm_source=rss_feed",
+        "published": "Wed, 01 Apr 2026 11:58:08 +0000",
+        "source": "SCMP",
         "risk_score": 3,
         "coords": [
-          31.046,
-          34.851
+          31.5,
+          34.8
         ]
       },
       {
-        "title": "(LEAD) Seoul stocks jump over 8 pct amid hopes for end to Middle East conflict",
-        "link": "https://en.yna.co.kr/view/AEN20260401009351320",
-        "published": "Wed, 1 Apr 2026 16:03:01 +0900",
+        "title": "(LEAD) Lee calls for greater transparency on key supply chains amid Middle East tensions",
+        "link": "https://en.yna.co.kr/view/AEN20260401012251315",
+        "published": "Wed, 1 Apr 2026 19:47:00 +0900",
         "source": "Yonhap",
         "risk_score": 3,
         "coords": [
           31.5,
           34.8
+        ]
+      },
+      {
+        "title": "Israel intensifies Lebanon attacks and hits areas not in Hezbollah's control",
+        "link": "https://www.bbc.com/news/articles/cvg07j6yeweo?at_medium=RSS&at_campaign=rss",
+        "published": "Wed, 01 Apr 2026 10:33:35 GMT",
+        "source": "BBC",
+        "risk_score": 3,
+        "coords": [
+          33.854,
+          35.862
         ]
       },
       {
@@ -262,29 +203,73 @@
         ]
       },
       {
-        "title": "(LEAD) S. Korean currency surges on hope for Middle East de-escalation, WGBI inclusion",
-        "link": "https://en.yna.co.kr/view/AEN20260401003451320",
-        "published": "Wed, 1 Apr 2026 15:50:58 +0900",
-        "source": "Yonhap",
-        "risk_score": 1,
+        "title": "Poland holds tight to its Patriot batteries amid reported US call for Middle East transfer",
+        "link": "https://www.defensenews.com/global/europe/2026/04/01/poland-holds-tight-to-its-patriot-batteries-amid-reported-us-call-for-middle-east-transfer/",
+        "published": "Wed, 01 Apr 2026 10:43:11 +0000",
+        "source": "Defense News",
+        "risk_score": 3,
         "coords": [
           31.5,
           34.8
         ]
       },
       {
-        "title": "Peacekeepers killed by roadside explosion in Lebanon, initial report finds",
-        "link": "https://www.bbc.com/news/articles/c05d7md899ro?at_medium=RSS&at_campaign=rss",
-        "published": "Tue, 31 Mar 2026 22:07:26 GMT",
-        "source": "BBC",
-        "risk_score": 1,
+        "title": "Japanese companies welcome new employees as fiscal year starts",
+        "link": "https://www.japantimes.co.jp/business/2026/04/01/companies/companies-welcome-new-employees/",
+        "published": "Wed, 01 Apr 2026 17:43:00 +0900",
+        "source": "Japan Times",
+        "risk_score": 3,
+        "coords": [
+          31.5,
+          34.8
+        ]
+      },
+      {
+        "title": "How are NATO allies pushing back against Trump’s Iran war demands?",
+        "link": "https://www.aljazeera.com/news/2026/4/1/how-are-nato-allies-pushing-back-against-trumps-iran-war-demands?traffic_source=rss",
+        "published": "Wed, 01 Apr 2026 12:03:47 +0000",
+        "source": "AlJazeera",
+        "risk_score": 3,
+        "coords": [
+          31.046,
+          34.851
+        ]
+      },
+      {
+        "title": "West Bank strikes over Palestinian-only death penalty",
+        "link": "https://www.aljazeera.com/video/newsfeed/2026/4/1/west-bank-strikes-over-palestinian-only-death-penalty?traffic_source=rss",
+        "published": "Wed, 01 Apr 2026 11:42:18 +0000",
+        "source": "AlJazeera",
+        "risk_score": 3,
+        "coords": [
+          31.046,
+          34.851
+        ]
+      },
+      {
+        "title": "Israel’s Message to Southern Lebanon: Shiites Must Go",
+        "link": "https://www.nytimes.com/2026/04/01/world/middleeast/lebanon-shiite-israel-evacuation.html",
+        "published": "Wed, 01 Apr 2026 10:43:12 +0000",
+        "source": "NYT",
+        "risk_score": 3,
         "coords": [
           33.854,
           35.862
         ]
+      },
+      {
+        "title": "UK Government implements measures to bring down the cost of living for families",
+        "link": "https://en.mercopress.com/2026/04/01/uk-government-implements-measures-to-bring-down-the-cost-of-living-for-families?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
+        "published": "Wed, 01 Apr 2026 09:09:00 GMT",
+        "source": "Mercopress",
+        "risk_score": 1,
+        "coords": [
+          31.5,
+          34.8
+        ]
       }
     ],
-    "machine_assessment": "China and India are exploring increased energy cooperation, with a focus on shared stakes in the region. This development may have implications for regional geopolitics and energy markets."
+    "machine_assessment": "Gasoline prices exceed $4/gallon in some areas, potentially fueling domestic unrest. Operators should be aware of this economic pressure point, which may contribute to regional instability and impact global energy markets."
   },
   {
     "title": "‘CanisterWorm’ Springs Wiper Attack Targeting Iran",
@@ -296,7 +281,7 @@
       32.427,
       53.688
     ],
-    "cluster_count": 4,
+    "cluster_count": 5,
     "articles": [
       {
         "title": "‘CanisterWorm’ Springs Wiper Attack Targeting Iran",
@@ -310,21 +295,10 @@
         ]
       },
       {
-        "title": "Iran using children in security roles in war, reports and witnesses say",
-        "link": "https://www.bbc.com/news/articles/c9wqgjn7x89o?at_medium=RSS&at_campaign=rss",
-        "published": "Tue, 31 Mar 2026 12:56:45 GMT",
-        "source": "BBC",
-        "risk_score": 5,
-        "coords": [
-          32.427,
-          53.688
-        ]
-      },
-      {
-        "title": "Trump interested in calling on Arab states to help pay for Iran war, White House says",
-        "link": "https://www.defensenews.com/news/your-military/2026/03/30/trump-interested-in-calling-on-arab-states-to-help-pay-for-iran-war-white-house-says/",
-        "published": "Mon, 30 Mar 2026 19:59:11 +0000",
-        "source": "Defense News",
+        "title": "Trump to address nation on Iran war. And, SCOTUS considers birthright citizenship",
+        "link": "https://www.npr.org/2026/04/01/g-s1-116034/up-first-newsletter-iran-war-strait-of-hormuz-birthright-citizenship-white-house-ballroom-npr-pbs",
+        "published": "Wed, 01 Apr 2026 07:22:04 -0400",
+        "source": "NPR",
         "risk_score": 3,
         "coords": [
           32.427,
@@ -332,9 +306,31 @@
         ]
       },
       {
-        "title": "Trump Says U.S. Military Campaign to Wind Down and Plans National Address",
-        "link": "https://www.nytimes.com/live/2026/03/31/world/iran-war-oil-trump",
-        "published": "Wed, 01 Apr 2026 05:53:02 +0000",
+        "title": "Trump to address nation after saying U.S. may leave war within weeks",
+        "link": "https://www.npr.org/2026/04/01/nx-s1-5769805/iran-war-trump",
+        "published": "Wed, 01 Apr 2026 06:02:54 -0400",
+        "source": "NPR",
+        "risk_score": 3,
+        "coords": [
+          32.427,
+          53.688
+        ]
+      },
+      {
+        "title": "UK PM says war on Iran will impact Britain’s future",
+        "link": "https://www.aljazeera.com/video/newsfeed/2026/4/1/uk-pm-says-iran-war-will-impact-britains-future?traffic_source=rss",
+        "published": "Wed, 01 Apr 2026 11:57:12 +0000",
+        "source": "AlJazeera",
+        "risk_score": 3,
+        "coords": [
+          32.427,
+          53.688
+        ]
+      },
+      {
+        "title": "Iran War Live Updates: Trump Berates Allies While Signaling He Will Wind Down the War",
+        "link": "https://www.nytimes.com/live/2026/04/01/world/iran-war-trump-oil-news",
+        "published": "Wed, 01 Apr 2026 12:38:31 +0000",
         "source": "NYT",
         "risk_score": 3,
         "coords": [
@@ -343,7 +339,27 @@
         ]
       }
     ],
-    "machine_assessment": "A wiper malware attack, dubbed \"CanisterWorm\", has targeted Iranian systems, with 4 clusters detected so far. The attack's purpose and scope are unclear, but it poses a moderate threat to regional stability."
+    "machine_assessment": "A wiper malware attack, dubbed \"CanisterWorm\", has targeted Iranian systems, with 5 clusters detected. Operators should be aware of the potential for further attacks in the region and assess their exposure to similar threats."
+  },
+  {
+    "title": "3 Reasons Attackers Are Using Your Trusted Tools Against You (And Why You Don’t See It Coming)",
+    "link": "https://thehackernews.com/2026/04/3-reasons-attackers-are-using-your.html",
+    "published": "Wed, 01 Apr 2026 16:28:00 +0530",
+    "source": "The Hacker News",
+    "risk_score": 5,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "3 Reasons Attackers Are Using Your Trusted Tools Against You (And Why You Don’t See It Coming)",
+        "link": "https://thehackernews.com/2026/04/3-reasons-attackers-are-using-your.html",
+        "published": "Wed, 01 Apr 2026 16:28:00 +0530",
+        "source": "The Hacker News",
+        "risk_score": 5,
+        "coords": null
+      }
+    ],
+    "machine_assessment": "Attackers are exploiting trusted tools, such as password managers and VPNs, to gain unauthorized access. This tactic is likely being used by sophisticated threat actors who have adapted their methods to evade detection."
   },
   {
     "title": "TrueConf Zero-Day Exploited in Attacks on Southeast Asian Government Networks",
@@ -355,7 +371,7 @@
       34.0,
       100.0
     ],
-    "cluster_count": 1,
+    "cluster_count": 2,
     "articles": [
       {
         "title": "TrueConf Zero-Day Exploited in Attacks on Southeast Asian Government Networks",
@@ -367,29 +383,20 @@
           34.0,
           100.0
         ]
-      }
-    ],
-    "machine_assessment": "TrueConf zero-day vulnerability exploited in attacks targeting Southeast Asian government networks, potentially compromising sensitive information. Exact scope and impact unclear, but operators should be aware of potential for lateral movement within compromised networks."
-  },
-  {
-    "title": "The AI Arms Race – Why Unified Exposure Management Is Becoming a Boardroom Priority",
-    "link": "https://thehackernews.com/2026/03/the-ai-arms-race-why-unified-exposure.html",
-    "published": "Tue, 31 Mar 2026 17:20:00 +0530",
-    "source": "The Hacker News",
-    "risk_score": 5,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
+      },
       {
-        "title": "The AI Arms Race – Why Unified Exposure Management Is Becoming a Boardroom Priority",
-        "link": "https://thehackernews.com/2026/03/the-ai-arms-race-why-unified-exposure.html",
-        "published": "Tue, 31 Mar 2026 17:20:00 +0530",
-        "source": "The Hacker News",
-        "risk_score": 5,
-        "coords": null
+        "title": "Trump Fed pick Warsh eyes a ‘family fight’ shakeup",
+        "link": "https://asiatimes.com/2026/04/trump-fed-pick-warsh-eyes-a-family-fight-shakeup/",
+        "published": "Wed, 01 Apr 2026 09:00:57 +0000",
+        "source": "Asia Times",
+        "risk_score": 3,
+        "coords": [
+          34.0,
+          100.0
+        ]
       }
     ],
-    "machine_assessment": "Boardrooms are prioritizing unified exposure management due to the escalating AI arms race, highlighting growing concerns about data security and potential exploitation. Unclear if specific incidents or threats prompted this shift in focus."
+    "machine_assessment": "TrueConf zero-day vulnerability exploited in attacks targeting Southeast Asian government networks, with at least two clusters identified. Operators should be aware of potential espionage or disruption activity in the region."
   },
   {
     "title": "Stolen Logins Are Fueling Everything From Ransomware to Nation-State Cyberattacks",
@@ -409,132 +416,140 @@
         "coords": null
       }
     ],
-    "machine_assessment": "Stolen login credentials are being used in various cyberattacks, including ransomware and nation-state operations. The source of the stolen logins is unclear, but their use highlights the ongoing threat of compromised identities in the cyber domain."
+    "machine_assessment": "Stolen login credentials are being used in various cyberattacks, including ransomware and nation-state operations. Operators should be aware of the potential for compromised accounts to be exploited by malicious actors."
   },
   {
-    "title": "Venom Stealer Raises Stakes With Continuous Credential Harvesting",
-    "link": "https://www.securityweek.com/venom-stealer-raises-stakes-with-continuous-credential-harvesting/",
-    "published": "Tue, 31 Mar 2026 14:51:59 +0000",
-    "source": "SecurityWeek",
-    "risk_score": 5,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Venom Stealer Raises Stakes With Continuous Credential Harvesting",
-        "link": "https://www.securityweek.com/venom-stealer-raises-stakes-with-continuous-credential-harvesting/",
-        "published": "Tue, 31 Mar 2026 14:51:59 +0000",
-        "source": "SecurityWeek",
-        "risk_score": 5,
-        "coords": null
-      }
-    ],
-    "machine_assessment": "Venom Stealer malware is continuously harvesting credentials from compromised systems, indicating a persistent threat. Operators should be cautious of potential lateral movement and data exfiltration."
-  },
-  {
-    "title": "Europe Has a ‘Guns vs. Butter’ Problem. War in Iran Makes It Worse.",
-    "link": "https://www.nytimes.com/2026/03/31/world/europe/europe-spending-problem-military-domestic.html",
-    "published": "Tue, 31 Mar 2026 09:00:35 +0000",
-    "source": "NYT",
+    "title": "‘Ukrainian housewives’ and Skyranger delays – German defense poster child Rheinmetall is in hot water",
+    "link": "https://www.defensenews.com/global/europe/2026/04/01/ukrainian-housewives-and-skyranger-delays-german-defense-poster-child-rheinmetall-is-in-hot-water/",
+    "published": "Wed, 01 Apr 2026 10:03:47 +0000",
+    "source": "Defense News",
     "risk_score": 5,
     "coords": [
-      48.8,
-      2.3
+      49.487,
+      31.272
     ],
     "cluster_count": 2,
     "articles": [
       {
-        "title": "Europe Has a ‘Guns vs. Butter’ Problem. War in Iran Makes It Worse.",
-        "link": "https://www.nytimes.com/2026/03/31/world/europe/europe-spending-problem-military-domestic.html",
-        "published": "Tue, 31 Mar 2026 09:00:35 +0000",
-        "source": "NYT",
+        "title": "‘Ukrainian housewives’ and Skyranger delays – German defense poster child Rheinmetall is in hot water",
+        "link": "https://www.defensenews.com/global/europe/2026/04/01/ukrainian-housewives-and-skyranger-delays-german-defense-poster-child-rheinmetall-is-in-hot-water/",
+        "published": "Wed, 01 Apr 2026 10:03:47 +0000",
+        "source": "Defense News",
         "risk_score": 5,
         "coords": [
-          48.8,
-          2.3
+          49.487,
+          31.272
         ]
       },
       {
-        "title": "Falklands representative honors 1982 war veterans at UK reunion",
-        "link": "https://en.mercopress.com/2026/03/31/falklands-representative-honors-1982-war-veterans-at-uk-reunion?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
-        "published": "Tue, 31 Mar 2026 18:16:00 GMT",
-        "source": "Mercopress",
+        "title": "Kherson, Ukraine: A hometown changed (Pt. 1)",
+        "link": "https://www.npr.org/2026/03/31/nx-s1-5719102/kherson-ukraine-a-hometown-changed-pt-1",
+        "published": "Tue, 31 Mar 2026 17:37:50 -0400",
+        "source": "NPR",
         "risk_score": 3,
         "coords": [
-          48.8,
-          2.3
+          49.487,
+          31.272
         ]
       }
     ],
-    "machine_assessment": null
+    "machine_assessment": "Rheinmetall, a key German defense contractor, faces criticism over delayed deliveries of the Skyranger drone system to Ukraine and potential misuse of funds. This may impact Germany's defense capabilities and relationships with Ukraine."
   },
   {
-    "title": "Missile-wielding Airbus interceptor engages one-way attack drone in test",
-    "link": "https://www.defensenews.com/global/europe/2026/03/30/missile-wielding-airbus-interceptor-engages-one-way-attack-drone-in-test/",
-    "published": "Mon, 30 Mar 2026 16:35:48 +0000",
-    "source": "Defense News",
+    "title": "Iran war pushing India to edge of a currency crisis",
+    "link": "https://asiatimes.com/2026/04/iran-war-pushing-india-to-edge-of-a-currency-crisis/",
+    "published": "Wed, 01 Apr 2026 08:41:07 +0000",
+    "source": "Asia Times",
     "risk_score": 5,
-    "coords": null,
+    "coords": [
+      35.676,
+      139.65
+    ],
+    "cluster_count": 3,
+    "articles": [
+      {
+        "title": "Iran war pushing India to edge of a currency crisis",
+        "link": "https://asiatimes.com/2026/04/iran-war-pushing-india-to-edge-of-a-currency-crisis/",
+        "published": "Wed, 01 Apr 2026 08:41:07 +0000",
+        "source": "Asia Times",
+        "risk_score": 5,
+        "coords": [
+          35.676,
+          139.65
+        ]
+      },
+      {
+        "title": "Japan’s international flights to get pricier due to hike in fuel surcharge",
+        "link": "https://www.japantimes.co.jp/business/2026/04/01/companies/fuel-surcharges/",
+        "published": "Wed, 01 Apr 2026 17:36:00 +0900",
+        "source": "Japan Times",
+        "risk_score": 3,
+        "coords": [
+          36.204,
+          138.252
+        ]
+      },
+      {
+        "title": "LDP divided over move to criminalize desecration of Japan's flag, sought by JIP",
+        "link": "https://www.japantimes.co.jp/news/2026/04/01/japan/crime-legal/criminalizing-flag-damaging/",
+        "published": "Wed, 01 Apr 2026 17:12:00 +0900",
+        "source": "Japan Times",
+        "risk_score": 1,
+        "coords": [
+          36.204,
+          138.252
+        ]
+      }
+    ],
+    "machine_assessment": "India on brink of currency crisis as Iran war drives up oil prices and depletes foreign reserves. Operators should be aware of potential economic instability in the region."
+  },
+  {
+    "title": "Green flood alert in Italy",
+    "link": "https://www.gdacs.org/report.aspx?eventtype=FL&eventid=1103825",
+    "published": "Wed, 01 Apr 2026 09:28:17 GMT",
+    "source": "GDACS",
+    "risk_score": 4,
+    "coords": [
+      42.296042,
+      14.444515
+    ],
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Missile-wielding Airbus interceptor engages one-way attack drone in test",
-        "link": "https://www.defensenews.com/global/europe/2026/03/30/missile-wielding-airbus-interceptor-engages-one-way-attack-drone-in-test/",
-        "published": "Mon, 30 Mar 2026 16:35:48 +0000",
-        "source": "Defense News",
-        "risk_score": 5,
-        "coords": null
+        "title": "Green flood alert in Italy",
+        "link": "https://www.gdacs.org/report.aspx?eventtype=FL&eventid=1103825",
+        "published": "Wed, 01 Apr 2026 09:28:17 GMT",
+        "source": "GDACS",
+        "risk_score": 4,
+        "coords": [
+          42.296042,
+          14.444515
+        ]
       }
     ],
     "machine_assessment": null
   },
   {
     "title": "Green forest fire notification in China",
-    "link": "https://www.gdacs.org/report.aspx?eventtype=WF&eventid=1028052",
-    "published": "Tue, 31 Mar 2026 19:00:11 GMT",
+    "link": "https://www.gdacs.org/report.aspx?eventtype=WF&eventid=1028085",
+    "published": "Wed, 01 Apr 2026 11:00:18 GMT",
     "source": "GDACS",
     "risk_score": 4,
     "coords": [
-      48.017713725842064,
-      123.7711631716722
+      47.57521523361517,
+      124.65718278619973
     ],
     "cluster_count": 1,
     "articles": [
       {
         "title": "Green forest fire notification in China",
-        "link": "https://www.gdacs.org/report.aspx?eventtype=WF&eventid=1028052",
-        "published": "Tue, 31 Mar 2026 19:00:11 GMT",
+        "link": "https://www.gdacs.org/report.aspx?eventtype=WF&eventid=1028085",
+        "published": "Wed, 01 Apr 2026 11:00:18 GMT",
         "source": "GDACS",
         "risk_score": 4,
         "coords": [
-          48.017713725842064,
-          123.7711631716722
-        ]
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Green forest fire notification in Australia",
-    "link": "https://www.gdacs.org/report.aspx?eventtype=WF&eventid=1028053",
-    "published": "Tue, 31 Mar 2026 19:00:18 GMT",
-    "source": "GDACS",
-    "risk_score": 4,
-    "coords": [
-      -16.20240186365481,
-      126.79432282277867
-    ],
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Green forest fire notification in Australia",
-        "link": "https://www.gdacs.org/report.aspx?eventtype=WF&eventid=1028053",
-        "published": "Tue, 31 Mar 2026 19:00:18 GMT",
-        "source": "GDACS",
-        "risk_score": 4,
-        "coords": [
-          -16.20240186365481,
-          126.79432282277867
+          47.57521523361517,
+          124.65718278619973
         ]
       }
     ],
@@ -587,19 +602,59 @@
     "machine_assessment": null
   },
   {
-    "title": "Vertex AI Vulnerability Exposes Google Cloud Data and Private Artifacts",
-    "link": "https://thehackernews.com/2026/03/vertex-ai-vulnerability-exposes-google.html",
-    "published": "Tue, 31 Mar 2026 18:39:00 +0530",
+    "title": "Google Attributes Axios npm Supply Chain Attack to North Korean Group UNC1069",
+    "link": "https://thehackernews.com/2026/04/google-attributes-axios-npm-supply.html",
+    "published": "Wed, 01 Apr 2026 13:14:00 +0530",
     "source": "The Hacker News",
     "risk_score": 3,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Vertex AI Vulnerability Exposes Google Cloud Data and Private Artifacts",
-        "link": "https://thehackernews.com/2026/03/vertex-ai-vulnerability-exposes-google.html",
-        "published": "Tue, 31 Mar 2026 18:39:00 +0530",
+        "title": "Google Attributes Axios npm Supply Chain Attack to North Korean Group UNC1069",
+        "link": "https://thehackernews.com/2026/04/google-attributes-axios-npm-supply.html",
+        "published": "Wed, 01 Apr 2026 13:14:00 +0530",
         "source": "The Hacker News",
+        "risk_score": 3,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "FBI warns against using Chinese mobile apps due to privacy risks",
+    "link": "https://www.bleepingcomputer.com/news/security/fbi-warns-against-using-chinese-mobile-apps-over-to-data-security-risks/",
+    "published": "Wed, 01 Apr 2026 07:39:10 -0400",
+    "source": "BleepingComputer",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "FBI warns against using Chinese mobile apps due to privacy risks",
+        "link": "https://www.bleepingcomputer.com/news/security/fbi-warns-against-using-chinese-mobile-apps-over-to-data-security-risks/",
+        "published": "Wed, 01 Apr 2026 07:39:10 -0400",
+        "source": "BleepingComputer",
+        "risk_score": 3,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "Google fixes fourth Chrome zero-day exploited in attacks in 2026",
+    "link": "https://www.bleepingcomputer.com/news/security/google-fixes-fourth-chrome-zero-day-exploited-in-attacks-in-2026/",
+    "published": "Wed, 01 Apr 2026 06:25:36 -0400",
+    "source": "BleepingComputer",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Google fixes fourth Chrome zero-day exploited in attacks in 2026",
+        "link": "https://www.bleepingcomputer.com/news/security/google-fixes-fourth-chrome-zero-day-exploited-in-attacks-in-2026/",
+        "published": "Wed, 01 Apr 2026 06:25:36 -0400",
+        "source": "BleepingComputer",
         "risk_score": 3,
         "coords": null
       }
@@ -627,6 +682,26 @@
     "machine_assessment": null
   },
   {
+    "title": "Axios NPM Package Breached in North Korean Supply Chain Attack",
+    "link": "https://www.securityweek.com/axios-npm-package-breached-in-north-korean-supply-chain-attack/",
+    "published": "Wed, 01 Apr 2026 08:45:47 +0000",
+    "source": "SecurityWeek",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Axios NPM Package Breached in North Korean Supply Chain Attack",
+        "link": "https://www.securityweek.com/axios-npm-package-breached-in-north-korean-supply-chain-attack/",
+        "published": "Wed, 01 Apr 2026 08:45:47 +0000",
+        "source": "SecurityWeek",
+        "risk_score": 3,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
     "title": "The Next Cybersecurity Crisis Isn’t Breaches—It’s Data You Can’t Trust",
     "link": "https://www.securityweek.com/the-next-cybersecurity-crisis-isnt-breaches-its-data-you-cant-trust/",
     "published": "Tue, 31 Mar 2026 15:35:33 +0000",
@@ -647,154 +722,147 @@
     "machine_assessment": null
   },
   {
-    "title": "Kherson, Ukraine: A hometown changed (Pt. 1)",
-    "link": "https://www.npr.org/2026/03/31/nx-s1-5719102/kherson-ukraine-a-hometown-changed-pt-1",
-    "published": "Tue, 31 Mar 2026 17:37:50 -0400",
+    "title": "After years in Russian captivity, former mayor of Ukrainian city returns home",
+    "link": "https://www.npr.org/2026/04/01/nx-s1-5735845/after-years-in-russian-captivity-former-mayor-of-ukrainian-city-returns-home",
+    "published": "Wed, 01 Apr 2026 04:42:03 -0400",
     "source": "NPR",
     "risk_score": 3,
-    "coords": [
-      49.487,
-      31.272
-    ],
+    "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Kherson, Ukraine: A hometown changed (Pt. 1)",
-        "link": "https://www.npr.org/2026/03/31/nx-s1-5719102/kherson-ukraine-a-hometown-changed-pt-1",
-        "published": "Tue, 31 Mar 2026 17:37:50 -0400",
+        "title": "After years in Russian captivity, former mayor of Ukrainian city returns home",
+        "link": "https://www.npr.org/2026/04/01/nx-s1-5735845/after-years-in-russian-captivity-former-mayor-of-ukrainian-city-returns-home",
+        "published": "Wed, 01 Apr 2026 04:42:03 -0400",
         "source": "NPR",
         "risk_score": 3,
-        "coords": [
-          49.487,
-          31.272
-        ]
+        "coords": null
       }
     ],
     "machine_assessment": null
   },
   {
-    "title": "Barricade around statue of girl symbolizing wartime sexual slavery victims lifted for 1st time in 6 yrs",
-    "link": "https://en.yna.co.kr/view/AEN20260401010500315",
-    "published": "Wed, 1 Apr 2026 16:20:35 +0900",
-    "source": "Yonhap",
+    "title": "China is trying to play peacemaker in the Iran war - will it work?",
+    "link": "https://www.bbc.com/news/articles/cze0kz7gr84o?at_medium=RSS&at_campaign=rss",
+    "published": "Wed, 01 Apr 2026 07:16:15 GMT",
+    "source": "BBC",
     "risk_score": 3,
     "coords": [
-      37.566,
-      126.978
-    ],
-    "cluster_count": 6,
-    "articles": [
-      {
-        "title": "Barricade around statue of girl symbolizing wartime sexual slavery victims lifted for 1st time in 6 yrs",
-        "link": "https://en.yna.co.kr/view/AEN20260401010500315",
-        "published": "Wed, 1 Apr 2026 16:20:35 +0900",
-        "source": "Yonhap",
-        "risk_score": 3,
-        "coords": [
-          37.566,
-          126.978
-        ]
-      },
-      {
-        "title": "South Korea praised Japan's 1995 war statement, records show",
-        "link": "https://www.japantimes.co.jp/news/2026/04/01/japan/politics/korea-japan-war-statement/",
-        "published": "Wed, 01 Apr 2026 15:41:00 +0900",
-        "source": "Japan Times",
-        "risk_score": 3,
-        "coords": [
-          35.907,
-          127.766
-        ]
-      },
-      {
-        "title": "Japan and South Korea’s Energy Hedge",
-        "link": "https://thediplomat.com/2026/03/japan-and-south-koreas-energy-hedge/",
-        "published": "Tue, 31 Mar 2026 23:08:00 +0900",
-        "source": "The Diplomat",
-        "risk_score": 1,
-        "coords": [
-          35.907,
-          127.766
-        ]
-      },
-      {
-        "title": "Hyundai Motor's March sales dip 2.3 pct as geopolitics affect global sales",
-        "link": "https://en.yna.co.kr/view/AEN20260401010300320",
-        "published": "Wed, 1 Apr 2026 16:11:59 +0900",
-        "source": "Yonhap",
-        "risk_score": 1,
-        "coords": [
-          35.907,
-          127.766
-        ]
-      },
-      {
-        "title": "Gov't to curb excessive classes at English kindergartens",
-        "link": "https://en.yna.co.kr/view/AEN20260401010100315",
-        "published": "Wed, 1 Apr 2026 16:03:40 +0900",
-        "source": "Yonhap",
-        "risk_score": 1,
-        "coords": [
-          37.566,
-          126.978
-        ]
-      },
-      {
-        "title": "Hyundai Motor reports March South Korea EV sales up 38% from a year ago",
-        "link": "https://www.channelnewsasia.com/business/hyundai-motor-reports-march-south-korea-ev-sales-up-38-year-ago-6030546",
-        "published": "Wed, 01 Apr 2026 14:53:23 +0800",
-        "source": "CNA",
-        "risk_score": 1,
-        "coords": [
-          35.907,
-          127.766
-        ]
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Argentina: court demands university salary restoration amid faculty strikes",
-    "link": "https://en.mercopress.com/2026/04/01/argentina-court-demands-university-salary-restoration-amid-faculty-strikes?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
-    "published": "Wed, 01 Apr 2026 01:49:00 GMT",
-    "source": "Mercopress",
-    "risk_score": 3,
-    "coords": [
-      -38.416,
-      -63.616
+      39.904,
+      116.407
     ],
     "cluster_count": 2,
     "articles": [
       {
-        "title": "Argentina: court demands university salary restoration amid faculty strikes",
-        "link": "https://en.mercopress.com/2026/04/01/argentina-court-demands-university-salary-restoration-amid-faculty-strikes?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
-        "published": "Wed, 01 Apr 2026 01:49:00 GMT",
-        "source": "Mercopress",
+        "title": "China is trying to play peacemaker in the Iran war - will it work?",
+        "link": "https://www.bbc.com/news/articles/cze0kz7gr84o?at_medium=RSS&at_campaign=rss",
+        "published": "Wed, 01 Apr 2026 07:16:15 GMT",
+        "source": "BBC",
         "risk_score": 3,
         "coords": [
-          -38.416,
-          -63.616
+          39.904,
+          116.407
         ]
       },
       {
-        "title": "Argentina's Cabinet Chief Adorni bought $230,000 apartment that his declared income cannot explain",
-        "link": "https://en.mercopress.com/2026/03/31/argentina-s-cabinet-chief-adorni-bought-230-000-apartment-that-his-declared-income-cannot-explain?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
-        "published": "Tue, 31 Mar 2026 18:05:00 GMT",
-        "source": "Mercopress",
-        "risk_score": 3,
+        "title": "China, the Philippines, and the Real Lesson of Second Thomas Shoal",
+        "link": "https://thediplomat.com/2026/04/china-the-philippines-and-the-real-lesson-of-second-thomas-shoal/",
+        "published": "Wed, 01 Apr 2026 04:55:00 +0900",
+        "source": "The Diplomat",
+        "risk_score": 1,
         "coords": [
-          -38.416,
-          -63.616
+          39.904,
+          116.407
         ]
       }
     ],
     "machine_assessment": null
   },
   {
-    "title": "China’s Economy Feels the Iran War Shock",
-    "link": "https://thediplomat.com/2026/03/chinas-economy-feels-the-iran-war-shock/",
-    "published": "Tue, 31 Mar 2026 22:40:00 +0900",
-    "source": "The Diplomat",
+    "title": "Russian military plane crash kills 29 in occupied Crimea",
+    "link": "https://www.bbc.com/news/articles/cly6387xgqxo?at_medium=RSS&at_campaign=rss",
+    "published": "Wed, 01 Apr 2026 09:55:28 GMT",
+    "source": "BBC",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Russian military plane crash kills 29 in occupied Crimea",
+        "link": "https://www.bbc.com/news/articles/cly6387xgqxo?at_medium=RSS&at_campaign=rss",
+        "published": "Wed, 01 Apr 2026 09:55:28 GMT",
+        "source": "BBC",
+        "risk_score": 3,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "Iraq celebrates qualification for FIFA World Cup 2026",
+    "link": "https://www.aljazeera.com/gallery/2026/4/1/iraqis-celebrate-in-the-streets-after-qualifying-for-fifa-world-cup-2026?traffic_source=rss",
+    "published": "Wed, 01 Apr 2026 11:19:11 +0000",
+    "source": "AlJazeera",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Iraq celebrates qualification for FIFA World Cup 2026",
+        "link": "https://www.aljazeera.com/gallery/2026/4/1/iraqis-celebrate-in-the-streets-after-qualifying-for-fifa-world-cup-2026?traffic_source=rss",
+        "published": "Wed, 01 Apr 2026 11:19:11 +0000",
+        "source": "AlJazeera",
+        "risk_score": 3,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "U.S. Plans Military Expansion in Greenland",
+    "link": "https://www.nytimes.com/2026/04/01/world/europe/us-military-seeks-expansion-in-greenland.html",
+    "published": "Wed, 01 Apr 2026 10:26:01 +0000",
+    "source": "NYT",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "U.S. Plans Military Expansion in Greenland",
+        "link": "https://www.nytimes.com/2026/04/01/world/europe/us-military-seeks-expansion-in-greenland.html",
+        "published": "Wed, 01 Apr 2026 10:26:01 +0000",
+        "source": "NYT",
+        "risk_score": 3,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "SAF to dispose of 250kg World War II bomb found along Tanah Merah Coast Road",
+    "link": "https://www.channelnewsasia.com/singapore/ww2-bomb-found-tanah-merah-controlled-disposal-war-tanah-merah-coast-changi-airport-6031181",
+    "published": "Wed, 01 Apr 2026 20:36:00 +0800",
+    "source": "CNA",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "SAF to dispose of 250kg World War II bomb found along Tanah Merah Coast Road",
+        "link": "https://www.channelnewsasia.com/singapore/ww2-bomb-found-tanah-merah-controlled-disposal-war-tanah-merah-coast-changi-airport-6031181",
+        "published": "Wed, 01 Apr 2026 20:36:00 +0800",
+        "source": "CNA",
+        "risk_score": 3,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "Qiushi reaffirms China’s trade-rebalance push, calls old export-led growth ‘unsustainable’",
+    "link": "https://www.scmp.com/economy/global-economy/article/3348651/qiushi-reaffirms-chinas-trade-rebalance-push-calls-old-export-led-growth-unsustainable?utm_source=rss_feed",
+    "published": "Wed, 01 Apr 2026 12:00:08 +0000",
+    "source": "SCMP",
     "risk_score": 3,
     "coords": [
       35.861,
@@ -803,10 +871,10 @@
     "cluster_count": 3,
     "articles": [
       {
-        "title": "China’s Economy Feels the Iran War Shock",
-        "link": "https://thediplomat.com/2026/03/chinas-economy-feels-the-iran-war-shock/",
-        "published": "Tue, 31 Mar 2026 22:40:00 +0900",
-        "source": "The Diplomat",
+        "title": "Qiushi reaffirms China’s trade-rebalance push, calls old export-led growth ‘unsustainable’",
+        "link": "https://www.scmp.com/economy/global-economy/article/3348651/qiushi-reaffirms-chinas-trade-rebalance-push-calls-old-export-led-growth-unsustainable?utm_source=rss_feed",
+        "published": "Wed, 01 Apr 2026 12:00:08 +0000",
+        "source": "SCMP",
         "risk_score": 3,
         "coords": [
           35.861,
@@ -814,26 +882,46 @@
         ]
       },
       {
-        "title": "Ganfeng Lithium forecasts strong battery demand amid China-US rivalry in renewable energy",
-        "link": "https://www.scmp.com/business/china-business/article/3348628/ganfeng-lithium-forecasts-strong-battery-demand-amid-china-us-rivalry-renewable-energy?utm_source=rss_feed",
-        "published": "Wed, 01 Apr 2026 07:00:21 +0000",
-        "source": "SCMP",
-        "risk_score": 1,
+        "title": "Japan's department store duty-free sales rebound as China-driven slump eases",
+        "link": "https://www.japantimes.co.jp/business/2026/04/01/companies/duty-free-sales-rebound/",
+        "published": "Wed, 01 Apr 2026 17:52:00 +0900",
+        "source": "Japan Times",
+        "risk_score": 3,
         "coords": [
           35.861,
           104.195
         ]
       },
       {
-        "title": "How Donald Trump Doubled Down on the Rhetorical Presidency in His Handling of China",
-        "link": "https://thediplomat.com/2026/03/how-donald-trump-doubled-down-on-the-rhetorical-presidency-in-his-handling-of-china/",
-        "published": "Tue, 31 Mar 2026 22:08:00 +0900",
-        "source": "The Diplomat",
+        "title": "Indonesia bets on nickel levy to break its China habit",
+        "link": "https://asiatimes.com/2026/04/indonesia-bets-on-nickel-levy-to-break-its-china-habit/",
+        "published": "Wed, 01 Apr 2026 10:00:58 +0000",
+        "source": "Asia Times",
         "risk_score": 1,
         "coords": [
           35.861,
           104.195
         ]
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "Thailand’s Brittle Defense Against Oil Shocks",
+    "link": "https://thediplomat.com/2026/04/thailands-brittle-defense-against-oil-shocks/",
+    "published": "Wed, 01 Apr 2026 08:27:00 +0900",
+    "source": "The Diplomat",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Thailand’s Brittle Defense Against Oil Shocks",
+        "link": "https://thediplomat.com/2026/04/thailands-brittle-defense-against-oil-shocks/",
+        "published": "Wed, 01 Apr 2026 08:27:00 +0900",
+        "source": "The Diplomat",
+        "risk_score": 3,
+        "coords": null
       }
     ],
     "machine_assessment": null
@@ -854,6 +942,65 @@
         "source": "The Diplomat",
         "risk_score": 3,
         "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "(3rd LD) Lee, Prabowo agree to elevate bilateral ties, expand defense industry cooperation",
+    "link": "https://en.yna.co.kr/view/AEN20260401001453315",
+    "published": "Wed, 1 Apr 2026 18:26:21 +0900",
+    "source": "Yonhap",
+    "risk_score": 3,
+    "coords": [
+      37.566,
+      126.978
+    ],
+    "cluster_count": 4,
+    "articles": [
+      {
+        "title": "(3rd LD) Lee, Prabowo agree to elevate bilateral ties, expand defense industry cooperation",
+        "link": "https://en.yna.co.kr/view/AEN20260401001453315",
+        "published": "Wed, 1 Apr 2026 18:26:21 +0900",
+        "source": "Yonhap",
+        "risk_score": 3,
+        "coords": [
+          37.566,
+          126.978
+        ]
+      },
+      {
+        "title": "(LEAD) S. Korea, U.S. discuss efforts to promote alliance through public diplomacy",
+        "link": "https://en.yna.co.kr/view/AEN20260401009151315",
+        "published": "Wed, 1 Apr 2026 20:06:31 +0900",
+        "source": "Yonhap",
+        "risk_score": 1,
+        "coords": [
+          35.907,
+          127.766
+        ]
+      },
+      {
+        "title": "Kia's March sales gain 2.7 pct on increased demand",
+        "link": "https://en.yna.co.kr/view/AEN20260401012600320",
+        "published": "Wed, 1 Apr 2026 18:55:05 +0900",
+        "source": "Yonhap",
+        "risk_score": 1,
+        "coords": [
+          35.907,
+          127.766
+        ]
+      },
+      {
+        "title": "(LEAD) Gov't expands vehicle rotation system to 2-day scheme in public sector",
+        "link": "https://en.yna.co.kr/view/AEN20260401012451320",
+        "published": "Wed, 1 Apr 2026 18:29:27 +0900",
+        "source": "Yonhap",
+        "risk_score": 1,
+        "coords": [
+          37.566,
+          126.978
+        ]
       }
     ],
     "machine_assessment": null
@@ -965,58 +1112,18 @@
     "machine_assessment": null
   },
   {
-    "title": "Google now allows you to change your @gmail.com address",
-    "link": "https://www.bleepingcomputer.com/news/google/google-now-allows-you-to-change-your-gmailcom-address/",
-    "published": "Tue, 31 Mar 2026 19:13:56 -0400",
-    "source": "BleepingComputer",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Google now allows you to change your @gmail.com address",
-        "link": "https://www.bleepingcomputer.com/news/google/google-now-allows-you-to-change-your-gmailcom-address/",
-        "published": "Tue, 31 Mar 2026 19:13:56 -0400",
-        "source": "BleepingComputer",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Proton launches new \"Meet\" privacy-focused conferencing platform",
-    "link": "https://www.bleepingcomputer.com/news/security/proton-launches-new-meet-privacy-focused-conferencing-platform/",
-    "published": "Tue, 31 Mar 2026 18:42:07 -0400",
-    "source": "BleepingComputer",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Proton launches new \"Meet\" privacy-focused conferencing platform",
-        "link": "https://www.bleepingcomputer.com/news/security/proton-launches-new-meet-privacy-focused-conferencing-platform/",
-        "published": "Tue, 31 Mar 2026 18:42:07 -0400",
-        "source": "BleepingComputer",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "CVE-2026-23229 crypto: virtio - Add spinlock protection with virtqueue notification",
-    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-23229",
-    "published": "Tue, 31 Mar 2026 01:40:25 -0700",
+    "title": "CVE-2025-68822 Input: alps - fix use-after-free bugs caused by dev3_register_work",
+    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-68822",
+    "published": "Wed, 01 Apr 2026 01:49:12 -0700",
     "source": "Microsoft Security Response Center",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "CVE-2026-23229 crypto: virtio - Add spinlock protection with virtqueue notification",
-        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-23229",
-        "published": "Tue, 31 Mar 2026 01:40:25 -0700",
+        "title": "CVE-2025-68822 Input: alps - fix use-after-free bugs caused by dev3_register_work",
+        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-68822",
+        "published": "Wed, 01 Apr 2026 01:49:12 -0700",
         "source": "Microsoft Security Response Center",
         "risk_score": 1,
         "coords": null
@@ -1025,18 +1132,18 @@
     "machine_assessment": null
   },
   {
-    "title": "CVE-2026-23221 bus: fsl-mc: fix use-after-free in driver_override_show()",
-    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-23221",
-    "published": "Tue, 31 Mar 2026 01:37:29 -0700",
+    "title": "CVE-2024-41013 xfs: don't walk off the end of a directory data block",
+    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-41013",
+    "published": "Wed, 01 Apr 2026 01:52:41 -0700",
     "source": "Microsoft Security Response Center",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "CVE-2026-23221 bus: fsl-mc: fix use-after-free in driver_override_show()",
-        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-23221",
-        "published": "Tue, 31 Mar 2026 01:37:29 -0700",
+        "title": "CVE-2024-41013 xfs: don't walk off the end of a directory data block",
+        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-41013",
+        "published": "Wed, 01 Apr 2026 01:52:41 -0700",
         "source": "Microsoft Security Response Center",
         "risk_score": 1,
         "coords": null
@@ -1045,18 +1152,18 @@
     "machine_assessment": null
   },
   {
-    "title": "CVE-2025-71232 scsi: qla2xxx: Free sp in error path to fix system crash",
-    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-71232",
-    "published": "Tue, 31 Mar 2026 01:39:38 -0700",
+    "title": "CVE-2023-52676 bpf: Guard stack limits against 32bit overflow",
+    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-52676",
+    "published": "Wed, 01 Apr 2026 01:51:22 -0700",
     "source": "Microsoft Security Response Center",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "CVE-2025-71232 scsi: qla2xxx: Free sp in error path to fix system crash",
-        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-71232",
-        "published": "Tue, 31 Mar 2026 01:39:38 -0700",
+        "title": "CVE-2023-52676 bpf: Guard stack limits against 32bit overflow",
+        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-52676",
+        "published": "Wed, 01 Apr 2026 01:51:22 -0700",
         "source": "Microsoft Security Response Center",
         "risk_score": 1,
         "coords": null
@@ -1065,18 +1172,18 @@
     "machine_assessment": null
   },
   {
-    "title": "CVE-2026-23222 crypto: omap - Allocate OMAP_CRYPTO_FORCE_COPY scatterlists correctly",
-    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-23222",
-    "published": "Tue, 31 Mar 2026 01:40:12 -0700",
+    "title": "CVE-2024-35839 netfilter: bridge: replace physindev with physinif in nf_bridge_info",
+    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-35839",
+    "published": "Wed, 01 Apr 2026 01:51:56 -0700",
     "source": "Microsoft Security Response Center",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "CVE-2026-23222 crypto: omap - Allocate OMAP_CRYPTO_FORCE_COPY scatterlists correctly",
-        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-23222",
-        "published": "Tue, 31 Mar 2026 01:40:12 -0700",
+        "title": "CVE-2024-35839 netfilter: bridge: replace physindev with physinif in nf_bridge_info",
+        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-35839",
+        "published": "Wed, 01 Apr 2026 01:51:56 -0700",
         "source": "Microsoft Security Response Center",
         "risk_score": 1,
         "coords": null
@@ -1085,19 +1192,39 @@
     "machine_assessment": null
   },
   {
-    "title": "CVE-2026-23228 smb: server: fix leak of active_num_conn in ksmbd_tcp_new_connection()",
-    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-23228",
-    "published": "Tue, 31 Mar 2026 01:40:18 -0700",
+    "title": "CVE-2026-29111 systemd: Local unprivileged user can trigger an assert",
+    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-29111",
+    "published": "Wed, 01 Apr 2026 01:49:35 -0700",
     "source": "Microsoft Security Response Center",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "CVE-2026-23228 smb: server: fix leak of active_num_conn in ksmbd_tcp_new_connection()",
-        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-23228",
-        "published": "Tue, 31 Mar 2026 01:40:18 -0700",
+        "title": "CVE-2026-29111 systemd: Local unprivileged user can trigger an assert",
+        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-29111",
+        "published": "Wed, 01 Apr 2026 01:49:35 -0700",
         "source": "Microsoft Security Response Center",
+        "risk_score": 1,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "Google Addresses Vertex Security Issues After Researchers Weaponize AI Agents",
+    "link": "https://www.securityweek.com/google-addresses-vertex-security-issues-after-researchers-weaponize-ai-agent/",
+    "published": "Wed, 01 Apr 2026 07:43:16 +0000",
+    "source": "SecurityWeek",
+    "risk_score": 1,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Google Addresses Vertex Security Issues After Researchers Weaponize AI Agents",
+        "link": "https://www.securityweek.com/google-addresses-vertex-security-issues-after-researchers-weaponize-ai-agent/",
+        "published": "Wed, 01 Apr 2026 07:43:16 +0000",
+        "source": "SecurityWeek",
         "risk_score": 1,
         "coords": null
       }
@@ -1117,26 +1244,6 @@
         "title": "Censys Raises $70 Million for Internet Intelligence Platform",
         "link": "https://www.securityweek.com/censys-raises-70-million-for-internet-intelligence-platform/",
         "published": "Tue, 31 Mar 2026 15:59:49 +0000",
-        "source": "SecurityWeek",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "TeamPCP Moves From OSS to AWS Environments",
-    "link": "https://www.securityweek.com/teampcp-moves-from-oss-to-aws-environments/",
-    "published": "Tue, 31 Mar 2026 13:53:43 +0000",
-    "source": "SecurityWeek",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "TeamPCP Moves From OSS to AWS Environments",
-        "link": "https://www.securityweek.com/teampcp-moves-from-oss-to-aws-environments/",
-        "published": "Tue, 31 Mar 2026 13:53:43 +0000",
         "source": "SecurityWeek",
         "risk_score": 1,
         "coords": null
@@ -1165,62 +1272,82 @@
     "machine_assessment": null
   },
   {
-    "title": "One of the first people known to change their gender was an ancient Egyptian pharaoh",
-    "link": "https://www.npr.org/sections/the-picture-show/2026/03/31/g-s1-115791/hatshepsut-one-of-egypts-greatest-pharaohs",
-    "published": "Tue, 31 Mar 2026 13:00:00 -0400",
-    "source": "NPR",
+    "title": "Where Million-Dollar Coastal Homes Glitter Near Metal Shacks",
+    "link": "https://www.nytimes.com/2026/04/01/world/africa/cape-town-housing-crisis.html",
+    "published": "Wed, 01 Apr 2026 04:01:19 +0000",
+    "source": "NYT",
     "risk_score": 1,
     "coords": [
-      26.82,
-      30.802
+      -30.559,
+      22.937
     ],
     "cluster_count": 1,
     "articles": [
       {
-        "title": "One of the first people known to change their gender was an ancient Egyptian pharaoh",
-        "link": "https://www.npr.org/sections/the-picture-show/2026/03/31/g-s1-115791/hatshepsut-one-of-egypts-greatest-pharaohs",
-        "published": "Tue, 31 Mar 2026 13:00:00 -0400",
-        "source": "NPR",
+        "title": "Where Million-Dollar Coastal Homes Glitter Near Metal Shacks",
+        "link": "https://www.nytimes.com/2026/04/01/world/africa/cape-town-housing-crisis.html",
+        "published": "Wed, 01 Apr 2026 04:01:19 +0000",
+        "source": "NYT",
         "risk_score": 1,
         "coords": [
-          26.82,
-          30.802
+          -30.559,
+          22.937
         ]
       }
     ],
     "machine_assessment": null
   },
   {
-    "title": "6 books named finalists for the 2026 International Booker Prize",
-    "link": "https://www.npr.org/2026/03/31/nx-s1-5766171/2026-international-booker-prize-shortlist",
-    "published": "Tue, 31 Mar 2026 09:00:31 -0400",
-    "source": "NPR",
+    "title": "In UK Prisons, Drones Fly In Contraband ‘As if by Uber Eats’",
+    "link": "https://www.nytimes.com/2026/04/01/world/europe/uk-prisons-contraband-drones.html",
+    "published": "Wed, 01 Apr 2026 04:01:05 +0000",
+    "source": "NYT",
     "risk_score": 1,
     "coords": [
-      23.697,
-      120.96
+      55.378,
+      -3.435
     ],
     "cluster_count": 1,
     "articles": [
       {
-        "title": "6 books named finalists for the 2026 International Booker Prize",
-        "link": "https://www.npr.org/2026/03/31/nx-s1-5766171/2026-international-booker-prize-shortlist",
-        "published": "Tue, 31 Mar 2026 09:00:31 -0400",
-        "source": "NPR",
+        "title": "In UK Prisons, Drones Fly In Contraband ‘As if by Uber Eats’",
+        "link": "https://www.nytimes.com/2026/04/01/world/europe/uk-prisons-contraband-drones.html",
+        "published": "Wed, 01 Apr 2026 04:01:05 +0000",
+        "source": "NYT",
         "risk_score": 1,
         "coords": [
-          23.697,
-          120.96
+          55.378,
+          -3.435
         ]
       }
     ],
     "machine_assessment": null
   },
   {
-    "title": "India begins counting more than a billion people in massive census",
-    "link": "https://www.bbc.com/news/articles/c7vqnpqrgy3o?at_medium=RSS&at_campaign=rss",
-    "published": "Wed, 01 Apr 2026 00:11:33 GMT",
-    "source": "BBC",
+    "title": "Hasbro says investigating cybersecurity incident",
+    "link": "https://www.channelnewsasia.com/business/hasbro-says-investigating-cybersecurity-incident-6031221",
+    "published": "Wed, 01 Apr 2026 20:26:06 +0800",
+    "source": "CNA",
+    "risk_score": 1,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Hasbro says investigating cybersecurity incident",
+        "link": "https://www.channelnewsasia.com/business/hasbro-says-investigating-cybersecurity-incident-6031221",
+        "published": "Wed, 01 Apr 2026 20:26:06 +0800",
+        "source": "CNA",
+        "risk_score": 1,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "India's Wipro names Nagendra Bandaru as CEO of AI segment",
+    "link": "https://www.channelnewsasia.com/business/indias-wipro-names-nagendra-bandaru-ceo-ai-segment-6031206",
+    "published": "Wed, 01 Apr 2026 20:15:58 +0800",
+    "source": "CNA",
     "risk_score": 1,
     "coords": [
       20.593,
@@ -1229,10 +1356,10 @@
     "cluster_count": 1,
     "articles": [
       {
-        "title": "India begins counting more than a billion people in massive census",
-        "link": "https://www.bbc.com/news/articles/c7vqnpqrgy3o?at_medium=RSS&at_campaign=rss",
-        "published": "Wed, 01 Apr 2026 00:11:33 GMT",
-        "source": "BBC",
+        "title": "India's Wipro names Nagendra Bandaru as CEO of AI segment",
+        "link": "https://www.channelnewsasia.com/business/indias-wipro-names-nagendra-bandaru-ceo-ai-segment-6031206",
+        "published": "Wed, 01 Apr 2026 20:15:58 +0800",
+        "source": "CNA",
         "risk_score": 1,
         "coords": [
           20.593,
@@ -1243,118 +1370,18 @@
     "machine_assessment": null
   },
   {
-    "title": "Iraq defeat Bolivia 2-1 to qualify for FIFA World Cup 2026",
-    "link": "https://www.aljazeera.com/sports/2026/4/1/iraq-defeat-bolivia-2-1-to-qualify-for-fifa-world-cup-2026?traffic_source=rss",
-    "published": "Wed, 01 Apr 2026 05:17:37 +0000",
-    "source": "AlJazeera",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Iraq defeat Bolivia 2-1 to qualify for FIFA World Cup 2026",
-        "link": "https://www.aljazeera.com/sports/2026/4/1/iraq-defeat-bolivia-2-1-to-qualify-for-fifa-world-cup-2026?traffic_source=rss",
-        "published": "Wed, 01 Apr 2026 05:17:37 +0000",
-        "source": "AlJazeera",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "First Black astronaut candidate ‘proud’ Victor Glover will make history",
-    "link": "https://www.aljazeera.com/video/newsfeed/2026/4/1/first-black-astronaut-candidate-proud-victor-glover-will-make-history?traffic_source=rss",
-    "published": "Wed, 01 Apr 2026 05:07:54 +0000",
-    "source": "AlJazeera",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "First Black astronaut candidate ‘proud’ Victor Glover will make history",
-        "link": "https://www.aljazeera.com/video/newsfeed/2026/4/1/first-black-astronaut-candidate-proud-victor-glover-will-make-history?traffic_source=rss",
-        "published": "Wed, 01 Apr 2026 05:07:54 +0000",
-        "source": "AlJazeera",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Residents inspect drone damage near Erbil airport",
-    "link": "https://www.aljazeera.com/video/newsfeed/2026/4/1/residents-inspect-drone-damage-near-erbil-airport?traffic_source=rss",
-    "published": "Wed, 01 Apr 2026 04:54:19 +0000",
-    "source": "AlJazeera",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Residents inspect drone damage near Erbil airport",
-        "link": "https://www.aljazeera.com/video/newsfeed/2026/4/1/residents-inspect-drone-damage-near-erbil-airport?traffic_source=rss",
-        "published": "Wed, 01 Apr 2026 04:54:19 +0000",
-        "source": "AlJazeera",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "American journalist kidnapped in Baghdad",
-    "link": "https://www.aljazeera.com/video/newsfeed/2026/4/1/american-journalist-kidnapped-in-baghdad?traffic_source=rss",
-    "published": "Wed, 01 Apr 2026 03:51:58 +0000",
-    "source": "AlJazeera",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "American journalist kidnapped in Baghdad",
-        "link": "https://www.aljazeera.com/video/newsfeed/2026/4/1/american-journalist-kidnapped-in-baghdad?traffic_source=rss",
-        "published": "Wed, 01 Apr 2026 03:51:58 +0000",
-        "source": "AlJazeera",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Putin’s Internet Blackout: A Chaotic Drive to Cut Off Russians From the World",
-    "link": "https://www.nytimes.com/2026/03/31/world/europe/russia-putin-telegram-internet.html",
-    "published": "Tue, 31 Mar 2026 16:49:00 +0000",
-    "source": "NYT",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Putin’s Internet Blackout: A Chaotic Drive to Cut Off Russians From the World",
-        "link": "https://www.nytimes.com/2026/03/31/world/europe/russia-putin-telegram-internet.html",
-        "published": "Tue, 31 Mar 2026 16:49:00 +0000",
-        "source": "NYT",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Fiji split with coach Byrne over 'new direction'",
-    "link": "https://www.channelnewsasia.com/sport/fiji-split-coach-byrne-over-new-direction-6030521",
-    "published": "Wed, 01 Apr 2026 14:39:41 +0800",
+    "title": "SpaceX seen as make-or-break test for mega IPOs",
+    "link": "https://www.channelnewsasia.com/business/spacex-seen-make-or-break-test-mega-ipos-6031171",
+    "published": "Wed, 01 Apr 2026 20:02:28 +0800",
     "source": "CNA",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Fiji split with coach Byrne over 'new direction'",
-        "link": "https://www.channelnewsasia.com/sport/fiji-split-coach-byrne-over-new-direction-6030521",
-        "published": "Wed, 01 Apr 2026 14:39:41 +0800",
+        "title": "SpaceX seen as make-or-break test for mega IPOs",
+        "link": "https://www.channelnewsasia.com/business/spacex-seen-make-or-break-test-mega-ipos-6031171",
+        "published": "Wed, 01 Apr 2026 20:02:28 +0800",
         "source": "CNA",
         "risk_score": 1,
         "coords": null
@@ -1363,18 +1390,18 @@
     "machine_assessment": null
   },
   {
-    "title": "Rising supply of HDB flats, global uncertainty set stage for more moderate resale price growth: Analysts",
-    "link": "https://www.channelnewsasia.com/singapore/hdb-resale-prices-bto-supply-mop-iran-war-6030291",
-    "published": "Wed, 01 Apr 2026 14:23:24 +0800",
+    "title": "Swiss finance minister sues for defamation over Grok-created post",
+    "link": "https://www.channelnewsasia.com/business/swiss-finance-minister-sues-defamation-over-grok-created-post-6031161",
+    "published": "Wed, 01 Apr 2026 19:52:19 +0800",
     "source": "CNA",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Rising supply of HDB flats, global uncertainty set stage for more moderate resale price growth: Analysts",
-        "link": "https://www.channelnewsasia.com/singapore/hdb-resale-prices-bto-supply-mop-iran-war-6030291",
-        "published": "Wed, 01 Apr 2026 14:23:24 +0800",
+        "title": "Swiss finance minister sues for defamation over Grok-created post",
+        "link": "https://www.channelnewsasia.com/business/swiss-finance-minister-sues-defamation-over-grok-created-post-6031161",
+        "published": "Wed, 01 Apr 2026 19:52:19 +0800",
         "source": "CNA",
         "risk_score": 1,
         "coords": null
@@ -1383,19 +1410,45 @@
     "machine_assessment": null
   },
   {
-    "title": "VinFast delaying break-even target to after 2027 due to growth push, sources say",
-    "link": "https://www.channelnewsasia.com/business/vinfast-delaying-break-even-target-after-2027-due-growth-push-sources-say-6030481",
-    "published": "Wed, 01 Apr 2026 14:18:21 +0800",
-    "source": "CNA",
+    "title": "Bolivia: probe into ring that stole and adulterated fuel imported through Chilean ports",
+    "link": "https://en.mercopress.com/2026/04/01/bolivia-probe-into-ring-that-stole-and-adulterated-fuel-imported-through-chilean-ports?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
+    "published": "Wed, 01 Apr 2026 10:37:00 GMT",
+    "source": "Mercopress",
+    "risk_score": 1,
+    "coords": [
+      -38.416,
+      -63.616
+    ],
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Bolivia: probe into ring that stole and adulterated fuel imported through Chilean ports",
+        "link": "https://en.mercopress.com/2026/04/01/bolivia-probe-into-ring-that-stole-and-adulterated-fuel-imported-through-chilean-ports?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
+        "published": "Wed, 01 Apr 2026 10:37:00 GMT",
+        "source": "Mercopress",
+        "risk_score": 1,
+        "coords": [
+          -38.416,
+          -63.616
+        ]
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "Increases in fees for applications for British passports in Falklands begin 6 April",
+    "link": "https://en.mercopress.com/2026/04/01/increases-in-fees-for-applications-for-british-passports-in-falklands-begin-6-april?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
+    "published": "Wed, 01 Apr 2026 09:24:00 GMT",
+    "source": "Mercopress",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "VinFast delaying break-even target to after 2027 due to growth push, sources say",
-        "link": "https://www.channelnewsasia.com/business/vinfast-delaying-break-even-target-after-2027-due-growth-push-sources-say-6030481",
-        "published": "Wed, 01 Apr 2026 14:18:21 +0800",
-        "source": "CNA",
+        "title": "Increases in fees for applications for British passports in Falklands begin 6 April",
+        "link": "https://en.mercopress.com/2026/04/01/increases-in-fees-for-applications-for-british-passports-in-falklands-begin-6-april?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
+        "published": "Wed, 01 Apr 2026 09:24:00 GMT",
+        "source": "Mercopress",
         "risk_score": 1,
         "coords": null
       }
@@ -1403,52 +1456,47 @@
     "machine_assessment": null
   },
   {
-    "title": "Dog lost for a week in New Zealand bush found after strangers fund US$6,300 air search",
-    "link": "https://www.scmp.com/news/asia/australasia/article/3348639/dog-lost-week-new-zealand-bush-found-after-strangers-fund-us6300-air-search?utm_source=rss_feed",
-    "published": "Wed, 01 Apr 2026 07:14:46 +0000",
+    "title": "Taiwan’s KMT chair Cheng Li-wun to honour Sun Yat-sen on landmark mainland China trip",
+    "link": "https://www.scmp.com/news/china/politics/article/3348696/taiwans-kmt-chair-cheng-li-wun-honour-sun-yat-sen-landmark-mainland-china-trip?utm_source=rss_feed",
+    "published": "Wed, 01 Apr 2026 12:17:02 +0000",
     "source": "SCMP",
     "risk_score": 1,
-    "coords": null,
+    "coords": [
+      31.23,
+      121.473
+    ],
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Dog lost for a week in New Zealand bush found after strangers fund US$6,300 air search",
-        "link": "https://www.scmp.com/news/asia/australasia/article/3348639/dog-lost-week-new-zealand-bush-found-after-strangers-fund-us6300-air-search?utm_source=rss_feed",
-        "published": "Wed, 01 Apr 2026 07:14:46 +0000",
+        "title": "Taiwan’s KMT chair Cheng Li-wun to honour Sun Yat-sen on landmark mainland China trip",
+        "link": "https://www.scmp.com/news/china/politics/article/3348696/taiwans-kmt-chair-cheng-li-wun-honour-sun-yat-sen-landmark-mainland-china-trip?utm_source=rss_feed",
+        "published": "Wed, 01 Apr 2026 12:17:02 +0000",
         "source": "SCMP",
         "risk_score": 1,
-        "coords": null
+        "coords": [
+          31.23,
+          121.473
+        ]
       }
     ],
     "machine_assessment": null
   },
   {
-    "title": "HKTVmall parent firm under fire for testing how long detached animal heads can survive",
-    "link": "https://www.scmp.com/news/hong-kong/society/article/3348638/hktvmall-parent-firm-under-fire-testing-how-long-detached-animal-heads-can-survive?utm_source=rss_feed",
-    "published": "Wed, 01 Apr 2026 07:14:21 +0000",
+    "title": "Hong Kong investment chief joins global board in first for Chinese sovereign funds",
+    "link": "https://www.scmp.com/news/hong-kong/hong-kong-economy/article/3348690/hong-kong-investment-chief-joins-global-board-first-chinese-sovereign-funds?utm_source=rss_feed",
+    "published": "Wed, 01 Apr 2026 12:00:25 +0000",
     "source": "SCMP",
     "risk_score": 1,
     "coords": [
       22.319,
       114.169
     ],
-    "cluster_count": 2,
+    "cluster_count": 1,
     "articles": [
       {
-        "title": "HKTVmall parent firm under fire for testing how long detached animal heads can survive",
-        "link": "https://www.scmp.com/news/hong-kong/society/article/3348638/hktvmall-parent-firm-under-fire-testing-how-long-detached-animal-heads-can-survive?utm_source=rss_feed",
-        "published": "Wed, 01 Apr 2026 07:14:21 +0000",
-        "source": "SCMP",
-        "risk_score": 1,
-        "coords": [
-          22.319,
-          114.169
-        ]
-      },
-      {
-        "title": "Some Hong Kong taxi drivers unprepared as new e-payments rule takes effect",
-        "link": "https://www.scmp.com/news/hong-kong/transport/article/3348627/some-hong-kong-taxi-drivers-unprepared-new-e-payments-rule-takes-effect?utm_source=rss_feed",
-        "published": "Wed, 01 Apr 2026 06:47:21 +0000",
+        "title": "Hong Kong investment chief joins global board in first for Chinese sovereign funds",
+        "link": "https://www.scmp.com/news/hong-kong/hong-kong-economy/article/3348690/hong-kong-investment-chief-joins-global-board-first-chinese-sovereign-funds?utm_source=rss_feed",
+        "published": "Wed, 01 Apr 2026 12:00:25 +0000",
         "source": "SCMP",
         "risk_score": 1,
         "coords": [
@@ -1460,18 +1508,18 @@
     "machine_assessment": null
   },
   {
-    "title": "Where Do Kazakhs Get Their News?",
-    "link": "https://thediplomat.com/2026/03/where-do-kazakhs-get-their-news/",
-    "published": "Tue, 31 Mar 2026 23:30:00 +0900",
+    "title": "Why Laos’ Communist Party Chose Continuity",
+    "link": "https://thediplomat.com/2026/04/why-laos-communist-party-chose-continuity/",
+    "published": "Wed, 01 Apr 2026 07:58:00 +0900",
     "source": "The Diplomat",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Where Do Kazakhs Get Their News?",
-        "link": "https://thediplomat.com/2026/03/where-do-kazakhs-get-their-news/",
-        "published": "Tue, 31 Mar 2026 23:30:00 +0900",
+        "title": "Why Laos’ Communist Party Chose Continuity",
+        "link": "https://thediplomat.com/2026/04/why-laos-communist-party-chose-continuity/",
+        "published": "Wed, 01 Apr 2026 07:58:00 +0900",
         "source": "The Diplomat",
         "risk_score": 1,
         "coords": null
@@ -1480,84 +1528,18 @@
     "machine_assessment": null
   },
   {
-    "title": "In Japan, strong state-led certification key to boosting organic food uptake",
-    "link": "https://www.japantimes.co.jp/news/2026/04/01/japan/science-health/trust-correlation-organic-foods/",
-    "published": "Wed, 01 Apr 2026 16:07:00 +0900",
-    "source": "Japan Times",
-    "risk_score": 1,
-    "coords": [
-      36.204,
-      138.252
-    ],
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "In Japan, strong state-led certification key to boosting organic food uptake",
-        "link": "https://www.japantimes.co.jp/news/2026/04/01/japan/science-health/trust-correlation-organic-foods/",
-        "published": "Wed, 01 Apr 2026 16:07:00 +0900",
-        "source": "Japan Times",
-        "risk_score": 1,
-        "coords": [
-          36.204,
-          138.252
-        ]
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Smiles, not stoicism, at new tournament for retired sumo stars",
-    "link": "https://www.japantimes.co.jp/sports/2026/04/01/sumo/former-wrestler-sumo-tournament/",
-    "published": "Wed, 01 Apr 2026 15:59:00 +0900",
+    "title": "Cookies, miso and milk make a pie for all seasons",
+    "link": "https://www.japantimes.co.jp/life/2026/04/01/food-drink/miso-milk-pantry-pie/",
+    "published": "Wed, 01 Apr 2026 18:20:00 +0900",
     "source": "Japan Times",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Smiles, not stoicism, at new tournament for retired sumo stars",
-        "link": "https://www.japantimes.co.jp/sports/2026/04/01/sumo/former-wrestler-sumo-tournament/",
-        "published": "Wed, 01 Apr 2026 15:59:00 +0900",
-        "source": "Japan Times",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Sony expands support for women pursuing science and engineering careers",
-    "link": "https://www.japantimes.co.jp/news/2026/04/01/japan/sony-women-science-engineering/",
-    "published": "Wed, 01 Apr 2026 15:30:00 +0900",
-    "source": "Japan Times",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Sony expands support for women pursuing science and engineering careers",
-        "link": "https://www.japantimes.co.jp/news/2026/04/01/japan/sony-women-science-engineering/",
-        "published": "Wed, 01 Apr 2026 15:30:00 +0900",
-        "source": "Japan Times",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Social media platforms differ in transparency on defamation and AI issues",
-    "link": "https://www.japantimes.co.jp/news/2026/04/01/japan/society/transparency-gap-survey/",
-    "published": "Wed, 01 Apr 2026 15:12:00 +0900",
-    "source": "Japan Times",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Social media platforms differ in transparency on defamation and AI issues",
-        "link": "https://www.japantimes.co.jp/news/2026/04/01/japan/society/transparency-gap-survey/",
-        "published": "Wed, 01 Apr 2026 15:12:00 +0900",
+        "title": "Cookies, miso and milk make a pie for all seasons",
+        "link": "https://www.japantimes.co.jp/life/2026/04/01/food-drink/miso-milk-pantry-pie/",
+        "published": "Wed, 01 Apr 2026 18:20:00 +0900",
         "source": "Japan Times",
         "risk_score": 1,
         "coords": null

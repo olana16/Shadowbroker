@@ -3,7 +3,7 @@
 import { API_BASE } from "@/lib/api";
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Settings, ExternalLink, Key, Shield, X, Save, ChevronDown, ChevronUp, Rss, Plus, Trash2, RotateCcw, Send } from "lucide-react";
+import { Settings, ExternalLink, Key, Shield, X, Save, ChevronDown, ChevronUp, Rss, Plus, Trash2, RotateCcw, Send, Tv } from "lucide-react";
 
 interface ApiEntry {
     id: string;
@@ -30,6 +30,13 @@ interface TelegramChannelEntry {
     enabled: boolean;
 }
 
+interface LiveVideoChannelEntry {
+    name: string;
+    region: string;
+    youtube_url: string;
+    enabled: boolean;
+}
+
 const WEIGHT_LABELS: Record<number, string> = { 1: "LOW", 2: "MED", 3: "STD", 4: "HIGH", 5: "CRIT" };
 const WEIGHT_COLORS: Record<number, string> = {
     1: "text-gray-400 border-gray-600",
@@ -40,6 +47,7 @@ const WEIGHT_COLORS: Record<number, string> = {
 };
 const MAX_FEEDS = 50;
 const MAX_TELEGRAM_CHANNELS = 20;
+const MAX_LIVE_VIDEO_CHANNELS = 20;
 
 // Category colors for the tactical UI
 const CATEGORY_COLORS: Record<string, string> = {
@@ -54,7 +62,7 @@ const CATEGORY_COLORS: Record<string, string> = {
     SIGINT: "text-rose-400 border-rose-500/30 bg-rose-950/20",
 };
 
-type Tab = "api-keys" | "news-feeds" | "telegram-channels";
+type Tab = "api-keys" | "news-feeds" | "telegram-channels" | "live-video";
 
 const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     const [activeTab, setActiveTab] = useState<Tab>("api-keys");
@@ -86,6 +94,10 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
     const [telegramDirty, setTelegramDirty] = useState(false);
     const [telegramSaving, setTelegramSaving] = useState(false);
     const [telegramMsg, setTelegramMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
+    const [liveVideoChannels, setLiveVideoChannels] = useState<LiveVideoChannelEntry[]>([]);
+    const [liveVideoDirty, setLiveVideoDirty] = useState(false);
+    const [liveVideoSaving, setLiveVideoSaving] = useState(false);
+    const [liveVideoMsg, setLiveVideoMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
 
     const fetchKeys = useCallback(async () => {
         try {
@@ -122,13 +134,26 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
         }
     }, []);
 
+    const fetchLiveVideoChannels = useCallback(async () => {
+        try {
+            const res = await fetch(`${API_BASE}/api/settings/live-video-channels`);
+            if (res.ok) {
+                setLiveVideoChannels(await res.json());
+                setLiveVideoDirty(false);
+            }
+        } catch (e) {
+            console.error("Failed to fetch live video channels", e);
+        }
+    }, []);
+
     useEffect(() => {
         if (isOpen) {
             fetchKeys();
             fetchFeeds();
             fetchTelegramChannels();
+            fetchLiveVideoChannels();
         }
-    }, [isOpen, fetchKeys, fetchFeeds, fetchTelegramChannels]);
+    }, [isOpen, fetchKeys, fetchFeeds, fetchTelegramChannels, fetchLiveVideoChannels]);
 
     // API Keys handlers
     const startEditing = (api: ApiEntry) => { setEditingId(api.id); setEditValue(""); };
@@ -277,6 +302,65 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
         }
     };
 
+    const updateLiveVideoChannel = (idx: number, field: keyof LiveVideoChannelEntry, value: string | boolean) => {
+        setLiveVideoChannels(prev => prev.map((channel, i) => i === idx ? { ...channel, [field]: value } : channel));
+        setLiveVideoDirty(true);
+        setLiveVideoMsg(null);
+    };
+
+    const removeLiveVideoChannel = (idx: number) => {
+        setLiveVideoChannels(prev => prev.filter((_, i) => i !== idx));
+        setLiveVideoDirty(true);
+        setLiveVideoMsg(null);
+    };
+
+    const addLiveVideoChannel = () => {
+        if (liveVideoChannels.length >= MAX_LIVE_VIDEO_CHANNELS) return;
+        setLiveVideoChannels(prev => [...prev, { name: "", region: "", youtube_url: "", enabled: true }]);
+        setLiveVideoDirty(true);
+        setLiveVideoMsg(null);
+    };
+
+    const saveLiveVideoChannels = async () => {
+        setLiveVideoSaving(true);
+        setLiveVideoMsg(null);
+        try {
+            const res = await fetch(`${API_BASE}/api/settings/live-video-channels`, {
+                method: "PUT",
+                headers: adminHeaders({ "Content-Type": "application/json" }),
+                body: JSON.stringify(liveVideoChannels),
+            });
+            if (res.ok) {
+                setLiveVideoDirty(false);
+                setLiveVideoMsg({ type: "ok", text: "Live video channels saved." });
+                window.dispatchEvent(new Event("sb-live-video-updated"));
+            } else {
+                const d = await res.json().catch(() => ({}));
+                setLiveVideoMsg({ type: "err", text: d.message || "Save failed" });
+            }
+        } catch {
+            setLiveVideoMsg({ type: "err", text: "Network error" });
+        } finally { setLiveVideoSaving(false); }
+    };
+
+    const resetLiveVideoChannels = async () => {
+        try {
+            const res = await fetch(`${API_BASE}/api/settings/live-video-channels/reset`, {
+                method: "POST",
+                headers: adminHeaders(),
+            });
+            if (res.ok) {
+                const d = await res.json();
+                setLiveVideoChannels(d.channels || []);
+                setLiveVideoDirty(false);
+                setLiveVideoMsg({ type: "ok", text: "Reset to defaults" });
+                window.dispatchEvent(new Event("sb-live-video-updated"));
+            }
+        } catch {
+            setLiveVideoMsg({ type: "err", text: "Reset failed" });
+        }
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -357,6 +441,14 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
                                 <Send size={10} />
                                 TELEGRAM
                                 {telegramDirty && <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />}
+                            </button>
+                            <button
+                                onClick={() => setActiveTab("live-video")}
+                                className={`flex-1 px-4 py-2.5 text-[10px] font-mono tracking-widest font-bold transition-colors flex items-center justify-center gap-1.5 ${activeTab === "live-video" ? "text-fuchsia-400 border-b-2 border-fuchsia-500 bg-fuchsia-950/10" : "text-[var(--text-muted)] hover:text-[var(--text-secondary)]"}`}
+                            >
+                                <Tv size={10} />
+                                LIVE VIDEO
+                                {liveVideoDirty && <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400 animate-pulse" />}
                             </button>
                         </div>
 
@@ -661,6 +753,105 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
                                     <div className="flex items-center justify-between text-[9px] text-[var(--text-muted)] font-mono mt-2">
                                         <span>{telegramChannels.length}/{MAX_TELEGRAM_CHANNELS} CHANNELS</span>
                                         <span>USERNAMES SHOULD LOOK LIKE @CHANNEL</span>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {activeTab === "live-video" && (
+                            <>
+                                <div className="mx-4 mt-4 p-3 rounded-lg border border-fuchsia-900/30 bg-fuchsia-950/10">
+                                    <div className="flex items-start gap-2">
+                                        <Tv size={12} className="text-fuchsia-500 mt-0.5 flex-shrink-0" />
+                                        <p className="text-[10px] text-[var(--text-secondary)] font-mono leading-relaxed">
+                                            Configure live news video channels for the YouTube panel. Add a channel name, region label, and a YouTube live/watch/channel URL. Up to <span className="text-fuchsia-400">{MAX_LIVE_VIDEO_CHANNELS}</span> sources.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex-1 overflow-y-auto styled-scrollbar p-4 space-y-2">
+                                    {liveVideoChannels.map((channel, idx) => (
+                                        <div key={idx} className="rounded-lg border border-[var(--border-primary)]/60 p-3 hover:border-fuchsia-500/40 transition-colors group">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <input
+                                                    type="text"
+                                                    value={channel.name}
+                                                    onChange={(e) => updateLiveVideoChannel(idx, "name", e.target.value)}
+                                                    className="flex-1 bg-transparent border-b border-[var(--border-primary)] text-xs font-mono text-[var(--text-primary)] outline-none focus:border-fuchsia-500/70 transition-colors px-1 py-0.5"
+                                                    placeholder="Channel name..."
+                                                />
+                                                <label className="flex items-center gap-2 text-[9px] font-mono text-[var(--text-muted)]">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={channel.enabled}
+                                                        onChange={(e) => updateLiveVideoChannel(idx, "enabled", e.target.checked)}
+                                                        className="accent-fuchsia-500"
+                                                    />
+                                                    ENABLED
+                                                </label>
+                                                <button
+                                                    onClick={() => removeLiveVideoChannel(idx)}
+                                                    className="w-6 h-6 rounded flex items-center justify-center text-[var(--text-muted)] hover:text-red-400 hover:bg-red-950/20 transition-all opacity-0 group-hover:opacity-100"
+                                                    title="Remove channel"
+                                                >
+                                                    <Trash2 size={11} />
+                                                </button>
+                                            </div>
+                                            <input
+                                                type="text"
+                                                value={channel.region}
+                                                onChange={(e) => updateLiveVideoChannel(idx, "region", e.target.value)}
+                                                className="w-full mb-2 bg-black/30 border border-[var(--border-primary)]/40 rounded px-2 py-1 text-[10px] font-mono text-[var(--text-muted)] outline-none focus:border-fuchsia-500/50 focus:text-fuchsia-300 transition-colors"
+                                                placeholder="Region label..."
+                                            />
+                                            <input
+                                                type="text"
+                                                value={channel.youtube_url}
+                                                onChange={(e) => updateLiveVideoChannel(idx, "youtube_url", e.target.value)}
+                                                className="w-full bg-black/30 border border-[var(--border-primary)]/40 rounded px-2 py-1 text-[10px] font-mono text-[var(--text-muted)] outline-none focus:border-fuchsia-500/50 focus:text-fuchsia-300 transition-colors"
+                                                placeholder="https://www.youtube.com/watch?v=..."
+                                            />
+                                        </div>
+                                    ))}
+
+                                    <button
+                                        onClick={addLiveVideoChannel}
+                                        disabled={liveVideoChannels.length >= MAX_LIVE_VIDEO_CHANNELS}
+                                        className="w-full py-2.5 rounded-lg border border-dashed border-[var(--border-primary)]/60 text-[var(--text-muted)] hover:border-fuchsia-500/50 hover:text-fuchsia-400 hover:bg-fuchsia-950/10 transition-all text-[10px] font-mono flex items-center justify-center gap-1.5 disabled:opacity-30 disabled:cursor-not-allowed"
+                                    >
+                                        <Plus size={10} />
+                                        ADD CHANNEL ({liveVideoChannels.length}/{MAX_LIVE_VIDEO_CHANNELS})
+                                    </button>
+                                </div>
+
+                                {liveVideoMsg && (
+                                    <div className={`mx-4 mb-2 px-3 py-2 rounded text-[10px] font-mono ${liveVideoMsg.type === "ok" ? "text-green-400 bg-green-950/20 border border-green-900/30" : "text-red-400 bg-red-950/20 border border-red-900/30"}`}>
+                                        {liveVideoMsg.text}
+                                    </div>
+                                )}
+
+                                <div className="p-4 border-t border-[var(--border-primary)]/80">
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            onClick={saveLiveVideoChannels}
+                                            disabled={!liveVideoDirty || liveVideoSaving}
+                                            className="flex-1 px-4 py-2 rounded bg-fuchsia-500/20 border border-fuchsia-500/40 text-fuchsia-400 hover:bg-fuchsia-500/30 transition-colors text-[10px] font-mono flex items-center justify-center gap-1.5 disabled:opacity-30 disabled:cursor-not-allowed"
+                                        >
+                                            <Save size={10} />
+                                            {liveVideoSaving ? "SAVING..." : "SAVE CHANNELS"}
+                                        </button>
+                                        <button
+                                            onClick={resetLiveVideoChannels}
+                                            className="px-3 py-2 rounded border border-[var(--border-primary)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-secondary)] transition-all text-[10px] font-mono flex items-center gap-1.5"
+                                            title="Reset to defaults"
+                                        >
+                                            <RotateCcw size={10} />
+                                            RESET
+                                        </button>
+                                    </div>
+                                    <div className="flex items-center justify-between text-[9px] text-[var(--text-muted)] font-mono mt-2">
+                                        <span>{liveVideoChannels.length}/{MAX_LIVE_VIDEO_CHANNELS} CHANNELS</span>
+                                        <span>PASTE YOUTUBE LIVE / WATCH / CHANNEL URLS</span>
                                     </div>
                                 </div>
                             </>

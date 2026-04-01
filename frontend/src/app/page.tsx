@@ -27,6 +27,7 @@ import { useRegionDossier } from "@/hooks/useRegionDossier";
 
 // Use dynamic loads for Maplibre to avoid SSR window is not defined errors
 const MaplibreViewer = dynamic(() => import('@/components/MaplibreViewer'), { ssr: false });
+const LiveNewsPanel = dynamic(() => import('@/components/LiveNewsPanel'), { ssr: false });
 
 /* ── LOCATE BAR ── coordinate / place-name search above bottom status bar ── */
 function LocateBar({ onLocate }: { onLocate: (lat: number, lng: number) => void }) {
@@ -346,6 +347,12 @@ export default function Dashboard() {
             <div className="flex-shrink-0">
               <ErrorBoundary name="MarketsPanel">
                 <MarketsPanel data={data} />
+              </ErrorBoundary>
+            </div>
+
+            <div className="flex-shrink-0">
+              <ErrorBoundary name="LiveNewsPanel">
+                <LiveNewsPanel />
               </ErrorBoundary>
             </div>
 
