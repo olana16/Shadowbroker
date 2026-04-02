@@ -195,10 +195,16 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
     const news: NewsArticle[] = data?.news || [];
     const telegram: NewsArticle[] = data?.telegram || [];
     const cyberNews = news.filter(isCyberArticle);
+    const getPublishedTime = (item: NewsArticle) => {
+        const published = item.published || item.pub_date;
+        if (!published) return 0;
+        const timestamp = new Date(published).getTime();
+        return Number.isNaN(timestamp) ? 0 : timestamp;
+    };
     
     // Combine RSS news and Telegram messages, sorted by published date (newest first)
     const combinedNews = [...news, ...telegram].sort((a, b) => 
-        new Date(b.published).getTime() - new Date(a.published).getTime()
+        getPublishedTime(b) - getPublishedTime(a)
     );
     const visibleFeed = (
         feedView === 'news' ? news :
@@ -206,7 +212,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         feedView === 'telegram' ? telegram :
         combinedNews
     ).sort((a, b) =>
-        new Date(b.published).getTime() - new Date(a.published).getTime()
+        getPublishedTime(b) - getPublishedTime(a)
     );
 
     // Determine the selected flight's model for Wikipedia thumbnail lookup
@@ -1110,9 +1116,9 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                                             LVL: {item.risk_score}/10
                                         </span>
                                         <div className="flex items-center gap-2">
-                                            {item.cluster_count > 1 && (
+                                            {(item.cluster_count ?? 0) > 1 && (
                                                 <button onClick={() => toggleExpand(idx)} className="text-[8px] font-bold text-cyan-500 bg-[var(--bg-secondary)]/50 hover:text-[var(--text-primary)] hover:bg-[var(--hover-accent)] border border-cyan-500/30 px-1.5 py-0.5 rounded-sm transition-colors cursor-pointer">
-                                                    {isExpanded ? '[- COLLAPSE]' : `[+${item.cluster_count - 1} SOURCES]`}
+                                                    {isExpanded ? '[- COLLAPSE]' : `[+${(item.cluster_count ?? 1) - 1} SOURCES]`}
                                                 </button>
                                             )}
                                             {item.coords && (

@@ -50,9 +50,10 @@ from services.fetchers.geo import (  # noqa: F401
 )
 
 try:
-    from services.fetchers.telegram import fetch_telegram  # noqa: F401
+    from services.fetchers.telegram import fetch_telegram, load_cached_telegram_into_store  # noqa: F401
 except ModuleNotFoundError:
     fetch_telegram = None
+    load_cached_telegram_into_store = None
     logger = logging.getLogger("services.data_fetcher")
     logger.warning("Telethon is not installed; Telegram fetcher will be skipped.")
 
@@ -123,6 +124,8 @@ def start_scheduler():
     global _scheduler
     init_db()
     load_cached_news_into_store()
+    if load_cached_telegram_into_store:
+        load_cached_telegram_into_store()
     _scheduler = BackgroundScheduler(daemon=True)
     _now = datetime.now()
 

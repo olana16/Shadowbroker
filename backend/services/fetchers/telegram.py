@@ -1,5 +1,6 @@
 """Telegram channel fetching and message extraction."""
 import asyncio
+import json
 import logging
 import os
 import sys
@@ -36,6 +37,7 @@ SNAPSHOT_MESSAGE_LIMIT = 10
 # Cache file for last message IDs
 CACHE_DIR = BASE_DIR / "data"
 CACHE_FILE = CACHE_DIR / "telegram_cache.json"
+NEWS_CACHE_FILE = CACHE_DIR / "telegram_feed_cache.json"
 
 
 def _session_path(name):
@@ -57,6 +59,40 @@ def _load_cache():
         except Exception as e:
             logger.warning(f"Failed to load Telegram cache: {e}")
     return {}
+
+
+def _load_news_cache() -> list[dict]:
+    if NEWS_CACHE_FILE.exists():
+        try:
+            with open(NEWS_CACHE_FILE, "r", encoding="utf-8") as f:
+                cached = json.load(f)
+            if isinstance(cached, list):
+                return cached
+        except Exception as e:
+            logger.warning(f"Failed to load Telegram news cache: {e}")
+    return []
+
+
+def _save_news_cache(news_items: list[dict]) -> None:
+    CACHE_DIR.mkdir(exist_ok=True)
+    try:
+        with open(NEWS_CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(news_items, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        logger.warning(f"Failed to save Telegram news cache: {e}")
+
+
+def load_cached_telegram_into_store() -> int:
+    cached = _load_news_cache()
+    if not cached:
+        return 0
+    with _data_lock:
+        if latest_data.get("telegram"):
+            return len(latest_data["telegram"])
+        latest_data["telegram"] = cached
+    _mark_fresh("telegram")
+    logger.info("Loaded %s cached Telegram items into store", len(cached))
+    return len(cached)
 
 def _save_cache(cache):
     """Save last message IDs to cache."""
@@ -248,6 +284,7 @@ def fetch_telegram():
 
         # Save cache
         _save_cache(cache)
+        _save_news_cache(telegram_news)
 
         if telegram_news:
             logger.info(f"Fetched {len(telegram_news)} Telegram messages from {len(channels)} channels")

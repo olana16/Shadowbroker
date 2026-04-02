@@ -3,6 +3,8 @@
 :root {
   --background: #000000;
   --foreground: #ededed;
+  --font-geist-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-geist-mono: "SFMono-Regular", "Cascadia Code", "JetBrains Mono", "Fira Code", Consolas, "Liberation Mono", monospace;
   --bg-primary: #000000;
   --bg-secondary: rgb(5, 5, 8);
   --bg-tertiary: rgb(12, 12, 16);
