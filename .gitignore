@@ -113,3 +113,15 @@ ROADMAP.md
 UPDATEPROTOCOL.md
 CLAUDE.md
 DOCKER_SECRETS.md
+
+
+#cache
+backend/data/news_cache.json
+backend/data/telegram_cache.json
+backend/data/telegram_feed_cache.json
+backend/data/geocode_cache.json
+backend/data/sat_gp_cache.json
+backend/data/sat_gp_cache_meta.json
+backend/data/meshtastic_nodes_cache.json
+backend/data/peer_store.json
+backend/data/wormhole_status.json
