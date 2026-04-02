@@ -1,27 +1,16 @@
 [
   {
-    "title": "Who is held accountable if a war crime is committed in Iran?",
-    "link": "https://www.npr.org/2026/04/01/nx-s1-5766235/who-is-held-accountable-if-a-war-crime-is-committed-in-iran",
-    "published": "Wed, 01 Apr 2026 16:48:19 -0400",
-    "source": "NPR",
+    "title": "Hopes dim for swift end to Iran war after Trump speech",
+    "link": "https://www.japantimes.co.jp/news/2026/04/02/world/politics/trump-address-iran-war/",
+    "published": "Thu, 02 Apr 2026 16:04:00 +0900",
+    "source": "Japan Times",
     "risk_score": 7,
     "coords": [
       32.427,
       53.688
     ],
-    "cluster_count": 9,
+    "cluster_count": 6,
     "articles": [
-      {
-        "title": "Who is held accountable if a war crime is committed in Iran?",
-        "link": "https://www.npr.org/2026/04/01/nx-s1-5766235/who-is-held-accountable-if-a-war-crime-is-committed-in-iran",
-        "published": "Wed, 01 Apr 2026 16:48:19 -0400",
-        "source": "NPR",
-        "risk_score": 7,
-        "coords": [
-          32.427,
-          53.688
-        ]
-      },
       {
         "title": "Hopes dim for swift end to Iran war after Trump speech",
         "link": "https://www.japantimes.co.jp/news/2026/04/02/world/politics/trump-address-iran-war/",
@@ -56,10 +45,10 @@
         ]
       },
       {
-        "title": "(URGENT) KOSPI dips 4.47 pct to 5,234.05 as Trump vows to strike Iran \"extremely hard\"",
-        "link": "https://en.yna.co.kr/view/AEN20260402007500320",
-        "published": "Thu, 2 Apr 2026 15:37:14 +0900",
-        "source": "Yonhap",
+        "title": "Iranian officials react to President Trump's speech on Iran war",
+        "link": "https://www.npr.org/2026/04/02/nx-s1-5770563/iranian-officials-react-to-president-trumps-speech-on-iran-war",
+        "published": "Thu, 02 Apr 2026 04:41:14 -0400",
+        "source": "NPR",
         "risk_score": 3,
         "coords": [
           32.427,
@@ -78,73 +67,42 @@
         ]
       },
       {
-        "title": "BOJ may be overlooking real risk from Iran war, says ex-central bank official",
-        "link": "https://www.channelnewsasia.com/business/boj-may-be-overlooking-real-risk-iran-war-says-ex-central-bank-official-6033086",
-        "published": "Thu, 02 Apr 2026 14:57:40 +0800",
-        "source": "CNA",
+        "title": "Oil price surges, Asian stocks fall as Trump vows to continue Iran attacks",
+        "link": "https://www.aljazeera.com/news/2026/4/2/oil-surges-asian-stocks-plunge-as-trump-vows-to-keep-up-iran-attacks?traffic_source=rss",
+        "published": "Thu, 02 Apr 2026 08:07:13 +0000",
+        "source": "AlJazeera",
         "risk_score": 3,
-        "coords": [
-          32.427,
-          53.688
-        ]
-      },
-      {
-        "title": "Trump Claims Military Success but Offers No Clear Timeline to End Fighting",
-        "link": "https://www.nytimes.com/live/2026/04/01/world/iran-war-trump-oil-news",
-        "published": "Thu, 02 Apr 2026 07:00:51 +0000",
-        "source": "NYT",
-        "risk_score": 3,
-        "coords": [
-          32.427,
-          53.688
-        ]
-      },
-      {
-        "title": "Trump's fresh Iran threats give investors a risk-off reality check",
-        "link": "https://www.channelnewsasia.com/business/trumps-fresh-iran-threats-give-investors-risk-reality-check-6033076",
-        "published": "Thu, 02 Apr 2026 14:47:43 +0800",
-        "source": "CNA",
-        "risk_score": 1,
         "coords": [
           32.427,
           53.688
         ]
       }
     ],
-    "machine_assessment": "War crime accountability in Iran unclear, sparking concern among operators. Uncertainty surrounding prosecution and punishment mechanisms may embolden malicious actors to operate with impunity in the region."
+    "machine_assessment": "Iranian officials express skepticism over US intentions for swift conflict resolution after Trump's recent speech, casting doubt on a quick end to hostilities. This development may indicate prolonged instability in the region."
   },
   {
-    "title": "New DeepLoad Malware Dropped in ClickFix Attacks",
-    "link": "https://www.securityweek.com/new-deepload-malware-dropped-in-clickfix-attacks/",
-    "published": "Wed, 01 Apr 2026 15:04:43 +0000",
-    "source": "SecurityWeek",
+    "title": "Iran War Live Updates: Gulf Nations and Israel Face New Attacks After Trump Claims Military Success",
+    "link": "https://www.nytimes.com/live/2026/04/02/world/iran-war-trump-news",
+    "published": "Thu, 02 Apr 2026 08:33:24 +0000",
+    "source": "NYT",
     "risk_score": 7,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "New DeepLoad Malware Dropped in ClickFix Attacks",
-        "link": "https://www.securityweek.com/new-deepload-malware-dropped-in-clickfix-attacks/",
-        "published": "Wed, 01 Apr 2026 15:04:43 +0000",
-        "source": "SecurityWeek",
-        "risk_score": 7,
-        "coords": null
-      }
-    ],
-    "machine_assessment": "New DeepLoad malware deployed in ClickFix attacks, targeting unknown locations. Operators should be cautious of this emerging threat, which may indicate a new wave of targeted attacks leveraging the ClickFix exploit kit."
-  },
-  {
-    "title": "Trump vows to send Iran \"back to the Stone Age\" as oil surges back above $100",
-    "link": "https://en.mercopress.com/2026/04/02/trump-vows-to-send-iran-back-to-the-stone-age-as-oil-surges-back-above-100?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
-    "published": "Thu, 02 Apr 2026 03:00:00 GMT",
-    "source": "Mercopress",
-    "risk_score": 5,
     "coords": [
       38.907,
       -77.036
     ],
     "cluster_count": 11,
     "articles": [
+      {
+        "title": "Iran War Live Updates: Gulf Nations and Israel Face New Attacks After Trump Claims Military Success",
+        "link": "https://www.nytimes.com/live/2026/04/02/world/iran-war-trump-news",
+        "published": "Thu, 02 Apr 2026 08:33:24 +0000",
+        "source": "NYT",
+        "risk_score": 7,
+        "coords": [
+          38.907,
+          -77.036
+        ]
+      },
       {
         "title": "Trump vows to send Iran \"back to the Stone Age\" as oil surges back above $100",
         "link": "https://en.mercopress.com/2026/04/02/trump-vows-to-send-iran-back-to-the-stone-age-as-oil-surges-back-above-100?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
@@ -179,6 +137,17 @@
         ]
       },
       {
+        "title": "Iran war: What is happening on day 34 of US-Israel attacks?",
+        "link": "https://www.aljazeera.com/news/2026/4/2/iran-war-what-is-happening-on-day-34-of-us-israel-attacks?traffic_source=rss",
+        "published": "Thu, 02 Apr 2026 07:50:50 +0000",
+        "source": "AlJazeera",
+        "risk_score": 5,
+        "coords": [
+          38.907,
+          -77.036
+        ]
+      },
+      {
         "title": "Iran-Backed Hackers Claim Wiper Attack on Medtech Firm Stryker",
         "link": "https://krebsonsecurity.com/2026/03/iran-backed-hackers-claim-wiper-attack-on-medtech-firm-stryker/",
         "published": "Wed, 11 Mar 2026 16:20:13 +0000",
@@ -201,10 +170,10 @@
         ]
       },
       {
-        "title": "US lifts sanctions on Delcy Rodríguez, clearing the way for her visit to Washington",
-        "link": "https://en.mercopress.com/2026/04/02/us-lifts-sanctions-on-delcy-rodriguez-clearing-the-way-for-her-visit-to-washington?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
-        "published": "Thu, 02 Apr 2026 03:01:00 GMT",
-        "source": "Mercopress",
+        "title": "Troops and their families evacuated to the US after attacks on Middle East bases",
+        "link": "https://www.npr.org/2026/04/02/nx-s1-5768139/troops-and-their-families-evacuated-to-the-us-after-attacks-on-middle-east-bases",
+        "published": "Thu, 02 Apr 2026 04:41:10 -0400",
+        "source": "NPR",
         "risk_score": 3,
         "coords": [
           38.907,
@@ -212,10 +181,10 @@
         ]
       },
       {
-        "title": "The Iran vs US-Israel war and the end of the unipolar moment",
-        "link": "https://asiatimes.com/2026/04/the-iran-vs-us-israel-war-and-the-end-of-the-unipolar-moment/",
-        "published": "Wed, 01 Apr 2026 21:55:50 +0000",
-        "source": "Asia Times",
+        "title": "US lifts sanctions on Delcy Rodríguez, clearing the way for her visit to Washington",
+        "link": "https://en.mercopress.com/2026/04/02/us-lifts-sanctions-on-delcy-rodriguez-clearing-the-way-for-her-visit-to-washington?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
+        "published": "Thu, 02 Apr 2026 03:01:00 GMT",
+        "source": "Mercopress",
         "risk_score": 3,
         "coords": [
           38.907,
@@ -243,31 +212,29 @@
           38.907,
           -77.036
         ]
-      },
-      {
-        "title": "Trump’s primetime speech on Iran war: Key takeaways",
-        "link": "https://www.aljazeera.com/news/2026/4/2/trumps-primetime-speech-on-iran-war-key-takeaways?traffic_source=rss",
-        "published": "Thu, 02 Apr 2026 05:15:10 +0000",
-        "source": "AlJazeera",
-        "risk_score": 3,
-        "coords": [
-          38.907,
-          -77.036
-        ]
-      },
-      {
-        "title": "Trump’s national address on Iran ’embarrassing, incoherent’",
-        "link": "https://www.aljazeera.com/video/newsfeed/2026/4/2/trumps-national-address-on-iran-embarrassing?traffic_source=rss",
-        "published": "Thu, 02 Apr 2026 05:01:23 +0000",
-        "source": "AlJazeera",
-        "risk_score": 1,
-        "coords": [
-          38.907,
-          -77.036
-        ]
       }
     ],
-    "machine_assessment": "US President Trump has threatened to send Iran \"back to the Stone Age\" amid rising oil prices. This rhetoric may escalate tensions and increase the risk of military action, potentially impacting global energy markets."
+    "machine_assessment": "Iranian-backed forces launched attacks on Gulf nations and Israel, following Trump's claim of military success. Unclear if these are retaliatory strikes or part of a larger escalation, but poses increased risk to regional stability."
+  },
+  {
+    "title": "New DeepLoad Malware Dropped in ClickFix Attacks",
+    "link": "https://www.securityweek.com/new-deepload-malware-dropped-in-clickfix-attacks/",
+    "published": "Wed, 01 Apr 2026 15:04:43 +0000",
+    "source": "SecurityWeek",
+    "risk_score": 7,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "New DeepLoad Malware Dropped in ClickFix Attacks",
+        "link": "https://www.securityweek.com/new-deepload-malware-dropped-in-clickfix-attacks/",
+        "published": "Wed, 01 Apr 2026 15:04:43 +0000",
+        "source": "SecurityWeek",
+        "risk_score": 7,
+        "coords": null
+      }
+    ],
+    "machine_assessment": "New DeepLoad malware has been detected in \"ClickFix\" attacks, targeting unknown locations. Operators should be cautious of this emerging threat, which may indicate a new wave of targeted attacks leveraging the ClickFix exploit kit."
   },
   {
     "title": "CERT-UA Impersonation Campaign Spread AGEWHEEZE Malware to 1 Million Emails",
@@ -304,18 +271,18 @@
         ]
       },
       {
-        "title": "Ukraine wants IOC to examine 'neutral' status of Russian athletes",
-        "link": "https://www.japantimes.co.jp/olympics/2026/04/02/ukraine-ioc-russia-investigate/",
-        "published": "Thu, 02 Apr 2026 15:08:00 +0900",
-        "source": "Japan Times",
-        "risk_score": 1,
+        "title": "Russia is luring students with large financial packages to join drone units",
+        "link": "https://www.scmp.com/news/world/russia-central-asia/article/3348784/russia-luring-students-large-financial-packages-join-drone-units?utm_source=rss_feed",
+        "published": "Thu, 02 Apr 2026 07:42:43 +0000",
+        "source": "SCMP",
+        "risk_score": 3,
         "coords": [
           49.487,
           31.272
         ]
       }
     ],
-    "machine_assessment": "CERT-UA reports a large-scale impersonation campaign spreading AGEWHEEZE malware via 1 million emails, primarily targeting Ukrainian users. Operators should be aware of this threat due to its potential impact on Ukrainian networks and possible lateral movement capabilities."
+    "machine_assessment": "CERT-UA reports a malware campaign impersonating their organization, spreading AGEWHEEZE malware to approximately 1 million emails. Operators should be aware of this phishing tactic targeting Ukrainian entities and potentially other organizations in the region."
   },
   {
     "title": "Hackers exploit TrueConf zero-day to push malicious software updates",
@@ -335,7 +302,7 @@
         "coords": null
       }
     ],
-    "machine_assessment": "Hackers exploited a TrueConf zero-day vulnerability to push malware updates, compromising users' systems. The attack's location is unknown, but operators should be cautious as this could lead to further exploitation of the vulnerability."
+    "machine_assessment": "Hackers exploited a zero-day vulnerability in TrueConf video conferencing software, pushing malicious software updates. The attack's location is unknown, but it poses a moderate risk (5/10) to users of the affected platform."
   },
   {
     "title": "Trump falling into Iran’s asymmetric resolve trap",
@@ -347,7 +314,7 @@
       31.5,
       34.8
     ],
-    "cluster_count": 6,
+    "cluster_count": 8,
     "articles": [
       {
         "title": "Trump falling into Iran’s asymmetric resolve trap",
@@ -361,25 +328,14 @@
         ]
       },
       {
-        "title": "(LEAD) Seoul stocks drop nearly 4.5 pct amid dashed hope for swift end to Middle East war",
-        "link": "https://en.yna.co.kr/view/AEN20260402007751320",
-        "published": "Thu, 2 Apr 2026 16:10:00 +0900",
-        "source": "Yonhap",
+        "title": "Surging ‘Jewish terrorism’ in West Bank condemned but goes unpunished",
+        "link": "https://www.scmp.com/news/world/middle-east/article/3348798/surging-jewish-terrorism-west-bank-condemned-goes-unpunished?utm_source=rss_feed",
+        "published": "Thu, 02 Apr 2026 08:45:00 +0000",
+        "source": "SCMP",
         "risk_score": 3,
         "coords": [
-          31.5,
-          34.8
-        ]
-      },
-      {
-        "title": "Seoul stocks drop nearly 4.5 pct amid dashed hope for swift end to Middle East war",
-        "link": "https://en.yna.co.kr/view/AEN20260402007700320",
-        "published": "Thu, 2 Apr 2026 15:43:22 +0900",
-        "source": "Yonhap",
-        "risk_score": 3,
-        "coords": [
-          31.5,
-          34.8
+          31.046,
+          34.851
         ]
       },
       {
@@ -394,10 +350,10 @@
         ]
       },
       {
-        "title": "Trump claims ‘success’ in Iran in just 32 days compared to lengthy US wars",
-        "link": "https://www.aljazeera.com/video/newsfeed/2026/4/2/trump-claims-success-in-iran-in-just-32-days-compared-to-lengthy-us-wars?traffic_source=rss",
-        "published": "Thu, 02 Apr 2026 05:00:13 +0000",
-        "source": "AlJazeera",
+        "title": "Chinese airlines to raise fuel surcharges on domestic flights",
+        "link": "https://www.japantimes.co.jp/business/2026/04/02/companies/chinese-airlines-fuel-surcharges/",
+        "published": "Thu, 02 Apr 2026 17:24:00 +0900",
+        "source": "Japan Times",
         "risk_score": 3,
         "coords": [
           31.5,
@@ -405,42 +361,101 @@
         ]
       },
       {
-        "title": "Israel’s death penalty law is not about executing Palestinians",
-        "link": "https://www.aljazeera.com/opinions/2026/4/2/israels-death-penalty-law-is-not-about-executing-palestinians?traffic_source=rss",
-        "published": "Thu, 02 Apr 2026 06:11:37 +0000",
+        "title": "Iran’s ex-foreign minister Kharazi ‘gravely wounded’ in attack on his home",
+        "link": "https://www.aljazeera.com/news/2026/4/2/irans-ex-foreign-minister-kharazi-gravely-wounded-in-attack-on-his-home?traffic_source=rss",
+        "published": "Thu, 02 Apr 2026 08:13:39 +0000",
         "source": "AlJazeera",
-        "risk_score": 1,
+        "risk_score": 3,
         "coords": [
           31.046,
           34.851
         ]
+      },
+      {
+        "title": "Mourners vow resistance as Iran marks Islamic Republic’s 47th anniversary",
+        "link": "https://www.aljazeera.com/gallery/2026/4/2/mourners-vow-resistance-as-iran-marks-islamic-republics-47th-anniversary?traffic_source=rss",
+        "published": "Thu, 02 Apr 2026 07:38:42 +0000",
+        "source": "AlJazeera",
+        "risk_score": 3,
+        "coords": [
+          31.046,
+          34.851
+        ]
+      },
+      {
+        "title": "Israel invades southern Lebanon to go after Iran-allied Hezbollah militants",
+        "link": "https://www.npr.org/2026/04/02/nx-s1-5770161/israel-invades-southern-lebanon-to-go-after-iran-allied-hezbollah-militants",
+        "published": "Thu, 02 Apr 2026 04:42:33 -0400",
+        "source": "NPR",
+        "risk_score": 1,
+        "coords": [
+          33.854,
+          35.862
+        ]
+      },
+      {
+        "title": "Former minister of public health talks about Israel's invasion of Lebanon",
+        "link": "https://www.npr.org/2026/04/02/nx-s1-5766215/former-minister-of-public-health-talks-about-israels-invasion-of-lebanon",
+        "published": "Thu, 02 Apr 2026 04:41:53 -0400",
+        "source": "NPR",
+        "risk_score": 1,
+        "coords": [
+          33.854,
+          35.862
+        ]
       }
     ],
-    "machine_assessment": "US President Trump's aggressive rhetoric towards Iran may be playing into Tehran's hands, as it appears to be escalating tensions without a clear military objective. This development increases the risk of miscalculation or unintended escalation in the region."
+    "machine_assessment": "US-Iran tensions escalate as Trump appears to be falling into Iran's trap, with potential for asymmetric retaliation. Location hint suggests possible Middle East conflict zone, but details are uncertain."
   },
   {
-    "title": "South Korea president says economy on 'wartime footing' over Iran war",
-    "link": "https://www.channelnewsasia.com/east-asia/south-korea-economy-oil-iran-war-6033096",
-    "published": "Thu, 02 Apr 2026 15:08:03 +0800",
-    "source": "CNA",
+    "title": "Pakistan’s Economic Stabilization Efforts Face Their Biggest Challenge With Iran War",
+    "link": "https://thediplomat.com/2026/04/pakistans-economic-stabilization-efforts-face-their-biggest-challenge-with-iran-war/",
+    "published": "Thu, 02 Apr 2026 01:59:00 +0900",
+    "source": "The Diplomat",
+    "risk_score": 5,
+    "coords": [
+      30.375,
+      69.345
+    ],
+    "cluster_count": 2,
+    "articles": [
+      {
+        "title": "Pakistan’s Economic Stabilization Efforts Face Their Biggest Challenge With Iran War",
+        "link": "https://thediplomat.com/2026/04/pakistans-economic-stabilization-efforts-face-their-biggest-challenge-with-iran-war/",
+        "published": "Thu, 02 Apr 2026 01:59:00 +0900",
+        "source": "The Diplomat",
+        "risk_score": 5,
+        "coords": [
+          30.375,
+          69.345
+        ]
+      },
+      {
+        "title": "Pakistan is playing mediator in the Iran war. It's a role the country is used to",
+        "link": "https://www.npr.org/2026/04/02/nx-s1-5767066/pakistan-is-playing-mediator-in-the-iran-war-its-a-role-the-country-is-used-to",
+        "published": "Thu, 02 Apr 2026 04:41:41 -0400",
+        "source": "NPR",
+        "risk_score": 3,
+        "coords": [
+          30.375,
+          69.345
+        ]
+      }
+    ],
+    "machine_assessment": "Pakistan's economic stabilization efforts are threatened by the escalating conflict with Iran, which may disrupt trade and energy supplies. Operators should be aware of potential instability in the region."
+  },
+  {
+    "title": "Iran shows S Korea’s real vulnerability is cars not crude",
+    "link": "https://asiatimes.com/2026/04/iran-shows-s-koreas-real-vulnerability-is-cars-not-crude/",
+    "published": "Thu, 02 Apr 2026 05:21:07 +0000",
+    "source": "Asia Times",
     "risk_score": 5,
     "coords": [
       35.907,
       127.766
     ],
-    "cluster_count": 5,
+    "cluster_count": 6,
     "articles": [
-      {
-        "title": "South Korea president says economy on 'wartime footing' over Iran war",
-        "link": "https://www.channelnewsasia.com/east-asia/south-korea-economy-oil-iran-war-6033096",
-        "published": "Thu, 02 Apr 2026 15:08:03 +0800",
-        "source": "CNA",
-        "risk_score": 5,
-        "coords": [
-          35.907,
-          127.766
-        ]
-      },
       {
         "title": "Iran shows S Korea’s real vulnerability is cars not crude",
         "link": "https://asiatimes.com/2026/04/iran-shows-s-koreas-real-vulnerability-is-cars-not-crude/",
@@ -464,20 +479,42 @@
         ]
       },
       {
-        "title": "U.S. Army, S. Korean Navy ramp up partnership over sustainment modernization",
-        "link": "https://en.yna.co.kr/view/AEN20260402007000315",
-        "published": "Thu, 2 Apr 2026 15:50:18 +0900",
+        "title": "(LEAD) Defense chief discusses alliance issues with U.S. lawmakers",
+        "link": "https://en.yna.co.kr/view/AEN20260402006251315",
+        "published": "Thu, 2 Apr 2026 16:53:36 +0900",
         "source": "Yonhap",
-        "risk_score": 1,
+        "risk_score": 3,
         "coords": [
-          35.907,
-          127.766
+          37.566,
+          126.978
         ]
       },
       {
-        "title": "Deputy FM to attend virtual multilateral meeting on Strait of Hormuz",
-        "link": "https://en.yna.co.kr/view/AEN20260402007600315",
-        "published": "Thu, 2 Apr 2026 15:44:30 +0900",
+        "title": "S. Korea calls for swift normalization of maritime shipping network after Trump's war speech",
+        "link": "https://en.yna.co.kr/view/AEN20260402008600315",
+        "published": "Thu, 2 Apr 2026 16:52:12 +0900",
+        "source": "Yonhap",
+        "risk_score": 3,
+        "coords": [
+          37.566,
+          126.978
+        ]
+      },
+      {
+        "title": "Tigers manager breathes sigh of relief after star player avoids injury",
+        "link": "https://en.yna.co.kr/view/AEN20260402010000315",
+        "published": "Thu, 2 Apr 2026 17:35:11 +0900",
+        "source": "Yonhap",
+        "risk_score": 1,
+        "coords": [
+          37.566,
+          126.978
+        ]
+      },
+      {
+        "title": "Lee backs gradual amendment to Constitution",
+        "link": "https://en.yna.co.kr/view/AEN20260402008400315",
+        "published": "Thu, 2 Apr 2026 16:50:26 +0900",
         "source": "Yonhap",
         "risk_score": 1,
         "coords": [
@@ -486,55 +523,29 @@
         ]
       }
     ],
-    "machine_assessment": "South Korea's president has declared a wartime economic footing due to tensions with Iran, indicating heightened alertness and potential for increased military cooperation with the US. This development may impact regional stability and global supply chains."
+    "machine_assessment": "Iran has demonstrated a vulnerability in South Korean interests, targeting cars rather than oil exports, highlighting a potential new area of exposure for Seoul. Operators should be aware of this shift in Iranian tactics and its implications for regional stability."
   },
   {
-    "title": "Pakistan’s Economic Stabilization Efforts Face Their Biggest Challenge With Iran War",
-    "link": "https://thediplomat.com/2026/04/pakistans-economic-stabilization-efforts-face-their-biggest-challenge-with-iran-war/",
-    "published": "Thu, 02 Apr 2026 01:59:00 +0900",
-    "source": "The Diplomat",
-    "risk_score": 5,
-    "coords": [
-      30.375,
-      69.345
-    ],
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Pakistan’s Economic Stabilization Efforts Face Their Biggest Challenge With Iran War",
-        "link": "https://thediplomat.com/2026/04/pakistans-economic-stabilization-efforts-face-their-biggest-challenge-with-iran-war/",
-        "published": "Thu, 02 Apr 2026 01:59:00 +0900",
-        "source": "The Diplomat",
-        "risk_score": 5,
-        "coords": [
-          30.375,
-          69.345
-        ]
-      }
-    ],
-    "machine_assessment": "Pakistan's economic stabilization efforts are being threatened by the escalating conflict with Iran, which may disrupt trade and energy supplies. Operators should be aware of potential instability in the region."
-  },
-  {
-    "title": "Green notification for tropical cyclone 13-20252026-26. Population affected by Category 1 (120 km/h) wind speeds or higher is 0  (0 in Tropical Storm).",
+    "title": "Green notification for tropical cyclone INDUSA-26. Population affected by Category 1 (120 km/h) wind speeds or higher is 0  (0 in Tropical Storm).",
     "link": "https://www.gdacs.org/report.aspx?eventtype=TC&eventid=1001267",
     "published": "Wed, 01 Apr 2026 19:35:43 GMT",
     "source": "GDACS",
     "risk_score": 4,
     "coords": [
-      -11.59,
-      73.38
+      -12.07,
+      73.46
     ],
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Green notification for tropical cyclone 13-20252026-26. Population affected by Category 1 (120 km/h) wind speeds or higher is 0  (0 in Tropical Storm).",
+        "title": "Green notification for tropical cyclone INDUSA-26. Population affected by Category 1 (120 km/h) wind speeds or higher is 0  (0 in Tropical Storm).",
         "link": "https://www.gdacs.org/report.aspx?eventtype=TC&eventid=1001267",
         "published": "Wed, 01 Apr 2026 19:35:43 GMT",
         "source": "GDACS",
         "risk_score": 4,
         "coords": [
-          -11.59,
-          73.38
+          -12.07,
+          73.46
         ]
       }
     ],
@@ -607,6 +618,26 @@
     "machine_assessment": null
   },
   {
+    "title": "Over 14,000 F5 BIG-IP APM instances still exposed to RCE attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/over-14-000-f5-big-ip-apm-instances-still-exposed-to-rce-attacks/",
+    "published": "Thu, 02 Apr 2026 04:25:50 -0400",
+    "source": "BleepingComputer",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Over 14,000 F5 BIG-IP APM instances still exposed to RCE attacks",
+        "link": "https://www.bleepingcomputer.com/news/security/over-14-000-f5-big-ip-apm-instances-still-exposed-to-rce-attacks/",
+        "published": "Thu, 02 Apr 2026 04:25:50 -0400",
+        "source": "BleepingComputer",
+        "risk_score": 3,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
     "title": "New CrystalRAT malware adds RAT, stealer and prankware features",
     "link": "https://www.bleepingcomputer.com/news/security/new-crystalrat-malware-adds-rat-stealer-and-prankware-features/",
     "published": "Wed, 01 Apr 2026 19:17:09 -0400",
@@ -667,26 +698,6 @@
     "machine_assessment": null
   },
   {
-    "title": "'NoVoice' Android malware on Google Play infected 2.3 million devices",
-    "link": "https://www.bleepingcomputer.com/news/security/novoice-android-malware-on-google-play-infected-23-million-devices/",
-    "published": "Wed, 01 Apr 2026 14:07:21 -0400",
-    "source": "BleepingComputer",
-    "risk_score": 3,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "'NoVoice' Android malware on Google Play infected 2.3 million devices",
-        "link": "https://www.bleepingcomputer.com/news/security/novoice-android-malware-on-google-play-infected-23-million-devices/",
-        "published": "Wed, 01 Apr 2026 14:07:21 -0400",
-        "source": "BleepingComputer",
-        "risk_score": 3,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
     "title": "Toy Giant Hasbro Hit by Cyberattack",
     "link": "https://www.securityweek.com/toy-giant-hasbro-hit-by-cyberattack/",
     "published": "Wed, 01 Apr 2026 15:35:47 +0000",
@@ -702,69 +713,6 @@
         "source": "SecurityWeek",
         "risk_score": 3,
         "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "U.S. lifts sanctions on Venezuela's acting President Delcy Rodríguez",
-    "link": "https://www.npr.org/2026/04/02/g-s1-116142/u-s-lift-sanctions-venezuela-president-delcy-rodriguez",
-    "published": "Thu, 02 Apr 2026 02:44:49 -0400",
-    "source": "NPR",
-    "risk_score": 3,
-    "coords": [
-      7.119,
-      -66.589
-    ],
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "U.S. lifts sanctions on Venezuela's acting President Delcy Rodríguez",
-        "link": "https://www.npr.org/2026/04/02/g-s1-116142/u-s-lift-sanctions-venezuela-president-delcy-rodriguez",
-        "published": "Thu, 02 Apr 2026 02:44:49 -0400",
-        "source": "NPR",
-        "risk_score": 3,
-        "coords": [
-          7.119,
-          -66.589
-        ]
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "25 years ago today, a mid-air collision sparked an 11-day U.S.–China standoff",
-    "link": "https://www.npr.org/2026/04/01/nx-s1-5768269/25-years-ago-today-a-mid-air-collision-sparked-an-11-day-u-s-china-standoff",
-    "published": "Wed, 01 Apr 2026 17:00:45 -0400",
-    "source": "NPR",
-    "risk_score": 3,
-    "coords": [
-      35.861,
-      104.195
-    ],
-    "cluster_count": 2,
-    "articles": [
-      {
-        "title": "25 years ago today, a mid-air collision sparked an 11-day U.S.–China standoff",
-        "link": "https://www.npr.org/2026/04/01/nx-s1-5768269/25-years-ago-today-a-mid-air-collision-sparked-an-11-day-u-s-china-standoff",
-        "published": "Wed, 01 Apr 2026 17:00:45 -0400",
-        "source": "NPR",
-        "risk_score": 3,
-        "coords": [
-          35.861,
-          104.195
-        ]
-      },
-      {
-        "title": "Cobalt, Congo, and China: Battery Power as Political Power",
-        "link": "https://thediplomat.com/2026/04/cobalt-congo-and-china-battery-power-as-political-power/",
-        "published": "Wed, 01 Apr 2026 22:47:00 +0900",
-        "source": "The Diplomat",
-        "risk_score": 1,
-        "coords": [
-          35.861,
-          104.195
-        ]
       }
     ],
     "machine_assessment": null
@@ -790,45 +738,124 @@
     "machine_assessment": null
   },
   {
-    "title": "Evacuated From War-Torn Gaza, 11 Toddlers Return Home to Hugs and Tears",
-    "link": "https://www.nytimes.com/2026/04/01/world/middleeast/gaza-children-evacuated-return.html",
-    "published": "Wed, 01 Apr 2026 18:31:36 +0000",
-    "source": "NYT",
+    "title": "Risis turns 50: How the Singapore heritage jewellery brand is evolving for a new generation",
+    "link": "https://www.channelnewsasia.com/people/risis-50-singapore-jewellery-brand-6027876",
+    "published": "Thu, 02 Apr 2026 16:01:06 +0800",
+    "source": "CNA",
     "risk_score": 3,
     "coords": [
-      26.82,
-      30.802
+      1.352,
+      103.819
     ],
-    "cluster_count": 1,
+    "cluster_count": 3,
     "articles": [
       {
-        "title": "Evacuated From War-Torn Gaza, 11 Toddlers Return Home to Hugs and Tears",
-        "link": "https://www.nytimes.com/2026/04/01/world/middleeast/gaza-children-evacuated-return.html",
-        "published": "Wed, 01 Apr 2026 18:31:36 +0000",
-        "source": "NYT",
+        "title": "Risis turns 50: How the Singapore heritage jewellery brand is evolving for a new generation",
+        "link": "https://www.channelnewsasia.com/people/risis-50-singapore-jewellery-brand-6027876",
+        "published": "Thu, 02 Apr 2026 16:01:06 +0800",
+        "source": "CNA",
         "risk_score": 3,
         "coords": [
-          26.82,
-          30.802
+          1.352,
+          103.819
+        ]
+      },
+      {
+        "title": "Singapore confirms two locally transmitted mpox cases; authorities say risk to public is low",
+        "link": "https://www.channelnewsasia.com/singapore/mpox-infection-cases-communicable-diseases-agency-6033226",
+        "published": "Thu, 02 Apr 2026 16:29:00 +0800",
+        "source": "CNA",
+        "risk_score": 1,
+        "coords": [
+          1.352,
+          103.819
+        ]
+      },
+      {
+        "title": "Singapore gives green light for pork blood products after almost three decades",
+        "link": "https://www.channelnewsasia.com/singapore/singapore-food-agency-thailand-pig-blood-products-6033126",
+        "published": "Thu, 02 Apr 2026 15:48:00 +0800",
+        "source": "CNA",
+        "risk_score": 1,
+        "coords": [
+          1.352,
+          103.819
         ]
       }
     ],
     "machine_assessment": null
   },
   {
-    "title": "Wreck of Danish flagship sunk by famed British admiral discovered after 225 years",
-    "link": "https://www.scmp.com/news/world/europe/article/3348765/wreck-danish-flagship-sunk-famed-british-admiral-discovered-after-225-years?utm_source=rss_feed",
-    "published": "Thu, 02 Apr 2026 06:20:49 +0000",
+    "title": "Japan eases timeline for creating nuclear plant anti-terrorism facilities",
+    "link": "https://www.japantimes.co.jp/news/2026/04/02/japan/antiterror-facility-deadline/",
+    "published": "Thu, 02 Apr 2026 16:39:00 +0900",
+    "source": "Japan Times",
+    "risk_score": 3,
+    "coords": [
+      36.204,
+      138.252
+    ],
+    "cluster_count": 2,
+    "articles": [
+      {
+        "title": "Japan eases timeline for creating nuclear plant anti-terrorism facilities",
+        "link": "https://www.japantimes.co.jp/news/2026/04/02/japan/antiterror-facility-deadline/",
+        "published": "Thu, 02 Apr 2026 16:39:00 +0900",
+        "source": "Japan Times",
+        "risk_score": 3,
+        "coords": [
+          36.204,
+          138.252
+        ]
+      },
+      {
+        "title": "Japan women's coach Nielsen steps down, weeks after Asian Cup glory",
+        "link": "https://www.channelnewsasia.com/sport/japan-womens-coach-nielsen-steps-down-weeks-after-asian-cup-glory-6033241",
+        "published": "Thu, 02 Apr 2026 16:06:56 +0800",
+        "source": "CNA",
+        "risk_score": 1,
+        "coords": [
+          36.204,
+          138.252
+        ]
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "Malaysian minister offers personal aid to family of man killed in drink-driving crash",
+    "link": "https://www.scmp.com/week-asia/people/article/3348794/malaysian-minister-offers-personal-aid-family-man-killed-drink-driving-crash?utm_source=rss_feed",
+    "published": "Thu, 02 Apr 2026 08:30:25 +0000",
     "source": "SCMP",
     "risk_score": 3,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Wreck of Danish flagship sunk by famed British admiral discovered after 225 years",
-        "link": "https://www.scmp.com/news/world/europe/article/3348765/wreck-danish-flagship-sunk-famed-british-admiral-discovered-after-225-years?utm_source=rss_feed",
-        "published": "Thu, 02 Apr 2026 06:20:49 +0000",
+        "title": "Malaysian minister offers personal aid to family of man killed in drink-driving crash",
+        "link": "https://www.scmp.com/week-asia/people/article/3348794/malaysian-minister-offers-personal-aid-family-man-killed-drink-driving-crash?utm_source=rss_feed",
+        "published": "Thu, 02 Apr 2026 08:30:25 +0000",
         "source": "SCMP",
+        "risk_score": 3,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "Expelled from camp, Palestinian refugees now face Iranian rockets",
+    "link": "https://www.japantimes.co.jp/news/2026/04/02/world/palestinian-refugees-face-iranian-rockets/",
+    "published": "Thu, 02 Apr 2026 16:19:00 +0900",
+    "source": "Japan Times",
+    "risk_score": 3,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Expelled from camp, Palestinian refugees now face Iranian rockets",
+        "link": "https://www.japantimes.co.jp/news/2026/04/02/world/palestinian-refugees-face-iranian-rockets/",
+        "published": "Thu, 02 Apr 2026 16:19:00 +0900",
+        "source": "Japan Times",
         "risk_score": 3,
         "coords": null
       }
@@ -856,6 +883,26 @@
     "machine_assessment": null
   },
   {
+    "title": "Apple Expands iOS 18.7.7 Update to More Devices to Block DarkSword Exploit",
+    "link": "https://thehackernews.com/2026/04/apple-expands-ios-1877-update-to-more.html",
+    "published": "Thu, 02 Apr 2026 12:39:00 +0530",
+    "source": "The Hacker News",
+    "risk_score": 1,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Apple Expands iOS 18.7.7 Update to More Devices to Block DarkSword Exploit",
+        "link": "https://thehackernews.com/2026/04/apple-expands-ios-1877-update-to-more.html",
+        "published": "Thu, 02 Apr 2026 12:39:00 +0530",
+        "source": "The Hacker News",
+        "risk_score": 1,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
     "title": "Block the Prompt, Not the Work: The End of \"Doctor No\"",
     "link": "https://thehackernews.com/2026/04/block-prompt-not-work-end-of-doctor-no.html",
     "published": "Wed, 01 Apr 2026 18:16:00 +0530",
@@ -876,19 +923,19 @@
     "machine_assessment": null
   },
   {
-    "title": "New Chrome Zero-Day CVE-2026-5281 Under Active Exploitation — Patch Released",
-    "link": "https://thehackernews.com/2026/04/new-chrome-zero-day-cve-2026-5281-under.html",
-    "published": "Wed, 01 Apr 2026 17:12:00 +0530",
-    "source": "The Hacker News",
+    "title": "CVE-2026-2739 This affects versions of the package bn.js before 5.2.3. Calling maskn(0) on any BN instance corrupts the internal state, causing toString(), divmod(), and other methods to enter an infinite loop, hanging the process indefinitely.",
+    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-2739",
+    "published": "Thu, 02 Apr 2026 01:37:20 -0700",
+    "source": "Microsoft Security Response Center",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "New Chrome Zero-Day CVE-2026-5281 Under Active Exploitation — Patch Released",
-        "link": "https://thehackernews.com/2026/04/new-chrome-zero-day-cve-2026-5281-under.html",
-        "published": "Wed, 01 Apr 2026 17:12:00 +0530",
-        "source": "The Hacker News",
+        "title": "CVE-2026-2739 This affects versions of the package bn.js before 5.2.3. Calling maskn(0) on any BN instance corrupts the internal state, causing toString(), divmod(), and other methods to enter an infinite loop, hanging the process indefinitely.",
+        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-2739",
+        "published": "Thu, 02 Apr 2026 01:37:20 -0700",
+        "source": "Microsoft Security Response Center",
         "risk_score": 1,
         "coords": null
       }
@@ -976,19 +1023,19 @@
     "machine_assessment": null
   },
   {
-    "title": "CVE-2026-5107 FRRouting FRR EVPN Type-2 Route bgp_evpn.c process_type2_route access control",
-    "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-5107",
-    "published": "Thu, 02 Apr 2026 01:39:08 -0700",
-    "source": "Microsoft Security Response Center",
+    "title": "Variance Raises $21.5M for Compliance Investigation Platform Powered by AI Agents",
+    "link": "https://www.securityweek.com/variance-raises-21-5m-for-compliance-investigation-platform-powered-by-ai-agents/",
+    "published": "Thu, 02 Apr 2026 08:01:49 +0000",
+    "source": "SecurityWeek",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "CVE-2026-5107 FRRouting FRR EVPN Type-2 Route bgp_evpn.c process_type2_route access control",
-        "link": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-5107",
-        "published": "Thu, 02 Apr 2026 01:39:08 -0700",
-        "source": "Microsoft Security Response Center",
+        "title": "Variance Raises $21.5M for Compliance Investigation Platform Powered by AI Agents",
+        "link": "https://www.securityweek.com/variance-raises-21-5m-for-compliance-investigation-platform-powered-by-ai-agents/",
+        "published": "Thu, 02 Apr 2026 08:01:49 +0000",
+        "source": "SecurityWeek",
         "risk_score": 1,
         "coords": null
       }
@@ -1031,72 +1078,6 @@
         "source": "SecurityWeek",
         "risk_score": 1,
         "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Exploited Zero-Day Among 21 Vulnerabilities Patched in Chrome",
-    "link": "https://www.securityweek.com/exploited-zero-day-among-21-vulnerabilities-patched-in-chrome/",
-    "published": "Wed, 01 Apr 2026 14:36:39 +0000",
-    "source": "SecurityWeek",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Exploited Zero-Day Among 21 Vulnerabilities Patched in Chrome",
-        "link": "https://www.securityweek.com/exploited-zero-day-among-21-vulnerabilities-patched-in-chrome/",
-        "published": "Wed, 01 Apr 2026 14:36:39 +0000",
-        "source": "SecurityWeek",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Is the U.S. Navy ready to clear sea mines in the Persian Gulf?",
-    "link": "https://www.npr.org/2026/04/01/nx-s1-5766222/mines-persian-gulf-strait-navy-lcs",
-    "published": "Wed, 01 Apr 2026 15:54:36 -0400",
-    "source": "NPR",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Is the U.S. Navy ready to clear sea mines in the Persian Gulf?",
-        "link": "https://www.npr.org/2026/04/01/nx-s1-5766222/mines-persian-gulf-strait-navy-lcs",
-        "published": "Wed, 01 Apr 2026 15:54:36 -0400",
-        "source": "NPR",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "\"Lives will be lost\": How the U.K.'s aid cuts may affect parts of Africa",
-    "link": "https://www.npr.org/2026/04/01/nx-s1-5763752/lives-will-be-lost-how-the-u-k-s-aid-cuts-may-affect-parts-of-africa",
-    "published": "Wed, 01 Apr 2026 15:31:33 -0400",
-    "source": "NPR",
-    "risk_score": 1,
-    "coords": [
-      0.0,
-      25.0
-    ],
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "\"Lives will be lost\": How the U.K.'s aid cuts may affect parts of Africa",
-        "link": "https://www.npr.org/2026/04/01/nx-s1-5763752/lives-will-be-lost-how-the-u-k-s-aid-cuts-may-affect-parts-of-africa",
-        "published": "Wed, 01 Apr 2026 15:31:33 -0400",
-        "source": "NPR",
-        "risk_score": 1,
-        "coords": [
-          0.0,
-          25.0
-        ]
       }
     ],
     "machine_assessment": null
@@ -1159,21 +1140,64 @@
     "machine_assessment": null
   },
   {
-    "title": "How long will Artemis II take to reach the moon, and what happens next?",
-    "link": "https://www.aljazeera.com/news/2026/4/2/how-long-will-artemis-ii-take-to-reach-the-moon-and-what-happens-next?traffic_source=rss",
-    "published": "Thu, 02 Apr 2026 05:48:56 +0000",
-    "source": "AlJazeera",
+    "title": "France to announce measures to favour data centres in coming weeks, Finance Minister says",
+    "link": "https://www.channelnewsasia.com/business/france-announce-measures-favour-data-centres-in-coming-weeks-finance-minister-says-6033186",
+    "published": "Thu, 02 Apr 2026 15:58:07 +0800",
+    "source": "CNA",
     "risk_score": 1,
-    "coords": null,
+    "coords": [
+      46.227,
+      2.213
+    ],
+    "cluster_count": 2,
+    "articles": [
+      {
+        "title": "France to announce measures to favour data centres in coming weeks, Finance Minister says",
+        "link": "https://www.channelnewsasia.com/business/france-announce-measures-favour-data-centres-in-coming-weeks-finance-minister-says-6033186",
+        "published": "Thu, 02 Apr 2026 15:58:07 +0800",
+        "source": "CNA",
+        "risk_score": 1,
+        "coords": [
+          46.227,
+          2.213
+        ]
+      },
+      {
+        "title": "‘Orban constantly vetoes’: Europe braces for Hungary election",
+        "link": "https://www.aljazeera.com/news/2026/4/2/orban-constantly-vetoes-europe-braces-for-hungary-election?traffic_source=rss",
+        "published": "Thu, 02 Apr 2026 08:17:10 +0000",
+        "source": "AlJazeera",
+        "risk_score": 1,
+        "coords": [
+          48.8,
+          2.3
+        ]
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
+    "title": "China’s Aiming for the Moon, and NASA Is Looking Over Its Shoulder",
+    "link": "https://www.nytimes.com/2026/04/02/world/asia/china-space-moon-nasa-artemis.html",
+    "published": "Thu, 02 Apr 2026 05:57:27 +0000",
+    "source": "NYT",
+    "risk_score": 1,
+    "coords": [
+      39.904,
+      116.407
+    ],
     "cluster_count": 1,
     "articles": [
       {
-        "title": "How long will Artemis II take to reach the moon, and what happens next?",
-        "link": "https://www.aljazeera.com/news/2026/4/2/how-long-will-artemis-ii-take-to-reach-the-moon-and-what-happens-next?traffic_source=rss",
-        "published": "Thu, 02 Apr 2026 05:48:56 +0000",
-        "source": "AlJazeera",
+        "title": "China’s Aiming for the Moon, and NASA Is Looking Over Its Shoulder",
+        "link": "https://www.nytimes.com/2026/04/02/world/asia/china-space-moon-nasa-artemis.html",
+        "published": "Thu, 02 Apr 2026 05:57:27 +0000",
+        "source": "NYT",
         "risk_score": 1,
-        "coords": null
+        "coords": [
+          39.904,
+          116.407
+        ]
       }
     ],
     "machine_assessment": null
@@ -1231,63 +1255,6 @@
     "machine_assessment": null
   },
   {
-    "title": "China’s ‘pig semen eyedrop’ may help treat Alzheimer’s: scientist in Australia",
-    "link": "https://www.scmp.com/news/china/science/article/3348726/chinas-brain-penetrating-pig-semen-eyedrop-may-treat-alzheimers-scientist-australia?utm_source=rss_feed",
-    "published": "Thu, 02 Apr 2026 06:47:06 +0000",
-    "source": "SCMP",
-    "risk_score": 1,
-    "coords": [
-      -25.274,
-      133.775
-    ],
-    "cluster_count": 2,
-    "articles": [
-      {
-        "title": "China’s ‘pig semen eyedrop’ may help treat Alzheimer’s: scientist in Australia",
-        "link": "https://www.scmp.com/news/china/science/article/3348726/chinas-brain-penetrating-pig-semen-eyedrop-may-treat-alzheimers-scientist-australia?utm_source=rss_feed",
-        "published": "Thu, 02 Apr 2026 06:47:06 +0000",
-        "source": "SCMP",
-        "risk_score": 1,
-        "coords": [
-          -25.274,
-          133.775
-        ]
-      },
-      {
-        "title": "Australia, Japan women say AFC ignoring pay inequality concerns",
-        "link": "https://www.channelnewsasia.com/sport/australia-japan-women-say-afc-ignoring-pay-inequality-concerns-6033121",
-        "published": "Thu, 02 Apr 2026 15:05:39 +0800",
-        "source": "CNA",
-        "risk_score": 1,
-        "coords": [
-          -25.274,
-          133.775
-        ]
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Mediacorp to offer all 104 World Cup matches from S$98",
-    "link": "https://www.channelnewsasia.com/singapore/world-cup-2026-mediacorp-football-6033041",
-    "published": "Thu, 02 Apr 2026 14:32:00 +0800",
-    "source": "CNA",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Mediacorp to offer all 104 World Cup matches from S$98",
-        "link": "https://www.channelnewsasia.com/singapore/world-cup-2026-mediacorp-football-6033041",
-        "published": "Thu, 02 Apr 2026 14:32:00 +0800",
-        "source": "CNA",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
     "title": "Bolivia: probe into ring that stole and adulterated fuel imported through Chilean ports",
     "link": "https://en.mercopress.com/2026/04/01/bolivia-probe-into-ring-that-stole-and-adulterated-fuel-imported-through-chilean-ports?utm_source=feed&utm_medium=rss&utm_content=main&utm_campaign=rss",
     "published": "Wed, 01 Apr 2026 10:37:00 GMT",
@@ -1314,32 +1281,21 @@
     "machine_assessment": null
   },
   {
-    "title": "Leslie Cheung’s path to stardom, 10 new K-dramas to watch: 5 Lifestyle highlights",
-    "link": "https://www.scmp.com/news/people-culture/trending-china/article/3348775/leslie-cheungs-path-stardom-10-new-k-dramas-watch-5-lifestyle-highlights?utm_source=rss_feed",
-    "published": "Thu, 02 Apr 2026 07:08:39 +0000",
+    "title": "Discovery Bay resident files ombudsman complaint over plan for full taxi access",
+    "link": "https://www.scmp.com/news/hong-kong/society/article/3348792/discovery-bay-resident-files-ombudsman-complaint-over-plan-full-taxi-access?utm_source=rss_feed",
+    "published": "Thu, 02 Apr 2026 08:36:44 +0000",
     "source": "SCMP",
     "risk_score": 1,
     "coords": [
       22.319,
       114.169
     ],
-    "cluster_count": 2,
+    "cluster_count": 1,
     "articles": [
       {
-        "title": "Leslie Cheung’s path to stardom, 10 new K-dramas to watch: 5 Lifestyle highlights",
-        "link": "https://www.scmp.com/news/people-culture/trending-china/article/3348775/leslie-cheungs-path-stardom-10-new-k-dramas-watch-5-lifestyle-highlights?utm_source=rss_feed",
-        "published": "Thu, 02 Apr 2026 07:08:39 +0000",
-        "source": "SCMP",
-        "risk_score": 1,
-        "coords": [
-          22.319,
-          114.169
-        ]
-      },
-      {
-        "title": "Hong Kong’s Catholic leader calls for giving young offenders ‘second chance’",
-        "link": "https://www.scmp.com/news/hong-kong/society/article/3348768/hong-kongs-top-catholic-priest-calls-young-offenders-get-second-chance?utm_source=rss_feed",
-        "published": "Thu, 02 Apr 2026 06:34:24 +0000",
+        "title": "Discovery Bay resident files ombudsman complaint over plan for full taxi access",
+        "link": "https://www.scmp.com/news/hong-kong/society/article/3348792/discovery-bay-resident-files-ombudsman-complaint-over-plan-full-taxi-access?utm_source=rss_feed",
+        "published": "Thu, 02 Apr 2026 08:36:44 +0000",
         "source": "SCMP",
         "risk_score": 1,
         "coords": [
@@ -1351,21 +1307,38 @@
     "machine_assessment": null
   },
   {
-    "title": "Premier Li Qiang pushes AI-powered, next-gen energy system amid global shocks",
-    "link": "https://www.scmp.com/economy/china-economy/article/3348764/premier-li-qiang-pushes-ai-powered-next-gen-energy-system-amid-global-shocks?utm_source=rss_feed",
-    "published": "Thu, 02 Apr 2026 06:10:42 +0000",
+    "title": "‘China shock 2.0’ is a false narrative born of Western anxiety: Chinese media",
+    "link": "https://www.scmp.com/economy/china-economy/article/3348787/china-shock-20-false-narrative-born-western-anxiety-chinese-media?utm_source=rss_feed",
+    "published": "Thu, 02 Apr 2026 07:55:43 +0000",
     "source": "SCMP",
     "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
+    "coords": [
+      35.861,
+      104.195
+    ],
+    "cluster_count": 2,
     "articles": [
       {
-        "title": "Premier Li Qiang pushes AI-powered, next-gen energy system amid global shocks",
-        "link": "https://www.scmp.com/economy/china-economy/article/3348764/premier-li-qiang-pushes-ai-powered-next-gen-energy-system-amid-global-shocks?utm_source=rss_feed",
-        "published": "Thu, 02 Apr 2026 06:10:42 +0000",
+        "title": "‘China shock 2.0’ is a false narrative born of Western anxiety: Chinese media",
+        "link": "https://www.scmp.com/economy/china-economy/article/3348787/china-shock-20-false-narrative-born-western-anxiety-chinese-media?utm_source=rss_feed",
+        "published": "Thu, 02 Apr 2026 07:55:43 +0000",
         "source": "SCMP",
         "risk_score": 1,
-        "coords": null
+        "coords": [
+          35.861,
+          104.195
+        ]
+      },
+      {
+        "title": "Cobalt, Congo, and China: Battery Power as Political Power",
+        "link": "https://thediplomat.com/2026/04/cobalt-congo-and-china-battery-power-as-political-power/",
+        "published": "Wed, 01 Apr 2026 22:47:00 +0900",
+        "source": "The Diplomat",
+        "risk_score": 1,
+        "coords": [
+          35.861,
+          104.195
+        ]
       }
     ],
     "machine_assessment": null
@@ -1411,6 +1384,26 @@
     "machine_assessment": null
   },
   {
+    "title": "Yonhap News Summary",
+    "link": "https://en.yna.co.kr/view/AEN20260402009000315",
+    "published": "Thu, 2 Apr 2026 17:00:00 +0900",
+    "source": "Yonhap",
+    "risk_score": 1,
+    "coords": null,
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "Yonhap News Summary",
+        "link": "https://en.yna.co.kr/view/AEN20260402009000315",
+        "published": "Thu, 2 Apr 2026 17:00:00 +0900",
+        "source": "Yonhap",
+        "risk_score": 1,
+        "coords": null
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
     "title": "Pump, dump and post: Indonesia needs to regulate its finfluencers",
     "link": "https://asiatimes.com/2026/04/pump-dump-and-post-indonesia-needs-to-regulate-its-finfluencers/",
     "published": "Thu, 02 Apr 2026 05:48:52 +0000",
@@ -1437,6 +1430,32 @@
     "machine_assessment": null
   },
   {
+    "title": "EU-India FTA: true commitment or marriage of convenience?",
+    "link": "https://asiatimes.com/2026/04/eu-india-fta-true-commitment-or-marriage-of-convenience/",
+    "published": "Thu, 02 Apr 2026 05:20:14 +0000",
+    "source": "Asia Times",
+    "risk_score": 1,
+    "coords": [
+      28.613,
+      77.209
+    ],
+    "cluster_count": 1,
+    "articles": [
+      {
+        "title": "EU-India FTA: true commitment or marriage of convenience?",
+        "link": "https://asiatimes.com/2026/04/eu-india-fta-true-commitment-or-marriage-of-convenience/",
+        "published": "Thu, 02 Apr 2026 05:20:14 +0000",
+        "source": "Asia Times",
+        "risk_score": 1,
+        "coords": [
+          28.613,
+          77.209
+        ]
+      }
+    ],
+    "machine_assessment": null
+  },
+  {
     "title": "Pentagon, Boeing agree to triple PAC-3 seeker production",
     "link": "https://www.defensenews.com/industry/techwatch/2026/04/01/pentagon-boeing-agree-to-triple-pac-3-seeker-production/",
     "published": "Wed, 01 Apr 2026 15:23:48 +0000",
@@ -1457,67 +1476,21 @@
     "machine_assessment": null
   },
   {
-    "title": "Rams receiver Puka Nacua checks into rehab center",
-    "link": "https://www.japantimes.co.jp/sports/2026/04/02/more-sports/rams-nacua-enters-rehab/",
-    "published": "Thu, 02 Apr 2026 15:20:00 +0900",
+    "title": "In pursuit of world title and Olympic gold, Kanoa Igarashi looks back with gratitude",
+    "link": "https://www.japantimes.co.jp/sports/2026/04/02/more-sports/kanoa-igarashi-new-wsl-season/",
+    "published": "Thu, 02 Apr 2026 17:20:00 +0900",
     "source": "Japan Times",
     "risk_score": 1,
     "coords": null,
     "cluster_count": 1,
     "articles": [
       {
-        "title": "Rams receiver Puka Nacua checks into rehab center",
-        "link": "https://www.japantimes.co.jp/sports/2026/04/02/more-sports/rams-nacua-enters-rehab/",
-        "published": "Thu, 02 Apr 2026 15:20:00 +0900",
+        "title": "In pursuit of world title and Olympic gold, Kanoa Igarashi looks back with gratitude",
+        "link": "https://www.japantimes.co.jp/sports/2026/04/02/more-sports/kanoa-igarashi-new-wsl-season/",
+        "published": "Thu, 02 Apr 2026 17:20:00 +0900",
         "source": "Japan Times",
         "risk_score": 1,
         "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Arne Slot hoping Mohamed Salah ends Liverpool tenure on high note",
-    "link": "https://www.japantimes.co.jp/sports/2026/04/02/soccer/salah-slot-liverpool-ending/",
-    "published": "Thu, 02 Apr 2026 14:57:00 +0900",
-    "source": "Japan Times",
-    "risk_score": 1,
-    "coords": null,
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Arne Slot hoping Mohamed Salah ends Liverpool tenure on high note",
-        "link": "https://www.japantimes.co.jp/sports/2026/04/02/soccer/salah-slot-liverpool-ending/",
-        "published": "Thu, 02 Apr 2026 14:57:00 +0900",
-        "source": "Japan Times",
-        "risk_score": 1,
-        "coords": null
-      }
-    ],
-    "machine_assessment": null
-  },
-  {
-    "title": "Japan's police agency to promote reform to tackle more specialized, global crime",
-    "link": "https://www.japantimes.co.jp/news/2026/04/02/japan/crime-legal/police-structural-reform-promotion/",
-    "published": "Thu, 02 Apr 2026 14:48:00 +0900",
-    "source": "Japan Times",
-    "risk_score": 1,
-    "coords": [
-      36.204,
-      138.252
-    ],
-    "cluster_count": 1,
-    "articles": [
-      {
-        "title": "Japan's police agency to promote reform to tackle more specialized, global crime",
-        "link": "https://www.japantimes.co.jp/news/2026/04/02/japan/crime-legal/police-structural-reform-promotion/",
-        "published": "Thu, 02 Apr 2026 14:48:00 +0900",
-        "source": "Japan Times",
-        "risk_score": 1,
-        "coords": [
-          36.204,
-          138.252
-        ]
       }
     ],
     "machine_assessment": null

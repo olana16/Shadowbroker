@@ -180,6 +180,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
     const [expandedIndexes, setExpandedIndexes] = useState<number[]>([]);
     const [feedView, setFeedView] = useState<FeedView>('all');
     const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const panelEntity: SelectedEntity | null = selectedEntity?.type === '__panel_only__' ? selectedEntity : null;
 
     // Intentionally omitting map click triggers for expanding
     // as we now show a contextual pop-up on the map directly.
@@ -218,8 +219,8 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
     // Determine the selected flight's model for Wikipedia thumbnail lookup
     // (must call hook unconditionally — React rules of hooks)
     const selectedFlightModel = (() => {
-        if (!selectedEntity) return undefined;
-        const { type, id } = selectedEntity;
+        if (!panelEntity) return undefined;
+        const { type, id } = panelEntity;
         let flight: any = null;
         if (type === 'flight') flight = data?.commercial_flights?.[id as number];
         else if (type === 'private_flight') flight = data?.private_flights?.[id as number];
@@ -231,7 +232,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
     const { imgUrl: aircraftImgUrl, wikiUrl: aircraftWikiUrl, loading: aircraftImgLoading } = useAircraftImage(selectedFlightModel);
 
     // Region Dossier (right-click intelligence)
-    if (selectedEntity?.type === 'region_dossier') {
+    if (panelEntity?.type === 'region_dossier') {
         const d = regionDossier;
         return (
             <motion.div
@@ -243,7 +244,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                 <div className="p-3 border-b border-emerald-500/30 bg-emerald-950/40 flex justify-between items-center">
                     <h2 className="text-xs tracking-widest font-bold text-emerald-400">REGION DOSSIER</h2>
                     <span className="text-[8px] text-[var(--text-muted)]">
-                        {selectedEntity.extra ? `${selectedEntity.extra.lat.toFixed(3)}, ${selectedEntity.extra.lng.toFixed(3)}` : ''}
+                        {panelEntity.extra ? `${panelEntity.extra.lat.toFixed(3)}, ${panelEntity.extra.lng.toFixed(3)}` : ''}
                     </span>
                 </div>
                 {regionDossierLoading ? (
@@ -298,8 +299,8 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         );
     }
 
-    if (selectedEntity?.type === 'tracked_flight') {
-        const flight = data?.tracked_flights?.find((f: any) => f.icao24 === selectedEntity.id);
+    if (panelEntity?.type === 'tracked_flight') {
+        const flight = data?.tracked_flights?.find((f: any) => f.icao24 === panelEntity.id);
         if (flight) {
             const callsign = flight.callsign || "UNKNOWN";
             const alertColorMap: Record<string, string> = {
@@ -457,27 +458,27 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         }
     }
 
-    if (selectedEntity?.type === 'flight' || selectedEntity?.type === 'military_flight' || selectedEntity?.type === 'private_flight' || selectedEntity?.type === 'private_jet') {
-        const flightsList = selectedEntity.type === 'flight' ? data?.commercial_flights
-            : selectedEntity.type === 'private_flight' ? data?.private_flights
-                : selectedEntity.type === 'private_jet' ? data?.private_jets
+    if (panelEntity?.type === 'flight' || panelEntity?.type === 'military_flight' || panelEntity?.type === 'private_flight' || panelEntity?.type === 'private_jet') {
+        const flightsList = panelEntity.type === 'flight' ? data?.commercial_flights
+            : panelEntity.type === 'private_flight' ? data?.private_flights
+                : panelEntity.type === 'private_jet' ? data?.private_jets
                     : data?.military_flights;
-        const flight = flightsList?.find((f: any) => f.icao24 === selectedEntity.id);
+        const flight = flightsList?.find((f: any) => f.icao24 === panelEntity.id);
 
         if (flight) {
             const callsign = flight.callsign || "UNKNOWN";
             let airline = "UNKNOWN";
 
-            if (selectedEntity.type === 'military_flight') {
+            if (panelEntity.type === 'military_flight') {
                 const mil = flight as import('@/types/dashboard').MilitaryFlight;
                 const milCountry = mil.country;
                 airline = mil.force
                     ? `${milCountry} ${mil.force}`.trim()
                     : (milCountry && milCountry !== 'Military Asset' && milCountry !== 'Unknown'
                         ? milCountry : "MILITARY ASSET");
-            } else if (selectedEntity.type === 'private_jet') {
+            } else if (panelEntity.type === 'private_jet') {
                 airline = "PRIVATE JET";
-            } else if (selectedEntity.type === 'private_flight') {
+            } else if (panelEntity.type === 'private_flight') {
                 airline = "PRIVATE / GA";
             } else if ('airline_code' in flight && flight.airline_code) {
                 // Use the airline code resolved from adsb.lol routeset API
@@ -506,8 +507,8 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                     className="w-full bg-black/60 backdrop-blur-md border border-[var(--border-primary)] rounded-xl flex flex-col z-10 font-mono shadow-[0_4px_30px_rgba(0,0,0,0.5)] pointer-events-auto overflow-hidden flex-shrink-0"
                 >
                     <div className="p-3 border-b border-[var(--border-primary)]/30 bg-[var(--bg-secondary)]/40 flex justify-between items-center">
-                        <h2 className={`text-xs tracking-widest font-bold ${selectedEntity.type === 'military_flight' ? 'text-red-400' : selectedEntity.type === 'private_flight' ? 'text-orange-400' : selectedEntity.type === 'private_jet' ? 'text-purple-400' : 'text-cyan-400'} flex items-center gap-2`}>
-                            {selectedEntity.type === 'military_flight' ? "MILITARY BOGEY INTERCEPT" : selectedEntity.type === 'private_flight' ? "PRIVATE TRANSPONDER" : selectedEntity.type === 'private_jet' ? "PRIVATE JET TRANSPONDER" : "COMMERCIAL TRANSPONDER"}
+                        <h2 className={`text-xs tracking-widest font-bold ${panelEntity.type === 'military_flight' ? 'text-red-400' : panelEntity.type === 'private_flight' ? 'text-orange-400' : panelEntity.type === 'private_jet' ? 'text-purple-400' : 'text-cyan-400'} flex items-center gap-2`}>
+                            {panelEntity.type === 'military_flight' ? "MILITARY BOGEY INTERCEPT" : panelEntity.type === 'private_flight' ? "PRIVATE TRANSPONDER" : panelEntity.type === 'private_jet' ? "PRIVATE JET TRANSPONDER" : "COMMERCIAL TRANSPONDER"}
                         </h2>
                         <span className="text-[10px] text-[var(--text-muted)] font-mono">TRK: {callsign}</span>
                     </div>
@@ -585,8 +586,8 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         }
     }
 
-    if (selectedEntity?.type === 'ship') {
-        const ship = data?.ships?.find((s: any) => s.mmsi === selectedEntity.id);
+    if (panelEntity?.type === 'ship') {
+        const ship = data?.ships?.find((s: any) => s.mmsi === panelEntity.id);
         if (ship) {
             const vesselTypeLabels: Record<string, string> = {
                 'tanker': 'TANKER',
@@ -694,8 +695,8 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         }
     }
 
-    if (selectedEntity?.type === 'gdelt') {
-        const gdeltItem = data?.gdelt?.find((g: any) => (g.properties?.name || String(g.geometry?.coordinates)) === selectedEntity.id);
+    if (panelEntity?.type === 'gdelt') {
+        const gdeltItem = data?.gdelt?.find((g: any) => (g.properties?.name || String(g.geometry?.coordinates)) === panelEntity.id);
         if (gdeltItem && gdeltItem.properties) {
             const props = gdeltItem.properties;
             return (
@@ -709,7 +710,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                         <h2 className="text-xs tracking-widest font-bold text-orange-400 flex items-center gap-2">
                             <AlertTriangle size={14} className="text-orange-400" /> MILITARY INCIDENT CLUSTER
                         </h2>
-                        <span className="text-[10px] text-[var(--text-muted)] font-mono">ID: {selectedEntity.id}</span>
+                        <span className="text-[10px] text-[var(--text-muted)] font-mono">ID: {panelEntity.id}</span>
                     </div>
 
                     <div className="p-4 flex flex-col gap-3">
@@ -758,8 +759,8 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         }
     }
 
-    if (selectedEntity?.type === 'liveuamap') {
-        const item = data?.liveuamap?.find((l: any) => String(l.id) === String(selectedEntity.id));
+    if (panelEntity?.type === 'liveuamap') {
+        const item = data?.liveuamap?.find((l: any) => String(l.id) === String(panelEntity.id));
         if (item) {
             return (
                 <motion.div
@@ -802,8 +803,8 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         }
     }
 
-    if (selectedEntity?.type === 'news') {
-        const item = data?.news?.[selectedEntity.id as number];
+    if (panelEntity?.type === 'news') {
+        const item = data?.news?.[panelEntity.id as number];
         if (item) {
             return (
                 <motion.div
@@ -849,8 +850,8 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         }
     }
 
-    if (selectedEntity?.type === 'airport') {
-        const apt = data?.airports?.find((a: any) => String(a.id) === String(selectedEntity.id));
+    if (panelEntity?.type === 'airport') {
+        const apt = data?.airports?.find((a: any) => String(a.id) === String(panelEntity.id));
         if (apt) {
             return (
                 <motion.div
@@ -885,7 +886,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
         }
     }
 
-    if (selectedEntity?.type === 'cctv') {
+    if (panelEntity?.type === 'cctv') {
         return (
             <motion.div
                 initial={{ y: 50, opacity: 0 }}
@@ -895,16 +896,16 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
             >
                 <div className="p-3 border-b border-[var(--border-primary)]/30 bg-[var(--bg-secondary)]/40 flex justify-between items-center">
                     <h2 className="text-xs tracking-widest font-bold text-cyan-400 flex items-center gap-2">
-                        <AlertTriangle size={14} className="text-red-400" /> {selectedEntity.extra?.last_updated
-                            ? new Date(selectedEntity.extra.last_updated + 'Z').toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZoneName: 'short' }).toUpperCase() + ' — OPTIC INTERCEPT'
+                        <AlertTriangle size={14} className="text-red-400" /> {panelEntity.extra?.last_updated
+                            ? new Date(panelEntity.extra.last_updated + 'Z').toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZoneName: 'short' }).toUpperCase() + ' — OPTIC INTERCEPT'
                             : 'OPTIC INTERCEPT'}
                     </h2>
-                    <span className="text-[10px] text-[var(--text-muted)] font-mono">ID: {selectedEntity.id}{selectedEntity.extra?.source_agency ? ` | ${selectedEntity.extra.source_agency}` : ''}</span>
+                    <span className="text-[10px] text-[var(--text-muted)] font-mono">ID: {panelEntity.id}{panelEntity.extra?.source_agency ? ` | ${panelEntity.extra.source_agency}` : ''}</span>
                 </div>
                 <div className="relative w-full h-48 bg-black flex items-center justify-center p-1">
                     {(() => {
-                        const url = selectedEntity.media_url || '';
-                        const mt = selectedEntity.extra?.media_type || (
+                        const url = panelEntity.media_url || '';
+                        const mt = panelEntity.extra?.media_type || (
                             url.includes('.mp4') || url.includes('.webm') ? 'video' :
                                 url.includes('.m3u8') || url.includes('hls') ? 'hls' :
                                     url.includes('.mjpg') || url.includes('.mjpeg') || url.includes('mjpg') ? 'mjpeg' :
@@ -969,10 +970,10 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                     </div>
                 </div>
                 <div className="p-3 bg-black/40 text-[9px] text-cyan-500/70 font-mono tracking-widest flex justify-between items-center">
-                    <span>{selectedEntity.name?.toUpperCase() || 'UNKNOWN MOUNT'}</span>
+                    <span>{panelEntity.name?.toUpperCase() || 'UNKNOWN MOUNT'}</span>
                     <span className="text-red-500 text-right">
-                        {selectedEntity.extra?.last_updated
-                            ? new Date(selectedEntity.extra.last_updated + 'Z').toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZoneName: 'short' })
+                        {panelEntity.extra?.last_updated
+                            ? new Date(panelEntity.extra.last_updated + 'Z').toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZoneName: 'short' })
                             : ''}
                     </span>
                 </div>

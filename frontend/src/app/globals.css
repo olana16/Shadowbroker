@@ -39,7 +39,7 @@
   --scrollbar-thumb-hover: rgba(8, 145, 178, 0.5);
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);

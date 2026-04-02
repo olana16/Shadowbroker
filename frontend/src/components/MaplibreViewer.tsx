@@ -4,6 +4,7 @@ import { API_BASE } from "@/lib/api";
 import React, { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import Map, { Source, Layer, MapRef, ViewState, Popup, Marker } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
+import Hls from "hls.js";
 import { computeNightPolygon } from "@/utils/solarTerminator";
 import { interpolatePosition } from "@/utils/positioning";
 import { darkStyle, lightStyle } from "@/components/map/styles/mapStyles";
@@ -56,6 +57,44 @@ import {
     buildSatellitesGeoJSON, buildShipsGeoJSON, buildCarriersGeoJSON,
     type FlightLayerConfig,
 } from "@/components/map/geoJSONBuilders";
+
+function PopupHlsVideo({ url, className }: { url: string; className?: string }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video || !url) return;
+
+        let hls: Hls | null = null;
+
+        if (Hls.isSupported()) {
+            hls = new Hls({ enableWorker: false, lowLatencyMode: true });
+            hls.loadSource(url);
+            hls.attachMedia(video);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = url;
+        }
+
+        return () => {
+            hls?.destroy();
+        };
+    }, [url]);
+
+    return <video ref={videoRef} autoPlay muted playsInline className={className} />;
+}
+
+function inferCctvMediaType(url: string, mediaType?: string) {
+    if (mediaType) return mediaType;
+    if (url.includes('.mp4') || url.includes('.webm')) return 'video';
+    if (url.includes('.m3u8') || url.includes('hls')) return 'hls';
+    if (url.includes('.mjpg') || url.includes('.mjpeg') || url.includes('mjpg')) return 'mjpeg';
+    if (url.includes('embed') || url.includes('maps/embed')) return 'embed';
+    if (url.includes('mapbox.com')) return 'satellite';
+    return 'image';
+}
+
+const CCTV_NO_SIGNAL_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23111' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2306b6d4' font-family='monospace' font-size='14'%3ENO SIGNAL%3C/text%3E%3C/svg%3E";
+const CCTV_FEED_UNAVAILABLE_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23111' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2306b6d4' font-family='monospace' font-size='14'%3EFEED UNAVAILABLE%3C/text%3E%3C/svg%3E";
 
 const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, selectedEntity, onMouseCoords, onRightClick, regionDossier, regionDossierLoading, onViewStateChange, measureMode, onMeasureClick, measurePoints, gibsDate, gibsOpacity, viewBoundsRef, setTrackedSdr }: MaplibreViewerProps) => {
     const mapRef = useRef<MapRef>(null);
@@ -627,7 +666,7 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
         : 1.0;
 
     return (
-        <div className={`relative h-full w-full z-0 isolate ${selectedEntity && ['region_dossier', 'gdelt', 'liveuamap', 'news'].includes(selectedEntity.type) ? 'map-focus-active' : ''}`}>
+        <div className={`relative h-full w-full z-0 isolate ${selectedEntity && ['gdelt', 'liveuamap', 'news'].includes(selectedEntity.type) ? 'map-focus-active' : ''}`}>
             <Map
                 ref={mapRef}
                 reuseMaps
@@ -1640,6 +1679,224 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                     );
                 })()}
 
+                {/* Aircraft click popup */}
+                {(() => {
+                    if (!selectedEntity || !['flight', 'private_flight', 'private_jet', 'military_flight', 'tracked_flight'].includes(selectedEntity.type)) {
+                        return null;
+                    }
+
+                    const flight =
+                        selectedEntity.type === 'flight' ? data?.commercial_flights?.find((f: any) => f.icao24 === selectedEntity.id) :
+                        selectedEntity.type === 'private_flight' ? data?.private_flights?.find((f: any) => f.icao24 === selectedEntity.id) :
+                        selectedEntity.type === 'private_jet' ? data?.private_jets?.find((f: any) => f.icao24 === selectedEntity.id) :
+                        selectedEntity.type === 'military_flight' ? data?.military_flights?.find((f: any) => f.icao24 === selectedEntity.id) :
+                        data?.tracked_flights?.find((f: any) => f.icao24 === selectedEntity.id);
+
+                    if (!flight) return null;
+
+                    const flightAny = flight as any;
+                    const [iLng, iLat] = interpFlight(flight);
+                    const isTracked = selectedEntity.type === 'tracked_flight';
+                    const isMilitary = selectedEntity.type === 'military_flight';
+                    const isPrivate = selectedEntity.type === 'private_flight' || selectedEntity.type === 'private_jet';
+                    const accent = isTracked ? '#ff1493' : isMilitary ? '#ff5555' : isPrivate ? '#c084fc' : '#00e5ff';
+                    const title = isTracked ? 'TRACKED AIRCRAFT' : isMilitary ? 'MILITARY AIRCRAFT' : isPrivate ? 'PRIVATE AIRCRAFT' : 'COMMERCIAL AIRCRAFT';
+                    const operator = isTracked
+                        ? (flightAny.alert_operator || flightAny.operator || flightAny.name || 'UNKNOWN')
+                        : isMilitary
+                            ? (flightAny.force ? `${flight.country} ${flightAny.force}`.trim() : (flight.country || 'MILITARY ASSET'))
+                            : (flightAny.airline_code || flight.callsign || 'UNKNOWN');
+
+                    return (
+                        <Popup
+                            longitude={iLng}
+                            latitude={iLat}
+                            closeButton={false}
+                            closeOnClick={false}
+                            onClose={() => onEntityClick?.(null)}
+                            anchor="bottom"
+                            offset={12}
+                        >
+                            <div className="map-popup" style={{ borderWidth: 1, borderStyle: 'solid', borderColor: accent }}>
+                                <div className="flex justify-between items-start mb-1">
+                                    <div className="map-popup-title" style={{ color: accent }}>
+                                        {flight.callsign || flight.registration || flight.icao24 || 'UNKNOWN FLIGHT'}
+                                    </div>
+                                    <button onClick={() => onEntityClick?.(null)} className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] ml-2">✕</button>
+                                </div>
+                                <div className="map-popup-subtitle pb-1" style={{ color: accent, borderBottom: `1px solid ${accent}55` }}>
+                                    {title}
+                                </div>
+                                <div className="map-popup-row">
+                                    Operator: <span className="text-white">{operator}</span>
+                                </div>
+                                {flight.model && (
+                                    <div className="map-popup-row">
+                                        Aircraft: <span className="text-white">{flight.model}</span>
+                                    </div>
+                                )}
+                                {flight.registration && (
+                                    <div className="map-popup-row">
+                                        Registration: <span className="text-[#888]">{flight.registration}</span>
+                                    </div>
+                                )}
+                                <div className="map-popup-row">
+                                    Altitude: <span className="text-[#44ff88]">{Math.round((flight.alt || 0) / 0.3048).toLocaleString()} ft</span>
+                                </div>
+                                {(flight.speed_knots ?? 0) > 0 && (
+                                    <div className="map-popup-row">
+                                        Speed: <span className="text-[#00e5ff]">{flight.speed_knots} kn</span>
+                                    </div>
+                                )}
+                                <div className="map-popup-row">
+                                    Heading: <span className="text-[#888]">{Math.round(flight.heading || 0)}°</span>
+                                </div>
+                                {(flight.origin_name || flight.dest_name) && (
+                                    <div className="map-popup-row">
+                                        Route: <span className="text-white">{flight.origin_name || 'UNKNOWN'} → {flight.dest_name || 'UNKNOWN'}</span>
+                                    </div>
+                                )}
+                                {flight.squawk && (
+                                    <div className="map-popup-row">
+                                        Squawk: <span className={flight.squawk === '7700' ? 'text-red-400' : flight.squawk === '7600' ? 'text-yellow-400' : 'text-white'}>{flight.squawk}</span>
+                                    </div>
+                                )}
+                                {flight.icao24 && (
+                                    <div className="mt-2 pt-2 border-t border-[var(--border-primary)]/50">
+                                        <a
+                                            href={`https://adsb.lol/?icao=${flight.icao24}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[#00e5ff] underline text-[10px]"
+                                        >
+                                            View Flight History
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
+                        </Popup>
+                    );
+                })()}
+
+                {/* CCTV click popup */}
+                {selectedEntity?.type === 'cctv' && (() => {
+                    const camera = data?.cctv?.find((c: any, i: number) => String(c.id ?? i) === String(selectedEntity.id));
+                    const lat = camera?.lat ?? selectedEntity.extra?.lat ?? selectedEntity.extra?.geometry?.coordinates?.[1];
+                    const lng = camera?.lon ?? selectedEntity.extra?.lon ?? selectedEntity.extra?.lng ?? selectedEntity.extra?.geometry?.coordinates?.[0];
+                    const url = selectedEntity.media_url || camera?.media_url || '';
+                    const mediaType = inferCctvMediaType(url, selectedEntity.extra?.media_type || camera?.media_type);
+
+                    if (lat == null || lng == null) return null;
+
+                    return (
+                        <Popup
+                            longitude={lng}
+                            latitude={lat}
+                            closeButton={false}
+                            closeOnClick={false}
+                            onClose={() => onEntityClick?.(null)}
+                            anchor={lat >= viewState.latitude ? "top" : "bottom"}
+                            offset={12}
+                            maxWidth="360px"
+                        >
+                            <div className="map-popup !border-cyan-500/40" style={{ borderWidth: 1, borderStyle: 'solid' }}>
+                                <div className="flex justify-between items-start mb-1">
+                                    <div className="map-popup-title text-cyan-400">
+                                        {selectedEntity.name?.toUpperCase() || camera?.direction_facing?.toUpperCase() || 'OPTIC INTERCEPT'}
+                                    </div>
+                                    <button onClick={() => onEntityClick?.(null)} className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] ml-2">✕</button>
+                                </div>
+                                <div className="map-popup-subtitle text-cyan-500/80 border-b border-cyan-900/30 pb-1">
+                                    CCTV FEED {selectedEntity.extra?.source_agency ? `• ${selectedEntity.extra.source_agency}` : camera?.source_agency ? `• ${camera.source_agency}` : ''}
+                                </div>
+
+                                <div className="relative mt-2 overflow-hidden rounded border border-cyan-900/40 bg-black">
+                                    <div className="absolute left-2 top-2 z-10 rounded bg-black/60 px-1.5 py-0.5 text-[8px] tracking-widest text-cyan-400">
+                                        REC
+                                    </div>
+                                    <div className="aspect-video w-full">
+                                        {!url ? (
+                                            <img
+                                                src={CCTV_NO_SIGNAL_SVG}
+                                                alt="No CCTV feed available"
+                                                className="h-full w-full object-cover"
+                                            />
+                                        ) : mediaType === 'video' ? (
+                                            <video
+                                                src={url}
+                                                autoPlay
+                                                loop
+                                                muted
+                                                playsInline
+                                                className="h-full w-full object-cover"
+                                            />
+                                        ) : mediaType === 'hls' ? (
+                                            <PopupHlsVideo
+                                                url={url}
+                                                className="h-full w-full object-cover"
+                                            />
+                                        ) : mediaType === 'embed' ? (
+                                            <iframe
+                                                src={url}
+                                                allowFullScreen
+                                                loading="lazy"
+                                                className="h-full w-full border-0"
+                                            />
+                                        ) : mediaType === 'mjpeg' ? (
+                                            <img
+                                                src={url}
+                                                alt="MJPEG CCTV feed"
+                                                referrerPolicy="no-referrer"
+                                                className="h-full w-full object-cover"
+                                                onError={(e) => {
+                                                    (e.target as HTMLImageElement).src = CCTV_FEED_UNAVAILABLE_SVG;
+                                                }}
+                                            />
+                                        ) : (
+                                            <img
+                                                src={url}
+                                                alt="CCTV feed"
+                                                referrerPolicy="no-referrer"
+                                                className="h-full w-full object-cover"
+                                                onError={(e) => {
+                                                    (e.target as HTMLImageElement).src = CCTV_NO_SIGNAL_SVG;
+                                                }}
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="mt-2 space-y-1 text-[10px]">
+                                    <div className="map-popup-row">
+                                        Camera ID: <span className="text-white">{selectedEntity.id}</span>
+                                    </div>
+                                    {(selectedEntity.extra?.source_agency || camera?.source_agency) && (
+                                        <div className="map-popup-row">
+                                            Agency: <span className="text-white">{selectedEntity.extra?.source_agency || camera?.source_agency}</span>
+                                        </div>
+                                    )}
+                                    <div className="map-popup-row">
+                                        Coordinates: <span className="text-[#888]">{lat.toFixed(4)}, {lng.toFixed(4)}</span>
+                                    </div>
+                                </div>
+
+                                {url && (
+                                    <div className="mt-2 border-t border-[var(--border-primary)]/50 pt-2">
+                                        <a
+                                            href={url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-cyan-400 underline text-[10px]"
+                                        >
+                                            Open Feed Source
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
+                        </Popup>
+                    );
+                })()}
+
                 {/* UAV click popup — real ADS-B detected drones */}
                 {selectedEntity?.type === 'uav' && (() => {
                     const uav = data?.uavs?.find((u: any) => u.id === selectedEntity.id);
@@ -2221,7 +2478,7 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                         );
                 })()}
 
-                {/* REGION DOSSIER — location pin on map (full intel shown in right panel) */}
+                {/* REGION DOSSIER — location pin + popup on map */}
                 {selectedEntity?.type === 'region_dossier' && selectedEntity.extra && (
                     <Marker
                         longitude={selectedEntity.extra.lng}
@@ -2242,209 +2499,107 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                     </Marker>
                 )}
 
-                {/* SENTINEL-2 IMAGERY — fullscreen overlay modal */}
-                {selectedEntity?.type === 'region_dossier' && selectedEntity.extra && regionDossier?.sentinel2 && !regionDossierLoading && (() => {
-                    const s2 = regionDossier.sentinel2;
-                    const imgUrl = s2.fullres_url || s2.thumbnail_url;
-                    return (
-                        <div
-                            style={{
-                                position: 'fixed',
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                zIndex: 9999,
-                                background: 'rgba(0,0,0,0.85)',
-                                backdropFilter: 'blur(8px)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                padding: '60px 20px 80px 20px',
-                            }}
-                            onClick={(e) => { if (e.target === e.currentTarget) onEntityClick(null); }}
-                            onKeyDown={(e: any) => { if (e.key === 'Escape') onEntityClick(null); }}
-                            tabIndex={-1}
-                            ref={(el) => el?.focus()}
-                        >
-                            <div style={{
-                                background: 'rgba(0,0,0,0.95)',
-                                border: '1px solid rgba(34,197,94,0.5)',
-                                borderRadius: 12,
-                                overflow: 'hidden',
-                                maxWidth: 'calc(100vw - 40px)',
-                                maxHeight: 'calc(100vh - 80px)',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                boxShadow: '0 0 60px rgba(34,197,94,0.3)',
-                            }}>
-                                {/* Header bar */}
-                                <div style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                    padding: '10px 16px',
-                                    background: 'rgba(20,83,45,0.4)',
-                                    borderBottom: '1px solid rgba(34,197,94,0.3)',
-                                }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                        <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', animation: 'pulse 2s infinite' }} />
-                                        <span style={{ fontSize: 11, color: '#4ade80', fontFamily: 'monospace', letterSpacing: '0.2em', fontWeight: 'bold' }}>
-                                            SENTINEL-2 IMAGERY
-                                        </span>
-                                    </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                        <span style={{ fontSize: 10, color: 'rgba(134,239,172,0.6)', fontFamily: 'monospace' }}>
-                                            {selectedEntity.extra.lat.toFixed(4)}, {selectedEntity.extra.lng.toFixed(4)}
-                                        </span>
-                                        <button
-                                            onClick={() => onEntityClick(null)}
-                                            style={{
-                                                background: 'rgba(239,68,68,0.2)',
-                                                border: '1px solid rgba(239,68,68,0.4)',
-                                                borderRadius: 6,
-                                                color: '#ef4444',
-                                                fontSize: 10,
-                                                fontFamily: 'monospace',
-                                                padding: '4px 10px',
-                                                cursor: 'pointer',
-                                                letterSpacing: '0.1em',
-                                            }}
-                                        >
-                                            ✕ CLOSE
-                                        </button>
-                                    </div>
+                {selectedEntity?.type === 'region_dossier' && selectedEntity.extra && (
+                    <Popup
+                        longitude={selectedEntity.extra.lng}
+                        latitude={selectedEntity.extra.lat}
+                        closeButton={false}
+                        closeOnClick={false}
+                        onClose={() => onEntityClick?.(null)}
+                        anchor={selectedEntity.extra.lat >= viewState.latitude ? "top" : "bottom"}
+                        offset={18}
+                    >
+                        <div className="bg-[var(--bg-secondary)]/90 backdrop-blur-md border border-emerald-800 rounded-lg flex flex-col z-[100] font-mono shadow-[0_4px_30px_rgba(16,185,129,0.3)] pointer-events-auto overflow-hidden w-[320px]">
+                            <div className="p-2 border-b border-emerald-500/30 bg-emerald-950/40 flex justify-between items-center">
+                                <h2 className="text-[10px] tracking-widest font-bold text-emerald-400 flex items-center gap-1">
+                                    <Globe size={12} className="text-emerald-400" /> REGION DOSSIER
+                                </h2>
+                                <button onClick={() => onEntityClick?.(null)} className="text-[var(--text-secondary)] hover:text-[var(--text-primary)]">✕</button>
+                            </div>
+                            <div className="p-3 flex flex-col gap-2 text-[9px]">
+                                <div className="flex justify-between items-center border-b border-[var(--border-primary)] pb-1">
+                                    <span className="text-[var(--text-muted)]">COORDS</span>
+                                    <span className="text-white font-bold">
+                                        {selectedEntity.extra.lat.toFixed(3)}, {selectedEntity.extra.lng.toFixed(3)}
+                                    </span>
                                 </div>
 
-                                {s2.found ? (
+                                {regionDossierLoading ? (
+                                    <div className="py-3 text-center text-emerald-400 font-bold tracking-widest animate-pulse">
+                                        COMPILING INTELLIGENCE...
+                                    </div>
+                                ) : regionDossier?.error ? (
+                                    <div className="py-2 text-red-400">{regionDossier.error}</div>
+                                ) : (
                                     <>
-                                        {/* Metadata row */}
-                                        <div style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'space-between',
-                                            padding: '8px 16px',
-                                            fontSize: 11,
-                                            fontFamily: 'monospace',
-                                            borderBottom: '1px solid rgba(20,83,45,0.4)',
-                                        }}>
-                                            <span style={{ color: '#86efac' }}>{s2.platform}</span>
-                                            <span style={{ color: '#4ade80', fontWeight: 'bold' }}>{s2.datetime?.slice(0, 10)}</span>
-                                            <span style={{ color: '#86efac' }}>{s2.cloud_cover?.toFixed(0)}% cloud</span>
-                                        </div>
-
-                                        {/* Image */}
-                                        {imgUrl ? (
-                                            <div style={{ flex: 1, overflow: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400 }}>
-                                                <img
-                                                    src={imgUrl}
-                                                    alt="Sentinel-2 scene"
-                                                    style={{
-                                                        maxWidth: '100%',
-                                                        maxHeight: 'calc(100vh - 220px)',
-                                                        objectFit: 'contain',
-                                                        display: 'block',
-                                                    }}
-                                                />
-                                            </div>
-                                        ) : (
-                                            <div style={{ padding: '40px 16px', fontSize: 11, color: 'rgba(134,239,172,0.5)', fontFamily: 'monospace', textAlign: 'center' }}>
-                                                Scene found — no preview available
+                                        {regionDossier?.country?.name && (
+                                            <div className="flex justify-between items-center border-b border-[var(--border-primary)] pb-1">
+                                                <span className="text-[var(--text-muted)]">COUNTRY</span>
+                                                <span className="text-white font-bold text-right ml-2">
+                                                    {regionDossier.country.flag_emoji ? `${regionDossier.country.flag_emoji} ` : ''}{regionDossier.country.name}
+                                                </span>
                                             </div>
                                         )}
-
-                                        {/* Action buttons */}
-                                        {imgUrl && (
-                                            <div style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                gap: 12,
-                                                padding: '10px 16px',
-                                                background: 'rgba(20,83,45,0.3)',
-                                                borderTop: '1px solid rgba(34,197,94,0.2)',
-                                            }}>
-                                                <a
-                                                    href={imgUrl}
-                                                    download={`sentinel2_${selectedEntity.extra.lat.toFixed(4)}_${selectedEntity.extra.lng.toFixed(4)}.jpg`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    style={{
-                                                        background: 'rgba(34,197,94,0.2)',
-                                                        border: '1px solid rgba(34,197,94,0.5)',
-                                                        borderRadius: 6,
-                                                        color: '#4ade80',
-                                                        fontSize: 10,
-                                                        fontFamily: 'monospace',
-                                                        padding: '6px 16px',
-                                                        cursor: 'pointer',
-                                                        textDecoration: 'none',
-                                                        letterSpacing: '0.15em',
-                                                        fontWeight: 'bold',
-                                                    }}
-                                                >
-                                                    ⬇ DOWNLOAD
-                                                </a>
-                                                <button
-                                                    onClick={async () => {
-                                                        try {
-                                                            const resp = await fetch(imgUrl);
-                                                            const blob = await resp.blob();
-                                                            await navigator.clipboard.write([
-                                                                new ClipboardItem({ [blob.type]: blob })
-                                                            ]);
-                                                        } catch {
-                                                            // fallback: copy URL
-                                                            await navigator.clipboard.writeText(imgUrl);
-                                                        }
-                                                    }}
-                                                    style={{
-                                                        background: 'rgba(34,197,94,0.15)',
-                                                        border: '1px solid rgba(34,197,94,0.4)',
-                                                        borderRadius: 6,
-                                                        color: '#4ade80',
-                                                        fontSize: 10,
-                                                        fontFamily: 'monospace',
-                                                        padding: '6px 16px',
-                                                        cursor: 'pointer',
-                                                        letterSpacing: '0.15em',
-                                                        fontWeight: 'bold',
-                                                    }}
-                                                >
-                                                    📋 COPY
-                                                </button>
-                                                <a
-                                                    href={imgUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    style={{
-                                                        background: 'rgba(16,185,129,0.15)',
-                                                        border: '1px solid rgba(16,185,129,0.4)',
-                                                        borderRadius: 6,
-                                                        color: '#10b981',
-                                                        fontSize: 10,
-                                                        fontFamily: 'monospace',
-                                                        padding: '6px 16px',
-                                                        cursor: 'pointer',
-                                                        textDecoration: 'none',
-                                                        letterSpacing: '0.15em',
-                                                        fontWeight: 'bold',
-                                                    }}
-                                                >
-                                                    ↗ OPEN FULL RES
-                                                </a>
+                                        {regionDossier?.country?.capital && (
+                                            <div className="flex justify-between items-center border-b border-[var(--border-primary)] pb-1">
+                                                <span className="text-[var(--text-muted)]">CAPITAL</span>
+                                                <span className="text-white font-bold">{regionDossier.country.capital}</span>
+                                            </div>
+                                        )}
+                                        {regionDossier?.country?.leader && (
+                                            <div className="flex justify-between items-center border-b border-[var(--border-primary)] pb-1">
+                                                <span className="text-[var(--text-muted)]">LEADER</span>
+                                                <span className="text-emerald-400 font-bold text-right ml-2">{regionDossier.country.leader}</span>
+                                            </div>
+                                        )}
+                                        {(regionDossier?.local?.name || regionDossier?.local?.state) && (
+                                            <div className="flex justify-between items-center border-b border-[var(--border-primary)] pb-1">
+                                                <span className="text-[var(--text-muted)]">LOCAL</span>
+                                                <span className="text-white font-bold text-right ml-2">
+                                                    {regionDossier.local.name || regionDossier.local.state}
+                                                </span>
+                                            </div>
+                                        )}
+                                        {regionDossier?.local?.summary && (
+                                            <div className="mt-1 p-2 bg-black/60 border border-emerald-800/50 rounded-sm text-[8px] text-emerald-300 leading-tight">
+                                                <span className="font-bold text-emerald-400">&gt;_ INTEL: </span>
+                                                {regionDossier.local.summary.length > 260 ? `${regionDossier.local.summary.slice(0, 260)}...` : regionDossier.local.summary}
+                                            </div>
+                                        )}
+                                        {regionDossier?.sentinel2 && (
+                                            <div className="mt-1 p-2 bg-black/60 border border-emerald-800/50 rounded-sm">
+                                                <div className="flex justify-between items-center">
+                                                    <span className="text-[var(--text-muted)]">IMAGERY</span>
+                                                    <span className="text-emerald-400 font-bold">SENTINEL-2 READY</span>
+                                                </div>
+                                                {(regionDossier.sentinel2.fullres_url || regionDossier.sentinel2.thumbnail_url) && (
+                                                    <div className="flex items-center justify-between gap-2 mt-2">
+                                                        <a
+                                                            href={regionDossier.sentinel2.fullres_url || regionDossier.sentinel2.thumbnail_url}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-emerald-400 hover:text-emerald-300 text-[9px] font-bold underline"
+                                                        >
+                                                            Open Imagery
+                                                        </a>
+                                                        <a
+                                                            href={regionDossier.sentinel2.fullres_url || regionDossier.sentinel2.thumbnail_url}
+                                                            download={`sentinel2_${selectedEntity.extra.lat.toFixed(4)}_${selectedEntity.extra.lng.toFixed(4)}.jpg`}
+                                                            className="text-cyan-400 hover:text-cyan-300 text-[9px] font-bold underline"
+                                                        >
+                                                            Download
+                                                        </a>
+                                                    </div>
+                                                )}
                                             </div>
                                         )}
                                     </>
-                                ) : (
-                                    <div style={{ padding: '40px 16px', fontSize: 11, color: 'rgba(134,239,172,0.5)', fontFamily: 'monospace', textAlign: 'center' }}>
-                                        No clear imagery in last 30 days
-                                    </div>
                                 )}
                             </div>
                         </div>
-                    );
-                })()}
+                    </Popup>
+                )}
+
 
                 {/* MEASUREMENT LINES */}
                 {measurePoints && measurePoints.length >= 2 && (

@@ -280,9 +280,19 @@ export default function Dashboard() {
             animate={{ x: leftOpen ? 0 : -360 }}
             transition={{ type: 'spring', damping: 30, stiffness: 250 }}
           >
-            {/* LEFT PANEL - DATA LAYERS */}
             <ErrorBoundary name="WorldviewLeftPanel">
               <WorldviewLeftPanel data={data} activeLayers={activeLayers} setActiveLayers={setActiveLayers} onSettingsClick={() => setSettingsOpen(true)} onLegendClick={() => setLegendOpen(true)} gibsDate={gibsDate} setGibsDate={setGibsDate} gibsOpacity={gibsOpacity} setGibsOpacity={setGibsOpacity} onEntityClick={setSelectedEntity} onFlyTo={(lat, lng) => setFlyToLocation({ lat, lng, ts: Date.now() })} trackedSdr={trackedSdr} setTrackedSdr={setTrackedSdr} />
+            </ErrorBoundary>
+          </motion.div>
+
+          {/* LEFT DOCKED INTEL PANEL */}
+          <motion.div
+            className="absolute left-[22.5rem] top-24 bottom-6 w-80 flex flex-col z-[199] pointer-events-auto hud-zone"
+            animate={{ x: leftOpen ? 0 : -360, opacity: leftOpen ? 1 : 0 }}
+            transition={{ type: 'spring', damping: 30, stiffness: 250 }}
+          >
+            <ErrorBoundary name="NewsFeedLeftDock">
+              <NewsFeed data={data} selectedEntity={selectedEntity} regionDossier={regionDossier} regionDossierLoading={regionDossierLoading} />
             </ErrorBoundary>
           </motion.div>
 
@@ -377,12 +387,6 @@ export default function Dashboard() {
               </ErrorBoundary>
             </div>
 
-            {/* BOTTOM RIGHT - NEWS FEED (fills remaining space) */}
-            <div className="flex-1 min-h-0 flex flex-col">
-              <ErrorBoundary name="NewsFeed">
-                <NewsFeed data={data} selectedEntity={selectedEntity} regionDossier={regionDossier} regionDossierLoading={regionDossierLoading} />
-              </ErrorBoundary>
-            </div>
           </motion.div>
 
           {/* BOTTOM CENTER COORDINATE / LOCATION BAR — hidden when Sentinel-2 imagery overlay is open */}
