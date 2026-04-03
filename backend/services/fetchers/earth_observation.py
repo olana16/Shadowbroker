@@ -1,13 +1,66 @@
 """Earth-observation fetchers — earthquakes, FIRMS fires, space weather, weather radar."""
 import csv
 import io
+import json
 import logging
 import heapq
+from pathlib import Path
 from services.network_utils import fetch_with_curl
 from services.fetchers._store import latest_data, _data_lock, _mark_fresh
 from services.fetchers.retry import with_retry
 
 logger = logging.getLogger(__name__)
+
+_BASE_DATA_DIR = Path(__file__).parent.parent.parent / "data"
+_EARTHQUAKE_CACHE_PATH = _BASE_DATA_DIR / "earthquakes_cache.json"
+_FIRMS_CACHE_PATH = _BASE_DATA_DIR / "firms_fires_cache.json"
+
+
+def _load_list_cache(path: Path) -> list[dict]:
+    try:
+        if path.exists():
+            with open(path, "r", encoding="utf-8") as f:
+                cached = json.load(f)
+            if isinstance(cached, list):
+                return cached
+    except (IOError, OSError, json.JSONDecodeError, ValueError) as e:
+        logger.warning(f"Failed to load cache {path.name}: {e}")
+    return []
+
+
+def _save_list_cache(path: Path, items: list[dict]) -> None:
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(items, f, indent=2, ensure_ascii=False)
+    except (IOError, OSError) as e:
+        logger.warning(f"Failed to save cache {path.name}: {e}")
+
+
+def load_cached_earthquakes_into_store() -> int:
+    cached = _load_list_cache(_EARTHQUAKE_CACHE_PATH)
+    if not cached:
+        return 0
+    with _data_lock:
+        if latest_data.get("earthquakes"):
+            return len(latest_data["earthquakes"])
+        latest_data["earthquakes"] = cached
+    _mark_fresh("earthquakes")
+    logger.info("Loaded %s cached earthquakes into store", len(cached))
+    return len(cached)
+
+
+def load_cached_firms_fires_into_store() -> int:
+    cached = _load_list_cache(_FIRMS_CACHE_PATH)
+    if not cached:
+        return 0
+    with _data_lock:
+        if latest_data.get("firms_fires"):
+            return len(latest_data["firms_fires"])
+        latest_data["firms_fires"] = cached
+    _mark_fresh("firms_fires")
+    logger.info("Loaded %s cached FIRMS hotspots into store", len(cached))
+    return len(cached)
 
 
 # ---------------------------------------------------------------------------
@@ -34,6 +87,7 @@ def fetch_earthquakes():
     with _data_lock:
         latest_data["earthquakes"] = quakes
     if quakes:
+        _save_list_cache(_EARTHQUAKE_CACHE_PATH, quakes)
         _mark_fresh("earthquakes")
 
 
@@ -74,6 +128,7 @@ def fetch_firms_fires():
     with _data_lock:
         latest_data["firms_fires"] = fires
     if fires:
+        _save_list_cache(_FIRMS_CACHE_PATH, fires)
         _mark_fresh("firms_fires")
 
 

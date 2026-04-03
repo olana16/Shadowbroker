@@ -10,6 +10,7 @@ from services.fetchers._store import latest_data, _data_lock, _mark_fresh
 from services.fetchers.retry import with_retry
 
 logger = logging.getLogger(__name__)
+_OUTAGES_CACHE_PATH = Path(__file__).parent.parent.parent / "data" / "internet_outages_cache.json"
 
 
 # ---------------------------------------------------------------------------
@@ -39,6 +40,40 @@ def _geocode_region(region_name: str, country_name: str) -> tuple:
         pass
     _region_geocode_cache[cache_key] = None
     return None
+
+
+def _load_outages_cache() -> list[dict]:
+    try:
+        if _OUTAGES_CACHE_PATH.exists():
+            with open(_OUTAGES_CACHE_PATH, "r", encoding="utf-8") as f:
+                cached = json.load(f)
+            if isinstance(cached, list):
+                return cached
+    except (IOError, OSError, json.JSONDecodeError, ValueError) as e:
+        logger.warning(f"Failed to load internet outages cache: {e}")
+    return []
+
+
+def _save_outages_cache(items: list[dict]) -> None:
+    try:
+        _OUTAGES_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(_OUTAGES_CACHE_PATH, "w", encoding="utf-8") as f:
+            json.dump(items, f, indent=2, ensure_ascii=False)
+    except (IOError, OSError) as e:
+        logger.warning(f"Failed to save internet outages cache: {e}")
+
+
+def load_cached_internet_outages_into_store() -> int:
+    cached = _load_outages_cache()
+    if not cached:
+        return 0
+    with _data_lock:
+        if latest_data.get("internet_outages"):
+            return len(latest_data["internet_outages"])
+        latest_data["internet_outages"] = cached
+    _mark_fresh("internet_outages")
+    logger.info("Loaded %s cached internet outages into store", len(cached))
+    return len(cached)
 
 
 @with_retry(max_retries=1, base_delay=1)
@@ -101,6 +136,7 @@ def fetch_internet_outages():
     with _data_lock:
         latest_data["internet_outages"] = outages
     if outages:
+        _save_outages_cache(outages)
         _mark_fresh("internet_outages")
 
 

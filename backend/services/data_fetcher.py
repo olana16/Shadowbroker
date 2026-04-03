@@ -39,15 +39,19 @@ from services.fetchers.news import fetch_news, load_cached_news_into_store  # no
 from services.fetchers.financial import fetch_defense_stocks, fetch_oil_prices  # noqa: F401
 from services.fetchers.earth_observation import (  # noqa: F401
     fetch_earthquakes, fetch_firms_fires, fetch_space_weather, fetch_weather,
+    load_cached_earthquakes_into_store, load_cached_firms_fires_into_store,
 )
 from services.fetchers.infrastructure import (  # noqa: F401
     fetch_internet_outages, fetch_datacenters, fetch_military_bases, fetch_power_plants,
     fetch_cctv, fetch_kiwisdr,
+    load_cached_internet_outages_into_store,
 )
 from services.fetchers.geo import (  # noqa: F401
     fetch_ships, fetch_airports, find_nearest_airport, cached_airports,
     fetch_frontlines, fetch_gdelt, fetch_geopolitics, update_liveuamap,
+    load_cached_gdelt_into_store,
 )
+from services.fetchers.financial import load_cached_markets_into_store  # noqa: F401
 
 try:
     from services.fetchers.telegram import fetch_telegram, load_cached_telegram_into_store  # noqa: F401
@@ -126,6 +130,11 @@ def start_scheduler():
     load_cached_news_into_store()
     if load_cached_telegram_into_store:
         load_cached_telegram_into_store()
+    load_cached_earthquakes_into_store()
+    load_cached_firms_fires_into_store()
+    load_cached_internet_outages_into_store()
+    load_cached_markets_into_store()
+    load_cached_gdelt_into_store()
     _scheduler = BackgroundScheduler(daemon=True)
     _now = datetime.now()
 

@@ -125,3 +125,10 @@ backend/data/sat_gp_cache_meta.json
 backend/data/meshtastic_nodes_cache.json
 backend/data/peer_store.json
 backend/data/wormhole_status.json
+backend/data/earthquakes_cache.json
+backend/data/gdelt_cache.json
+backend/data/internet_outages_cache.json
+backend/data/markets_cache.json
+
+#session files
+backend/shadowbroker_session.session

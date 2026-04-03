@@ -88,6 +88,14 @@ function getSourceLabel(url: string) {
   }
 }
 
+function getDisplayChipLabel(source: string, title: string) {
+  const normalized = source.trim().toLowerCase();
+  if (!normalized || normalized === "article" || normalized === "articles") {
+    return title;
+  }
+  return source;
+}
+
 function getArticleDateLabel(article: NewsArticle) {
   return formatDateLabel(article.published || article.pub_date);
 }
@@ -134,6 +142,50 @@ function riskLabel(score: number) {
   if (score >= 6) return "High";
   if (score >= 4) return "Medium";
   return "Low";
+}
+
+function gdeltKeywordBoost(title: string, location: string) {
+  const text = `${title} ${location}`.toLowerCase();
+  let boost = 0;
+
+  const keywordWeights: Array<[string, number]> = [
+    ["nuclear", 4],
+    ["missile", 3],
+    ["airstrike", 3],
+    ["strike", 2],
+    ["drone", 2],
+    ["attack", 2],
+    ["killed", 3],
+    ["dead", 3],
+    ["wounded", 2],
+    ["explosion", 2],
+    ["blast", 2],
+    ["military", 2],
+    ["troops", 2],
+    ["war", 2],
+    ["conflict", 2],
+    ["clash", 2],
+    ["shelling", 3],
+    ["artillery", 3],
+    ["raid", 2],
+    ["terror", 3],
+    ["protest", 1],
+    ["unrest", 2],
+    ["crackdown", 2],
+    ["border", 1],
+  ];
+
+  for (const [keyword, weight] of keywordWeights) {
+    if (text.includes(keyword)) boost += weight;
+  }
+
+  return boost;
+}
+
+function computeGdeltRiskScore(title: string, location: string, count: number) {
+  const clusterBase = 2 + Math.min(count || 1, 6);
+  const keywordBoost = gdeltKeywordBoost(title, location);
+  return clampRisk(Math.min(10, clusterBase + keywordBoost));
 }
 
 function isCyberArticle(article: NewsArticle) {
@@ -314,35 +366,39 @@ function flattenGdeltArticles(gdelt: GDELTIncident[] | undefined, dateLabel: str
     const headlines = props._headlines_list ?? [];
 
     if (urls.length === 0) {
+      const title = props.name || "Untitled incident";
+      const location = props.name || "Unknown location";
       grouped.get(region)?.push({
         id: `${props.name}-${lat}-${lng}-0`,
-        title: props.name || "Untitled incident",
+        title,
         source: "GDELT",
         url: "",
         dateLabel,
-        location: props.name || "Unknown location",
+        location,
         region,
         clusterCount: props.count || 1,
         lat,
         lng,
-        riskScore: clampRisk(Math.min(10, 2 + (props.count || 1))),
+        riskScore: computeGdeltRiskScore(title, location, props.count || 1),
       });
       continue;
     }
 
     urls.forEach((url, index) => {
+      const title = headlines[index] || props.name || "Untitled incident";
+      const location = props.name || "Unknown location";
       grouped.get(region)?.push({
         id: `${props.name}-${lat}-${lng}-${index}`,
-        title: headlines[index] || props.name || "Untitled incident",
+        title,
         source: getSourceLabel(url),
         url,
         dateLabel,
-        location: props.name || "Unknown location",
+        location,
         region,
         clusterCount: props.count || 1,
         lat,
         lng,
-        riskScore: clampRisk(Math.min(10, 2 + (props.count || 1))),
+        riskScore: computeGdeltRiskScore(title, location, props.count || 1),
       });
     });
   }
@@ -393,7 +449,7 @@ function FeedPanel({
               >
                 <div className="mb-3 flex items-start justify-between gap-3">
                   <div className="rounded-xl border border-cyan-900/40 bg-cyan-950/30 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.22em] text-cyan-400/80">
-                    {item.source}
+                    {getDisplayChipLabel(item.source, item.title)}
                   </div>
                   {typeof item.riskScore === "number" && (
                     <div className={`rounded-xl border px-2.5 py-1 text-right text-[10px] font-mono uppercase tracking-[0.16em] ${tone.badge}`}>
@@ -402,7 +458,7 @@ function FeedPanel({
                   )}
                 </div>
 
-                <h4 className={`line-clamp-3 text-base font-semibold leading-6 ${tone.title}`}>
+                <h4 className={`text-base font-semibold leading-6 ${tone.title}`}>
                   {item.title}
                 </h4>
 
@@ -670,19 +726,19 @@ export default function GdeltNewsDashboard({ data }: GdeltNewsDashboardProps) {
                         >
                           <div className="mb-3 flex items-start justify-between gap-3">
                             <div className="rounded-xl border border-cyan-900/40 bg-cyan-950/30 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.22em] text-cyan-400/80">
-                              {item.source}
+                              {getDisplayChipLabel(item.source, item.title)}
                             </div>
                             <div className="flex flex-col items-end gap-2">
                               <div className={`rounded-xl border px-2.5 py-1 text-right text-[10px] font-mono uppercase tracking-[0.16em] ${tone.badge}`}>
                                 {riskLabel(item.riskScore)} {item.riskScore}/10
                               </div>
                               <div className="text-right text-[10px] font-mono uppercase tracking-[0.16em] text-cyan-100/45">
-                                {item.clusterCount} reports
+                                {item.clusterCount} clustered events
                               </div>
                             </div>
                           </div>
 
-                          <h4 className={`line-clamp-3 text-base font-semibold leading-6 ${tone.title}`}>
+                          <h4 className={`text-base font-semibold leading-6 ${tone.title}`}>
                             {item.title}
                           </h4>
 

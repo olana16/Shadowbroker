@@ -3,11 +3,55 @@
 Uses yfinance batch download to minimise Yahoo Finance requests and avoid rate limiting.
 """
 import logging
+import json
+from pathlib import Path
 import yfinance as yf
 from services.fetchers._store import latest_data, _data_lock, _mark_fresh
 from services.fetchers.retry import with_retry
 
 logger = logging.getLogger(__name__)
+
+_MARKETS_CACHE_PATH = Path(__file__).parent.parent.parent / "data" / "markets_cache.json"
+
+
+def _load_market_cache() -> dict:
+    try:
+        if _MARKETS_CACHE_PATH.exists():
+            with open(_MARKETS_CACHE_PATH, "r", encoding="utf-8") as f:
+                cached = json.load(f)
+            if isinstance(cached, dict):
+                return cached
+    except (IOError, OSError, json.JSONDecodeError, ValueError) as e:
+        logger.warning(f"Failed to load markets cache: {e}")
+    return {}
+
+
+def _save_market_cache(stocks: dict, oil: dict) -> None:
+    try:
+        _MARKETS_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(_MARKETS_CACHE_PATH, "w", encoding="utf-8") as f:
+            json.dump({"stocks": stocks, "oil": oil}, f, indent=2, ensure_ascii=False)
+    except (IOError, OSError) as e:
+        logger.warning(f"Failed to save markets cache: {e}")
+
+
+def load_cached_markets_into_store() -> int:
+    cached = _load_market_cache()
+    stocks = cached.get("stocks", {})
+    oil = cached.get("oil", {})
+    if not stocks and not oil:
+        return 0
+    with _data_lock:
+        if not latest_data.get("stocks") and stocks:
+            latest_data["stocks"] = stocks
+        if not latest_data.get("oil") and oil:
+            latest_data["oil"] = oil
+    if stocks:
+        _mark_fresh("stocks")
+    if oil:
+        _mark_fresh("oil")
+    logger.info("Loaded cached markets into store: %s stocks, %s oil", len(stocks), len(oil))
+    return len(stocks) + len(oil)
 
 
 def _batch_fetch(symbols: list[str], period: str = "5d") -> dict:
@@ -70,6 +114,7 @@ def fetch_defense_stocks():
                 latest_data['stocks'] = stocks
                 if oil:
                     latest_data['oil'] = oil
+            _save_market_cache(stocks, oil)
             _mark_fresh("stocks")
             if oil:
                 _mark_fresh("oil")
@@ -92,6 +137,8 @@ def fetch_oil_prices():
         if oil:
             with _data_lock:
                 latest_data['oil'] = oil
+                stocks = latest_data.get('stocks', {})
+            _save_market_cache(stocks, oil)
             _mark_fresh("oil")
     except Exception as e:
         logger.error(f"Error fetching oil: {e}")

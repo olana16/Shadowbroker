@@ -1,13 +1,16 @@
 """Ship and geopolitics fetchers — AIS vessels, carriers, frontlines, GDELT, LiveUAmap."""
 import csv
 import io
+import json
 import math
 import logging
+from pathlib import Path
 from services.network_utils import fetch_with_curl
 from services.fetchers._store import latest_data, _data_lock, _mark_fresh
 from services.fetchers.retry import with_retry
 
 logger = logging.getLogger(__name__)
+_GDELT_CACHE_PATH = Path(__file__).parent.parent.parent / "data" / "gdelt_cache.json"
 
 
 # ---------------------------------------------------------------------------
@@ -142,9 +145,35 @@ def fetch_gdelt():
         if gdelt is not None:
             with _data_lock:
                 latest_data['gdelt'] = gdelt
+            try:
+                _GDELT_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+                with open(_GDELT_CACHE_PATH, "w", encoding="utf-8") as f:
+                    json.dump(gdelt, f, indent=2, ensure_ascii=False, default=str)
+            except (IOError, OSError, TypeError) as cache_err:
+                logger.warning(f"Failed to save GDELT cache: {cache_err}")
             _mark_fresh("gdelt")
     except Exception as e:
         logger.error(f"Error fetching GDELT: {e}")
+
+
+def load_cached_gdelt_into_store() -> int:
+    try:
+        if not _GDELT_CACHE_PATH.exists():
+            return 0
+        with open(_GDELT_CACHE_PATH, "r", encoding="utf-8") as f:
+            cached = json.load(f)
+        if not isinstance(cached, list):
+            return 0
+    except (IOError, OSError, json.JSONDecodeError, ValueError) as e:
+        logger.warning(f"Failed to load GDELT cache: {e}")
+        return 0
+    with _data_lock:
+        if latest_data.get("gdelt"):
+            return len(latest_data["gdelt"])
+        latest_data["gdelt"] = cached
+    _mark_fresh("gdelt")
+    logger.info("Loaded %s cached GDELT items into store", len(cached))
+    return len(cached)
 
 
 def fetch_geopolitics():
