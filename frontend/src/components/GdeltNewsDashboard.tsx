@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CalendarDays, ExternalLink, Globe2, MapPin, Newspaper, RadioTower, ShieldAlert, Send } from "lucide-react";
-import type { DashboardData, GDELTIncident, NewsArticle } from "@/types/dashboard";
+import { Activity, CalendarDays, ExternalLink, Flame, Globe2, MapPin, Newspaper, RadioTower, Send, ShieldAlert, Waves, Wifi } from "lucide-react";
+import type { DashboardData, Earthquake, FireHotspot, GDELTIncident, InternetOutage, NewsArticle, StockTicker } from "@/types/dashboard";
 
 type RegionKey =
   | "Africa"
@@ -40,6 +40,18 @@ interface FeedPanelItem {
   dateLabel: string;
   summary?: string;
   riskScore?: number;
+}
+
+interface WatchPanelItem {
+  id: string;
+  title: string;
+  source?: string;
+  subtitle: string;
+  meta?: string;
+  details?: string[];
+  url?: string;
+  dateLabel?: string;
+  riskScore: number;
 }
 
 const REGION_ORDER: RegionKey[] = [
@@ -156,6 +168,106 @@ function toFeedItems(items: NewsArticle[] | undefined) {
     summary: item.machine_assessment || item.summary,
     riskScore: clampRisk(item.risk_score ?? 1),
   }));
+}
+
+function sortByRisk<T extends { riskScore: number }>(items: T[], limit = 12) {
+  return [...items].sort((a, b) => b.riskScore - a.riskScore).slice(0, limit);
+}
+
+function toEarthquakeItems(items: Earthquake[] | undefined, freshness?: string | null): WatchPanelItem[] {
+  const freshnessLabel = formatDateLabel(freshness);
+  return sortByRisk(
+    (items ?? []).map((item, index) => ({
+      id: item.id || `eq-${index}`,
+      title: `M${item.mag.toFixed(1)} • ${item.place}`,
+      source: "USGS",
+      subtitle: item.title || "USGS earthquake event",
+      meta: "Depth unavailable in current payload",
+      details: [
+        `Coordinates ${item.lat.toFixed(2)}, ${item.lng.toFixed(2)}`,
+        `Magnitude ${item.mag.toFixed(1)}`,
+        `Source freshness ${freshnessLabel}`,
+      ],
+      dateLabel: freshnessLabel,
+      riskScore: clampRisk(item.mag + 1),
+    })),
+    12,
+  );
+}
+
+function toOutageItems(items: InternetOutage[] | undefined, freshness?: string | null): WatchPanelItem[] {
+  const freshnessLabel = formatDateLabel(freshness);
+  return sortByRisk(
+    (items ?? []).map((item, index) => ({
+      id: `${item.country_code}-${item.region_code}-${index}`,
+      title: `${item.country_name}${item.region_name ? ` • ${item.region_name}` : ""}`,
+      source: item.datasource || "IODA",
+      subtitle: `${item.datasource} • ${item.level}`,
+      meta: `Severity ${(item.severity * 100).toFixed(0)}%`,
+      details: [
+        `Country ${item.country_code} • Region ${item.region_code || "N/A"}`,
+        `Coordinates ${item.lat.toFixed(2)}, ${item.lng.toFixed(2)}`,
+        `Feed freshness ${freshnessLabel}`,
+      ],
+      dateLabel: freshnessLabel,
+      riskScore: clampRisk(item.severity * 10),
+    })),
+    12,
+  );
+}
+
+function toFireItems(items: FireHotspot[] | undefined): WatchPanelItem[] {
+  return sortByRisk(
+    (items ?? []).map((item, index) => ({
+      id: `${item.lat}-${item.lng}-${index}`,
+      title: `FRP ${item.frp.toFixed(1)} • Brightness ${item.brightness.toFixed(0)}`,
+      source: "NASA FIRMS",
+      subtitle: `${item.daynight.toUpperCase()} • Confidence ${item.confidence}`,
+      meta: `${item.lat.toFixed(2)}, ${item.lng.toFixed(2)}`,
+      details: [
+        `Acquired ${item.acq_date} ${item.acq_time}`,
+        `Coordinates ${item.lat.toFixed(2)}, ${item.lng.toFixed(2)}`,
+        `Confidence ${item.confidence} • ${item.daynight.toUpperCase()}`,
+      ],
+      dateLabel: formatDateLabel(`${item.acq_date}T${item.acq_time.slice(0, 2)}:${item.acq_time.slice(2, 4)}:00`),
+      riskScore: clampRisk(Math.min(10, item.frp / 20)),
+    })),
+    12,
+  );
+}
+
+function marketRiskFromTicker(ticker: StockTicker) {
+  return clampRisk(Math.min(10, Math.abs(ticker.change_percent) * 1.6 + 1));
+}
+
+function toMarketItems(stocks: Record<string, StockTicker> | undefined, oil: Record<string, StockTicker> | undefined): WatchPanelItem[] {
+  const stockItems = Object.entries(stocks ?? {}).map(([symbol, ticker]) => ({
+    id: `stock-${symbol}`,
+    title: `${symbol} ${ticker.price}`,
+    source: "Markets",
+    subtitle: `${ticker.up ? "Up" : "Down"} ${ticker.change_percent.toFixed(2)}%`,
+    meta: "Market ticker",
+    details: [
+      `Price ${ticker.price}`,
+      `Move ${ticker.change_percent.toFixed(2)}%`,
+      `Direction ${ticker.up ? "Positive" : "Negative"}`,
+    ],
+    riskScore: marketRiskFromTicker(ticker),
+  }));
+  const oilItems = Object.entries(oil ?? {}).map(([symbol, ticker]) => ({
+    id: `oil-${symbol}`,
+    title: `${symbol} ${ticker.price}`,
+    source: "Oil",
+    subtitle: `${ticker.up ? "Up" : "Down"} ${ticker.change_percent.toFixed(2)}%`,
+    meta: "Energy market",
+    details: [
+      `Price ${ticker.price}`,
+      `Move ${ticker.change_percent.toFixed(2)}%`,
+      `Direction ${ticker.up ? "Positive" : "Negative"}`,
+    ],
+    riskScore: marketRiskFromTicker(ticker),
+  }));
+  return sortByRisk([...oilItems, ...stockItems], 12);
 }
 
 function classifyRegion(lat: number, lng: number): RegionKey {
@@ -331,6 +443,89 @@ function FeedPanel({
   );
 }
 
+function WatchPanel({
+  title,
+  subtitle,
+  items,
+  accent,
+  icon,
+}: {
+  title: string;
+  subtitle: string;
+  items: WatchPanelItem[];
+  accent: string;
+  icon: React.ReactNode;
+}) {
+  return (
+    <section className="flex h-[420px] min-h-[420px] flex-col rounded-3xl border border-cyan-500/35 bg-[rgba(4,8,12,0.88)] p-4 shadow-[0_12px_50px_rgba(0,0,0,0.35),0_0_0_1px_rgba(34,211,238,0.14)] backdrop-blur-md sm:p-5">
+      <div className="mb-4 flex items-start justify-between gap-3 border-b border-cyan-900/30 pb-4">
+        <div>
+          <h3 className="text-xl font-semibold tracking-[0.08em] text-red-300">{title}</h3>
+          <p className="mt-1 text-sm text-cyan-100/55">{subtitle}</p>
+        </div>
+        <div className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] font-mono uppercase tracking-[0.24em] ${accent}`}>
+          {icon}
+          {items.length}
+        </div>
+      </div>
+      {items.length === 0 ? (
+        <div className="flex flex-1 items-center justify-center rounded-2xl border border-dashed border-cyan-900/30 bg-black/20 px-4 py-8 text-center text-sm text-cyan-100/45">
+          No items available right now.
+        </div>
+      ) : (
+        <div className="styled-scrollbar flex-1 overflow-y-auto pr-1">
+          <div className="flex flex-col gap-4">
+            {items.map((item) => {
+              const tone = getRiskTone(item.riskScore);
+              return (
+                <article key={item.id} className={`flex flex-col rounded-2xl border p-4 transition-colors ${tone.card}`}>
+                  <div className="mb-3 flex items-start justify-between gap-3">
+                    <div className="flex flex-col gap-2">
+                      {item.source ? (
+                        <div className="rounded-xl border border-cyan-900/40 bg-cyan-950/30 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.22em] text-cyan-400/80">
+                          {item.source}
+                        </div>
+                      ) : null}
+                      <div className={`w-fit rounded-xl border px-2.5 py-1 text-right text-[10px] font-mono uppercase tracking-[0.16em] ${tone.badge}`}>
+                        {riskLabel(item.riskScore)} {item.riskScore}/10
+                      </div>
+                    </div>
+                    {item.dateLabel ? (
+                      <div className="text-right text-[10px] font-mono uppercase tracking-[0.16em] text-cyan-100/45">
+                        {item.dateLabel}
+                      </div>
+                    ) : null}
+                  </div>
+                  <h4 className={`text-base font-semibold leading-6 ${tone.title}`}>{item.title}</h4>
+                  <p className="mt-2 text-sm leading-6 text-cyan-100/65">{item.subtitle}</p>
+                  {item.meta ? <p className="mt-2 text-sm text-cyan-100/45">{item.meta}</p> : null}
+                  {item.details?.length ? (
+                    <div className="mt-3 flex flex-col gap-1.5 rounded-xl border border-white/5 bg-black/15 px-3 py-2">
+                      {item.details.slice(0, 3).map((detail, index) => (
+                        <div key={index} className="text-[11px] leading-5 text-cyan-100/58">
+                          {detail}
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                  {item.url ? (
+                    <div className="mt-4 pt-2">
+                      <a href={item.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-cyan-300 transition-colors hover:text-cyan-200">
+                        Open source
+                        <ExternalLink size={14} />
+                      </a>
+                    </div>
+                  ) : null}
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 export default function GdeltNewsDashboard({ data }: GdeltNewsDashboardProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const dateLabel = formatDateLabel(data.freshness?.gdelt || data.last_updated);
@@ -338,6 +533,10 @@ export default function GdeltNewsDashboard({ data }: GdeltNewsDashboardProps) {
   const telegramItems = useMemo(() => toFeedItems(data.telegram), [data.telegram]);
   const cyberRssItems = useMemo(() => toFeedItems((data.news ?? []).filter(isCyberArticle)), [data.news]);
   const newsRssItems = useMemo(() => toFeedItems((data.news ?? []).filter((item) => !isCyberArticle(item))), [data.news]);
+  const earthquakeItems = useMemo(() => toEarthquakeItems(data.earthquakes, data.freshness?.earthquakes), [data.earthquakes, data.freshness?.earthquakes]);
+  const outageItems = useMemo(() => toOutageItems(data.internet_outages, data.freshness?.internet_outages), [data.internet_outages, data.freshness?.internet_outages]);
+  const fireItems = useMemo(() => toFireItems(data.firms_fires), [data.firms_fires]);
+  const marketItems = useMemo(() => toMarketItems(data.stocks, data.oil), [data.stocks, data.oil]);
   const totalItems = useMemo(
     () => REGION_ORDER.reduce((sum, region) => sum + (grouped.get(region)?.length || 0), 0),
     [grouped],
@@ -397,6 +596,37 @@ export default function GdeltNewsDashboard({ data }: GdeltNewsDashboardProps) {
             items={cyberRssItems}
             accent="border-emerald-900/40 bg-emerald-950/20 text-emerald-300/80"
             icon={<ShieldAlert size={13} />}
+          />
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <WatchPanel
+            title="Earthquakes"
+            subtitle="Magnitude-sorted seismic events with place and feed time."
+            items={earthquakeItems}
+            accent="border-amber-900/40 bg-amber-950/20 text-amber-300/80"
+            icon={<Activity size={13} />}
+          />
+          <WatchPanel
+            title="Internet Outages"
+            subtitle="Country and region outage panels ranked by severity."
+            items={outageItems}
+            accent="border-rose-900/40 bg-rose-950/20 text-rose-300/80"
+            icon={<Wifi size={13} />}
+          />
+          <WatchPanel
+            title="FIRMS Fires"
+            subtitle="Wildfire hotspots ranked by fire radiative power."
+            items={fireItems}
+            accent="border-orange-900/40 bg-orange-950/20 text-orange-300/80"
+            icon={<Flame size={13} />}
+          />
+          <WatchPanel
+            title="Markets"
+            subtitle="Oil and major ticker moves ranked by volatility."
+            items={marketItems}
+            accent="border-emerald-900/40 bg-emerald-950/20 text-emerald-300/80"
+            icon={<Waves size={13} />}
           />
         </div>
 
