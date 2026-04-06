@@ -1,4 +1,4 @@
-"""Regression tests for news geocoding keywords and feed configuration."""
+"""Regression tests for news geocoding keywords and news configuration."""
 import json
 from pathlib import Path
 from unittest.mock import MagicMock
@@ -8,9 +8,12 @@ import pytest
 from services.fetchers.news import _resolve_coords, _attach_machine_assessments, _generate_machine_assessment
 from services import news_feed_config
 from services.news_feed_config import DEFAULT_FEEDS
+from services import news_keyword_config
+from services.news_keyword_config import DEFAULT_KEYWORDS
 
 
 CONFIG_PATH = Path(__file__).parent.parent / "config" / "news_feeds.json"
+KEYWORD_CONFIG_PATH = Path(__file__).parent.parent / "config" / "news_keywords.json"
 
 
 # -- Keyword resolution: East Asia specific locations --------------------------
@@ -176,6 +179,33 @@ class TestFeedConfig:
 
         assert names[:2] == ["NPR", "Custom Feed"]
         assert "Voice of America" in names
+
+
+class TestKeywordConfig:
+    """DEFAULT_KEYWORDS and news_keywords.json must stay in sync."""
+
+    def test_default_keywords_match_json(self):
+        data = json.loads(KEYWORD_CONFIG_PATH.read_text(encoding="utf-8"))
+        json_keywords = data["keywords"]
+        assert sorted(DEFAULT_KEYWORDS) == sorted(json_keywords)
+
+    def test_runtime_keywords_keep_user_entries_and_append_new_defaults(self, tmp_path, monkeypatch):
+        runtime_path = tmp_path / "news_keywords.runtime.json"
+        default_path = tmp_path / "news_keywords.default.json"
+
+        runtime_path.write_text(
+            json.dumps({"keywords": ["ethiopia", "drone", "war"]}),
+            encoding="utf-8",
+        )
+        default_path.write_text(json.dumps({"keywords": DEFAULT_KEYWORDS}), encoding="utf-8")
+
+        monkeypatch.setattr(news_keyword_config, "RUNTIME_CONFIG_PATH", runtime_path)
+        monkeypatch.setattr(news_keyword_config, "DEFAULT_CONFIG_PATH", default_path)
+
+        keywords = news_keyword_config.get_keywords()
+
+        assert keywords[:3] == ["ethiopia", "drone", "war"]
+        assert "missile" in keywords
 
 
 class TestOllamaSummaries:

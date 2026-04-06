@@ -10,6 +10,7 @@ import feedparser
 from services.network_utils import fetch_with_curl
 from services.fetchers._store import latest_data, _data_lock, _mark_fresh
 from services.fetchers.retry import with_retry
+from services.news_keyword_config import get_keywords
 
 logger = logging.getLogger("services.data_fetcher")
 
@@ -322,6 +323,7 @@ def fetch_news():
     feed_config = get_feeds()
     feeds = {f["name"]: f["url"] for f in feed_config}
     source_weights = {f["name"]: f["weight"] for f in feed_config}
+    risk_keywords = get_keywords()
 
     clusters = {}
     _cluster_grid = {}
@@ -369,7 +371,6 @@ def fetch_news():
                 elif alert_level == "Orange": risk_score = 7
                 else: risk_score = 4
             else:
-                risk_keywords = ['war', 'missile', 'strike', 'attack', 'crisis', 'tension', 'military', 'conflict', 'defense', 'clash', 'nuclear']
                 text = (title + " " + summary).lower()
 
                 risk_score = 1

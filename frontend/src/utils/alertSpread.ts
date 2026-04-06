@@ -18,6 +18,14 @@ export interface SpreadAlertItem extends NewsArticle {
     showLine: boolean;
 }
 
+function buildAlertKey(item: Pick<NewsArticle, "title" | "coords" | "source" | "published" | "link">, fallbackIdx?: number): string {
+    const coordsPart = item.coords ? `${item.coords[0]},${item.coords[1]}` : "no-coords";
+    const sourcePart = item.source || "unknown-source";
+    const publishedPart = item.published || "unknown-time";
+    const linkPart = item.link || `idx-${fallbackIdx ?? 0}`;
+    return `${item.title}|${coordsPart}|${sourcePart}|${publishedPart}|${linkPart}`;
+}
+
 /** Estimate rendered box height based on title length */
 function estimateBoxH(n: { title?: string; cluster_count?: number }): number {
     const titleLen = (n.title || "").length;
@@ -130,12 +138,12 @@ export function spreadAlertItems(
 
     return items
         .filter((item) => {
-            const alertKey = `${item.title}|${item.coords?.[0]},${item.coords?.[1]}`;
+            const alertKey = buildAlertKey(item, item.originalIdx);
             return !dismissedAlerts.has(alertKey);
         })
         .map((item) => ({
             ...item,
-            alertKey: `${item.title}|${item.coords?.[0]},${item.coords?.[1]}`,
+            alertKey: buildAlertKey(item, item.originalIdx),
             showLine: Math.abs(item.offsetX) > 5 || Math.abs(item.offsetY) > 5,
         })) as SpreadAlertItem[];
 }

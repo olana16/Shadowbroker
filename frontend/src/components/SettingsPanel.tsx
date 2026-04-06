@@ -46,6 +46,7 @@ const WEIGHT_COLORS: Record<number, string> = {
     5: "text-red-400 border-red-600",
 };
 const MAX_FEEDS = 50;
+const MAX_NEWS_KEYWORDS = 100;
 const MAX_TELEGRAM_CHANNELS = 20;
 const MAX_LIVE_VIDEO_CHANNELS = 20;
 
@@ -90,6 +91,10 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
     const [feedsDirty, setFeedsDirty] = useState(false);
     const [feedSaving, setFeedSaving] = useState(false);
     const [feedMsg, setFeedMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
+    const [newsKeywords, setNewsKeywords] = useState<string[]>([]);
+    const [keywordsDirty, setKeywordsDirty] = useState(false);
+    const [keywordSaving, setKeywordSaving] = useState(false);
+    const [keywordMsg, setKeywordMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
     const [telegramChannels, setTelegramChannels] = useState<TelegramChannelEntry[]>([]);
     const [telegramDirty, setTelegramDirty] = useState(false);
     const [telegramSaving, setTelegramSaving] = useState(false);
@@ -122,6 +127,18 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
         }
     }, []);
 
+    const fetchNewsKeywords = useCallback(async () => {
+        try {
+            const res = await fetch(`${API_BASE}/api/settings/news-keywords`);
+            if (res.ok) {
+                setNewsKeywords(await res.json());
+                setKeywordsDirty(false);
+            }
+        } catch (e) {
+            console.error("Failed to fetch news keywords", e);
+        }
+    }, []);
+
     const fetchTelegramChannels = useCallback(async () => {
         try {
             const res = await fetch(`${API_BASE}/api/settings/telegram-channels`);
@@ -150,10 +167,11 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
         if (isOpen) {
             fetchKeys();
             fetchFeeds();
+            fetchNewsKeywords();
             fetchTelegramChannels();
             fetchLiveVideoChannels();
         }
-    }, [isOpen, fetchKeys, fetchFeeds, fetchTelegramChannels, fetchLiveVideoChannels]);
+    }, [isOpen, fetchKeys, fetchFeeds, fetchNewsKeywords, fetchTelegramChannels, fetchLiveVideoChannels]);
 
     // API Keys handlers
     const startEditing = (api: ApiEntry) => { setEditingId(api.id); setEditValue(""); };
@@ -242,6 +260,65 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
             }
         } catch {
             setFeedMsg({ type: "err", text: "Reset failed" });
+        }
+    };
+
+    const updateKeyword = (idx: number, value: string) => {
+        setNewsKeywords(prev => prev.map((keyword, i) => i === idx ? value : keyword));
+        setKeywordsDirty(true);
+        setKeywordMsg(null);
+    };
+
+    const removeKeyword = (idx: number) => {
+        setNewsKeywords(prev => prev.filter((_, i) => i !== idx));
+        setKeywordsDirty(true);
+        setKeywordMsg(null);
+    };
+
+    const addKeyword = () => {
+        if (newsKeywords.length >= MAX_NEWS_KEYWORDS) return;
+        setNewsKeywords(prev => [...prev, ""]);
+        setKeywordsDirty(true);
+        setKeywordMsg(null);
+    };
+
+    const saveKeywords = async () => {
+        setKeywordSaving(true);
+        setKeywordMsg(null);
+        try {
+            const res = await fetch(`${API_BASE}/api/settings/news-keywords`, {
+                method: "PUT",
+                headers: adminHeaders({ "Content-Type": "application/json" }),
+                body: JSON.stringify(newsKeywords),
+            });
+            if (res.ok) {
+                setKeywordsDirty(false);
+                setKeywordMsg({ type: "ok", text: "Keywords saved. Changes take effect on next news refresh (~30min) or manual /api/refresh." });
+            } else {
+                const d = await res.json().catch(() => ({}));
+                setKeywordMsg({ type: "err", text: d.message || "Save failed" });
+            }
+        } catch {
+            setKeywordMsg({ type: "err", text: "Network error" });
+        } finally {
+            setKeywordSaving(false);
+        }
+    };
+
+    const resetKeywords = async () => {
+        try {
+            const res = await fetch(`${API_BASE}/api/settings/news-keywords/reset`, {
+                method: "POST",
+                headers: adminHeaders(),
+            });
+            if (res.ok) {
+                const d = await res.json();
+                setNewsKeywords(d.keywords || []);
+                setKeywordsDirty(false);
+                setKeywordMsg({ type: "ok", text: "Reset to defaults" });
+            }
+        } catch {
+            setKeywordMsg({ type: "err", text: "Reset failed" });
         }
     };
 
@@ -566,13 +643,56 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
                                     <div className="flex items-start gap-2">
                                         <Rss size={12} className="text-orange-500 mt-0.5 flex-shrink-0" />
                                         <p className="text-[10px] text-[var(--text-secondary)] font-mono leading-relaxed">
-                                            Configure RSS/Atom feeds for the Threat Intel news panel. Each feed is scored by keyword heuristics and weighted by the priority you set. Up to <span className="text-orange-400">{MAX_FEEDS}</span> sources.
+                                            Configure RSS/Atom feeds and the news risk keywords used by the Threat Intel panel. Each feed is weighted by the priority you set, and matching keywords raise a story&apos;s risk score.
                                         </p>
                                     </div>
                                 </div>
 
                                 {/* Feed List */}
                                 <div className="flex-1 overflow-y-auto styled-scrollbar p-4 space-y-2">
+                                    <div className="rounded-lg border border-orange-900/30 bg-orange-950/10 p-3 mb-3">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <div>
+                                                <div className="text-[10px] font-mono tracking-widest text-orange-400">NEWS RISK KEYWORDS</div>
+                                                <div className="text-[9px] font-mono text-[var(--text-muted)] mt-1">
+                                                    Add words like <span className="text-orange-300">ethiopia</span>, <span className="text-orange-300">drone</span>, or <span className="text-orange-300">blackout</span> to boost matching stories.
+                                                </div>
+                                            </div>
+                                            <button
+                                                onClick={addKeyword}
+                                                disabled={newsKeywords.length >= MAX_NEWS_KEYWORDS}
+                                                className="px-2 py-1 rounded border border-dashed border-orange-500/40 text-orange-400 hover:bg-orange-500/10 transition-all text-[9px] font-mono flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed"
+                                            >
+                                                <Plus size={10} />
+                                                ADD
+                                            </button>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            {newsKeywords.map((keyword, idx) => (
+                                                <div key={`news-keyword-${idx}`} className="flex items-center gap-1.5 group">
+                                                    <input
+                                                        type="text"
+                                                        value={keyword}
+                                                        onChange={(e) => updateKeyword(idx, e.target.value)}
+                                                        className="flex-1 bg-black/30 border border-[var(--border-primary)]/40 rounded px-2 py-1 text-[10px] font-mono text-[var(--text-secondary)] outline-none focus:border-orange-500/50 focus:text-orange-200 transition-colors"
+                                                        placeholder="keyword..."
+                                                    />
+                                                    <button
+                                                        onClick={() => removeKeyword(idx)}
+                                                        className="w-6 h-6 rounded flex items-center justify-center text-[var(--text-muted)] hover:text-red-400 hover:bg-red-950/20 transition-all opacity-0 group-hover:opacity-100"
+                                                        title="Remove keyword"
+                                                    >
+                                                        <Trash2 size={11} />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className="flex items-center justify-between text-[9px] text-[var(--text-muted)] font-mono mt-3">
+                                            <span>{newsKeywords.length}/{MAX_NEWS_KEYWORDS} KEYWORDS</span>
+                                            <span>MATCHES ARE CASE-INSENSITIVE</span>
+                                        </div>
+                                    </div>
+
                                     {feeds.map((feed, idx) => (
                                         <div key={idx} className="rounded-lg border border-[var(--border-primary)]/60 p-3 hover:border-[var(--border-secondary)]/60 transition-colors group">
                                             {/* Row 1: Name + Weight + Delete */}
@@ -636,10 +756,23 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
                                         {feedMsg.text}
                                     </div>
                                 )}
+                                {keywordMsg && (
+                                    <div className={`mx-4 mb-2 px-3 py-2 rounded text-[10px] font-mono ${keywordMsg.type === "ok" ? "text-green-400 bg-green-950/20 border border-green-900/30" : "text-red-400 bg-red-950/20 border border-red-900/30"}`}>
+                                        {keywordMsg.text}
+                                    </div>
+                                )}
 
                                 {/* Footer */}
                                 <div className="p-4 border-t border-[var(--border-primary)]/80">
                                     <div className="flex items-center gap-2">
+                                        <button
+                                            onClick={saveKeywords}
+                                            disabled={!keywordsDirty || keywordSaving}
+                                            className="px-3 py-2 rounded bg-orange-500/15 border border-orange-500/30 text-orange-300 hover:bg-orange-500/25 transition-colors text-[10px] font-mono flex items-center justify-center gap-1.5 disabled:opacity-30 disabled:cursor-not-allowed"
+                                        >
+                                            <Save size={10} />
+                                            {keywordSaving ? "SAVING..." : "SAVE KEYWORDS"}
+                                        </button>
                                         <button
                                             onClick={saveFeeds}
                                             disabled={!feedsDirty || feedSaving}
@@ -654,7 +787,15 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
                                             title="Reset to defaults"
                                         >
                                             <RotateCcw size={10} />
-                                            RESET
+                                            FEEDS
+                                        </button>
+                                        <button
+                                            onClick={resetKeywords}
+                                            className="px-3 py-2 rounded border border-[var(--border-primary)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-secondary)] transition-all text-[10px] font-mono flex items-center gap-1.5"
+                                            title="Reset keywords to defaults"
+                                        >
+                                            <RotateCcw size={10} />
+                                            KEYWORDS
                                         </button>
                                     </div>
                                     <div className="flex items-center justify-between text-[9px] text-[var(--text-muted)] font-mono mt-2">
