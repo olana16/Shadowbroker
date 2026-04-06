@@ -3,13 +3,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { BarChart3, ChevronLeft, ChevronRight, Newspaper, Radar, ShieldAlert, SlidersHorizontal, Tv } from "lucide-react";
 import WorldviewLeftPanel from "@/components/WorldviewLeftPanel";
 import NewsFeed from "@/components/NewsFeed";
 import MarketsPanel from "@/components/MarketsPanel";
 import FilterPanel from "@/components/FilterPanel";
 import FindLocateBar from "@/components/FindLocateBar";
 import TopRightControls from "@/components/TopRightControls";
+import CyberThreatPanel from "@/components/CyberThreatPanel";
 import SettingsPanel from "@/components/SettingsPanel";
 import MapLegend from "@/components/MapLegend";
 import RegionWatchPanel from "@/components/RegionWatchPanel";
@@ -154,6 +155,7 @@ export default function DashboardContent() {
   const [uiVisible, setUiVisible] = useState(true);
   const [leftOpen, setLeftOpen] = useState(true);
   const [rightOpen, setRightOpen] = useState(true);
+  const [rightPanelView, setRightPanelView] = useState<"news" | "region" | "cyber" | "markets" | "live" | "filters">("news");
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [legendOpen, setLegendOpen] = useState(false);
   const [mapView, setMapView] = useState({ zoom: 2, latitude: 20 });
@@ -218,6 +220,17 @@ export default function DashboardContent() {
     });
   };
 
+  const rightPanelTabs = [
+    { key: "news", label: "NEWS", icon: Newspaper, description: "RSS and Telegram intercepts in one feed" },
+    { key: "region", label: "REGION", icon: Radar, description: "Watch one country across all live feeds" },
+    { key: "cyber", label: "CYBER", icon: ShieldAlert, description: "Exploited vulnerabilities and cyber reporting" },
+    { key: "markets", label: "MARKETS", icon: BarChart3, description: "Defense stocks and commodity movement" },
+    { key: "live", label: "LIVE", icon: Tv, description: "Live video sources and channels" },
+    { key: "filters", label: "FILTERS", icon: SlidersHorizontal, description: "Refine flights and tracked activity" },
+  ] as const;
+
+  const activeRightPanel = rightPanelTabs.find((tab) => tab.key === rightPanelView) || rightPanelTabs[0];
+
   return (
     <DashboardDataProvider data={data} selectedEntity={selectedEntity} setSelectedEntity={setSelectedEntity}>
       <main className="min-h-screen w-full overflow-y-auto bg-[var(--bg-primary)] font-sans text-[var(--foreground)]">
@@ -253,27 +266,6 @@ export default function DashboardContent() {
 
           {uiVisible && (
             <>
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                className="hud-zone pointer-events-none absolute top-6 left-6 z-[200] flex items-center gap-4"
-              >
-                <div className="flex h-8 w-8 items-center justify-center">
-                  <div className="relative flex h-6 w-6 items-center justify-center rounded-full border border-cyan-500">
-                    <div className="h-4 w-4 rounded-full bg-cyan-500/30" />
-                    <div className="absolute top-[-2px] bottom-[-2px] w-[1px] bg-cyan-500" />
-                    <div className="absolute left-[-2px] right-[-2px] h-[1px] bg-cyan-500" />
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  <h1 className="flex items-center gap-3 text-2xl font-bold tracking-[0.4em] text-[var(--text-primary)]" style={{ fontFamily: "monospace" }}>
-                    <span className="text-cyan-400">CIWD</span>
-                  </h1>
-                  <span className="mt-1 ml-1 font-mono text-[9px] tracking-[0.3em] text-[var(--text-muted)]">GLOBAL THREAT INTERCEPT</span>
-                </div>
-              </motion.div>
-
               <div className="hud-zone pointer-events-none absolute top-2 left-6 z-[200] text-[8px] font-mono tracking-widest text-cyan-500/50">
                 OPTIC VIS:113 SRC:180 DENS:1.42 0.8ms
               </div>
@@ -290,16 +282,6 @@ export default function DashboardContent() {
               >
                 <ErrorBoundary name="WorldviewLeftPanel">
                   <WorldviewLeftPanel data={data} activeLayers={activeLayers} setActiveLayers={setActiveLayers} onSettingsClick={() => setSettingsOpen(true)} onLegendClick={() => setLegendOpen(true)} gibsDate={gibsDate} setGibsDate={setGibsDate} gibsOpacity={gibsOpacity} setGibsOpacity={setGibsOpacity} onEntityClick={setSelectedEntity} onFlyTo={(lat, lng) => setFlyToLocation({ lat, lng, ts: Date.now() })} trackedSdr={trackedSdr} setTrackedSdr={setTrackedSdr} />
-                </ErrorBoundary>
-              </motion.div>
-
-              <motion.div
-                className="hud-zone pointer-events-auto absolute left-[22.5rem] top-24 bottom-6 z-[199] flex w-80 flex-col max-xl:hidden"
-                animate={{ x: leftOpen ? 0 : -360, opacity: leftOpen ? 1 : 0 }}
-                transition={{ type: "spring", damping: 30, stiffness: 250 }}
-              >
-                <ErrorBoundary name="NewsFeedLeftDock">
-                  <NewsFeed data={data} selectedEntity={selectedEntity} regionDossier={regionDossier} regionDossierLoading={regionDossierLoading} />
                 </ErrorBoundary>
               </motion.div>
 
@@ -332,84 +314,131 @@ export default function DashboardContent() {
               </motion.div>
 
               <motion.div
-                className="hud-zone styled-scrollbar pointer-events-auto absolute right-6 top-24 bottom-6 z-[200] flex w-80 flex-col gap-4 overflow-y-auto pr-2 max-lg:hidden"
+                className="hud-zone pointer-events-auto absolute right-6 top-24 bottom-6 z-[200] flex w-[22rem] flex-col max-lg:hidden"
                 animate={{ x: rightOpen ? 0 : 360 }}
                 transition={{ type: "spring", damping: 30, stiffness: 250 }}
               >
-                <TopRightControls />
+                <div className="flex h-full min-h-0 flex-col rounded-2xl border border-cyan-900/40 bg-[var(--bg-primary)]/72 p-3 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+                  <TopRightControls />
 
-                <div className="shrink-0">
-                  <FindLocateBar
-                    data={data}
-                    onLocate={(lat, lng) => {
-                      setFlyToLocation({ lat, lng, ts: Date.now() });
-                    }}
-                    onFilter={(filterKey, value) => {
-                      setActiveFilters((prev) => {
-                        const current = prev[filterKey] || [];
-                        if (!current.includes(value)) {
-                          return { ...prev, [filterKey]: [...current, value] };
-                        }
-                        return prev;
-                      });
-                    }}
-                  />
-                </div>
-
-                <div className="shrink-0">
-                  <ErrorBoundary name="RegionWatchPanel">
-                    <RegionWatchPanel
-                      watchRegion={watchRegion}
-                      watchResults={watchResults}
-                      onSetWatchRegion={(region) => {
-                        setWatchRegion(region);
-                        const center = getWatchRegionCenter(region);
-                        setFlyToLocation({
-                          ...center,
-                          ts: Date.now(),
-                          bounds: {
-                            south: region.south,
-                            west: region.west,
-                            north: region.north,
-                            east: region.east,
-                          },
-                        });
+                  <div className="mt-3 shrink-0">
+                    <FindLocateBar
+                      data={data}
+                      onLocate={(lat, lng) => {
+                        setFlyToLocation({ lat, lng, ts: Date.now() });
                       }}
-                      onClearWatchRegion={() => setWatchRegion(null)}
-                      onFocusResult={focusWatchResult}
-                      onFlyToRegion={(region) => {
-                        const center = getWatchRegionCenter(region);
-                        setFlyToLocation({
-                          ...center,
-                          ts: Date.now(),
-                          bounds: {
-                            south: region.south,
-                            west: region.west,
-                            north: region.north,
-                            east: region.east,
-                          },
+                      onFilter={(filterKey, value) => {
+                        setActiveFilters((prev) => {
+                          const current = prev[filterKey] || [];
+                          if (!current.includes(value)) {
+                            return { ...prev, [filterKey]: [...current, value] };
+                          }
+                          return prev;
                         });
                       }}
                     />
-                  </ErrorBoundary>
-                </div>
+                  </div>
 
-                <div className="shrink-0">
-                  <ErrorBoundary name="MarketsPanel">
-                    <MarketsPanel data={data} />
-                  </ErrorBoundary>
-                </div>
+                  <div className="mt-3 shrink-0 rounded-xl border border-[var(--border-primary)]/70 bg-black/20 p-1.5">
+                    <div className="grid grid-cols-6 gap-1">
+                      {rightPanelTabs.map((tab) => {
+                        const Icon = tab.icon;
+                        const isActive = rightPanelView === tab.key;
+                        return (
+                          <button
+                            key={tab.key}
+                            type="button"
+                            onClick={() => setRightPanelView(tab.key)}
+                            className={`flex flex-col items-center gap-1 rounded-lg px-2 py-2 text-[8px] font-mono tracking-[0.18em] transition-colors ${
+                              isActive
+                                ? "bg-cyan-500/15 text-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.12)]"
+                                : "text-[var(--text-muted)] hover:bg-cyan-950/20 hover:text-cyan-300"
+                            }`}
+                            title={tab.description}
+                          >
+                            <Icon size={13} />
+                            <span>{tab.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
 
-                <div className="shrink-0">
-                  <ErrorBoundary name="LiveNewsPanel">
-                    <LiveNewsPanel />
-                  </ErrorBoundary>
-                </div>
+                  <div className="mt-3 shrink-0 rounded-xl border border-[var(--border-primary)]/60 bg-black/20 px-3 py-2">
+                    <div className="font-mono text-[8px] tracking-[0.24em] text-cyan-500/70">GLOBAL THREAT INTERCEPT</div>
+                    <div className="font-mono text-[10px] tracking-[0.18em] text-cyan-300">{activeRightPanel.label} WORKSPACE</div>
+                    <div className="mt-1 text-[9px] font-mono text-[var(--text-muted)]">{activeRightPanel.description}</div>
+                  </div>
 
-                <div className="shrink-0">
-                  <ErrorBoundary name="FilterPanel">
-                    <FilterPanel data={data} activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
-                  </ErrorBoundary>
+                  <div className="mt-3 min-h-0 flex-1 overflow-hidden">
+                    {rightPanelView === "news" && (
+                      <ErrorBoundary name="NewsFeedRightDock">
+                        <NewsFeed data={data} selectedEntity={selectedEntity} regionDossier={regionDossier} regionDossierLoading={regionDossierLoading} />
+                      </ErrorBoundary>
+                    )}
+
+                    {rightPanelView === "region" && (
+                      <ErrorBoundary name="RegionWatchPanel">
+                        <RegionWatchPanel
+                          watchRegion={watchRegion}
+                          watchResults={watchResults}
+                          onSetWatchRegion={(region) => {
+                            setWatchRegion(region);
+                            const center = getWatchRegionCenter(region);
+                            setFlyToLocation({
+                              ...center,
+                              ts: Date.now(),
+                              bounds: {
+                                south: region.south,
+                                west: region.west,
+                                north: region.north,
+                                east: region.east,
+                              },
+                            });
+                          }}
+                          onClearWatchRegion={() => setWatchRegion(null)}
+                          onFocusResult={focusWatchResult}
+                          onFlyToRegion={(region) => {
+                            const center = getWatchRegionCenter(region);
+                            setFlyToLocation({
+                              ...center,
+                              ts: Date.now(),
+                              bounds: {
+                                south: region.south,
+                                west: region.west,
+                                north: region.north,
+                                east: region.east,
+                              },
+                            });
+                          }}
+                        />
+                      </ErrorBoundary>
+                    )}
+
+                    {rightPanelView === "cyber" && (
+                      <ErrorBoundary name="CyberThreatPanel">
+                        <CyberThreatPanel data={data} />
+                      </ErrorBoundary>
+                    )}
+
+                    {rightPanelView === "markets" && (
+                      <ErrorBoundary name="MarketsPanel">
+                        <MarketsPanel data={data} />
+                      </ErrorBoundary>
+                    )}
+
+                    {rightPanelView === "live" && (
+                      <ErrorBoundary name="LiveNewsPanel">
+                        <LiveNewsPanel />
+                      </ErrorBoundary>
+                    )}
+
+                    {rightPanelView === "filters" && (
+                      <ErrorBoundary name="FilterPanel">
+                        <FilterPanel data={data} activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
+                      </ErrorBoundary>
+                    )}
+                  </div>
                 </div>
               </motion.div>
 

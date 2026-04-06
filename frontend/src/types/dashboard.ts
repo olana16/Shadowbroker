@@ -272,6 +272,30 @@ export interface NewsArticle {
   telegram_message_id?: number;
 }
 
+export interface CybersecurityThreat {
+  id: string;
+  type: "vulnerability" | "advisory" | "incident";
+  title: string;
+  summary?: string;
+  source: string;
+  link: string;
+  published?: string;
+  risk_score: number;
+  severity: "critical" | "high" | "medium" | "low";
+  cve?: string;
+  vendor?: string;
+  product?: string;
+  known_ransomware?: boolean;
+  due_date?: string;
+  required_action?: string;
+  notes?: string;
+  short_description?: string;
+  tags?: string[];
+  lat?: number;
+  lng?: number;
+  coords?: [number, number];
+}
+
 // ─── UKRAINE FRONTLINE ──────────────────────────────────────────────────────
 
 export interface FrontlineGeoJSON {
@@ -423,6 +447,7 @@ export interface DashboardData {
 
   // Slow tier
   news?: NewsArticle[];
+  cybersecurity?: CybersecurityThreat[];
   telegram?: NewsArticle[];
   stocks?: StocksData;
   oil?: OilData;
@@ -496,7 +521,7 @@ export interface WatchResultItem {
   subtitle?: string;
   lat: number;
   lng: number;
-  scope: "flights" | "outages" | "fires" | "news" | "satellites";
+  scope: "flights" | "outages" | "fires" | "news" | "earthquakes" | "satellites";
   severity?: string;
   entityType?: string;
   entityId?: string | number;
