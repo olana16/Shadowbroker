@@ -10,7 +10,6 @@ import MarketsPanel from "@/components/MarketsPanel";
 import FilterPanel from "@/components/FilterPanel";
 import FindLocateBar from "@/components/FindLocateBar";
 import TopRightControls from "@/components/TopRightControls";
-import RadioInterceptPanel from "@/components/RadioInterceptPanel";
 import SettingsPanel from "@/components/SettingsPanel";
 import MapLegend from "@/components/MapLegend";
 import RegionWatchPanel from "@/components/RegionWatchPanel";
@@ -199,9 +198,6 @@ export default function DashboardContent() {
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [flyToLocation, setFlyToLocation] = useState<{ lat: number; lng: number; ts: number; zoom?: number; bounds?: { south: number; west: number; north: number; east: number } } | null>(null);
   const [watchRegion, setWatchRegion] = useState<WatchRegion | null>(null);
-  const [isEavesdropping, setIsEavesdropping] = useState(false);
-  const [eavesdropLocation, setEavesdropLocation] = useState<{ lat: number; lng: number } | null>(null);
-  const [cameraCenter, setCameraCenter] = useState<{ lat: number; lng: number } | null>(null);
   const { showOnboarding, setShowOnboarding } = useOnboarding();
   const { showChangelog, setShowChangelog } = useChangelog();
   const watchResults = useMemo(() => filterDashboardDataForWatchRegion(data, watchRegion), [data, watchRegion]);
@@ -239,9 +235,6 @@ export default function DashboardContent() {
                 flyToLocation={flyToLocation}
                 gibsDate={gibsDate}
                 gibsOpacity={gibsOpacity}
-                isEavesdropping={isEavesdropping}
-                onEavesdropClick={setEavesdropLocation}
-                onCameraMove={setCameraCenter}
                 onMouseCoords={handleMouseCoords}
                 onRightClick={handleMapRightClick}
                 regionDossier={regionDossier}
@@ -410,19 +403,6 @@ export default function DashboardContent() {
                 <div className="shrink-0">
                   <ErrorBoundary name="LiveNewsPanel">
                     <LiveNewsPanel />
-                  </ErrorBoundary>
-                </div>
-
-                <div className="shrink-0">
-                  <ErrorBoundary name="RadioInterceptPanel">
-                    <RadioInterceptPanel
-                      data={data}
-                      isEavesdropping={isEavesdropping}
-                      setIsEavesdropping={setIsEavesdropping}
-                      eavesdropLocation={eavesdropLocation}
-                      cameraCenter={cameraCenter}
-                      selectedEntity={selectedEntity}
-                    />
                   </ErrorBoundary>
                 </div>
 
