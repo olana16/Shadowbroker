@@ -18,7 +18,7 @@ export interface SpreadAlertItem extends NewsArticle {
     showLine: boolean;
 }
 
-function buildAlertKey(item: Pick<NewsArticle, "title" | "coords" | "source" | "published" | "link">, fallbackIdx?: number): string {
+export function buildNewsAlertKey(item: Pick<NewsArticle, "title" | "coords" | "source" | "published" | "link">, fallbackIdx?: number): string {
     const coordsPart = item.coords ? `${item.coords[0]},${item.coords[1]}` : "no-coords";
     const sourcePart = item.source || "unknown-source";
     const publishedPart = item.published || "unknown-time";
@@ -45,7 +45,7 @@ export function spreadAlertItems(
 ): SpreadAlertItem[] {
     const pixelsPerDeg = (256 * Math.pow(2, zoom)) / 360;
 
-    let items = news
+    const items = news
         .map((n, idx) => ({ ...n, originalIdx: idx }))
         .filter((n) => n.coords)
         .map((n) => ({
@@ -138,12 +138,12 @@ export function spreadAlertItems(
 
     return items
         .filter((item) => {
-            const alertKey = buildAlertKey(item, item.originalIdx);
+            const alertKey = buildNewsAlertKey(item, item.originalIdx);
             return !dismissedAlerts.has(alertKey);
         })
         .map((item) => ({
             ...item,
-            alertKey: buildAlertKey(item, item.originalIdx),
+            alertKey: buildNewsAlertKey(item, item.originalIdx),
             showLine: Math.abs(item.offsetX) > 5 || Math.abs(item.offsetY) > 5,
         })) as SpreadAlertItem[];
 }

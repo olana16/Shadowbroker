@@ -76,6 +76,7 @@ _BLIND_SPOT_REGIONS = [
     {"name": "Chengdu",       "lat": 30.6, "lon": 104.1, "radius_nm": 250},
     {"name": "Lagos-Accra",   "lat": 6.5,  "lon": 3.4,   "radius_nm": 250},
     {"name": "Addis Ababa",   "lat": 9.0,  "lon": 38.7,  "radius_nm": 250},
+    {"name": "Ethiopia", "lat": 9.145, "lon": 40.489673, "radius_nm": 250},
 ]
 _SUPPLEMENTAL_FETCH_INTERVAL = 120
 last_supplemental_fetch = 0

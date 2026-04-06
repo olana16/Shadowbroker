@@ -49,6 +49,7 @@ import { INTERP_TICK_MS, ALERT_BOX_WIDTH_PX, ALERT_MAX_OFFSET_PX } from "@/lib/c
 import { useInterpolation } from "@/components/map/hooks/useInterpolation";
 import { useClusterLabels } from "@/components/map/hooks/useClusterLabels";
 import { spreadAlertItems } from "@/utils/alertSpread";
+import { buildWatchRegionGeoJSON } from "@/utils/regionWatch";
 import {
     buildEarthquakesGeoJSON, buildJammingGeoJSON, buildCctvGeoJSON, buildKiwisdrGeoJSON,
     buildFirmsGeoJSON, buildInternetOutagesGeoJSON, buildDataCentersGeoJSON, buildPowerPlantsGeoJSON, buildMilitaryBasesGeoJSON,
@@ -96,7 +97,7 @@ function inferCctvMediaType(url: string, mediaType?: string) {
 const CCTV_NO_SIGNAL_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23111' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2306b6d4' font-family='monospace' font-size='14'%3ENO SIGNAL%3C/text%3E%3C/svg%3E";
 const CCTV_FEED_UNAVAILABLE_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23111' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2306b6d4' font-family='monospace' font-size='14'%3EFEED UNAVAILABLE%3C/text%3E%3C/svg%3E";
 
-const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, selectedEntity, onMouseCoords, onRightClick, regionDossier, regionDossierLoading, onViewStateChange, measureMode, onMeasureClick, measurePoints, gibsDate, gibsOpacity, viewBoundsRef, setTrackedSdr }: MaplibreViewerProps) => {
+const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, selectedEntity, watchRegion, onMouseCoords, onRightClick, regionDossier, regionDossierLoading, onViewStateChange, measureMode, onMeasureClick, measurePoints, gibsDate, gibsOpacity, viewBoundsRef, setTrackedSdr }: MaplibreViewerProps) => {
     const mapRef = useRef<MapRef>(null);
     const [mapReady, setMapReady] = useState(false);
     const { theme } = useTheme();
@@ -225,13 +226,28 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
 
     useEffect(() => {
         if (flyToLocation && mapRef.current) {
-            mapRef.current.flyTo({
-                center: [flyToLocation.lng, flyToLocation.lat],
-                zoom: 8,
-                duration: 1500
-            });
+            if (flyToLocation.bounds) {
+                mapRef.current.fitBounds(
+                    [
+                        [flyToLocation.bounds.west, flyToLocation.bounds.south],
+                        [flyToLocation.bounds.east, flyToLocation.bounds.north],
+                    ],
+                    { padding: 80, duration: 1500 }
+                );
+            } else {
+                mapRef.current.flyTo({
+                    center: [flyToLocation.lng, flyToLocation.lat],
+                    zoom: flyToLocation.zoom ?? 8,
+                    duration: 1500
+                });
+            }
         }
     }, [flyToLocation]);
+
+    const watchRegionGeoJSON = useMemo(() =>
+        watchRegion ? buildWatchRegionGeoJSON(watchRegion) : null,
+        [watchRegion]
+    );
 
     const earthquakesGeoJSON = useMemo(() =>
         activeLayers.earthquakes ? buildEarthquakesGeoJSON(data?.earthquakes) : null,
@@ -840,6 +856,29 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             paint={{
                                 'fill-color': '#0a0e1a',
                                 'fill-opacity': 0.35,
+                            }}
+                        />
+                    </Source>
+                )}
+
+                {watchRegionGeoJSON && (
+                    <Source id="watch-region" type="geojson" data={watchRegionGeoJSON as any}>
+                        <Layer
+                            id="watch-region-fill"
+                            type="fill"
+                            paint={{
+                                'fill-color': '#06b6d4',
+                                'fill-opacity': 0.06,
+                            }}
+                        />
+                        <Layer
+                            id="watch-region-line"
+                            type="line"
+                            paint={{
+                                'line-color': '#22d3ee',
+                                'line-width': 2,
+                                'line-opacity': 0.85,
+                                'line-dasharray': [2, 2],
                             }}
                         />
                     </Source>

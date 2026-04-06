@@ -480,6 +480,38 @@ export interface SelectedEntity {
   extra?: Record<string, any>;
 }
 
+export interface WatchRegion {
+  mode: "country";
+  label: string;
+  south: number;
+  west: number;
+  north: number;
+  east: number;
+  query?: string;
+}
+
+export interface WatchResultItem {
+  id: string;
+  title: string;
+  subtitle?: string;
+  lat: number;
+  lng: number;
+  scope: "flights" | "outages" | "fires" | "news" | "satellites";
+  severity?: string;
+  entityType?: string;
+  entityId?: string | number;
+}
+
+export interface WatchRegionResults {
+  flights: WatchResultItem[];
+  outages: WatchResultItem[];
+  fires: WatchResultItem[];
+  news: WatchResultItem[];
+  earthquakes: WatchResultItem[];
+  satellites: WatchResultItem[];
+  total: number;
+}
+
 export interface MeasurePoint {
   lat: number;
   lng: number;
@@ -496,8 +528,9 @@ export interface MaplibreViewerProps {
   activeFilters?: Record<string, string[]>;
   effects?: MapEffects;
   onEntityClick: (entity: SelectedEntity | null) => void;
-  flyToLocation: { lat: number; lng: number; zoom?: number; ts?: number } | null;
+  flyToLocation: { lat: number; lng: number; zoom?: number; ts?: number; bounds?: { south: number; west: number; north: number; east: number } } | null;
   selectedEntity: SelectedEntity | null;
+  watchRegion?: WatchRegion | null;
   onMouseCoords: (coords: { lat: number; lng: number }) => void;
   onRightClick: (coords: { lat: number; lng: number }) => void;
   regionDossier: RegionDossier | null;

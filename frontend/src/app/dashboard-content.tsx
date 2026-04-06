@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -13,17 +13,19 @@ import TopRightControls from "@/components/TopRightControls";
 import RadioInterceptPanel from "@/components/RadioInterceptPanel";
 import SettingsPanel from "@/components/SettingsPanel";
 import MapLegend from "@/components/MapLegend";
+import RegionWatchPanel from "@/components/RegionWatchPanel";
 import ScaleBar from "@/components/ScaleBar";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import GdeltNewsDashboard from "@/components/GdeltNewsDashboard";
 import { DashboardDataProvider } from "@/lib/DashboardDataContext";
 import OnboardingModal, { useOnboarding } from "@/components/OnboardingModal";
 import ChangelogModal, { useChangelog } from "@/components/ChangelogModal";
-import type { KiwiSDR, SelectedEntity } from "@/types/dashboard";
+import type { KiwiSDR, SelectedEntity, WatchRegion, WatchResultItem } from "@/types/dashboard";
 import { NOMINATIM_DEBOUNCE_MS } from "@/lib/constants";
 import { useDataPolling } from "@/hooks/useDataPolling";
 import { useReverseGeocode } from "@/hooks/useReverseGeocode";
 import { useRegionDossier } from "@/hooks/useRegionDossier";
+import { filterDashboardDataForWatchRegion, getWatchRegionCenter } from "@/utils/regionWatch";
 
 const MaplibreViewer = dynamic(() => import("@/components/MaplibreViewer"), { ssr: false });
 const LiveNewsPanel = dynamic(() => import("@/components/LiveNewsPanel"), { ssr: false });
@@ -195,12 +197,21 @@ export default function DashboardContent() {
   const [activeStyle, setActiveStyle] = useState("DEFAULT");
   const stylesList = ["DEFAULT", "SATELLITE"];
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
-  const [flyToLocation, setFlyToLocation] = useState<{ lat: number; lng: number; ts: number } | null>(null);
+  const [flyToLocation, setFlyToLocation] = useState<{ lat: number; lng: number; ts: number; zoom?: number; bounds?: { south: number; west: number; north: number; east: number } } | null>(null);
+  const [watchRegion, setWatchRegion] = useState<WatchRegion | null>(null);
   const [isEavesdropping, setIsEavesdropping] = useState(false);
   const [eavesdropLocation, setEavesdropLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [cameraCenter, setCameraCenter] = useState<{ lat: number; lng: number } | null>(null);
   const { showOnboarding, setShowOnboarding } = useOnboarding();
   const { showChangelog, setShowChangelog } = useChangelog();
+  const watchResults = useMemo(() => filterDashboardDataForWatchRegion(data, watchRegion), [data, watchRegion]);
+
+  const focusWatchResult = (item: WatchResultItem) => {
+    setFlyToLocation({ lat: item.lat, lng: item.lng, ts: Date.now(), zoom: 7 });
+    if (item.entityType && item.entityId != null) {
+      setSelectedEntity({ type: item.entityType, id: item.entityId });
+    }
+  };
 
   const cycleStyle = () => {
     setActiveStyle((prev) => {
@@ -224,6 +235,7 @@ export default function DashboardContent() {
                 effects={{ ...effects, bloom: effects.bloom && activeStyle !== "DEFAULT", style: activeStyle }}
                 onEntityClick={setSelectedEntity}
                 selectedEntity={selectedEntity}
+                watchRegion={watchRegion}
                 flyToLocation={flyToLocation}
                 gibsDate={gibsDate}
                 gibsOpacity={gibsOpacity}
@@ -349,6 +361,44 @@ export default function DashboardContent() {
                       });
                     }}
                   />
+                </div>
+
+                <div className="shrink-0">
+                  <ErrorBoundary name="RegionWatchPanel">
+                    <RegionWatchPanel
+                      watchRegion={watchRegion}
+                      watchResults={watchResults}
+                      onSetWatchRegion={(region) => {
+                        setWatchRegion(region);
+                        const center = getWatchRegionCenter(region);
+                        setFlyToLocation({
+                          ...center,
+                          ts: Date.now(),
+                          bounds: {
+                            south: region.south,
+                            west: region.west,
+                            north: region.north,
+                            east: region.east,
+                          },
+                        });
+                      }}
+                      onClearWatchRegion={() => setWatchRegion(null)}
+                      onFocusResult={focusWatchResult}
+                      onFlyToRegion={(region) => {
+                        const center = getWatchRegionCenter(region);
+                        setFlyToLocation({
+                          ...center,
+                          ts: Date.now(),
+                          bounds: {
+                            south: region.south,
+                            west: region.west,
+                            north: region.north,
+                            east: region.east,
+                          },
+                        });
+                      }}
+                    />
+                  </ErrorBoundary>
                 </div>
 
                 <div className="shrink-0">
