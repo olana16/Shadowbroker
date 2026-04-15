@@ -16,7 +16,6 @@ import MapLegend from "@/components/MapLegend";
 import RegionWatchPanel from "@/components/RegionWatchPanel";
 import ScaleBar from "@/components/ScaleBar";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import GdeltNewsDashboard from "@/components/GdeltNewsDashboard";
 import { DashboardDataProvider } from "@/lib/DashboardDataContext";
 import OnboardingModal, { useOnboarding } from "@/components/OnboardingModal";
 import ChangelogModal, { useChangelog } from "@/components/ChangelogModal";
@@ -266,15 +265,6 @@ export default function DashboardContent() {
 
           {uiVisible && (
             <>
-              <div className="hud-zone pointer-events-none absolute top-2 left-6 z-[200] text-[8px] font-mono tracking-widest text-cyan-500/50">
-                OPTIC VIS:113 SRC:180 DENS:1.42 0.8ms
-              </div>
-
-              <div className="hud-zone pointer-events-none absolute top-2 right-6 z-[200] flex flex-col items-end text-[9px] font-mono tracking-widest text-[var(--text-muted)]">
-                <div>RTX</div>
-                <div>VSR</div>
-              </div>
-
               <motion.div
                 className="hud-zone pointer-events-none absolute left-6 top-24 bottom-6 z-[200] flex w-80 flex-col gap-6 max-md:hidden"
                 animate={{ x: leftOpen ? 0 : -360 }}
@@ -552,8 +542,6 @@ export default function DashboardContent() {
             </div>
           )}
         </section>
-
-        <GdeltNewsDashboard data={data} />
       </main>
     </DashboardDataProvider>
   );
