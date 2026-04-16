@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Globe2, LocateFixed, Radar, Search, Trash2 } from "lucide-react";
+import { Globe2, LocateFixed, Search, Trash2 } from "lucide-react";
 import type { WatchRegion, WatchRegionResults, WatchResultItem } from "@/types/dashboard";
 
 interface RegionWatchPanelProps {
@@ -84,31 +84,7 @@ export default function RegionWatchPanel({
 
   return (
     <div className="rounded-xl border border-cyan-900/40 bg-[var(--bg-primary)]/55 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.2)] overflow-hidden">
-      <div className="flex items-center justify-between border-b border-[var(--border-primary)]/60 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <Radar size={14} className="text-cyan-400" />
-          <div>
-            <div className="text-[10px] font-mono tracking-[0.18em] text-cyan-400">REGION WATCH</div>
-            <div className="text-[9px] font-mono text-[var(--text-muted)]">Focus flights, outages, fires, news, satellites inside one area</div>
-          </div>
-        </div>
-        {watchRegion && (
-          <button
-            onClick={onClearWatchRegion}
-            className="flex items-center gap-1 rounded border border-red-500/30 px-2 py-1 text-[9px] font-mono text-red-400 hover:bg-red-950/20"
-            title="Clear watch region"
-          >
-            <Trash2 size={10} />
-            CLEAR
-          </button>
-        )}
-      </div>
-
       <div className="p-4 space-y-3">
-        <div className="rounded border border-cyan-900/30 bg-cyan-950/10 px-3 py-2 text-[10px] font-mono text-[var(--text-muted)]">
-          Country watch mode resolves the selected country into a bounding box automatically.
-        </div>
-
         <div className="flex gap-2">
           <input
             type="text"
@@ -140,6 +116,16 @@ export default function RegionWatchPanel({
               className="rounded border border-[var(--border-primary)] px-3 py-2 text-[10px] font-mono text-[var(--text-muted)] hover:text-cyan-400 hover:border-cyan-500/40"
             >
               <LocateFixed size={12} />
+            </button>
+          )}
+          {watchRegion && (
+            <button
+              onClick={onClearWatchRegion}
+              className="flex items-center gap-1 rounded border border-red-500/30 px-3 py-2 text-[10px] font-mono text-red-400 hover:bg-red-950/20"
+              title="Clear watch region"
+            >
+              <Trash2 size={10} />
+              CLEAR
             </button>
           )}
         </div>
