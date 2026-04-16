@@ -266,7 +266,7 @@ export default function DashboardContent() {
           {uiVisible && (
             <>
               <motion.div
-                className="hud-zone pointer-events-none absolute left-6 top-24 bottom-6 z-[200] flex w-80 flex-col gap-6 max-md:hidden"
+                className="hud-zone pointer-events-none absolute left-6 top-6 bottom-6 z-[200] flex w-80 flex-col gap-6 max-md:hidden"
                 animate={{ x: leftOpen ? 0 : -360 }}
                 transition={{ type: "spring", damping: 30, stiffness: 250 }}
               >
