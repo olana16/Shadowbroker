@@ -194,8 +194,8 @@ export default function DashboardContent() {
   });
   const [gibsOpacity, setGibsOpacity] = useState(0.6);
   const effects = { bloom: true };
-  const [activeStyle, setActiveStyle] = useState("DEFAULT");
-  const stylesList = ["DEFAULT", "SATELLITE"];
+  const [activeStyle, setActiveStyle] = useState("OSM");
+  const stylesList = ["OSM", "SATELLITE"];
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [flyToLocation, setFlyToLocation] = useState<{ lat: number; lng: number; ts: number; zoom?: number; bounds?: { south: number; west: number; north: number; east: number } } | null>(null);
   const [watchRegion, setWatchRegion] = useState<WatchRegion | null>(null);
@@ -228,8 +228,6 @@ export default function DashboardContent() {
     { key: "filters", label: "FILTERS", icon: SlidersHorizontal, description: "Refine flights and tracked activity" },
   ] as const;
 
-  const activeRightPanel = rightPanelTabs.find((tab) => tab.key === rightPanelView) || rightPanelTabs[0];
-
   return (
     <DashboardDataProvider data={data} selectedEntity={selectedEntity} setSelectedEntity={setSelectedEntity}>
       <main className="min-h-screen w-full overflow-y-auto bg-[var(--bg-primary)] font-sans text-[var(--foreground)]">
@@ -240,7 +238,7 @@ export default function DashboardContent() {
                 data={data}
                 activeLayers={activeLayers}
                 activeFilters={activeFilters}
-                effects={{ ...effects, bloom: effects.bloom && activeStyle !== "DEFAULT", style: activeStyle }}
+                effects={{ ...effects, bloom: effects.bloom && activeStyle === "SATELLITE", style: activeStyle }}
                 onEntityClick={setSelectedEntity}
                 selectedEntity={selectedEntity}
                 watchRegion={watchRegion}
@@ -354,13 +352,7 @@ export default function DashboardContent() {
                     </div>
                   </div>
 
-                  <div className="mt-3 shrink-0 rounded-xl border border-[var(--border-primary)]/60 bg-black/20 px-3 py-2">
-                    <div className="font-mono text-[8px] tracking-[0.24em] text-cyan-500/70">GLOBAL THREAT INTERCEPT</div>
-                    <div className="font-mono text-[10px] tracking-[0.18em] text-cyan-300">{activeRightPanel.label} WORKSPACE</div>
-                    <div className="mt-1 text-[9px] font-mono text-[var(--text-muted)]">{activeRightPanel.description}</div>
-                  </div>
-
-                  <div className="mt-3 min-h-0 flex-1 overflow-hidden">
+                  <div className="mt-2 min-h-0 flex-1 overflow-hidden">
                     {rightPanelView === "news" && (
                       <ErrorBoundary name="NewsFeedRightDock">
                         <NewsFeed data={data} selectedEntity={selectedEntity} regionDossier={regionDossier} regionDossierLoading={regionDossierLoading} />

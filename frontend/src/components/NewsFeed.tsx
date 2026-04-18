@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertTriangle, Clock, ChevronDown, ChevronUp } from 'lucide-react';
+import { AlertTriangle, ChevronDown, ChevronUp } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 import WikiImage from '@/components/WikiImage';
@@ -985,34 +985,15 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className={`w-full bg-[var(--bg-primary)]/40 backdrop-blur-md border border-[var(--border-primary)] rounded-xl flex flex-col z-10 font-mono shadow-[0_4px_30px_rgba(0,0,0,0.5)] pointer-events-auto overflow-hidden transition-all duration-300 ${isMinimized ? 'h-[50px] flex-shrink-0' : 'flex-1 min-h-0'}`}
+            className={`w-full bg-[var(--bg-primary)]/40 backdrop-blur-md border border-[var(--border-primary)] rounded-xl flex flex-col z-10 font-mono shadow-[0_4px_30px_rgba(0,0,0,0.5)] pointer-events-auto overflow-hidden transition-all duration-300 ${isMinimized ? 'h-[34px] flex-shrink-0' : 'flex-1 min-h-0'}`}
         >
             <div
-                className="p-3 border-b border-[var(--border-primary)]/50 relative overflow-hidden cursor-pointer hover:bg-[var(--bg-secondary)]/50 transition-colors"
+                className="flex items-center justify-end border-b border-[var(--border-primary)]/50 px-2 py-1 relative overflow-hidden cursor-pointer hover:bg-[var(--bg-secondary)]/50 transition-colors"
                 onClick={() => setIsMinimized(!isMinimized)}
             >
-                <div className="flex justify-between items-center relative z-10">
-                    <h2 className="text-xs tracking-widest font-bold text-cyan-400 flex items-center gap-2">
-                        <AlertTriangle size={14} /> GLOBAL THREAT INTERCEPT
-                    </h2>
-                    <button className="text-cyan-500 hover:text-[var(--text-primary)] transition-colors">
-                        {isMinimized ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
-                    </button>
-                </div>
-
-                <AnimatePresence>
-                    {!isMinimized && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="text-[9px] text-cyan-500/80 mt-1 flex items-center justify-between font-bold relative z-10"
-                        >
-                            <span className="px-1 border border-cyan-500/30">SYS.STATUS: MONITORING</span>
-                            <span className="flex items-center gap-1"><Clock size={10} /> {data?.last_updated ? formatTime(data.last_updated) : "SCANNING"}</span>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                <button className="relative z-10 text-cyan-500 hover:text-[var(--text-primary)] transition-colors" aria-label={isMinimized ? "Expand news feed" : "Collapse news feed"}>
+                    {isMinimized ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
+                </button>
             </div>
 
             <AnimatePresence>
