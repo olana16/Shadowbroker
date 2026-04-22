@@ -415,14 +415,14 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
             // Power plant icon
             loadImg('power-plant', svgPowerPlant);
             // Satellite mission-type icons
-            loadImg('sat-mil', makeSatSvg('#ff3333'));
-            loadImg('sat-sar', makeSatSvg('#00e5ff'));
-            loadImg('sat-sigint', makeSatSvg('#ffffff'));
-            loadImg('sat-nav', makeSatSvg('#4488ff'));
-            loadImg('sat-ew', makeSatSvg('#ff00ff'));
-            loadImg('sat-com', makeSatSvg('#44ff44'));
-            loadImg('sat-station', makeSatSvg('#ffdd00'));
-            loadImg('sat-gen', makeSatSvg('#aaaaaa'));
+            loadImg('sat-mil', makeSatSvg('#f2b24b', '#ff4d4d'));
+            loadImg('sat-sar', makeSatSvg('#b8e7ff', '#30d9ff'));
+            loadImg('sat-sigint', makeSatSvg('#d8dce8', '#f8f8ff'));
+            loadImg('sat-nav', makeSatSvg('#b7cbff', '#5c8dff'));
+            loadImg('sat-ew', makeSatSvg('#f0c4ff', '#ff72f1'));
+            loadImg('sat-com', makeSatSvg('#d4ffbf', '#64ff8d'));
+            loadImg('sat-station', makeSatSvg('#ffe48a', '#ffe46b'));
+            loadImg('sat-gen', makeSatSvg('#ced6e8', '#8fb7ff'));
         }, 0);
 
         setMapReady(true);
@@ -1655,10 +1655,10 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                                 'icon-image': ['get', 'iconId'],
                                 'icon-size': [
                                     'interpolate', ['linear'], ['zoom'],
-                                    0, 0.4,
-                                    3, 0.5,
-                                    6, 0.7,
-                                    10, 1.0
+                                    0, 0.5,
+                                    3, 0.62,
+                                    6, 0.85,
+                                    10, 1.15
                                 ],
                                 'icon-allow-overlap': true,
                             }}
