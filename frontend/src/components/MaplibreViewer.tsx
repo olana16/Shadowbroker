@@ -50,6 +50,7 @@ import { useInterpolation } from "@/components/map/hooks/useInterpolation";
 import { useClusterLabels } from "@/components/map/hooks/useClusterLabels";
 import { spreadAlertItems } from "@/utils/alertSpread";
 import { buildWatchRegionGeoJSON } from "@/utils/regionWatch";
+import { getFlagEmojiForCountry } from "@/utils/countryFlags";
 import {
     buildEarthquakesGeoJSON, buildJammingGeoJSON, buildCctvGeoJSON, buildKiwisdrGeoJSON,
     buildFirmsGeoJSON, buildInternetOutagesGeoJSON, buildDataCentersGeoJSON, buildPowerPlantsGeoJSON, buildMilitaryBasesGeoJSON,
@@ -1669,6 +1670,7 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                 {selectedEntity?.type === 'satellite' && (() => {
                     const sat = data?.satellites?.find((s: any) => s.id === selectedEntity.id);
                     if (!sat) return null;
+                    const countryFlag = getFlagEmojiForCountry(sat.country);
                     const missionLabels: Record<string, string> = {
                         military_recon: '🔴 MILITARY RECON', military_sar: '🔴 MILITARY SAR',
                         sar: '🔷 SAR IMAGING', sigint: '🟠 SIGINT / ELINT',
@@ -1697,7 +1699,17 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                                 )}
                                 {sat.country && (
                                     <div className="map-popup-row">
-                                        Country: <span className="text-white">{sat.country}</span>
+                                        Country: <span className="text-white">
+                                            {countryFlag && (
+                                                <span
+                                                    className="mr-1 inline-block"
+                                                    style={{ fontFamily: '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif' }}
+                                                >
+                                                    {countryFlag}
+                                                </span>
+                                            )}
+                                            {sat.country}
+                                        </span>
                                     </div>
                                 )}
                                 {sat.mission && (

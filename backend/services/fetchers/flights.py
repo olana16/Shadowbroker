@@ -18,6 +18,9 @@ from services.fetchers.retry import with_retry
 
 logger = logging.getLogger("services.data_fetcher")
 
+_FLIGHT_STALE_RETENTION_S = 45
+_FLIGHT_PARTIAL_DROP_KEEP_RATIO = 0.2
+
 # Pre-compiled regex patterns for airline code extraction (used in hot loop)
 _RE_AIRLINE_CODE_1 = re.compile(r'^([A-Z]{3})\d')
 _RE_AIRLINE_CODE_2 = re.compile(r'^([A-Z]{3})[A-Z\d]')
@@ -367,12 +370,15 @@ def _classify_and_publish(all_adsb_flights):
 
     if new_total == 0:
         logger.warning("No civilian flights found! Skipping overwrite to prevent clearing the map.")
-    elif prev_total > 100 and new_total < prev_total * 0.5:
-        logger.warning(f"Flight count dropped from {prev_total} to {new_total} (>50% loss). Keeping previous data to prevent flicker.")
+    elif prev_total > 100 and new_total < prev_total * _FLIGHT_PARTIAL_DROP_KEEP_RATIO:
+        logger.warning(
+            f"Flight count dropped from {prev_total} to {new_total} (>80% loss). "
+            "Keeping previous data to avoid a likely bad poll."
+        )
     else:
         _now = time.time()
 
-        def _merge_category(new_list, old_list, max_stale_s=120):
+        def _merge_category(new_list, old_list, max_stale_s=_FLIGHT_STALE_RETENTION_S):
             by_icao = {}
             for f in old_list:
                 icao = f.get('icao24', '')
@@ -582,14 +588,25 @@ def _classify_and_publish(all_adsb_flights):
 
 
 def _fetch_adsb_lol_regions():
-    """Fetch all adsb.lol regions in parallel (~3-5s). Returns raw aircraft list."""
+    """Fetch a broader set of adsb.lol regions in parallel.
+
+    We intentionally overlap regions so the result looks closer to the
+    global adsb.lol map than the older 6-circle sampling approach.
+    """
     regions = [
-        {"lat": 39.8, "lon": -98.5, "dist": 2000},
-        {"lat": 50.0, "lon": 15.0, "dist": 2000},
-        {"lat": 35.0, "lon": 105.0, "dist": 2000},
-        {"lat": -25.0, "lon": 133.0, "dist": 2000},
-        {"lat": 0.0, "lon": 20.0, "dist": 2500},
-        {"lat": -15.0, "lon": -60.0, "dist": 2000}
+        {"name": "North America West", "lat": 39.0, "lon": -122.0, "dist": 1700},
+        {"name": "North America Central", "lat": 39.8, "lon": -98.5, "dist": 1800},
+        {"name": "North America East", "lat": 40.5, "lon": -74.0, "dist": 1600},
+        {"name": "South America", "lat": -15.0, "lon": -60.0, "dist": 1900},
+        {"name": "Europe West", "lat": 48.5, "lon": -2.0, "dist": 1500},
+        {"name": "Europe Central", "lat": 50.0, "lon": 15.0, "dist": 1500},
+        {"name": "Middle East", "lat": 28.0, "lon": 45.0, "dist": 1600},
+        {"name": "Africa North", "lat": 18.0, "lon": 18.0, "dist": 1900},
+        {"name": "Africa South", "lat": -20.0, "lon": 28.0, "dist": 1700},
+        {"name": "South Asia", "lat": 22.0, "lon": 78.0, "dist": 1700},
+        {"name": "East Asia", "lat": 35.0, "lon": 118.0, "dist": 1800},
+        {"name": "Southeast Asia", "lat": 8.0, "lon": 106.0, "dist": 1600},
+        {"name": "Oceania", "lat": -25.0, "lon": 133.0, "dist": 1900},
     ]
 
     def _fetch_region(r):
@@ -600,11 +617,11 @@ def _fetch_adsb_lol_regions():
                 data = res.json()
                 return data.get("ac", [])
         except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, json.JSONDecodeError, OSError) as e:
-            logger.warning(f"Region fetch failed for lat={r['lat']}: {e}")
+            logger.warning(f"Region fetch failed for {r['name']} ({r['lat']}, {r['lon']}): {e}")
         return []
 
     all_flights = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=len(regions)) as pool:
         results = pool.map(_fetch_region, regions)
     for region_flights in results:
         all_flights.extend(region_flights)
