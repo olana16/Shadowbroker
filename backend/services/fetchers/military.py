@@ -141,7 +141,7 @@ def fetch_military_flights():
     detected_uavs = []
     try:
         url = "https://api.adsb.lol/v2/mil"
-        response = fetch_with_curl(url, timeout=10)
+        response = requests.get(url, timeout=10)
         if response.status_code == 200:
             ac = response.json().get('ac', [])
             for f in ac:

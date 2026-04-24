@@ -219,7 +219,7 @@ def fetch_routes_background(sampled):
 
         for batch in batches:
             try:
-                r = fetch_with_curl("https://api.adsb.lol/api/0/routeset", method="POST", json_data={"planes": batch}, timeout=15)
+                r = requests.post("https://api.adsb.lol/api/0/routeset", json={"planes": batch}, timeout=15)
                 if r.status_code == 200:
                     route_data = r.json()
                     route_list = []
@@ -612,7 +612,7 @@ def _fetch_adsb_lol_regions():
     def _fetch_region(r):
         url = f"https://api.adsb.lol/v2/lat/{r['lat']}/lon/{r['lon']}/dist/{r['dist']}"
         try:
-            res = fetch_with_curl(url, timeout=10)
+            res = requests.get(url, timeout=10)
             if res.status_code == 200:
                 data = res.json()
                 return data.get("ac", [])
@@ -625,47 +625,6 @@ def _fetch_adsb_lol_regions():
         results = pool.map(_fetch_region, regions)
     for region_flights in results:
         all_flights.extend(region_flights)
-    return all_flights
-
-
-def _fetch_airplaneslive_fallback_regions():
-    """Fetch a small set of broad airplanes.live regions as a primary fallback.
-
-    This is used when adsb.lol is unavailable or geo-blocked so the aircraft
-    layers do not go completely empty at startup.
-    """
-    regions = [
-        {"name": "North America", "lat": 39.8, "lon": -98.5, "radius_nm": 900},
-        {"name": "Europe", "lat": 50.0, "lon": 15.0, "radius_nm": 900},
-        {"name": "Middle East / Africa", "lat": 22.0, "lon": 30.0, "radius_nm": 900},
-        {"name": "East Asia", "lat": 35.0, "lon": 118.0, "radius_nm": 900},
-    ]
-
-    def _fetch_region(region):
-        url = f"https://api.airplanes.live/v2/point/{region['lat']}/{region['lon']}/{region['radius_nm']}"
-        try:
-            res = fetch_with_curl(url, timeout=10)
-            if res.status_code == 200:
-                data = res.json()
-                flights = data.get("ac", [])
-                if flights:
-                    logger.info(f"airplanes.live fallback {region['name']}: {len(flights)} aircraft")
-                return flights
-        except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, json.JSONDecodeError, OSError) as e:
-            logger.warning(f"airplanes.live fallback failed for {region['name']}: {e}")
-        return []
-
-    all_flights = []
-    seen_hex = set()
-    for region in regions:
-        region_flights = _fetch_region(region)
-        for f in region_flights:
-            hex_id = (f.get("hex") or "").lower().strip()
-            if hex_id and hex_id not in seen_hex:
-                all_flights.append(f)
-                seen_hex.add(hex_id)
-        # Avoid bursty parallel requests that trigger provider rate limits.
-        time.sleep(0.6)
     return all_flights
 
 
@@ -778,20 +737,6 @@ def fetch_flights():
                 daemon=True,
             ).start()
         else:
-            logger.warning("adsb.lol returned 0 aircraft; trying fallback providers")
-            fallback_flights = _fetch_airplaneslive_fallback_regions()
-            if not fallback_flights:
-                fallback_flights = _fetch_supplemental_sources(set())
-            if fallback_flights:
-                logger.info(f"Supplemental fallback: {len(fallback_flights)} aircraft — publishing immediately")
-                _classify_and_publish(fallback_flights)
-
-                threading.Thread(
-                    target=_enrich_with_opensky_and_supplemental,
-                    args=(fallback_flights,),
-                    daemon=True,
-                ).start()
-            else:
-                logger.warning("No aircraft available from supplemental fallback sources either")
+            logger.warning("adsb.lol returned 0 aircraft")
     except Exception as e:
         logger.error(f"Error fetching flights: {e}")
