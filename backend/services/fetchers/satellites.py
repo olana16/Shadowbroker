@@ -189,7 +189,7 @@ def _fetch_satellites_from_tle_api():
     for term in search_terms:
         try:
             url = f"https://tle.ivanstanojevic.me/api/tle/?search={term}&page_size=100&format=json"
-            response = fetch_with_curl(url, timeout=8)
+            response = requests.get(url, timeout=8)
             if response.status_code != 200:
                 continue
             data = response.json()
@@ -216,6 +216,14 @@ def fetch_satellites():
     sats = []
     try:
         now_ts = time.time()
+        # Load from disk cache first for immediate display
+        if _sat_gp_cache["data"] is None:
+            disk_data = _load_sat_cache()
+            if disk_data:
+                _sat_gp_cache["data"] = disk_data
+                _sat_gp_cache["last_fetch"] = now_ts - (_CELESTRAK_FETCH_INTERVAL - 300)
+                _sat_gp_cache["source"] = "disk_cache"
+
         if _sat_gp_cache["data"] is None or (now_ts - _sat_gp_cache["last_fetch"]) > _CELESTRAK_FETCH_INTERVAL:
             gp_urls = [
                 "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json",
@@ -228,7 +236,7 @@ def fetch_satellites():
 
             for url in gp_urls:
                 try:
-                    response = fetch_with_curl(url, timeout=15, headers=headers)
+                    response = requests.get(url, timeout=15, headers=headers)
                     if response.status_code == 304:
                         # Data unchanged — reset timer without re-downloading
                         _sat_gp_cache["last_fetch"] = now_ts
