@@ -108,7 +108,7 @@ export const svgAirlinerLime = makeAircraftSvg('airliner', '#32CD32', 'black', 2
 export const svgAirlinerBlack = makeAircraftSvg('airliner', '#222', '#555', 22);
 export const svgAirlinerWhite = makeAircraftSvg('airliner', 'white', '#666', 22);
 
-export const svgTurbopropCyan = makeAircraftSvg('turboprop', 'cyan');
+export const svgTurbopropCyan = makeAircraftSvg('turboprop', 'cyan'); 
 export const svgTurbopropOrange = makeAircraftSvg('turboprop', '#FF8C00');
 export const svgTurbopropPurple = makeAircraftSvg('turboprop', '#9B59B6');
 export const svgTurbopropYellow = makeAircraftSvg('turboprop', 'yellow');

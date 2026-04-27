@@ -134,3 +134,7 @@ backend/data/markets_cache.json
 backend/shadowbroker_session.session
 
 backend/data/news_keywords.json
+
+
+#session
+backend/data/cctv.db
