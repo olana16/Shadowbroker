@@ -985,7 +985,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className={`w-full bg-[var(--bg-primary)]/40 backdrop-blur-md border border-[var(--border-primary)] rounded-xl flex flex-col z-10 font-mono shadow-[0_4px_30px_rgba(0,0,0,0.5)] pointer-events-auto overflow-hidden transition-all duration-300 ${isMinimized ? 'h-[34px] flex-shrink-0' : 'flex-1 min-h-0'}`}
+            className={`h-full w-full bg-[var(--bg-primary)]/40 backdrop-blur-md border border-[var(--border-primary)] rounded-xl flex flex-col z-10 font-mono shadow-[0_4px_30px_rgba(0,0,0,0.5)] pointer-events-auto overflow-hidden transition-all duration-300 ${isMinimized ? 'h-[34px] flex-shrink-0' : 'flex-1 min-h-0'}`}
         >
             <div
                 className="flex items-center justify-end border-b border-[var(--border-primary)]/50 px-2 py-1 relative overflow-hidden cursor-pointer hover:bg-[var(--bg-secondary)]/50 transition-colors"
@@ -1002,7 +1002,7 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="flex-1 overflow-y-auto p-3 flex flex-col gap-2 styled-scrollbar"
+                        className="flex-1 min-h-0 overflow-y-auto p-3 flex flex-col gap-2 styled-scrollbar"
                     >
                         <div className="sticky top-0 z-20 -mt-3 -mx-3 px-3 pt-3 pb-2 bg-[linear-gradient(to_bottom,rgba(6,10,14,0.96),rgba(6,10,14,0.88),rgba(6,10,14,0))] backdrop-blur-sm">
                             <div className="flex items-center justify-between gap-2">
