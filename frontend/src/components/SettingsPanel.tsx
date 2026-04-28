@@ -84,7 +84,7 @@ const SettingsPanel = React.memo(function SettingsPanel({ isOpen, onClose }: { i
     const [editingId, setEditingId] = useState<string | null>(null);
     const [editValue, setEditValue] = useState("");
     const [saving, setSaving] = useState(false);
-    const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(["Aviation", "Maritime"]));
+    const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(["Aviation", "Maritime", "Space"]));
 
     // --- News Feeds state ---
     const [feeds, setFeeds] = useState<FeedEntry[]>([]);

@@ -132,7 +132,7 @@ const WorldviewLeftPanel = React.memo(function WorldviewLeftPanel({ data, active
         { id: "military", name: "Military Flights", source: "adsb.lol", count: data?.military_flights?.length || 0, icon: AlertTriangle },
         { id: "tracked", name: "Tracked Aircraft", source: "Plane-Alert DB", count: data?.tracked_flights?.length || 0, icon: Eye },
         { id: "earthquakes", name: "Earthquakes (24h)", source: "USGS", count: data?.earthquakes?.length || 0, icon: Activity },
-        { id: "satellites", name: "Satellites", source: data?.satellite_source === "celestrak" ? "CelesTrak SGP4" : data?.satellite_source === "tle_api" ? "TLE API · SGP4" : data?.satellite_source === "disk_cache" ? "Cached · SGP4 (est.)" : "CelesTrak SGP4", count: data?.satellites?.length || 0, icon: Satellite },
+        { id: "satellites", name: "Satellites", source: data?.satellite_source === "tle_api" ? "TLE API · SGP4" : data?.satellite_source === "celestrak" ? "CelesTrak SGP4" : data?.satellite_source === "disk_cache" ? "Cached · SGP4 (est.)" : data?.satellite_source === "seed_cache" ? "Bundled cache · SGP4" : "TLE API · SGP4", count: data?.satellites?.length || 0, icon: Satellite },
         { id: "ships_military", name: "Military / Carriers", source: "AIS Stream", count: militaryShipCount, icon: Ship },
         { id: "ships_cargo", name: "Cargo / Tankers", source: "AIS Stream", count: cargoShipCount, icon: Ship },
         { id: "ships_civilian", name: "Civilian Vessels", source: "AIS Stream", count: civilianShipCount, icon: Anchor },

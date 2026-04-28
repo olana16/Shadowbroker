@@ -23,6 +23,10 @@ COPY pyproject.toml .
 COPY uv.lock .
 # Copy source code
 COPY backend/ .
+# Preserve a bundled satellite cache outside /app/data so fresh runtime volumes
+# still have a cold-start fallback if live TLE providers are unavailable.
+RUN mkdir -p /app/bootstrap \
+    && if [ -f /app/data/sat_gp_cache.json ]; then cp /app/data/sat_gp_cache.json /app/bootstrap/sat_gp_cache.json; fi
 # Install Python dependencies using UV (this will use the lock file for reproducibility)
 RUN uv sync --frozen
 RUN uv run playwright install --with-deps chromium
