@@ -31,11 +31,22 @@ def _gmst(jd_ut1):
 # Satellite GP data cache
 # Public TLE providers refresh roughly daily; SGP4 propagation runs every cycle using cached elements.
 _SAT_FETCH_INTERVAL = 86400  # 24 hours
+_SAT_REFRESH_RETRY_DELAY = 1800  # 30 minutes after a failed live refresh
 _TLE_API_BASE = "https://tle.ivanstanojevic.me/api/tle"
 _TLE_API_PAGE_SIZE = 500
 _TLE_API_MAX_PAGES = 40
 _TLE_API_PAGE_DELAY_SECONDS = 0.2
-_sat_gp_cache = {"data": None, "last_fetch": 0, "source": "none", "last_modified": None}
+_TLE_API_CATALOG_TIMEOUT = 6
+_TLE_API_SEARCH_TIMEOUT = 4
+_CELESTRAK_TIMEOUT = 5
+_sat_gp_cache = {
+    "data": None,
+    "last_fetch": 0,
+    "source": "none",
+    "last_modified": None,
+    "last_attempt": 0,
+    "next_retry_at": 0,
+}
 _sat_classified_cache = {"data": None, "gp_fetch_ts": 0}
 _SAT_CACHE_PATH = Path(__file__).parent.parent.parent / "data" / "sat_gp_cache.json"
 _SAT_CACHE_META_PATH = Path(__file__).parent.parent.parent / "data" / "sat_gp_cache_meta.json"
@@ -249,7 +260,7 @@ def _fetch_satellites_from_tle_api_catalog():
     seen_ids = set()
 
     for page_num in range(1, _TLE_API_MAX_PAGES + 1):
-        response = requests.get(url, timeout=12)
+        response = requests.get(url, timeout=_TLE_API_CATALOG_TIMEOUT)
         if response.status_code != 200:
             logger.warning(f"Satellites: TLE API catalog request failed with {response.status_code} on page {page_num}")
             break
@@ -296,7 +307,7 @@ def _fetch_satellites_from_tle_api_search():
     for term in sorted(search_terms):
         try:
             url = f"{_TLE_API_BASE}/?search={term}&page_size=100&format=json"
-            response = requests.get(url, timeout=8)
+            response = requests.get(url, timeout=_TLE_API_SEARCH_TIMEOUT)
             if response.status_code != 200:
                 continue
             data = response.json()
@@ -328,7 +339,7 @@ def fetch_satellites():
             disk_data = _load_sat_cache(max_age_hours=None)
             if disk_data:
                 _sat_gp_cache["data"] = disk_data
-                _sat_gp_cache["last_fetch"] = now_ts - (_SAT_FETCH_INTERVAL + 1)
+                _sat_gp_cache["last_fetch"] = now_ts
                 _sat_gp_cache["source"] = "disk_cache"
                 logger.info("Satellites: Using persisted cache for immediate display while refresh runs")
 
@@ -336,25 +347,31 @@ def fetch_satellites():
             seed_data = _load_sat_seed_cache()
             if seed_data:
                 _sat_gp_cache["data"] = seed_data
-                _sat_gp_cache["last_fetch"] = now_ts - (_SAT_FETCH_INTERVAL + 1)
+                _sat_gp_cache["last_fetch"] = now_ts
                 _sat_gp_cache["source"] = "seed_cache"
                 logger.info("Satellites: Using bundled seed cache for immediate display while refresh runs")
 
-        if _sat_gp_cache["data"] is None or (now_ts - _sat_gp_cache["last_fetch"]) > _SAT_FETCH_INTERVAL:
-            if _sat_gp_cache["data"] is None:
-                logger.info("Satellites: refreshing from public TLE API catalog...")
-                try:
-                    catalog_data = _fetch_satellites_from_tle_api_catalog()
-                    if catalog_data and len(catalog_data) > 100:
-                        _sat_gp_cache["data"] = catalog_data
-                        _sat_gp_cache["last_fetch"] = now_ts
-                        _sat_gp_cache["source"] = "tle_api"
-                        _save_sat_cache(catalog_data)
-                        logger.info(f"Satellites: Downloaded {len(catalog_data)} GP records from TLE API catalog")
-                except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, OSError) as e:
-                    logger.warning(f"Satellites: TLE API catalog fetch failed: {e}")
+        refresh_due = _sat_gp_cache["data"] is None or (now_ts - _sat_gp_cache["last_fetch"]) > _SAT_FETCH_INTERVAL
+        should_retry_live = now_ts >= _sat_gp_cache.get("next_retry_at", 0)
 
-            if _sat_gp_cache["data"] is None:
+        if refresh_due and should_retry_live:
+            _sat_gp_cache["last_attempt"] = now_ts
+            live_refresh_succeeded = False
+            logger.info("Satellites: attempting live refresh from public providers...")
+            try:
+                catalog_data = _fetch_satellites_from_tle_api_catalog()
+                if catalog_data and len(catalog_data) > 100:
+                    _sat_gp_cache["data"] = catalog_data
+                    _sat_gp_cache["last_fetch"] = now_ts
+                    _sat_gp_cache["source"] = "tle_api"
+                    _sat_gp_cache["next_retry_at"] = 0
+                    _save_sat_cache(catalog_data)
+                    live_refresh_succeeded = True
+                    logger.info(f"Satellites: Downloaded {len(catalog_data)} GP records from TLE API catalog")
+            except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, OSError) as e:
+                logger.warning(f"Satellites: TLE API catalog fetch failed: {e}")
+
+            if not live_refresh_succeeded:
                 gp_urls = [
                     "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json",
                     "https://celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=json",
@@ -365,9 +382,11 @@ def fetch_satellites():
 
                 for url in gp_urls:
                     try:
-                        response = requests.get(url, timeout=15, headers=headers)
+                        response = requests.get(url, timeout=_CELESTRAK_TIMEOUT, headers=headers)
                         if response.status_code == 304:
                             _sat_gp_cache["last_fetch"] = now_ts
+                            _sat_gp_cache["next_retry_at"] = 0
+                            live_refresh_succeeded = True
                             logger.info("Satellites: CelesTrak returned 304 Not Modified (data unchanged)")
                             break
                         if response.status_code == 200:
@@ -376,18 +395,20 @@ def fetch_satellites():
                                 _sat_gp_cache["data"] = gp_data
                                 _sat_gp_cache["last_fetch"] = now_ts
                                 _sat_gp_cache["source"] = "celestrak"
+                                _sat_gp_cache["next_retry_at"] = 0
                                 if hasattr(response, "headers"):
                                     lm = response.headers.get("Last-Modified")
                                     if lm:
                                         _sat_gp_cache["last_modified"] = lm
                                 _save_sat_cache(gp_data)
+                                live_refresh_succeeded = True
                                 logger.info(f"Satellites: Downloaded {len(gp_data)} GP records from CelesTrak")
                                 break
                     except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, json.JSONDecodeError, OSError) as e:
                         logger.warning(f"Satellites: Failed to fetch from {url}: {e}")
                         continue
 
-            if _sat_gp_cache["data"] is None:
+            if not live_refresh_succeeded:
                 logger.info("Satellites: TLE catalog unavailable, trying public keyword search fallback...")
                 try:
                     fallback_data = _fetch_satellites_from_tle_api_search()
@@ -395,7 +416,9 @@ def fetch_satellites():
                         _sat_gp_cache["data"] = fallback_data
                         _sat_gp_cache["last_fetch"] = now_ts
                         _sat_gp_cache["source"] = "tle_api"
+                        _sat_gp_cache["next_retry_at"] = 0
                         _save_sat_cache(fallback_data)
+                        live_refresh_succeeded = True
                         logger.info(f"Satellites: Got {len(fallback_data)} records from TLE API search fallback")
                 except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, OSError) as e:
                     logger.error(f"Satellites: TLE search fallback failed: {e}")
@@ -415,6 +438,12 @@ def fetch_satellites():
                     _sat_gp_cache["last_fetch"] = now_ts - (_SAT_FETCH_INTERVAL - 300)
                     _sat_gp_cache["source"] = "seed_cache"
                     logger.info("Satellites: Using bundled seed cache because no live or persisted cache was available")
+
+            if not live_refresh_succeeded:
+                _sat_gp_cache["next_retry_at"] = now_ts + _SAT_REFRESH_RETRY_DELAY
+        elif refresh_due and not should_retry_live:
+            retry_in = max(0, int(_sat_gp_cache.get("next_retry_at", 0) - now_ts))
+            logger.info(f"Satellites: skipping live refresh during cooldown ({retry_in}s remaining)")
 
         data = _sat_gp_cache["data"]
         if not data:
