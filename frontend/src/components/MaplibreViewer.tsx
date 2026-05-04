@@ -672,7 +672,20 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
     useImperativeSource(mapForHook, 'tracked-flights', trackedFlightsGeoJSON);
     useImperativeSource(mapForHook, 'uavs', uavGeoJSON);
     useImperativeSource(mapForHook, 'satellites', satellitesGeoJSON);
-    useImperativeSource(mapForHook, 'firms-fires', firmsGeoJSON, 2000);
+    useImperativeSource(mapForHook, 'ships', shipsGeoJSON);
+    useImperativeSource(mapForHook, 'carriers', carriersGeoJSON);
+    useImperativeSource(mapForHook, 'earthquakes', earthquakesGeoJSON);
+    useImperativeSource(mapForHook, 'gps-jamming', jammingGeoJSON);
+    useImperativeSource(mapForHook, 'cctv', cctvGeoJSON);
+    useImperativeSource(mapForHook, 'kiwisdr', kiwisdrGeoJSON);
+    useImperativeSource(mapForHook, 'internet-outages', internetOutagesGeoJSON);
+    useImperativeSource(mapForHook, 'datacenters', dataCentersGeoJSON);
+    useImperativeSource(mapForHook, 'power-plants', powerPlantsGeoJSON);
+    useImperativeSource(mapForHook, 'military-bases', militaryBasesGeoJSON);
+    useImperativeSource(mapForHook, 'gdelt', gdeltGeoJSON);
+    useImperativeSource(mapForHook, 'liveuamap', liveuaGeoJSON);
+    useImperativeSource(mapForHook, 'frontlines', frontlineGeoJSON);
+    useImperativeSource(mapForHook, 'firms-fires', firmsGeoJSON);
 
     const handleMouseMove = useCallback((evt: any) => {
         if (onMouseCoords) onMouseCoords({ lat: evt.lngLat.lat, lng: evt.lngLat.lng });
@@ -946,11 +959,10 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                         />
                     </Source>
 
-                {shipsGeoJSON && (
                     <Source
                         id="ships"
                         type="geojson"
-                        data={shipsGeoJSON as any}
+                        data={EMPTY_FC as any}
                         cluster={true}
                         clusterMaxZoom={8}
                         clusterRadius={40}
@@ -1004,10 +1016,8 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
-                {carriersGeoJSON && (
-                    <Source id="carriers" type="geojson" data={carriersGeoJSON as any}>
+                    <Source id="carriers" type="geojson" data={EMPTY_FC as any}>
                         <Layer
                             id="carriers-layer"
                             type="symbol"
@@ -1021,7 +1031,6 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             paint={{ 'icon-opacity': opacityFilter }}
                         />
                     </Source>
-                )}
 
 
                 {activeRouteGeoJSON && (
@@ -1147,8 +1156,7 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
 
                 {/* UAV range circles removed — real ADS-B data has no fixed orbit */}
 
-                {gdeltGeoJSON && (
-                    <Source id="gdelt" type="geojson" data={gdeltGeoJSON as any}>
+                    <Source id="gdelt" type="geojson" data={EMPTY_FC as any}>
                         <Layer
                             id="gdelt-layer"
                             type="circle"
@@ -1162,10 +1170,8 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
-                {liveuaGeoJSON && (
-                    <Source id="liveuamap" type="geojson" data={liveuaGeoJSON as any}>
+                    <Source id="liveuamap" type="geojson" data={EMPTY_FC as any}>
                         <Layer
                             id="liveuamap-layer"
                             type="symbol"
@@ -1177,7 +1183,6 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
                 {/* HTML labels for ship cluster counts (hidden when any entity popup is active) */}
                 {shipsGeoJSON && !selectedEntity && <ClusterCountLabels clusters={shipClusters} prefix="sc" />}
@@ -1215,8 +1220,7 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                     <ThreatMarkers spreadAlerts={spreadAlerts} viewState={viewState} selectedEntity={selectedEntity} onEntityClick={onEntityClick} onDismiss={(alertKey: string) => { setDismissedAlerts(prev => new Set(prev).add(alertKey)); if (selectedEntity?.type === 'news') onEntityClick?.(null); }} />
                 )}
 
-                {frontlineGeoJSON && (
-                    <Source id="frontlines" type="geojson" data={frontlineGeoJSON as any}>
+                    <Source id="frontlines" type="geojson" data={EMPTY_FC as any}>
                         <Layer
                             id="ukraine-frontline-layer"
                             type="fill"
@@ -1227,13 +1231,11 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
-                {earthquakesGeoJSON && (
                     <Source
                         id="earthquakes"
                         type="geojson"
-                        data={earthquakesGeoJSON as any}
+                        data={EMPTY_FC as any}
                         cluster={true}
                         clusterMaxZoom={10}
                         clusterRadius={60}
@@ -1270,11 +1272,9 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             paint={{ 'icon-opacity': 1.0 }}
                         />
                     </Source>
-                )}
 
                 {/* GPS Jamming Zones — red translucent grid squares */}
-                {jammingGeoJSON && (
-                    <Source id="gps-jamming" type="geojson" data={jammingGeoJSON as any}>
+                    <Source id="gps-jamming" type="geojson" data={EMPTY_FC as any}>
                         <Layer
                             id="gps-jamming-fill"
                             type="fill"
@@ -1313,11 +1313,9 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
                 {/* CCTV Cameras — clustered green dots */}
-                {cctvGeoJSON && (
-                    <Source id="cctv" type="geojson" data={cctvGeoJSON as any} cluster={true} clusterRadius={50} clusterMaxZoom={14}>
+                    <Source id="cctv" type="geojson" data={EMPTY_FC as any} cluster={true} clusterRadius={50} clusterMaxZoom={14}>
                         {/* Cluster circles — green, sized by count */}
                         <Layer
                             id="cctv-clusters"
@@ -1372,11 +1370,9 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
                 {/* KiwiSDR Receivers — radio tower icons with pulse rings */}
-                {kiwisdrGeoJSON && (
-                    <Source id="kiwisdr" type="geojson" data={kiwisdrGeoJSON as any} cluster={true} clusterRadius={50} clusterMaxZoom={14}>
+                    <Source id="kiwisdr" type="geojson" data={EMPTY_FC as any} cluster={true} clusterRadius={50} clusterMaxZoom={14}>
                         {/* Pulse ring behind clusters */}
                         <Layer
                             id="kiwisdr-cluster-pulse"
@@ -1436,11 +1432,9 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
                 {/* Internet Outages — region-level grey markers with % and labels */}
-                {internetOutagesGeoJSON && (
-                    <Source id="internet-outages" type="geojson" data={internetOutagesGeoJSON as any}>
+                    <Source id="internet-outages" type="geojson" data={EMPTY_FC as any}>
                         {/* Outer ring */}
                         <Layer
                             id="internet-outages-pulse"
@@ -1500,11 +1494,9 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
                 {/* Data Center positions */}
-                {dataCentersGeoJSON && (
-                    <Source id="datacenters" type="geojson" data={dataCentersGeoJSON as any} cluster={true} clusterRadius={30} clusterMaxZoom={8}>
+                    <Source id="datacenters" type="geojson" data={EMPTY_FC as any} cluster={true} clusterRadius={30} clusterMaxZoom={8}>
                         {/* Cluster circles */}
                         <Layer
                             id="datacenters-clusters"
@@ -1555,11 +1547,9 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
                 {/* Power Plant positions */}
-                {powerPlantsGeoJSON && (
-                    <Source id="power-plants" type="geojson" data={powerPlantsGeoJSON as any} cluster={true} clusterRadius={30} clusterMaxZoom={8}>
+                    <Source id="power-plants" type="geojson" data={EMPTY_FC as any} cluster={true} clusterRadius={30} clusterMaxZoom={8}>
                         {/* Cluster circles */}
                         <Layer
                             id="power-plants-clusters"
@@ -1610,11 +1600,9 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
                 {/* Military Base positions */}
-                {militaryBasesGeoJSON && (
-                    <Source id="military-bases" type="geojson" data={militaryBasesGeoJSON as any}>
+                    <Source id="military-bases" type="geojson" data={EMPTY_FC as any}>
                         <Layer
                             id="military-bases-layer"
                             type="circle"
@@ -1644,7 +1632,6 @@ const MaplibreViewer = ({ data, activeLayers, onEntityClick, flyToLocation, sele
                             }}
                         />
                     </Source>
-                )}
 
                 {/* Satellite positions — mission-type icons */}
                 {/* satellites: data pushed imperatively */}

@@ -13,7 +13,7 @@ import re
 import logging
 import requests
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
 from sgp4.api import Satrec, WGS72, jday
 from services.fetchers._store import latest_data, _data_lock, _mark_fresh
 
@@ -32,13 +32,17 @@ def _gmst(jd_ut1):
 # Public TLE providers refresh roughly daily; SGP4 propagation runs every cycle using cached elements.
 _SAT_FETCH_INTERVAL = 86400  # 24 hours
 _SAT_REFRESH_RETRY_DELAY = 1800  # 30 minutes after a failed live refresh
-_TLE_API_BASE = "https://tle.ivanstanojevic.me/api/tle"
-_TLE_API_PAGE_SIZE = 500
-_TLE_API_MAX_PAGES = 40
-_TLE_API_PAGE_DELAY_SECONDS = 0.2
-_TLE_API_CATALOG_TIMEOUT = 6
-_TLE_API_SEARCH_TIMEOUT = 4
+_CELESTRAK_GP_GROUPS = [
+    "STATIONS",
+    "GPS-OPS",
+    "GLONASS",
+    "GALILEO",
+    "BEIDOU",
+    "RESOURCE",
+    "ACTIVE",
+]
 _CELESTRAK_TIMEOUT = 5
+_CELESTRAK_USER_AGENT = "Shadowbroker live risk dashboard (satellite tracker; contact: local operator)"
 _sat_gp_cache = {
     "data": None,
     "last_fetch": 0,
@@ -51,6 +55,15 @@ _sat_classified_cache = {"data": None, "gp_fetch_ts": 0}
 _SAT_CACHE_PATH = Path(__file__).parent.parent.parent / "data" / "sat_gp_cache.json"
 _SAT_CACHE_META_PATH = Path(__file__).parent.parent.parent / "data" / "sat_gp_cache_meta.json"
 _SAT_SEED_CACHE_PATH = Path(__file__).parent.parent.parent / "bootstrap" / "sat_gp_cache.json"
+_OFFLINE_SATELLITE_FALLBACKS = [
+    {"id": 25544, "name": "ISS (offline estimate)", "country": "Intl", "mission": "space_station", "sat_type": "Space Station", "alt_km": 420, "speed_knots": 15100, "period_min": 92.9, "inclination": 51.6, "phase": 15, "wiki": "https://en.wikipedia.org/wiki/International_Space_Station"},
+    {"id": 24876, "name": "GPS BIIR-2 (offline estimate)", "country": "USA", "mission": "navigation", "sat_type": "GPS", "alt_km": 20200, "speed_knots": 7500, "period_min": 718, "inclination": 55.0, "phase": 80, "wiki": "https://en.wikipedia.org/wiki/GPS_satellite_blocks"},
+    {"id": 40105, "name": "GLONASS-K1 (offline estimate)", "country": "Russia", "mission": "navigation", "sat_type": "GLONASS", "alt_km": 19100, "speed_knots": 7600, "period_min": 675, "inclination": 64.8, "phase": 145, "wiki": "https://en.wikipedia.org/wiki/GLONASS"},
+    {"id": 41175, "name": "GALILEO FOC (offline estimate)", "country": "EU", "mission": "navigation", "sat_type": "Galileo", "alt_km": 23200, "speed_knots": 7200, "period_min": 845, "inclination": 56.0, "phase": 210, "wiki": "https://en.wikipedia.org/wiki/Galileo_(satellite_navigation)"},
+    {"id": 36287, "name": "BEIDOU (offline estimate)", "country": "China", "mission": "navigation", "sat_type": "BeiDou", "alt_km": 21500, "speed_knots": 7350, "period_min": 773, "inclination": 55.5, "phase": 285, "wiki": "https://en.wikipedia.org/wiki/BeiDou"},
+    {"id": 40697, "name": "SENTINEL-2A (offline estimate)", "country": "EU", "mission": "commercial_imaging", "sat_type": "ESA Copernicus", "alt_km": 786, "speed_knots": 14300, "period_min": 100.6, "inclination": 98.6, "phase": 330, "wiki": "https://en.wikipedia.org/wiki/Sentinel-2"},
+]
+
 
 def _load_sat_cache(max_age_hours=48):
     """Load satellite GP data from local disk cache.
@@ -121,6 +134,29 @@ def _load_sat_seed_cache():
     return None
 
 
+def _build_offline_satellite_fallback(now):
+    """Return visible, clearly labeled estimates when no live/cache data exists."""
+    minutes = now.timestamp() / 60.0
+    sats = []
+    for sat in _OFFLINE_SATELLITE_FALLBACKS:
+        period = sat["period_min"]
+        phase = (minutes / period * 360.0 + sat["phase"]) % 360.0
+        phase_rad = math.radians(phase)
+        incl_rad = math.radians(sat["inclination"])
+        lat = math.degrees(math.asin(math.sin(incl_rad) * math.sin(phase_rad)))
+        lng = ((phase * 1.9 - minutes * 0.25 + sat["phase"]) % 360.0) - 180.0
+        heading = (phase + 90.0) % 360.0
+        entry = {k: v for k, v in sat.items() if k not in ("period_min", "inclination", "phase")}
+        entry.update({
+            "lat": round(lat, 4),
+            "lng": round(lng, 4),
+            "heading": round(heading, 1),
+            "is_estimate": True,
+        })
+        sats.append(entry)
+    return sats
+
+
 # Satellite intelligence classification database
 _SAT_INTEL_DB = [
     ("USA 224", {"country": "USA", "mission": "military_recon", "sat_type": "KH-11 Reconnaissance", "wiki": "https://en.wikipedia.org/wiki/KH-11_KENNEN"}),
@@ -155,6 +191,7 @@ _SAT_INTEL_DB = [
     ("LUCH", {"country": "Russia", "mission": "sigint", "sat_type": "Relay / SIGINT", "wiki": "https://en.wikipedia.org/wiki/Luch_(satellite)"}),
     ("SHIJIAN", {"country": "China", "mission": "sigint", "sat_type": "ELINT / Tech Demo", "wiki": "https://en.wikipedia.org/wiki/Shijian"}),
     ("NAVSTAR", {"country": "USA", "mission": "navigation", "sat_type": "GPS", "wiki": "https://en.wikipedia.org/wiki/GPS_satellite_blocks"}),
+    ("GPS", {"country": "USA", "mission": "navigation", "sat_type": "GPS", "wiki": "https://en.wikipedia.org/wiki/GPS_satellite_blocks"}),
     ("GLONASS", {"country": "Russia", "mission": "navigation", "sat_type": "GLONASS", "wiki": "https://en.wikipedia.org/wiki/GLONASS"}),
     ("BEIDOU", {"country": "China", "mission": "navigation", "sat_type": "BeiDou", "wiki": "https://en.wikipedia.org/wiki/BeiDou"}),
     ("GALILEO", {"country": "EU", "mission": "navigation", "sat_type": "Galileo", "wiki": "https://en.wikipedia.org/wiki/Galileo_(satellite_navigation)"}),
@@ -174,160 +211,57 @@ _SAT_INTEL_DB = [
 ]
 
 
-def _parse_tle_to_gp(name, norad_id, line1, line2):
-    """Convert a two-line element record to the GP fields used by the propagator."""
-    try:
-        incl = float(line2[8:16].strip())
-        raan = float(line2[17:25].strip())
-        ecc = float("0." + line2[26:33].strip())
-        argp = float(line2[34:42].strip())
-        ma = float(line2[43:51].strip())
-        mm = float(line2[52:63].strip())
-        bstar_str = line1[53:61].strip()
-        if bstar_str:
-            mantissa = float(bstar_str[:-2]) / 1e5
-            exponent = int(bstar_str[-2:])
-            bstar = mantissa * (10 ** exponent)
-        else:
-            bstar = 0.0
-        epoch_yr = int(line1[18:20])
-        epoch_day = float(line1[20:32].strip())
-        year = 2000 + epoch_yr if epoch_yr < 57 else 1900 + epoch_yr
-        epoch_dt = datetime(year, 1, 1) + timedelta(days=epoch_day - 1)
-        return {
-            "OBJECT_NAME": name,
-            "NORAD_CAT_ID": norad_id,
-            "MEAN_MOTION": mm,
-            "ECCENTRICITY": ecc,
-            "INCLINATION": incl,
-            "RA_OF_ASC_NODE": raan,
-            "ARG_OF_PERICENTER": argp,
-            "MEAN_ANOMALY": ma,
-            "BSTAR": bstar,
-            "EPOCH": epoch_dt.strftime("%Y-%m-%dT%H:%M:%S"),
-        }
-    except (ValueError, TypeError, IndexError, KeyError):
-        return None
+def _fetch_satellites_from_celestrak():
+    """Fetch satellite GP records from CelesTrak.
 
+    Smaller groups are fetched first so cold starts can display satellites even
+    when the full active catalog is slow or unavailable.
+    """
+    headers = {"User-Agent": _CELESTRAK_USER_AGENT}
+    if _sat_gp_cache.get("data") is not None and _sat_gp_cache.get("last_modified"):
+        headers["If-Modified-Since"] = _sat_gp_cache["last_modified"]
 
-def _normalize_tle_api_url(url):
-    if not url:
-        return None
-    if url.startswith("http://") or url.startswith("https://"):
-        return url
-    if url.startswith("/"):
-        return f"https://tle.ivanstanojevic.me{url}"
-    return f"{_TLE_API_BASE.rstrip('/')}/{url.lstrip('/')}"
-
-
-def _extract_tle_members(payload):
-    if isinstance(payload, list):
-        return payload
-    if not isinstance(payload, dict):
-        return []
-    members = payload.get("member")
-    if isinstance(members, list):
-        return members
-    hydra_members = payload.get("hydra:member")
-    if isinstance(hydra_members, list):
-        return hydra_members
-    items = payload.get("items")
-    if isinstance(items, list):
-        return items
-    return []
-
-
-def _extract_next_page_url(payload):
-    if not isinstance(payload, dict):
-        return None
-    view = payload.get("view")
-    if isinstance(view, dict):
-        next_url = view.get("next")
-        if next_url:
-            return _normalize_tle_api_url(next_url)
-    hydra_view = payload.get("hydra:view")
-    if isinstance(hydra_view, dict):
-        next_url = hydra_view.get("hydra:next")
-        if next_url:
-            return _normalize_tle_api_url(next_url)
-    return _normalize_tle_api_url(payload.get("next"))
-
-
-def _fetch_satellites_from_tle_api_catalog():
-    """Fetch the public TLE catalog and page through it when pagination is exposed."""
-    url = f"{_TLE_API_BASE}?page_size={_TLE_API_PAGE_SIZE}&format=json"
-    all_results = []
+    merged = []
     seen_ids = set()
+    not_modified = False
 
-    for page_num in range(1, _TLE_API_MAX_PAGES + 1):
-        response = requests.get(url, timeout=_TLE_API_CATALOG_TIMEOUT)
-        if response.status_code != 200:
-            logger.warning(f"Satellites: TLE API catalog request failed with {response.status_code} on page {page_num}")
-            break
-
-        payload = response.json()
-        members = _extract_tle_members(payload)
-        if not members:
-            break
-
-        for member in members:
-            gp = _parse_tle_to_gp(
-                member.get("name", "UNKNOWN"),
-                member.get("satelliteId"),
-                member.get("line1", ""),
-                member.get("line2", ""),
-            )
-            if not gp:
-                continue
-            sat_id = gp.get("NORAD_CAT_ID")
-            if sat_id in seen_ids:
-                continue
-            seen_ids.add(sat_id)
-            all_results.append(gp)
-
-        next_url = _extract_next_page_url(payload)
-        if not next_url or next_url == url:
-            break
-        url = next_url
-        if page_num < _TLE_API_MAX_PAGES:
-            time.sleep(_TLE_API_PAGE_DELAY_SECONDS)
-
-    return all_results
-
-
-def _fetch_satellites_from_tle_api_search():
-    """Fallback: search the public TLE API by tracked intel keywords."""
-    search_terms = set()
-    for key, _ in _SAT_INTEL_DB:
-        term = key.split()[0] if len(key.split()) > 1 and key.split()[0] in ("USA", "NROL") else key
-        search_terms.add(term)
-
-    all_results = []
-    seen_ids = set()
-    for term in sorted(search_terms):
+    for group in _CELESTRAK_GP_GROUPS:
+        url = f"https://celestrak.org/NORAD/elements/gp.php?GROUP={group}&FORMAT=json"
         try:
-            url = f"{_TLE_API_BASE}/?search={term}&page_size=100&format=json"
-            response = requests.get(url, timeout=_TLE_API_SEARCH_TIMEOUT)
-            if response.status_code != 200:
+            response = requests.get(url, timeout=_CELESTRAK_TIMEOUT, headers=headers)
+            if response.status_code == 304:
+                not_modified = True
+                logger.info(f"Satellites: CelesTrak returned 304 Not Modified for {group}")
                 continue
-            data = response.json()
-            for member in _extract_tle_members(data):
-                gp = _parse_tle_to_gp(
-                    member.get("name", "UNKNOWN"),
-                    member.get("satelliteId"),
-                    member.get("line1", ""),
-                    member.get("line2", ""),
-                )
-                if gp:
-                    sat_id = gp.get("NORAD_CAT_ID")
-                    if sat_id not in seen_ids:
-                        seen_ids.add(sat_id)
-                        all_results.append(gp)
-            time.sleep(0.1)
-        except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, json.JSONDecodeError, OSError) as e:
-            logger.debug(f"TLE fallback search '{term}' failed: {e}")
+            if response.status_code != 200:
+                logger.warning(f"Satellites: CelesTrak {group} request failed with {response.status_code}")
+                continue
 
-    return all_results
+            gp_data = response.json()
+            if not isinstance(gp_data, list) or not gp_data:
+                logger.warning(f"Satellites: CelesTrak returned an unexpected GP payload for {group}")
+                continue
+
+            before = len(merged)
+            for sat in gp_data:
+                sat_id = sat.get("NORAD_CAT_ID")
+                if sat_id in seen_ids:
+                    continue
+                seen_ids.add(sat_id)
+                merged.append(sat)
+            lm = response.headers.get("Last-Modified")
+            if lm:
+                _sat_gp_cache["last_modified"] = lm
+            logger.info(f"Satellites: CelesTrak {group} added {len(merged) - before} GP records")
+        except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, json.JSONDecodeError, OSError) as e:
+            logger.warning(f"Satellites: Failed to fetch CelesTrak {group}: {e}")
+
+    if merged:
+        return "updated", merged
+    if not_modified:
+        logger.info("Satellites: CelesTrak returned 304 Not Modified (data unchanged)")
+        return "not_modified", None
+    return "failed", None
 
 
 def fetch_satellites():
@@ -357,71 +291,24 @@ def fetch_satellites():
         if refresh_due and should_retry_live:
             _sat_gp_cache["last_attempt"] = now_ts
             live_refresh_succeeded = False
-            logger.info("Satellites: attempting live refresh from public providers...")
+            logger.info("Satellites: attempting live refresh from CelesTrak...")
             try:
-                catalog_data = _fetch_satellites_from_tle_api_catalog()
-                if catalog_data and len(catalog_data) > 100:
-                    _sat_gp_cache["data"] = catalog_data
+                fetch_status, gp_data = _fetch_satellites_from_celestrak()
+                if fetch_status == "not_modified":
                     _sat_gp_cache["last_fetch"] = now_ts
-                    _sat_gp_cache["source"] = "tle_api"
+                    _sat_gp_cache["source"] = "celestrak"
                     _sat_gp_cache["next_retry_at"] = 0
-                    _save_sat_cache(catalog_data)
                     live_refresh_succeeded = True
-                    logger.info(f"Satellites: Downloaded {len(catalog_data)} GP records from TLE API catalog")
+                elif fetch_status == "updated" and gp_data:
+                    _sat_gp_cache["data"] = gp_data
+                    _sat_gp_cache["last_fetch"] = now_ts
+                    _sat_gp_cache["source"] = "celestrak"
+                    _sat_gp_cache["next_retry_at"] = 0
+                    _save_sat_cache(gp_data)
+                    live_refresh_succeeded = True
+                    logger.info(f"Satellites: Downloaded {len(gp_data)} GP records from CelesTrak")
             except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, OSError) as e:
-                logger.warning(f"Satellites: TLE API catalog fetch failed: {e}")
-
-            if not live_refresh_succeeded:
-                gp_urls = [
-                    "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json",
-                    "https://celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=json",
-                ]
-                headers = {}
-                if _sat_gp_cache.get("last_modified"):
-                    headers["If-Modified-Since"] = _sat_gp_cache["last_modified"]
-
-                for url in gp_urls:
-                    try:
-                        response = requests.get(url, timeout=_CELESTRAK_TIMEOUT, headers=headers)
-                        if response.status_code == 304:
-                            _sat_gp_cache["last_fetch"] = now_ts
-                            _sat_gp_cache["next_retry_at"] = 0
-                            live_refresh_succeeded = True
-                            logger.info("Satellites: CelesTrak returned 304 Not Modified (data unchanged)")
-                            break
-                        if response.status_code == 200:
-                            gp_data = response.json()
-                            if isinstance(gp_data, list) and len(gp_data) > 100:
-                                _sat_gp_cache["data"] = gp_data
-                                _sat_gp_cache["last_fetch"] = now_ts
-                                _sat_gp_cache["source"] = "celestrak"
-                                _sat_gp_cache["next_retry_at"] = 0
-                                if hasattr(response, "headers"):
-                                    lm = response.headers.get("Last-Modified")
-                                    if lm:
-                                        _sat_gp_cache["last_modified"] = lm
-                                _save_sat_cache(gp_data)
-                                live_refresh_succeeded = True
-                                logger.info(f"Satellites: Downloaded {len(gp_data)} GP records from CelesTrak")
-                                break
-                    except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, json.JSONDecodeError, OSError) as e:
-                        logger.warning(f"Satellites: Failed to fetch from {url}: {e}")
-                        continue
-
-            if not live_refresh_succeeded:
-                logger.info("Satellites: TLE catalog unavailable, trying public keyword search fallback...")
-                try:
-                    fallback_data = _fetch_satellites_from_tle_api_search()
-                    if fallback_data and len(fallback_data) > 10:
-                        _sat_gp_cache["data"] = fallback_data
-                        _sat_gp_cache["last_fetch"] = now_ts
-                        _sat_gp_cache["source"] = "tle_api"
-                        _sat_gp_cache["next_retry_at"] = 0
-                        _save_sat_cache(fallback_data)
-                        live_refresh_succeeded = True
-                        logger.info(f"Satellites: Got {len(fallback_data)} records from TLE API search fallback")
-                except (requests.RequestException, ConnectionError, TimeoutError, ValueError, KeyError, OSError) as e:
-                    logger.error(f"Satellites: TLE search fallback failed: {e}")
+                logger.warning(f"Satellites: CelesTrak fetch failed: {e}")
 
             if _sat_gp_cache["data"] is None:
                 disk_data = _load_sat_cache(max_age_hours=None)
@@ -429,7 +316,7 @@ def fetch_satellites():
                     _sat_gp_cache["data"] = disk_data
                     _sat_gp_cache["last_fetch"] = now_ts - (_SAT_FETCH_INTERVAL - 300)
                     _sat_gp_cache["source"] = "disk_cache"
-                    logger.info("Satellites: Using stale disk cache because live providers were unavailable")
+                    logger.info("Satellites: Using stale disk cache because CelesTrak was unavailable")
 
             if _sat_gp_cache["data"] is None:
                 seed_data = _load_sat_seed_cache()
@@ -447,9 +334,13 @@ def fetch_satellites():
 
         data = _sat_gp_cache["data"]
         if not data:
-            logger.warning("No satellite GP data available from any source")
+            fallback_sats = _build_offline_satellite_fallback(datetime.utcnow())
+            _sat_gp_cache["source"] = "offline_estimate"
+            logger.info(f"Satellites: CelesTrak/cache unavailable, serving {len(fallback_sats)} offline estimate markers")
             with _data_lock:
-                latest_data["satellites"] = sats
+                latest_data["satellites"] = fallback_sats
+                latest_data["satellite_source"] = "offline_estimate"
+            _mark_fresh("satellites")
             return
 
         if _sat_classified_cache["gp_fetch_ts"] == _sat_gp_cache["last_fetch"] and _sat_classified_cache["data"]:
