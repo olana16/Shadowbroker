@@ -51,11 +51,8 @@ def search_places(query: str, limit: int = 5, country_only: bool = False) -> lis
         "format": "jsonv2",
         "limit": safe_limit,
         "addressdetails": 1,
+        "q": q,
     }
-    if country_only:
-        params["country"] = q
-    else:
-        params["q"] = q
 
     try:
         data = _get_json("/search", params)

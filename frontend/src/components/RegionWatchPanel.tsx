@@ -63,11 +63,17 @@ export default function RegionWatchPanel({
       }
       const matches = await res.json();
       const match = Array.isArray(matches) ? matches[0] : null;
-      if (!match?.boundingbox || match.boundingbox.length !== 4) {
+      if (!match) {
+        setError("Country not found. Try a different spelling.");
+        return;
+      }
+      if (!match.boundingbox || match.boundingbox.length !== 4) {
+        console.error("Invalid boundingbox:", match.boundingbox);
         setError("Could not resolve that country to a bounding box.");
         return;
       }
       const [south, north, west, east] = match.boundingbox.map(Number);
+      console.log(`Setting watch region for ${q}:`, { south, north, west, east });
       onSetWatchRegion({
         mode: "country",
         label: match.display_name || match.label || q,
@@ -77,8 +83,9 @@ export default function RegionWatchPanel({
         north,
         east,
       });
-    } catch {
-      setError("Country lookup failed.");
+    } catch (err) {
+      console.error("Country lookup error:", err);
+      setError(`Country lookup failed: ${err instanceof Error ? err.message : "Unknown error"}`);
     } finally {
       setCountryBusy(false);
     }
