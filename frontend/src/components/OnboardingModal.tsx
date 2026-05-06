@@ -48,7 +48,7 @@ const FREE_SOURCES = [
     { name: "Yahoo Finance", desc: "Defense stocks & oil", icon: <Globe size={12} /> },
 ];
 
-interface OnboardingModalProps {
+interface OnboardingModalProps {  
     onClose: () => void;
     onOpenSettings: () => void;
 }
