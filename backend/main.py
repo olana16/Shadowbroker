@@ -446,6 +446,29 @@ def api_sentinel2_search(
     """Search for latest Sentinel-2 imagery at a point. Sync for threadpool execution."""
     return search_sentinel2_scene(lat, lng)
 
+from services.geocoding import reverse_place, search_places
+
+@app.get("/api/geocode/search")
+@limiter.limit("30/minute")
+def api_geocode_search(
+    request: Request,
+    q: str = Query(..., min_length=1, max_length=120),
+    limit: int = Query(5, ge=1, le=10),
+    country_only: bool = False,
+):
+    """Proxy Nominatim search server-side so browser clients avoid CORS/UA issues."""
+    return search_places(q, limit=limit, country_only=country_only)
+
+@app.get("/api/geocode/reverse")
+@limiter.limit("60/minute")
+def api_geocode_reverse(
+    request: Request,
+    lat: float = Query(..., ge=-90, le=90),
+    lng: float = Query(..., ge=-180, le=180),
+):
+    """Proxy Nominatim reverse geocoding server-side with app User-Agent + cache."""
+    return reverse_place(lat, lng)
+
 # ---------------------------------------------------------------------------
 # API Settings — key registry & management
 # ---------------------------------------------------------------------------

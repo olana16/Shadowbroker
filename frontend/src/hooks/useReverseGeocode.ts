@@ -1,4 +1,5 @@
 import { useCallback, useState, useRef } from "react";
+import { API_BASE } from "@/lib/api";
 import { GEOCODE_THROTTLE_MS, GEOCODE_DISTANCE_THRESHOLD, GEOCODE_CACHE_SIZE } from "@/lib/constants";
 
 export function useReverseGeocode() {
@@ -33,17 +34,12 @@ export function useReverseGeocode() {
 
       try {
         const res = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?lat=${coords.lat}&lon=${coords.lng}&format=json&zoom=10&addressdetails=1`,
-          { headers: { 'Accept-Language': 'en' }, signal: geocodeAbort.current.signal }
+          `${API_BASE}/api/geocode/reverse?lat=${coords.lat}&lng=${coords.lng}`,
+          { signal: geocodeAbort.current.signal }
         );
         if (res.ok) {
           const data = await res.json();
-          const addr = data.address || {};
-          const city = addr.city || addr.town || addr.village || addr.county || '';
-          const state = addr.state || addr.region || '';
-          const country = addr.country || '';
-          const parts = [city, state, country].filter(Boolean);
-          const label = parts.join(', ') || data.display_name?.split(',').slice(0, 3).join(',') || 'Unknown';
+          const label = data.label || 'Unknown';
 
           if (geocodeCache.current.size > GEOCODE_CACHE_SIZE) {
             const iter = geocodeCache.current.keys();
@@ -56,8 +52,8 @@ export function useReverseGeocode() {
           setLocationLabel(label);
           lastGeocodedPos.current = coords;
         }
-      } catch (e: any) {
-        if (e.name !== 'AbortError') { /* Silently fail - keep last label */ }
+      } catch (e: unknown) {
+        if (!(e instanceof DOMException && e.name === 'AbortError')) { /* Silently fail - keep last label */ }
       }
     }, GEOCODE_THROTTLE_MS);
   }, []);

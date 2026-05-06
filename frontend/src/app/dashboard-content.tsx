@@ -17,6 +17,7 @@ import RegionWatchPanel from "@/components/RegionWatchPanel";
 import ScaleBar from "@/components/ScaleBar";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { DashboardDataProvider } from "@/lib/DashboardDataContext";
+import { API_BASE } from "@/lib/api";
 import OnboardingModal, { useOnboarding } from "@/components/OnboardingModal";
 import ChangelogModal, { useChangelog } from "@/components/ChangelogModal";
 import type { KiwiSDR, SelectedEntity, WatchRegion, WatchResultItem } from "@/types/dashboard";
@@ -65,15 +66,16 @@ function LocateBar({ onLocate }: { onLocate: (lat: number, lng: number) => void 
     timerRef.current = setTimeout(async () => {
       setLoading(true);
       try {
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=5`, {
-          headers: { "Accept-Language": "en" },
-        });
+        const res = await fetch(`${API_BASE}/api/geocode/search?q=${encodeURIComponent(q)}&limit=5`);
+        if (!res.ok) {
+          throw new Error(`Locate lookup failed with ${res.status}`);
+        }
         const data = await res.json();
         setResults(
-          data.map((r: { display_name: string; lat: string; lon: string }) => ({
-            label: r.display_name,
-            lat: parseFloat(r.lat),
-            lng: parseFloat(r.lon),
+          data.map((r: { label?: string; display_name?: string; lat: number; lng: number }) => ({
+            label: r.label || r.display_name || `${r.lat}, ${r.lng}`,
+            lat: r.lat,
+            lng: r.lng,
           })),
         );
       } catch {

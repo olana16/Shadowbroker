@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Globe2, LocateFixed, Search, Trash2 } from "lucide-react";
+import { API_BASE } from "@/lib/api";
 import type { WatchRegion, WatchRegionResults, WatchResultItem } from "@/types/dashboard";
 
 interface RegionWatchPanelProps {
@@ -56,9 +57,10 @@ export default function RegionWatchPanel({
     setCountryBusy(true);
     setError(null);
     try {
-      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&country=${encodeURIComponent(q)}`, {
-        headers: { "Accept-Language": "en" },
-      });
+      const res = await fetch(`${API_BASE}/api/geocode/search?q=${encodeURIComponent(q)}&limit=1&country_only=true`);
+      if (!res.ok) {
+        throw new Error(`Country lookup failed with ${res.status}`);
+      }
       const matches = await res.json();
       const match = Array.isArray(matches) ? matches[0] : null;
       if (!match?.boundingbox || match.boundingbox.length !== 4) {
@@ -68,7 +70,7 @@ export default function RegionWatchPanel({
       const [south, north, west, east] = match.boundingbox.map(Number);
       onSetWatchRegion({
         mode: "country",
-        label: match.display_name || q,
+        label: match.display_name || match.label || q,
         query: q,
         south,
         west,

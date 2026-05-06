@@ -21,6 +21,10 @@ export function useRegionDossier(
       let dossierData: Record<string, unknown> = {};
       if (dossierRes.status === 'fulfilled' && dossierRes.value.ok) {
         dossierData = await dossierRes.value.json();
+      } else if (dossierRes.status === 'fulfilled') {
+        dossierData = { error: `Region dossier failed (${dossierRes.value.status})` };
+      } else {
+        dossierData = { error: "Region dossier request failed" };
       }
       let sentinelData = null;
       if (sentinelRes.status === 'fulfilled' && sentinelRes.value.ok) {
