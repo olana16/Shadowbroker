@@ -43,7 +43,8 @@ def search_places(query: str, limit: int = 5, country_only: bool = False) -> lis
         return []
 
     safe_limit = max(1, min(limit, 10))
-    cache_key = f"search:{country_only}:{safe_limit}:{q.lower()}"
+    # Include a cache schema tag so logic changes do not reuse stale cached results.
+    cache_key = f"search:v2:{country_only}:{safe_limit}:{q.lower()}"
     if cache_key in _search_cache:
         return _search_cache[cache_key]
 
@@ -53,6 +54,9 @@ def search_places(query: str, limit: int = 5, country_only: bool = False) -> lis
         "addressdetails": 1,
         "q": q,
     }
+    if country_only:
+        # Nominatim country-level search; avoids returning cities/POIs for region watch.
+        params["featuretype"] = "country"
 
     try:
         data = _get_json("/search", params)
@@ -63,13 +67,34 @@ def search_places(query: str, limit: int = 5, country_only: bool = False) -> lis
     results = []
     for item in data if isinstance(data, list) else []:
         try:
+            item_lat = float(item["lat"])
+            item_lng = float(item["lon"])
+            bbox = [float(v) for v in item.get("boundingbox", [])]
+            item_type = (item.get("type") or "").lower()
+            item_class = (item.get("class") or "").lower()
+
+            if country_only:
+                # Nominatim country searches can come back as:
+                # - type=country
+                # - class=boundary,type=administrative (country boundary)
+                # - addresstype=country
+                # Keep only clearly country-level matches.
+                addresstype = (item.get("addresstype") or "").lower()
+                is_country_level = (
+                    item_type == "country"
+                    or addresstype == "country"
+                    or (item_class == "boundary" and item_type in {"administrative", "country"})
+                )
+                if not is_country_level:
+                    continue
+
             results.append(
                 {
                     "label": item.get("display_name") or q,
                     "display_name": item.get("display_name") or q,
-                    "lat": float(item["lat"]),
-                    "lng": float(item["lon"]),
-                    "boundingbox": [float(v) for v in item.get("boundingbox", [])],
+                    "lat": item_lat,
+                    "lng": item_lng,
+                    "boundingbox": bbox,
                     "type": item.get("type", ""),
                     "class": item.get("class", ""),
                 }
