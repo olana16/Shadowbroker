@@ -138,3 +138,6 @@ backend/data/news_keywords.json
 
 #session
 backend/data/cctv.db
+
+#fire catch
+backend/data/firms_fires_cache.json

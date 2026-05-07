@@ -140,6 +140,36 @@
     "acq_time": "0620"
   },
   {
+    "lat": 53.43104,
+    "lng": 34.02367,
+    "frp": 284.06,
+    "brightness": 367.0,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
+    "lat": 53.43647,
+    "lng": 34.02906,
+    "frp": 284.06,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
+    "lat": 53.43471,
+    "lng": 34.02134,
+    "frp": 284.06,
+    "brightness": 367.0,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
     "lat": -18.85093,
     "lng": 121.87855,
     "frp": 247.6,
@@ -758,6 +788,26 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1142"
+  },
+  {
+    "lat": 51.21783,
+    "lng": 30.23474,
+    "frp": 150.36,
+    "brightness": 340.36,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 51.21571,
+    "lng": 30.22709,
+    "frp": 150.36,
+    "brightness": 347.64,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 20.94289,
@@ -1460,6 +1510,36 @@
     "acq_time": "1142"
   },
   {
+    "lat": 53.43457,
+    "lng": 34.03913,
+    "frp": 114.48,
+    "brightness": 340.0,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
+    "lat": 53.43823,
+    "lng": 34.0368,
+    "frp": 114.48,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
+    "lat": 50.72,
+    "lng": 30.19955,
+    "frp": 113.96,
+    "brightness": 350.61,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -30.63036,
     "lng": 115.9666,
     "frp": 113.78,
@@ -1698,6 +1778,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0427"
+  },
+  {
+    "lat": 30.35203,
+    "lng": 50.06918,
+    "frp": 106.36,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0945"
   },
   {
     "lat": 15.2988,
@@ -2088,6 +2178,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0427"
+  },
+  {
+    "lat": 52.16179,
+    "lng": 32.29473,
+    "frp": 99.23,
+    "brightness": 321.01,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 60.44189,
@@ -2488,6 +2588,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0620"
+  },
+  {
+    "lat": 52.17385,
+    "lng": 32.28691,
+    "frp": 88.24,
+    "brightness": 303.16,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 21.09749,
@@ -3220,6 +3330,16 @@
     "acq_time": "0605"
   },
   {
+    "lat": 52.75402,
+    "lng": 42.27348,
+    "frp": 77.29,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -19.90488,
     "lng": 122.87186,
     "frp": 77.28,
@@ -3900,6 +4020,26 @@
     "acq_time": "1503"
   },
   {
+    "lat": 52.17269,
+    "lng": 32.28748,
+    "frp": 68.47,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.17424,
+    "lng": 32.29359,
+    "frp": 68.47,
+    "brightness": 340.52,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 16.77838,
     "lng": -91.99413,
     "frp": 68.33,
@@ -4388,6 +4528,26 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1503"
+  },
+  {
+    "lat": 52.16883,
+    "lng": 32.30431,
+    "frp": 63.0,
+    "brightness": 340.64,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.16732,
+    "lng": 32.29824,
+    "frp": 63.0,
+    "brightness": 349.58,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 17.84203,
@@ -4940,6 +5100,36 @@
     "acq_time": "0449"
   },
   {
+    "lat": 52.16619,
+    "lng": 32.29876,
+    "frp": 58.32,
+    "brightness": 367.0,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.17022,
+    "lng": 32.2962,
+    "frp": 58.32,
+    "brightness": 330.8,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.16867,
+    "lng": 32.29009,
+    "frp": 58.32,
+    "brightness": 336.17,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -32.80994,
     "lng": 117.05511,
     "frp": 58.18,
@@ -5400,6 +5590,36 @@
     "acq_time": "0446"
   },
   {
+    "lat": 51.20704,
+    "lng": 30.21489,
+    "frp": 54.12,
+    "brightness": 330.74,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 51.20917,
+    "lng": 30.22256,
+    "frp": 54.12,
+    "brightness": 367.0,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 51.21358,
+    "lng": 30.21943,
+    "frp": 54.12,
+    "brightness": 344.75,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 18.45723,
     "lng": -91.02156,
     "frp": 54.02,
@@ -5798,6 +6018,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "2012"
+  },
+  {
+    "lat": 52.38643,
+    "lng": 33.47647,
+    "frp": 52.24,
+    "brightness": 341.32,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 15.62171,
@@ -7620,6 +7850,16 @@
     "acq_time": "1136"
   },
   {
+    "lat": 46.46795,
+    "lng": 40.14122,
+    "frp": 44.06,
+    "brightness": 326.75,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 66.2487,
     "lng": 76.81385,
     "frp": 44.01,
@@ -8118,6 +8358,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1151"
+  },
+  {
+    "lat": 50.94339,
+    "lng": 35.19481,
+    "frp": 42.41,
+    "brightness": 341.4,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 49.34927,
@@ -8720,6 +8970,16 @@
     "acq_time": "0510"
   },
   {
+    "lat": 52.12816,
+    "lng": 32.40284,
+    "frp": 40.64,
+    "brightness": 346.35,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 14.14678,
     "lng": -89.33788,
     "frp": 40.62,
@@ -8950,6 +9210,36 @@
     "acq_time": "2012"
   },
   {
+    "lat": 52.00679,
+    "lng": 32.21051,
+    "frp": 39.84,
+    "brightness": 351.36,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.01239,
+    "lng": 32.21405,
+    "frp": 39.84,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.01083,
+    "lng": 32.20781,
+    "frp": 39.84,
+    "brightness": 345.66,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -36.67168,
     "lng": 146.65697,
     "frp": 39.8,
@@ -9128,6 +9418,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0620"
+  },
+  {
+    "lat": 51.98909,
+    "lng": 32.21505,
+    "frp": 39.0,
+    "brightness": 354.58,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 19.08414,
@@ -9428,6 +9728,26 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1639"
+  },
+  {
+    "lat": 51.20475,
+    "lng": 30.22569,
+    "frp": 38.02,
+    "brightness": 350.73,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 51.20261,
+    "lng": 30.21802,
+    "frp": 38.02,
+    "brightness": 354.4,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 10.68029,
@@ -10140,6 +10460,16 @@
     "acq_time": "2010"
   },
   {
+    "lat": 52.38776,
+    "lng": 33.48205,
+    "frp": 36.28,
+    "brightness": 347.21,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 53.77723,
     "lng": 59.80253,
     "frp": 36.12,
@@ -10510,6 +10840,66 @@
     "acq_time": "0839"
   },
   {
+    "lat": 51.50578,
+    "lng": 28.01642,
+    "frp": 34.99,
+    "brightness": 352.54,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
+    "lat": 51.50443,
+    "lng": 28.01189,
+    "frp": 34.99,
+    "brightness": 348.37,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
+    "lat": 52.13462,
+    "lng": 32.29824,
+    "frp": 34.98,
+    "brightness": 337.9,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.13308,
+    "lng": 32.29209,
+    "frp": 34.98,
+    "brightness": 367.0,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.13865,
+    "lng": 32.29562,
+    "frp": 34.98,
+    "brightness": 340.1,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.13711,
+    "lng": 32.28949,
+    "frp": 34.98,
+    "brightness": 347.84,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -5.86095,
     "lng": 25.47498,
     "frp": 34.97,
@@ -10770,6 +11160,16 @@
     "acq_time": "1325"
   },
   {
+    "lat": 51.20688,
+    "lng": 30.23335,
+    "frp": 34.41,
+    "brightness": 343.91,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 49.1498,
     "lng": 37.29108,
     "frp": 34.4,
@@ -10818,6 +11218,26 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1325"
+  },
+  {
+    "lat": 52.01641,
+    "lng": 32.21132,
+    "frp": 34.34,
+    "brightness": 344.35,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.01485,
+    "lng": 32.20509,
+    "frp": 34.34,
+    "brightness": 332.59,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 31.94495,
@@ -11088,6 +11508,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1130"
+  },
+  {
+    "lat": 57.79785,
+    "lng": 55.89309,
+    "frp": 33.54,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
   },
   {
     "lat": 49.6367,
@@ -12690,6 +13120,16 @@
     "acq_time": "1325"
   },
   {
+    "lat": 46.4653,
+    "lng": 40.1412,
+    "frp": 30.53,
+    "brightness": 341.24,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 16.92836,
     "lng": 96.02112,
     "frp": 30.52,
@@ -12748,6 +13188,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "0822"
+  },
+  {
+    "lat": 52.48453,
+    "lng": 49.13279,
+    "frp": 30.41,
+    "brightness": 341.21,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 10.46294,
@@ -13338,6 +13788,26 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "2010"
+  },
+  {
+    "lat": 52.17136,
+    "lng": 32.29568,
+    "frp": 29.45,
+    "brightness": 340.99,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.17537,
+    "lng": 32.29305,
+    "frp": 29.45,
+    "brightness": 340.86,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 31.31447,
@@ -14320,6 +14790,16 @@
     "acq_time": "1323"
   },
   {
+    "lat": 54.53216,
+    "lng": 39.62672,
+    "frp": 27.99,
+    "brightness": 352.85,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
     "lat": 52.53642,
     "lng": 22.47342,
     "frp": 27.96,
@@ -14788,6 +15268,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0427"
+  },
+  {
+    "lat": 24.50266,
+    "lng": 56.60755,
+    "frp": 27.54,
+    "brightness": 348.46,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0943"
   },
   {
     "lat": 10.63437,
@@ -15790,6 +16280,16 @@
     "acq_time": "1639"
   },
   {
+    "lat": 27.16083,
+    "lng": 56.10049,
+    "frp": 26.38,
+    "brightness": 346.96,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0945"
+  },
+  {
     "lat": 16.77114,
     "lng": -99.14244,
     "frp": 26.37,
@@ -16500,6 +17000,16 @@
     "acq_time": "1817"
   },
   {
+    "lat": 53.49666,
+    "lng": 34.01727,
+    "frp": 25.52,
+    "brightness": 352.51,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
     "lat": 20.64,
     "lng": 104.45412,
     "frp": 25.51,
@@ -17020,6 +17530,16 @@
     "acq_time": "1819"
   },
   {
+    "lat": 27.16732,
+    "lng": 56.05478,
+    "frp": 25.16,
+    "brightness": 345.44,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0945"
+  },
+  {
     "lat": -22.51271,
     "lng": 46.69676,
     "frp": 25.15,
@@ -17178,6 +17698,26 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1503"
+  },
+  {
+    "lat": -15.68717,
+    "lng": 47.71742,
+    "frp": 25.02,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0934"
+  },
+  {
+    "lat": -15.68659,
+    "lng": 47.72364,
+    "frp": 25.02,
+    "brightness": 335.01,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0934"
   },
   {
     "lat": -14.20451,
@@ -17780,6 +18320,16 @@
     "acq_time": "1830"
   },
   {
+    "lat": 51.95892,
+    "lng": 32.05833,
+    "frp": 24.58,
+    "brightness": 353.07,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 48.29905,
     "lng": 132.80705,
     "frp": 24.55,
@@ -18190,6 +18740,26 @@
     "acq_time": "1830"
   },
   {
+    "lat": 51.98914,
+    "lng": 32.0595,
+    "frp": 24.22,
+    "brightness": 353.36,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 51.98752,
+    "lng": 32.05319,
+    "frp": 24.22,
+    "brightness": 354.65,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 25.85703,
     "lng": 78.16513,
     "frp": 24.21,
@@ -18268,6 +18838,36 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0813"
+  },
+  {
+    "lat": -15.68606,
+    "lng": 47.71812,
+    "frp": 24.11,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0934"
+  },
+  {
+    "lat": -15.68669,
+    "lng": 47.71189,
+    "frp": 24.11,
+    "brightness": 333.01,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0934"
+  },
+  {
+    "lat": -15.67982,
+    "lng": 47.71125,
+    "frp": 24.11,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0934"
   },
   {
     "lat": -19.79445,
@@ -19070,6 +19670,16 @@
     "acq_time": "0637"
   },
   {
+    "lat": 60.43794,
+    "lng": 60.40095,
+    "frp": 23.58,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
     "lat": 9.86897,
     "lng": -63.80705,
     "frp": 23.52,
@@ -19510,6 +20120,16 @@
     "acq_time": "2010"
   },
   {
+    "lat": 54.01866,
+    "lng": 45.04043,
+    "frp": 23.25,
+    "brightness": 348.82,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -19.85201,
     "lng": 123.05956,
     "frp": 23.24,
@@ -19708,6 +20328,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "2010"
+  },
+  {
+    "lat": 51.98188,
+    "lng": 32.20519,
+    "frp": 23.1,
+    "brightness": 355.28,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 16.15581,
@@ -19998,6 +20628,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1639"
+  },
+  {
+    "lat": 51.33328,
+    "lng": 34.51196,
+    "frp": 22.88,
+    "brightness": 353.61,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": -0.91788,
@@ -20380,6 +21020,16 @@
     "acq_time": "0637"
   },
   {
+    "lat": 52.48652,
+    "lng": 49.13249,
+    "frp": 22.56,
+    "brightness": 344.88,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -12.95202,
     "lng": 132.46178,
     "frp": 22.55,
@@ -20508,6 +21158,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1503"
+  },
+  {
+    "lat": 26.32195,
+    "lng": 62.41816,
+    "frp": 22.48,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0943"
   },
   {
     "lat": -18.83417,
@@ -20788,6 +21448,36 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1134"
+  },
+  {
+    "lat": 23.82845,
+    "lng": 53.627,
+    "frp": 22.16,
+    "brightness": 352.11,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0943"
+  },
+  {
+    "lat": 23.83182,
+    "lng": 53.62644,
+    "frp": 22.16,
+    "brightness": 367.0,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0943"
+  },
+  {
+    "lat": 51.9881,
+    "lng": 32.06112,
+    "frp": 22.14,
+    "brightness": 352.21,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": -19.10828,
@@ -21078,6 +21768,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1151"
+  },
+  {
+    "lat": 25.52545,
+    "lng": 60.09062,
+    "frp": 22.03,
+    "brightness": 350.56,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0943"
   },
   {
     "lat": -13.38945,
@@ -21788,6 +22488,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0805"
+  },
+  {
+    "lat": 52.00693,
+    "lng": 32.12869,
+    "frp": 21.57,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 38.79924,
@@ -23490,6 +24200,16 @@
     "acq_time": "1140"
   },
   {
+    "lat": -15.67859,
+    "lng": 47.72358,
+    "frp": 20.64,
+    "brightness": 329.4,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0934"
+  },
+  {
     "lat": 17.90143,
     "lng": -93.18467,
     "frp": 20.61,
@@ -24100,6 +24820,26 @@
     "acq_time": "0824"
   },
   {
+    "lat": 51.50307,
+    "lng": 28.00736,
+    "frp": 20.21,
+    "brightness": 355.07,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
+    "lat": 51.5017,
+    "lng": 28.00281,
+    "frp": 20.21,
+    "brightness": 350.75,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
     "lat": 10.46714,
     "lng": -13.60289,
     "frp": 20.2,
@@ -24630,6 +25370,26 @@
     "acq_time": "0807"
   },
   {
+    "lat": 53.82228,
+    "lng": 59.09342,
+    "frp": 19.92,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 53.82221,
+    "lng": 59.08623,
+    "frp": 19.92,
+    "brightness": 348.03,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 17.89587,
     "lng": -92.48964,
     "frp": 19.91,
@@ -24900,6 +25660,26 @@
     "acq_time": "2010"
   },
   {
+    "lat": 52.00522,
+    "lng": 32.20425,
+    "frp": 19.82,
+    "brightness": 343.32,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.00925,
+    "lng": 32.20153,
+    "frp": 19.82,
+    "brightness": 341.83,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -13.10706,
     "lng": 131.55576,
     "frp": 19.81,
@@ -24948,6 +25728,26 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0427"
+  },
+  {
+    "lat": 51.25473,
+    "lng": 34.59038,
+    "frp": 19.81,
+    "brightness": 345.74,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 51.2535,
+    "lng": 34.58513,
+    "frp": 19.81,
+    "brightness": 348.32,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 48.07225,
@@ -27110,6 +27910,16 @@
     "acq_time": "0608"
   },
   {
+    "lat": 24.82765,
+    "lng": 53.62099,
+    "frp": 18.83,
+    "brightness": 334.86,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0943"
+  },
+  {
     "lat": -7.96912,
     "lng": 24.86271,
     "frp": 18.82,
@@ -27270,6 +28080,16 @@
     "acq_time": "0805"
   },
   {
+    "lat": -16.91783,
+    "lng": 47.91714,
+    "frp": 18.74,
+    "brightness": 350.73,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0934"
+  },
+  {
     "lat": 16.63447,
     "lng": 106.4939,
     "frp": 18.73,
@@ -27388,6 +28208,16 @@
     "daynight": "N",
     "acq_date": "2026-05-07",
     "acq_time": "0659"
+  },
+  {
+    "lat": 16.14003,
+    "lng": 42.96989,
+    "frp": 18.7,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0941"
   },
   {
     "lat": 21.21038,
@@ -27730,6 +28560,16 @@
     "acq_time": "0805"
   },
   {
+    "lat": 52.26961,
+    "lng": 32.45091,
+    "frp": 18.56,
+    "brightness": 355.43,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 26.77398,
     "lng": 119.73299,
     "frp": 18.55,
@@ -27888,6 +28728,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1325"
+  },
+  {
+    "lat": 29.03102,
+    "lng": 58.48943,
+    "frp": 18.44,
+    "brightness": 347.5,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0945"
   },
   {
     "lat": 16.27385,
@@ -28088,6 +28938,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1830"
+  },
+  {
+    "lat": 57.7977,
+    "lng": 55.88683,
+    "frp": 18.36,
+    "brightness": 341.54,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
   },
   {
     "lat": 16.48687,
@@ -28648,6 +29508,36 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "0449"
+  },
+  {
+    "lat": 52.00993,
+    "lng": 32.22301,
+    "frp": 18.05,
+    "brightness": 349.29,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.01553,
+    "lng": 32.22657,
+    "frp": 18.05,
+    "brightness": 341.59,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.01397,
+    "lng": 32.22032,
+    "frp": 18.05,
+    "brightness": 353.32,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 30.82413,
@@ -29250,6 +30140,16 @@
     "acq_time": "0608"
   },
   {
+    "lat": 53.91986,
+    "lng": 37.9583,
+    "frp": 17.85,
+    "brightness": 354.97,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
     "lat": -19.92268,
     "lng": 128.48508,
     "frp": 17.84,
@@ -29828,6 +30728,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1639"
+  },
+  {
+    "lat": 52.12625,
+    "lng": 31.86364,
+    "frp": 17.68,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 50.85189,
@@ -30538,6 +31448,26 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "2010"
+  },
+  {
+    "lat": 53.90696,
+    "lng": 60.62248,
+    "frp": 17.45,
+    "brightness": 348.74,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 53.91317,
+    "lng": 60.62264,
+    "frp": 17.45,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 21.36888,
@@ -32408,6 +33338,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0807"
+  },
+  {
+    "lat": 53.50552,
+    "lng": 28.19754,
+    "frp": 16.78,
+    "brightness": 337.02,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
   },
   {
     "lat": 11.6201,
@@ -35770,6 +36710,26 @@
     "acq_time": "1830"
   },
   {
+    "lat": 52.94572,
+    "lng": 38.14509,
+    "frp": 15.79,
+    "brightness": 343.64,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.12969,
+    "lng": 32.40894,
+    "frp": 15.79,
+    "brightness": 341.99,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 31.68052,
     "lng": 74.65935,
     "frp": 15.78,
@@ -36298,6 +37258,16 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1830"
+  },
+  {
+    "lat": 53.48596,
+    "lng": 32.97438,
+    "frp": 15.63,
+    "brightness": 339.5,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
   },
   {
     "lat": -23.23999,
@@ -37150,6 +38120,16 @@
     "acq_time": "0429"
   },
   {
+    "lat": -16.91682,
+    "lng": 47.91777,
+    "frp": 15.38,
+    "brightness": 347.32,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0934"
+  },
+  {
     "lat": -34.95471,
     "lng": 147.35806,
     "frp": 15.37,
@@ -37398,6 +38378,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0446"
+  },
+  {
+    "lat": 50.86524,
+    "lng": 26.67219,
+    "frp": 15.32,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 38.01745,
@@ -37720,6 +38710,16 @@
     "acq_time": "2012"
   },
   {
+    "lat": 52.02269,
+    "lng": 32.23635,
+    "frp": 15.23,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -25.22884,
     "lng": -42.57299,
     "frp": 15.2,
@@ -38000,6 +39000,16 @@
     "acq_time": "0349"
   },
   {
+    "lat": 50.25516,
+    "lng": 45.86546,
+    "frp": 15.15,
+    "brightness": 348.46,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 16.37409,
     "lng": 77.2393,
     "frp": 15.14,
@@ -38138,6 +39148,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0603"
+  },
+  {
+    "lat": 52.01061,
+    "lng": 32.24443,
+    "frp": 15.12,
+    "brightness": 356.3,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 18.68016,
@@ -38498,6 +39518,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0805"
+  },
+  {
+    "lat": 49.94117,
+    "lng": 37.81224,
+    "frp": 15.05,
+    "brightness": 342.88,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 29.07235,
@@ -39950,6 +40980,16 @@
     "acq_time": "0803"
   },
   {
+    "lat": 25.49132,
+    "lng": 52.3895,
+    "frp": 14.74,
+    "brightness": 333.28,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0943"
+  },
+  {
     "lat": 32.56638,
     "lng": 74.69671,
     "frp": 14.73,
@@ -40750,6 +41790,16 @@
     "acq_time": "0429"
   },
   {
+    "lat": 57.94516,
+    "lng": 60.05186,
+    "frp": 14.54,
+    "brightness": 355.44,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
+  },
+  {
     "lat": 49.35119,
     "lng": 129.7294,
     "frp": 14.53,
@@ -41210,6 +42260,16 @@
     "acq_time": "0429"
   },
   {
+    "lat": 49.83157,
+    "lng": 36.8637,
+    "frp": 14.46,
+    "brightness": 344.1,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 18.61643,
     "lng": 77.82962,
     "frp": 14.45,
@@ -41510,6 +42570,16 @@
     "acq_time": "1503"
   },
   {
+    "lat": 27.68398,
+    "lng": 52.25266,
+    "frp": 14.42,
+    "brightness": 345.33,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0945"
+  },
+  {
     "lat": 10.41585,
     "lng": -64.1582,
     "frp": 14.41,
@@ -41568,6 +42638,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0618"
+  },
+  {
+    "lat": 60.44416,
+    "lng": 60.40134,
+    "frp": 14.4,
+    "brightness": 356.38,
+    "confidence": "low",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
   },
   {
     "lat": 14.79171,
@@ -41798,6 +42878,26 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "2012"
+  },
+  {
+    "lat": 16.13826,
+    "lng": 42.96145,
+    "frp": 14.35,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0941"
+  },
+  {
+    "lat": 16.13738,
+    "lng": 42.95723,
+    "frp": 14.35,
+    "brightness": 354.03,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0941"
   },
   {
     "lat": -15.7395,
@@ -42690,6 +43790,16 @@
     "acq_time": "2012"
   },
   {
+    "lat": 52.16772,
+    "lng": 32.30481,
+    "frp": 14.18,
+    "brightness": 340.2,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": 18.83625,
     "lng": 76.72763,
     "frp": 14.17,
@@ -43210,6 +44320,16 @@
     "acq_time": "0803"
   },
   {
+    "lat": -18.24076,
+    "lng": 48.25869,
+    "frp": 14.05,
+    "brightness": 345.82,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0932"
+  },
+  {
     "lat": -13.10974,
     "lng": 131.53807,
     "frp": 14.04,
@@ -43278,6 +44398,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0429"
+  },
+  {
+    "lat": 53.42371,
+    "lng": 34.02831,
+    "frp": 14.03,
+    "brightness": 339.43,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0954"
   },
   {
     "lat": 15.13785,
@@ -43458,6 +44588,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0803"
+  },
+  {
+    "lat": -15.68089,
+    "lng": 47.71049,
+    "frp": 13.99,
+    "brightness": 355.91,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0934"
   },
   {
     "lat": 26.14912,
@@ -44698,6 +45838,36 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "1132"
+  },
+  {
+    "lat": 51.9865,
+    "lng": 32.05478,
+    "frp": 13.74,
+    "brightness": 348.67,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 51.99056,
+    "lng": 32.05207,
+    "frp": 13.74,
+    "brightness": 353.64,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 51.98897,
+    "lng": 32.04574,
+    "frp": 13.74,
+    "brightness": 341.72,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": -16.16395,
@@ -47170,6 +48340,26 @@
     "acq_time": "0429"
   },
   {
+    "lat": 52.01464,
+    "lng": 32.24175,
+    "frp": 13.27,
+    "brightness": 367.0,
+    "confidence": "high",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
+    "lat": 52.0171,
+    "lng": 32.23282,
+    "frp": 13.27,
+    "brightness": 346.79,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
+  },
+  {
     "lat": -14.34778,
     "lng": 130.22395,
     "frp": 13.26,
@@ -47438,6 +48628,16 @@
     "daynight": "D",
     "acq_date": "2026-05-07",
     "acq_time": "0803"
+  },
+  {
+    "lat": 51.08278,
+    "lng": 35.06459,
+    "frp": 13.24,
+    "brightness": 345.17,
+    "confidence": "nominal",
+    "daynight": "D",
+    "acq_date": "2026-05-07",
+    "acq_time": "0952"
   },
   {
     "lat": 30.29309,
@@ -48798,1205 +49998,5 @@
     "daynight": "D",
     "acq_date": "2026-05-06",
     "acq_time": "0449"
-  },
-  {
-    "lat": 47.13469,
-    "lng": 126.99197,
-    "frp": 12.97,
-    "brightness": 341.42,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0506"
-  },
-  {
-    "lat": 48.36686,
-    "lng": 126.53587,
-    "frp": 12.97,
-    "brightness": 336.05,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0506"
-  },
-  {
-    "lat": 16.46235,
-    "lng": 76.46695,
-    "frp": 12.97,
-    "brightness": 338.55,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0820"
-  },
-  {
-    "lat": 22.62028,
-    "lng": 80.38264,
-    "frp": 12.97,
-    "brightness": 339.38,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0822"
-  },
-  {
-    "lat": 29.87143,
-    "lng": 75.07286,
-    "frp": 12.97,
-    "brightness": 340.19,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": 30.5481,
-    "lng": 72.04456,
-    "frp": 12.97,
-    "brightness": 347.64,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": 14.3532,
-    "lng": 37.56889,
-    "frp": 12.97,
-    "brightness": 340.31,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1002"
-  },
-  {
-    "lat": 59.20102,
-    "lng": 80.9193,
-    "frp": 12.97,
-    "brightness": 356.1,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0811"
-  },
-  {
-    "lat": 49.64956,
-    "lng": 124.79958,
-    "frp": 12.96,
-    "brightness": 341.44,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0506"
-  },
-  {
-    "lat": 30.65889,
-    "lng": 8.09849,
-    "frp": 12.96,
-    "brightness": 356.4,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1149"
-  },
-  {
-    "lat": 0.02117,
-    "lng": 24.26813,
-    "frp": 12.96,
-    "brightness": 341.27,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1138"
-  },
-  {
-    "lat": 17.87691,
-    "lng": -91.04614,
-    "frp": 12.96,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 19.35879,
-    "lng": -102.47338,
-    "frp": 12.96,
-    "brightness": 347.04,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 20.01045,
-    "lng": -102.15526,
-    "frp": 12.96,
-    "brightness": 340.8,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2012"
-  },
-  {
-    "lat": 10.27728,
-    "lng": -14.12943,
-    "frp": 12.95,
-    "brightness": 334.3,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1503"
-  },
-  {
-    "lat": 10.27664,
-    "lng": -14.13458,
-    "frp": 12.95,
-    "brightness": 351.25,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1503"
-  },
-  {
-    "lat": 10.2835,
-    "lng": -14.13019,
-    "frp": 12.95,
-    "brightness": 331.53,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1503"
-  },
-  {
-    "lat": 10.28286,
-    "lng": -14.13536,
-    "frp": 12.95,
-    "brightness": 353.03,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1503"
-  },
-  {
-    "lat": 14.91433,
-    "lng": -88.62877,
-    "frp": 12.95,
-    "brightness": 343.16,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": -29.31682,
-    "lng": 115.637,
-    "frp": 12.95,
-    "brightness": 345.73,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0605"
-  },
-  {
-    "lat": 15.22349,
-    "lng": 108.05571,
-    "frp": 12.95,
-    "brightness": 335.23,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0618"
-  },
-  {
-    "lat": 25.71715,
-    "lng": 76.54868,
-    "frp": 12.94,
-    "brightness": 339.65,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0822"
-  },
-  {
-    "lat": 30.28091,
-    "lng": 75.79559,
-    "frp": 12.94,
-    "brightness": 347.97,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": 31.65464,
-    "lng": 74.60111,
-    "frp": 12.94,
-    "brightness": 348.57,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": 17.06233,
-    "lng": -93.4153,
-    "frp": 12.94,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 19.13896,
-    "lng": -90.59951,
-    "frp": 12.94,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 19.13842,
-    "lng": -90.60558,
-    "frp": 12.94,
-    "brightness": 354.64,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 19.62527,
-    "lng": 79.24361,
-    "frp": 12.94,
-    "brightness": 350.16,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0803"
-  },
-  {
-    "lat": 20.49164,
-    "lng": 102.9817,
-    "frp": 12.93,
-    "brightness": 348.45,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0640"
-  },
-  {
-    "lat": 19.82253,
-    "lng": 74.62765,
-    "frp": 12.93,
-    "brightness": 339.94,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0820"
-  },
-  {
-    "lat": 53.87767,
-    "lng": 59.89791,
-    "frp": 12.93,
-    "brightness": 339.35,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0830"
-  },
-  {
-    "lat": -28.03803,
-    "lng": -56.53301,
-    "frp": 12.93,
-    "brightness": 333.05,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1635"
-  },
-  {
-    "lat": -28.03839,
-    "lng": -56.53997,
-    "frp": 12.93,
-    "brightness": 356.14,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1635"
-  },
-  {
-    "lat": -28.03117,
-    "lng": -56.53342,
-    "frp": 12.93,
-    "brightness": 348.16,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1635"
-  },
-  {
-    "lat": -28.03153,
-    "lng": -56.54037,
-    "frp": 12.93,
-    "brightness": 333.79,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1635"
-  },
-  {
-    "lat": 16.2956,
-    "lng": -92.55863,
-    "frp": 12.93,
-    "brightness": 351.76,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 16.29517,
-    "lng": -92.56286,
-    "frp": 12.93,
-    "brightness": 337.93,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 16.30139,
-    "lng": -92.55926,
-    "frp": 12.93,
-    "brightness": 342.06,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 18.07996,
-    "lng": -99.21004,
-    "frp": 12.93,
-    "brightness": 349.11,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 49.68404,
-    "lng": 124.35922,
-    "frp": 12.93,
-    "brightness": 333.88,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0449"
-  },
-  {
-    "lat": -17.37551,
-    "lng": 45.66969,
-    "frp": 12.92,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0952"
-  },
-  {
-    "lat": -12.94852,
-    "lng": 18.36208,
-    "frp": 12.92,
-    "brightness": 347.33,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1316"
-  },
-  {
-    "lat": 19.19485,
-    "lng": -90.12297,
-    "frp": 12.92,
-    "brightness": 336.4,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 20.09033,
-    "lng": -89.71355,
-    "frp": 12.92,
-    "brightness": 335.82,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": -33.8728,
-    "lng": 149.81758,
-    "frp": 12.91,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0442"
-  },
-  {
-    "lat": -33.87404,
-    "lng": 149.81285,
-    "frp": 12.91,
-    "brightness": 356.42,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0442"
-  },
-  {
-    "lat": 15.20681,
-    "lng": 76.7593,
-    "frp": 12.91,
-    "brightness": 347.07,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0820"
-  },
-  {
-    "lat": 18.00716,
-    "lng": -90.95219,
-    "frp": 12.91,
-    "brightness": 350.42,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1830"
-  },
-  {
-    "lat": 32.0633,
-    "lng": 75.30507,
-    "frp": 12.91,
-    "brightness": 348.9,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0807"
-  },
-  {
-    "lat": 18.51214,
-    "lng": -96.14295,
-    "frp": 12.9,
-    "brightness": 315.32,
-    "confidence": "nominal",
-    "daynight": "N",
-    "acq_date": "2026-05-06",
-    "acq_time": "0720"
-  },
-  {
-    "lat": 18.50661,
-    "lng": -96.14822,
-    "frp": 12.9,
-    "brightness": 336.75,
-    "confidence": "nominal",
-    "daynight": "N",
-    "acq_date": "2026-05-06",
-    "acq_time": "0720"
-  },
-  {
-    "lat": 18.50618,
-    "lng": -96.14363,
-    "frp": 12.9,
-    "brightness": 348.79,
-    "confidence": "nominal",
-    "daynight": "N",
-    "acq_date": "2026-05-06",
-    "acq_time": "0720"
-  },
-  {
-    "lat": 17.65154,
-    "lng": 95.75528,
-    "frp": 12.9,
-    "brightness": 342.68,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0620"
-  },
-  {
-    "lat": 52.25402,
-    "lng": 85.39267,
-    "frp": 12.89,
-    "brightness": 346.92,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0648"
-  },
-  {
-    "lat": 52.25732,
-    "lng": 85.39108,
-    "frp": 12.89,
-    "brightness": 352.92,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0648"
-  },
-  {
-    "lat": 49.51056,
-    "lng": 23.66764,
-    "frp": 12.89,
-    "brightness": 341.72,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1151"
-  },
-  {
-    "lat": 16.54558,
-    "lng": -92.86352,
-    "frp": 12.89,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 23.27289,
-    "lng": 70.14059,
-    "frp": 12.89,
-    "brightness": 346.59,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0805"
-  },
-  {
-    "lat": -20.06312,
-    "lng": 122.51365,
-    "frp": 12.88,
-    "brightness": 354.29,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0446"
-  },
-  {
-    "lat": 10.32912,
-    "lng": -13.37546,
-    "frp": 12.88,
-    "brightness": 336.42,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1325"
-  },
-  {
-    "lat": 16.96917,
-    "lng": -91.63618,
-    "frp": 12.88,
-    "brightness": 346.39,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1830"
-  },
-  {
-    "lat": 17.91771,
-    "lng": -90.26512,
-    "frp": 12.88,
-    "brightness": 337.97,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": -14.45088,
-    "lng": 130.45282,
-    "frp": 12.87,
-    "brightness": 344.04,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0446"
-  },
-  {
-    "lat": -13.1167,
-    "lng": 131.49207,
-    "frp": 12.87,
-    "brightness": 341.34,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0446"
-  },
-  {
-    "lat": -13.11339,
-    "lng": 131.49155,
-    "frp": 12.87,
-    "brightness": 349.0,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0446"
-  },
-  {
-    "lat": 31.36303,
-    "lng": 75.12148,
-    "frp": 12.87,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": 47.78951,
-    "lng": 126.51286,
-    "frp": 12.87,
-    "brightness": 351.79,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0446"
-  },
-  {
-    "lat": 32.75666,
-    "lng": 74.63503,
-    "frp": 12.87,
-    "brightness": 351.09,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0807"
-  },
-  {
-    "lat": 31.96513,
-    "lng": 75.40592,
-    "frp": 12.86,
-    "brightness": 337.72,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": 31.96898,
-    "lng": 75.40533,
-    "frp": 12.86,
-    "brightness": 349.12,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": -13.43122,
-    "lng": 131.10294,
-    "frp": 12.86,
-    "brightness": 355.05,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0429"
-  },
-  {
-    "lat": -13.42704,
-    "lng": 131.10249,
-    "frp": 12.86,
-    "brightness": 355.9,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0429"
-  },
-  {
-    "lat": -34.34231,
-    "lng": 147.14478,
-    "frp": 12.84,
-    "brightness": 341.62,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0442"
-  },
-  {
-    "lat": 31.26392,
-    "lng": 73.72342,
-    "frp": 12.84,
-    "brightness": 346.7,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": 30.2505,
-    "lng": 8.089,
-    "frp": 12.84,
-    "brightness": 347.59,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1327"
-  },
-  {
-    "lat": 19.42566,
-    "lng": -90.11278,
-    "frp": 12.84,
-    "brightness": 344.51,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 48.31793,
-    "lng": 126.58578,
-    "frp": 12.83,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0325"
-  },
-  {
-    "lat": 48.31657,
-    "lng": 126.58119,
-    "frp": 12.83,
-    "brightness": 350.28,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0325"
-  },
-  {
-    "lat": 10.07893,
-    "lng": -13.37357,
-    "frp": 12.83,
-    "brightness": 351.46,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1503"
-  },
-  {
-    "lat": -13.78788,
-    "lng": 133.00366,
-    "frp": 12.83,
-    "brightness": 342.39,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0429"
-  },
-  {
-    "lat": -11.6202,
-    "lng": 130.7023,
-    "frp": 12.83,
-    "brightness": 356.1,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0429"
-  },
-  {
-    "lat": 51.36349,
-    "lng": 90.83723,
-    "frp": 12.82,
-    "brightness": 347.77,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0508"
-  },
-  {
-    "lat": 30.0073,
-    "lng": 75.88222,
-    "frp": 12.82,
-    "brightness": 342.58,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": -20.38733,
-    "lng": 46.22482,
-    "frp": 12.82,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0952"
-  },
-  {
-    "lat": -5.94599,
-    "lng": 19.52286,
-    "frp": 12.82,
-    "brightness": 337.18,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1136"
-  },
-  {
-    "lat": 22.27784,
-    "lng": 72.3036,
-    "frp": 12.82,
-    "brightness": 344.08,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0803"
-  },
-  {
-    "lat": -13.96921,
-    "lng": 131.91086,
-    "frp": 12.81,
-    "brightness": 340.49,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0446"
-  },
-  {
-    "lat": 29.57397,
-    "lng": 74.71189,
-    "frp": 12.81,
-    "brightness": 348.21,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": 48.99496,
-    "lng": 37.76522,
-    "frp": 12.81,
-    "brightness": 340.66,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1011"
-  },
-  {
-    "lat": 10.33103,
-    "lng": -13.36594,
-    "frp": 12.81,
-    "brightness": 344.4,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1325"
-  },
-  {
-    "lat": 10.33004,
-    "lng": -13.37088,
-    "frp": 12.81,
-    "brightness": 353.6,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1325"
-  },
-  {
-    "lat": 42.50941,
-    "lng": -120.63584,
-    "frp": 12.81,
-    "brightness": 353.45,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2017"
-  },
-  {
-    "lat": 42.5079,
-    "lng": -120.64196,
-    "frp": 12.81,
-    "brightness": 349.15,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2017"
-  },
-  {
-    "lat": 42.51241,
-    "lng": -120.64384,
-    "frp": 12.81,
-    "brightness": 348.09,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2017"
-  },
-  {
-    "lat": -13.43808,
-    "lng": -43.84879,
-    "frp": 12.8,
-    "brightness": 332.05,
-    "confidence": "nominal",
-    "daynight": "N",
-    "acq_date": "2026-05-06",
-    "acq_time": "0406"
-  },
-  {
-    "lat": -13.43874,
-    "lng": -43.84486,
-    "frp": 12.8,
-    "brightness": 338.78,
-    "confidence": "nominal",
-    "daynight": "N",
-    "acq_date": "2026-05-06",
-    "acq_time": "0406"
-  },
-  {
-    "lat": -13.11368,
-    "lng": 131.55679,
-    "frp": 12.8,
-    "brightness": 343.18,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0446"
-  },
-  {
-    "lat": -13.11037,
-    "lng": 131.55627,
-    "frp": 12.8,
-    "brightness": 346.54,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0446"
-  },
-  {
-    "lat": 29.72667,
-    "lng": 76.09917,
-    "frp": 12.8,
-    "brightness": 344.17,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0824"
-  },
-  {
-    "lat": 6.69232,
-    "lng": 4.51225,
-    "frp": 12.8,
-    "brightness": 337.12,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1323"
-  },
-  {
-    "lat": 10.73195,
-    "lng": -13.89801,
-    "frp": 12.8,
-    "brightness": 349.24,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1503"
-  },
-  {
-    "lat": -27.8215,
-    "lng": 114.14386,
-    "frp": 12.79,
-    "brightness": 341.18,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0627"
-  },
-  {
-    "lat": -27.82238,
-    "lng": 114.13903,
-    "frp": 12.79,
-    "brightness": 348.39,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0627"
-  },
-  {
-    "lat": -27.81871,
-    "lng": 114.13822,
-    "frp": 12.79,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0627"
-  },
-  {
-    "lat": 13.96026,
-    "lng": 77.40657,
-    "frp": 12.79,
-    "brightness": 345.31,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0820"
-  },
-  {
-    "lat": 23.69682,
-    "lng": 78.57019,
-    "frp": 12.79,
-    "brightness": 349.12,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0822"
-  },
-  {
-    "lat": -8.91426,
-    "lng": 27.14763,
-    "frp": 12.79,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1136"
-  },
-  {
-    "lat": 12.38795,
-    "lng": -7.14506,
-    "frp": 12.79,
-    "brightness": 347.68,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1325"
-  },
-  {
-    "lat": 11.18708,
-    "lng": -14.01523,
-    "frp": 12.79,
-    "brightness": 353.46,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1325"
-  },
-  {
-    "lat": 17.26402,
-    "lng": -90.02983,
-    "frp": 12.79,
-    "brightness": 330.97,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2010"
-  },
-  {
-    "lat": 16.41119,
-    "lng": 73.65372,
-    "frp": 12.78,
-    "brightness": 344.14,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0820"
-  },
-  {
-    "lat": 19.42506,
-    "lng": 78.30222,
-    "frp": 12.78,
-    "brightness": 343.6,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "0820"
-  },
-  {
-    "lat": 8.09188,
-    "lng": 33.21572,
-    "frp": 12.78,
-    "brightness": 342.28,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1140"
-  },
-  {
-    "lat": 8.0967,
-    "lng": 33.21508,
-    "frp": 12.78,
-    "brightness": 355.72,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1140"
-  },
-  {
-    "lat": -2.80202,
-    "lng": 10.16196,
-    "frp": 12.78,
-    "brightness": 332.03,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1318"
-  },
-  {
-    "lat": -28.23466,
-    "lng": -58.30418,
-    "frp": 12.78,
-    "brightness": 339.57,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1815"
-  },
-  {
-    "lat": 18.95295,
-    "lng": -90.33168,
-    "frp": 12.78,
-    "brightness": 367.0,
-    "confidence": "high",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "1830"
-  },
-  {
-    "lat": 29.46784,
-    "lng": -99.01268,
-    "frp": 12.78,
-    "brightness": 347.11,
-    "confidence": "nominal",
-    "daynight": "D",
-    "acq_date": "2026-05-06",
-    "acq_time": "2014"
-  },
-  {
-    "lat": 22.25015,
-    "lng": 82.26327,
-    "frp": 12.78,
-    "brightness": 343.13,
-    "confidence": "low",
-    "daynight": "D",
-    "acq_date": "2026-05-07",
-    "acq_time": "0803"
-  },
-  {
-    "lat": 17.9849,
-    "lng": -94.52242,
-    "frp": 12.78,
-    "brightness": 321.59,
-    "confidence": "nominal",
-    "daynight": "N",
-    "acq_date": "2026-05-07",
-    "acq_time": "0839"
   }
 ]
