@@ -64,6 +64,9 @@ def search_places(query: str, limit: int = 5, country_only: bool = False) -> lis
         logger.warning("Nominatim search failed for %r: %s", q, exc)
         return []
 
+    if data is None:
+        return []
+
     results = []
     for item in data if isinstance(data, list) else []:
         try:
@@ -72,11 +75,13 @@ def search_places(query: str, limit: int = 5, country_only: bool = False) -> lis
             bbox = [float(v) for v in item.get("boundingbox", [])]
             item_type = (item.get("type") or "").lower()
             item_class = (item.get("class") or "").lower()
+            item_category = (item.get("category") or "").lower()
 
             if country_only:
                 # Nominatim country searches can come back as:
                 # - type=country
                 # - class=boundary,type=administrative (country boundary)
+                # - category=boundary,type=administrative
                 # - addresstype=country
                 # Keep only clearly country-level matches.
                 addresstype = (item.get("addresstype") or "").lower()
@@ -84,6 +89,7 @@ def search_places(query: str, limit: int = 5, country_only: bool = False) -> lis
                     item_type == "country"
                     or addresstype == "country"
                     or (item_class == "boundary" and item_type in {"administrative", "country"})
+                    or (item_category == "boundary" and item_type in {"administrative", "country"})
                 )
                 if not is_country_level:
                     continue
