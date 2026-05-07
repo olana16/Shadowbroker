@@ -180,7 +180,9 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
     const [expandedIndexes, setExpandedIndexes] = useState<number[]>([]);
     const [feedView, setFeedView] = useState<FeedView>('all');
     const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const panelEntity: SelectedEntity | null = selectedEntity?.type === '__panel_only__' ? selectedEntity : null;
+    // Render details for the currently selected entity (map click / right-click).
+    // `__panel_only__` is still supported but no longer required.
+    const panelEntity: SelectedEntity | null = selectedEntity || null;
 
     // Intentionally omitting map click triggers for expanding
     // as we now show a contextual pop-up on the map directly.

@@ -260,6 +260,12 @@ async def live_data_fast(request: Request,
     has_bbox = all(v is not None for v in (s, w, n, e))
     def _f(items, lat_key="lat", lng_key="lng"):
         return _bbox_filter(items, s, w, n, e, lat_key, lng_key) if has_bbox else items
+    # Satellites are typically a small set (and may be "offline_estimate").
+    # BBox-filtering can easily result in an empty layer and look "broken", so we only
+    # bbox-filter when the list is large enough to matter.
+    sats = d.get("satellites", []) or []
+    sat_source = d.get("satellite_source", "none")
+    should_bbox_filter_sats = has_bbox and sat_source not in ("offline_estimate",) and len(sats) > 80
     payload = {
         "commercial_flights": _f(d.get("commercial_flights", [])),
         "military_flights": _f(d.get("military_flights", [])),
@@ -271,8 +277,8 @@ async def live_data_fast(request: Request,
         "uavs": _f(d.get("uavs", [])),
         "liveuamap": _f(d.get("liveuamap", [])),
         "gps_jamming": _f(d.get("gps_jamming", [])),
-        "satellites": _f(d.get("satellites", [])),
-        "satellite_source": d.get("satellite_source", "none"),
+        "satellites": _f(sats) if should_bbox_filter_sats else sats,
+        "satellite_source": sat_source,
         "freshness": dict(source_timestamps),
     }
     bbox_tag = f"{s},{w},{n},{e}" if has_bbox else "full"

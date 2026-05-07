@@ -463,5 +463,13 @@ def fetch_satellites():
     else:
         with _data_lock:
             if not latest_data.get("satellites"):
-                latest_data["satellites"] = []
-                latest_data["satellite_source"] = "none"
+                # If we have no satellites at all (cold start, cache mismatch, or propagation failure),
+                # fall back to a few clearly-labeled offline estimate markers so the layer isn't blank.
+                fallback_sats = _build_offline_satellite_fallback(datetime.utcnow())
+                latest_data["satellites"] = fallback_sats
+                latest_data["satellite_source"] = "offline_estimate"
+                logger.info(
+                    "Satellites: no positioned satellites available, serving %d offline estimate markers",
+                    len(fallback_sats),
+                )
+                _mark_fresh("satellites")

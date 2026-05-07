@@ -147,7 +147,10 @@ function LocateBar({ onLocate }: { onLocate: (lat: number, lng: number) => void 
 }
 
 export default function DashboardContent() {
-  const { data, backendStatus } = useDataPolling();
+  // NOTE: `data` lives in a ref inside useDataPolling for performance.
+  // We must subscribe to `dataVersion` so this component re-renders when new data arrives.
+  const { data, dataVersion, backendStatus } = useDataPolling();
+  void dataVersion;
   const { mouseCoords, locationLabel, handleMouseCoords } = useReverseGeocode();
   const [selectedEntity, setSelectedEntity] = useState<SelectedEntity | null>(null);
   const [trackedSdr, setTrackedSdr] = useState<KiwiSDR | null>(null);
