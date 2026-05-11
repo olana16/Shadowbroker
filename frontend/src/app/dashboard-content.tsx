@@ -312,7 +312,7 @@ export default function DashboardContent() {
                 transition={{ type: "spring", damping: 30, stiffness: 250 }}
               >
                 <div className="flex h-full min-h-0 flex-col rounded-2xl border border-cyan-900/40 bg-[var(--bg-primary)]/72 p-3 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
-                  <TopRightControls />
+                  {/* <TopRightControls /> */}
 
                   <div className="mt-3 shrink-0">
                     <FindLocateBar

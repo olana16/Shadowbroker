@@ -165,8 +165,6 @@ const WorldviewLeftPanel = React.memo(function WorldviewLeftPanel({ data, active
             {/* Header */}
             <div className="mb-6 pointer-events-auto">
                 <div className="mb-3 text-3xl font-bold tracking-[0.28em] text-[var(--text-heading)] md:text-4xl">CIWD</div>
-                <div className="text-[10px] text-[var(--text-secondary)] font-mono tracking-widest mb-1">TOP SECRET // SI-TK // NOFORN</div>
-                <div className="text-[10px] text-[var(--text-muted)] font-mono tracking-widest mb-4">KH11-4094 OPS-4168</div>
                 <div className="flex items-center gap-3">
                     <h1 className="text-2xl font-bold tracking-[0.2em] text-[var(--text-heading)]">FLIR</h1>
                     <button
@@ -203,7 +201,7 @@ const WorldviewLeftPanel = React.memo(function WorldviewLeftPanel({ data, active
                         </button>
                     )}
                     <span className={`h-7 px-2 rounded-lg border border-[var(--border-primary)] flex items-center justify-center text-[8px] ${theme === 'dark' ? 'text-cyan-400' : 'text-[var(--text-muted)]'} font-mono tracking-widest select-none`}>
-                        v{packageJson.version}
+                       {/* v{packageJson.version} */}
                     </span>
                 </div>
             </div>
