@@ -57,36 +57,57 @@ export default function RegionWatchPanel({
     setCountryBusy(true);
     setError(null);
     try {
-      const res = await fetch(`${API_BASE}/api/geocode/search?q=${encodeURIComponent(q)}&limit=1&country_only=true`);
-      if (!res.ok) {
-        throw new Error(`Country lookup failed with ${res.status}`);
-      }
-      const matches = await res.json();
-      const match = Array.isArray(matches) ? matches[0] : null;
-      if (!match) {
-        setError("Country not found. Try a different spelling.");
-        return;
-      }
-      if (!match.boundingbox || match.boundingbox.length !== 4) {
-        console.error("Invalid boundingbox:", match.boundingbox);
-        setError("Could not resolve that country to a bounding box.");
-        return;
-      }
-      const [south, north, west, east] = match.boundingbox.map(Number);
-      console.log(`Setting watch region for ${q}:`, { south, north, west, east });
-      onSetWatchRegion({
-        mode: "country",
-        label: match.display_name || match.label || q,
-        query: q,
-        south,
-        west,
-        north,
-        east,
-      });
-    } catch (err) {
-      console.error("Country lookup error:", err);
-      setError(`Country lookup failed: ${err instanceof Error ? err.message : "Unknown error"}`);
-    } finally {
+  const res = await fetch(
+    `${API_BASE}/api/geocode/search?q=${encodeURIComponent(q)}&limit=1`
+  );
+
+  if (!res.ok) {
+    throw new Error(`Country lookup failed with ${res.status}`);
+  }
+
+  const data = await res.json();
+
+  console.log("Geocode response:", data);
+
+  const matches = Array.isArray(data)
+    ? data
+    : data.results || data.features || [];
+
+  const match = matches[0];
+
+  if (!match) {
+    setError("Country not found.");
+    return;
+  }
+
+  // Support multiple bbox formats
+  let south, north, west, east;
+
+  if (match.boundingbox?.length === 4) {
+    [south, north, west, east] =
+      match.boundingbox.map(Number);
+  } else if (match.bbox?.length === 4) {
+    [west, south, east, north] =
+      match.bbox.map(Number);
+  } else {
+    setError("No bounding box returned.");
+    return;
+  }
+
+  onSetWatchRegion({
+    mode: "country",
+    label: match.display_name || match.label || q,
+    query: q,
+    south,
+    west,
+    north,
+    east,
+  });
+
+} catch (err) {
+  console.error(err);
+  setError("Lookup failed.");
+} finally {
       setCountryBusy(false);
     }
   };
