@@ -166,7 +166,6 @@ const WorldviewLeftPanel = React.memo(function WorldviewLeftPanel({ data, active
             <div className="mb-6 pointer-events-auto">
                 <div className="mb-3 text-3xl font-bold tracking-[0.28em] text-[var(--text-heading)] md:text-4xl">CIWD</div>
                 <div className="flex items-center gap-3">
-                    <h1 className="text-2xl font-bold tracking-[0.2em] text-[var(--text-heading)]">FLIR</h1>
                     <button
                         onClick={toggleTheme}
                         className={`w-7 h-7 rounded-lg border border-[var(--border-primary)] hover:border-cyan-500/50 flex items-center justify-center ${theme === 'dark' ? 'text-cyan-400' : 'text-[var(--text-muted)]'} hover:text-cyan-300 transition-all hover:bg-[var(--hover-accent)]`}
@@ -200,9 +199,7 @@ const WorldviewLeftPanel = React.memo(function WorldviewLeftPanel({ data, active
                             <span className="text-[8px] font-mono tracking-widest font-bold">KEY</span>
                         </button>
                     )}
-                    <span className={`h-7 px-2 rounded-lg border border-[var(--border-primary)] flex items-center justify-center text-[8px] ${theme === 'dark' ? 'text-cyan-400' : 'text-[var(--text-muted)]'} font-mono tracking-widest select-none`}>
-                       {/* v{packageJson.version} */}
-                    </span>
+                   
                 </div>
             </div>
 
