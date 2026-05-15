@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { Globe2, LocateFixed, Search, Trash2 } from "lucide-react";
 import { API_BASE } from "@/lib/api";
 import type { WatchRegion, WatchRegionResults, WatchResultItem } from "@/types/dashboard";
@@ -35,6 +35,8 @@ export default function RegionWatchPanel({
   const [countryQuery, setCountryQuery] = useState("");
   const [countryBusy, setCountryBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const geocodeCache = useRef<Map<string, any>>(new Map());
+
 
   useEffect(() => {
     if (!watchRegion) return;
@@ -56,58 +58,116 @@ export default function RegionWatchPanel({
     }
     setCountryBusy(true);
     setError(null);
+
+    const cacheKey = q.toLowerCase();
+    if (geocodeCache.current.has(cacheKey)) {
+      const match = geocodeCache.current.get(cacheKey);
+      let south, north, west, east;
+      if (match.boundingbox?.length === 4) {
+        [south, north, west, east] = match.boundingbox.map(Number);
+      } else if (match.bbox?.length === 4) {
+        [west, south, east, north] = match.bbox.map(Number);
+      } else {
+        setError("No bounding box in cached data.");
+        setCountryBusy(false);
+        return;
+      }
+      onSetWatchRegion({
+        mode: "country",
+        label: match.display_name || match.label || q,
+        query: q,
+        south,
+        west,
+        north,
+        east,
+      });
+      setCountryBusy(false);
+      return;
+    }
+
     try {
-  const res = await fetch(
-    `${API_BASE}/api/geocode/search?q=${encodeURIComponent(q)}&limit=1`
-  );
+      const res = await fetch(
+        `${API_BASE}/api/geocode/search?q=${encodeURIComponent(q)}&limit=1`
+      );
 
-  if (!res.ok) {
-    throw new Error(`Country lookup failed with ${res.status}`);
-  }
+      if (res.status === 304) {
+        if (geocodeCache.current.has(cacheKey)) {
+          const match = geocodeCache.current.get(cacheKey);
+          let south, north, west, east;
+          if (match.boundingbox?.length === 4) {
+            [south, north, west, east] = match.boundingbox.map(Number);
+          } else if (match.bbox?.length === 4) {
+            [west, south, east, north] = match.bbox.map(Number);
+          } else {
+            setError("No bounding box in cached data for 304.");
+            setCountryBusy(false);
+            return;
+          }
+          onSetWatchRegion({
+            mode: "country",
+            label: match.display_name || match.label || q,
+            query: q,
+            south,
+            west,
+            north,
+            east,
+          });
+        } else {
+          setError("304 received but no cached data.");
+        }
+        setCountryBusy(false);
+        return;
+      }
 
-  const data = await res.json();
+      if (!res.ok) {
+        throw new Error(`Country lookup failed with ${res.status}`);
+      }
 
-  console.log("Geocode response:", data);
+      const data = await res.json();
+      console.log("Geocode response:", data);
 
-  const matches = Array.isArray(data)
-    ? data
-    : data.results || data.features || [];
+      const matches = Array.isArray(data)
+        ? data
+        : data.results || data.features || [];
 
-  const match = matches[0];
+      const match = matches[0];
 
-  if (!match) {
-    setError("Country not found.");
-    return;
-  }
+      if (!match) {
+        setError("Country not found.");
+        setCountryBusy(false);
+        return;
+      }
 
-  // Support multiple bbox formats
-  let south, north, west, east;
+      // Support multiple bbox formats
+      let south, north, west, east;
 
-  if (match.boundingbox?.length === 4) {
-    [south, north, west, east] =
-      match.boundingbox.map(Number);
-  } else if (match.bbox?.length === 4) {
-    [west, south, east, north] =
-      match.bbox.map(Number);
-  } else {
-    setError("No bounding box returned.");
-    return;
-  }
+      if (match.boundingbox?.length === 4) {
+        [south, north, west, east] =
+          match.boundingbox.map(Number);
+      } else if (match.bbox?.length === 4) {
+        [west, south, east, north] =
+          match.bbox.map(Number);
+      } else {
+        setError("No bounding box returned.");
+        setCountryBusy(false);
+        return;
+      }
 
-  onSetWatchRegion({
-    mode: "country",
-    label: match.display_name || match.label || q,
-    query: q,
-    south,
-    west,
-    north,
-    east,
-  });
+      geocodeCache.current.set(cacheKey, match);
 
-} catch (err) {
-  console.error(err);
-  setError("Lookup failed.");
-} finally {
+      onSetWatchRegion({
+        mode: "country",
+        label: match.display_name || match.label || q,
+        query: q,
+        south,
+        west,
+        north,
+        east,
+      });
+    } catch (err) {
+      console.error(err);
+      setError("Lookup failed.");
+    } finally {
       setCountryBusy(false);
     }
   };

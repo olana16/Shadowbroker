@@ -37,6 +37,8 @@ function LocateBar({ onLocate }: { onLocate: (lat: number, lng: number) => void 
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const geocodeCache = useRef<Map<string, { label: string; lat: number; lng: number }[]>>(new Map());
+
 
   useEffect(() => {
     if (open) inputRef.current?.focus();
@@ -63,21 +65,35 @@ function LocateBar({ onLocate }: { onLocate: (lat: number, lng: number) => void 
       setResults([]);
       return;
     }
+
+    const cacheKey = q.toLowerCase();
+    if (geocodeCache.current.has(cacheKey)) {
+      setResults(geocodeCache.current.get(cacheKey)!);
+      return;
+    }
+
     timerRef.current = setTimeout(async () => {
       setLoading(true);
       try {
         const res = await fetch(`${API_BASE}/api/geocode/search?q=${encodeURIComponent(q)}&limit=5`);
-        if (!res.ok) {
+        if (res.status === 304) {
+          if (geocodeCache.current.has(cacheKey)) {
+            setResults(geocodeCache.current.get(cacheKey)!);
+          } else {
+            setResults([]);
+          }
+        } else if (!res.ok) {
           throw new Error(`Locate lookup failed with ${res.status}`);
-        }
-        const data = await res.json();
-        setResults(
-          data.map((r: { label?: string; display_name?: string; lat: number; lng: number }) => ({
+        } else {
+          const data = await res.json();
+          const parsedResults = data.map((r: { label?: string; display_name?: string; lat: number; lng: number }) => ({
             label: r.label || r.display_name || `${r.lat}, ${r.lng}`,
             lat: r.lat,
             lng: r.lng,
-          })),
-        );
+          }));
+          setResults(parsedResults);
+          geocodeCache.current.set(cacheKey, parsedResults);
+        }
       } catch {
         setResults([]);
       }
