@@ -178,10 +178,8 @@ const VESSEL_TYPE_WIKI: Record<string, string> = {
 function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoading }: { data: DashboardData, selectedEntity?: SelectedEntity | null, regionDossier?: RegionDossier | null, regionDossierLoading?: boolean }) {
     const [isMinimized, setIsMinimized] = useState(false);
     const [expandedIndexes, setExpandedIndexes] = useState<number[]>([]);
-    const [feedView, setFeedView] = useState<FeedView>('all');
+    const [feedView, setFeedView] = useState<'all' | 'news' | 'telegram'>('all');
     const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-    // Render details for the currently selected entity (map click / right-click).
-    // `__panel_only__` is still supported but no longer required.
     const panelEntity: SelectedEntity | null = selectedEntity || null;
 
     // Intentionally omitting map click triggers for expanding
@@ -197,7 +195,8 @@ function NewsFeedInner({ data, selectedEntity, regionDossier, regionDossierLoadi
 
     const news: NewsArticle[] = data?.news || [];
     const telegram: NewsArticle[] = data?.telegram || [];
-    const generalNews = news.filter((item) => !isCyberArticle(item));
+    // Show all news items including cyber security articles
+    const generalNews = news;
     const getPublishedTime = (item: NewsArticle) => {
         const published = item.published || item.pub_date;
         if (!published) return 0;
