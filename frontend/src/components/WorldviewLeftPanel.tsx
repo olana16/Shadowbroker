@@ -144,7 +144,7 @@ const WorldviewLeftPanel = React.memo(function WorldviewLeftPanel({ data, active
         { id: "gps_jamming", name: "GPS Jamming", source: "ADS-B NACp", count: data?.gps_jamming?.length || 0, icon: Radio },
         { id: "gibs_imagery", name: "MODIS Terra (Daily)", source: "NASA GIBS", count: null, icon: Globe },
         { id: "highres_satellite", name: "High-Res Satellite", source: "Esri World Imagery", count: null, icon: Satellite },
-        { id: "kiwisdr", name: "KiwiSDR Receivers", source: "KiwiSDR.com", count: data?.kiwisdr?.length || 0, icon: Radio },
+       // { id: "kiwisdr", name: "KiwiSDR Receivers", source: "KiwiSDR.com", count: data?.kiwisdr?.length || 0, icon: Radio },
         { id: "firms", name: "Fire Hotspots (24h)", source: "NASA FIRMS VIIRS", count: data?.firms_fires?.length || 0, icon: Flame },
         { id: "internet_outages", name: "Internet Outages", source: "IODA / Georgia Tech", count: data?.internet_outages?.length || 0, icon: Wifi },
         { id: "datacenters", name: "Data Centers", source: "DC Map (GitHub)", count: data?.datacenters?.length || 0, icon: Server },

@@ -270,7 +270,7 @@ helm install shadowbroker ./helm/chart --create-namespace --namespace shadowbrok
 │  │ MapLibre GL │    │ NewsFeed │    │ Control Panels│  │
 │  │  2D WebGL   │    │  SIGINT  │    │ Layers/Filters│  │
 │  │ Map Render  │    │  Intel   │    │ Markets/Radio │  │
-│  └──────┬──────┘    └────┬─────┘    └───────┬───────┘  │
+│  └──────┬──────┘    └────┬─────┘    └───────┬───────┘  │                
 │         └────────────────┼──────────────────┘          │
 │                          │ REST API (60s / 120s)       │
 ├──────────────────────────┼─────────────────────────────┤
