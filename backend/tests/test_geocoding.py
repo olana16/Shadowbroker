@@ -79,3 +79,32 @@ def test_search_places_does_not_cache_transient_nominatim_failures(monkeypatch):
 
     assert results == []
     assert cache_key not in geocoding._search_cache
+
+
+def test_search_places_country_bbox_override(monkeypatch):
+    def fake_get_json(_path, _params):
+        return [
+            {
+                "display_name": "France",
+                "lat": "46.2",
+                "lon": "2.2",
+                "boundingbox": ["-21.38", "51.08", "-178.2", "172.9"],
+                "type": "country",
+                "class": "boundary",
+                "address": {
+                    "country_code": "fr"
+                }
+            }
+        ]
+
+    monkeypatch.setattr(geocoding, "_get_json", fake_get_json)
+
+    cache_key = "search:v2:True:1:france"
+    if cache_key in geocoding._search_cache:
+        del geocoding._search_cache[cache_key]
+
+    results = geocoding.search_places("France", limit=1, country_only=True)
+
+    assert len(results) == 1
+    assert results[0]["boundingbox"] == [41.3, 51.1, -5.2, 9.6]
+

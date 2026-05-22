@@ -14,6 +14,18 @@ _search_cache = TTLCache(maxsize=500, ttl=86400)
 _reverse_cache = TTLCache(maxsize=2000, ttl=86400)
 
 
+# Bounding box overrides for countries with overseas territories or massive wraps
+# format: [south, north, west, east] (standard Nominatim boundingbox format)
+COUNTRY_BBOX_OVERRIDES = {
+    "fr": [41.3, 51.1, -5.2, 9.6],        # Metropolitan France
+    "us": [24.4, 49.4, -125.0, -66.9],     # Contiguous USA
+    "ru": [41.1, 82.1, 19.5, 180.0],       # Mainland Russia (excluding Western Hemisphere chunk to avoid antimeridian wrap)
+    "nl": [50.7, 53.6, 3.3, 7.3],          # European Netherlands
+    "au": [-44.0, -10.0, 112.0, 154.0],    # Mainland Australia (excluding remote islands)
+}
+
+
+
 def _wait_for_rate_limit() -> None:
     global _last_call
     elapsed = time.time() - _last_call
@@ -76,22 +88,22 @@ def search_places(query: str, limit: int = 5, country_only: bool = False) -> lis
             item_type = (item.get("type") or "").lower()
             item_class = (item.get("class") or "").lower()
             item_category = (item.get("category") or "").lower()
+            addresstype = (item.get("addresstype") or "").lower()
+
+            is_country = (
+                item_type == "country"
+                or addresstype == "country"
+                or (item_class == "boundary" and item_type in {"administrative", "country"})
+                or (item_category == "boundary" and item_type in {"administrative", "country"})
+            )
+
+            if is_country:
+                country_code = item.get("address", {}).get("country_code", "").lower()
+                if country_code in COUNTRY_BBOX_OVERRIDES:
+                    bbox = COUNTRY_BBOX_OVERRIDES[country_code]
 
             if country_only:
-                # Nominatim country searches can come back as:
-                # - type=country
-                # - class=boundary,type=administrative (country boundary)
-                # - category=boundary,type=administrative
-                # - addresstype=country
-                # Keep only clearly country-level matches.
-                addresstype = (item.get("addresstype") or "").lower()
-                is_country_level = (
-                    item_type == "country"
-                    or addresstype == "country"
-                    or (item_class == "boundary" and item_type in {"administrative", "country"})
-                    or (item_category == "boundary" and item_type in {"administrative", "country"})
-                )
-                if not is_country_level:
+                if not is_country:
                     continue
 
             results.append(

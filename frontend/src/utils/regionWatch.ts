@@ -19,9 +19,15 @@ import { buildNewsAlertKey } from "@/utils/alertSpread";
 
 type FlightItem = CommercialFlight | PrivateFlight | PrivateJet | MilitaryFlight | TrackedFlight;
 
-function inBbox(lat: number | null | undefined, lng: number | null | undefined, region: WatchRegion): boolean {
+export function inBbox(lat: number | null | undefined, lng: number | null | undefined, region: WatchRegion): boolean {
   if (lat == null || lng == null) return false;
-  return lat >= region.south && lat <= region.north && lng >= region.west && lng <= region.east;
+  if (lat < region.south || lat > region.north) return false;
+  if (region.west <= region.east) {
+    return lng >= region.west && lng <= region.east;
+  } else {
+    // Crosses the antimeridian (e.g. Russia, Alaska area)
+    return lng >= region.west || lng <= region.east;
+  }
 }
 
 export function getWatchRegionCenter(region: WatchRegion): { lat: number; lng: number } {
