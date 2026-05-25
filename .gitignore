@@ -131,7 +131,7 @@ backend/data/internet_outages_cache.json
 backend/data/markets_cache.json
 
 #session files
-backend/shadowbroker_session.session
+/backend/shadowbroker_session.session
 
 backend/data/news_keywords.json
 
