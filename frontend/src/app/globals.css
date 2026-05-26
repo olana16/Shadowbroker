@@ -16,8 +16,8 @@
   --text-muted: rgb(8, 145, 178);
   --text-heading: rgb(236, 254, 255);
   --hover-accent: rgba(8, 51, 68, 0.2);
-  --scrollbar-thumb: rgba(8, 145, 178, 0.3);
-  --scrollbar-thumb-hover: rgba(8, 145, 178, 0.5);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.8);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 1.0);
 }
 
 /* Light theme: only the map basemap changes — UI stays dark */
@@ -35,8 +35,8 @@
   --text-muted: rgb(8, 145, 178);
   --text-heading: rgb(236, 254, 255);
   --hover-accent: rgba(8, 51, 68, 0.2);
-  --scrollbar-thumb: rgba(8, 145, 178, 0.3);
-  --scrollbar-thumb-hover: rgba(8, 145, 178, 0.5);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.8);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 1.0);
 }
 
 :root {
@@ -54,7 +54,8 @@ body {
 
 /* Styled thin scrollbar for dark HUD UI */
 .styled-scrollbar::-webkit-scrollbar {
-  width: 5px;
+  width: 2px;
+  height: 2px;
 }
 
 .styled-scrollbar::-webkit-scrollbar-track {
@@ -72,6 +73,7 @@ body {
 
 .styled-scrollbar {
   scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 /* Map popup shared utilities */
@@ -123,8 +125,8 @@ body {
   --text-muted: #16a34a;
   --text-heading: #bbf7d0;
   --hover-accent: rgba(5, 46, 22, 0.2);
-  --scrollbar-thumb: rgba(22, 163, 74, 0.3);
-  --scrollbar-thumb-hover: rgba(22, 163, 74, 0.5);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.8);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 1.0);
 }
 
 /* --- Text color overrides --- */
